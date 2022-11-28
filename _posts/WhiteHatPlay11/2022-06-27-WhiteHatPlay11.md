@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "WhiteHatPlay11 revering challenge"
+title:  "WhiteHatPlay11"
 date:   2022-06-27 09:29:20 +0700
 modified: 2022-06-28 16:49:47 +07:00
 categories: WriteUp

@@ -1,18 +1,17 @@
 ---
-title: Colophon
+title: Le Phu Duc
 permalink: /about/
 layout: page
-excerpt: Hello peeps, I'm student of computer science from Banyuwangi, living in Jogjakarta. This blog for documentation about my programming journey, running on jekyll, hosting on netlify and using my own simple theme.
+excerpt: Hi I'm Le Phu Duc
 comments: false
 ---
-
-He's a student from Banyuwangi, living in Jogjakarta. the blog for documentation about his programming 🎒 journey, running on jekyll, hosting on [now.sh](http://now.sh) and using his own theme, he name it <a href="https://github.com/piharpi/jekyll-klise" target="_blank" rel="noopener">klisé</a>, he also loves to learning web technology; but he often forgot, that a reason why him doing the writing.
-
+He’s a student from University of Information Technology - VNU. 
+This blog will be the place to share the journey of learning and playing CTF during the first year of learning about the school. If you're interested, you can make friends via his discord **#Jinn8804**.
 If you have a question about him or else, just send a letter to him.
-
-You can [report](http://github.com/piharpi/jekyll-klise/issues/new) if there is an broken link(s) or somethings else.
 
 **may u needs ✨**
 
 - {{ site.author.email }}
 - github.com/{{ site.author.github }}
+
+Also, I use this **jekyll-klise** template from this [github](https://github.com/piharpi/jekyll-klise), thanks for the author Colophon.

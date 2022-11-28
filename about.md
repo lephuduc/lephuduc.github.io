@@ -14,4 +14,4 @@ If you have a question about him or else, just send a letter to him.
 - {{ site.author.email }}
 - github.com/{{ site.author.github }}
 
-Also, I used this **jekyll-klise** template this [github](https://github.com/piharpi/jekyll-klise), thanks for the author Colophon.
+Also, I used this **jekyll-klise** template from this [github](https://github.com/piharpi/jekyll-klise), thanks for the author Colophon.

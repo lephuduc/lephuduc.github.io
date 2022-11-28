@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "WhiteHatPlay11"
-date:   2020-08-29 09:29:20 +0700
+date:   2022-06-27 09:29:20 +0700
 categories: WriteUp
 tags: [ctf, rev]
 ---

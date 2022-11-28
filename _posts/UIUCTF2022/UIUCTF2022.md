@@ -4,7 +4,6 @@ title:  "UIU CTF 2022 Reversing"
 date:   2020-08-29 09:29:20 +0700
 categories: CTF
 ---
-# **UIU CTF - Reverse Engineering**
 
 # Reject to Inject - 197 points
 

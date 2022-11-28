@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Write up reversing.kr"
-date:   2022-06-27 09:29:20 +0700
+title:  "reversing.kr"
+date:   2022-05-26 09:29:20 +0700
 categories: WriteUp
 tags: [ctf, rev, wargame]
 description: Write up revering challenge for reversing.kr!

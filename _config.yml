@@ -13,9 +13,9 @@ mode: dark # default theme "dark" | "light"
 author:
   name: Le Phu Duc # author name
   bio: >- # tell to the world
-    Information Security at University of Information Technology VNU HCM city
-    as known as <a href="https://github.com/lephuduc" target="_blank" rel="noopener">@jinn</a>.
-  username: username # general username
+    Information Security at University of Information Technology VNU HCM city.
+    Enjoying CTF/rev & playing for <a href="https://ctftime.org/team/174075" target="_blank" rel="noopener">@return catbui;</a>, as known as <a href="https://github.com/lephuduc" target="_blank" rel="noopener">@jinn</a>.
+  username: jinn # general username
   github: lephuduc # github username
   twitter: lephuduck # twitter username
   facebook: lephuduc0309 # facebook username

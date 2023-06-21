@@ -1,10 +1,14 @@
 ---
-layout: post
-title:  "HCMUS-CTF 2023"
-date:   2023-05-08 09:29:20 +0700
-categories: WriteUp
-tags: [ctf, rev]
-description: Write up for RE challenge in HCMUS-CTF 2023!
+title: "HCMUS-CTF 2023"
+description: "Write up for rev problem in hcmusctf-2023"
+summary: "Write up for rev problem in hcmusctf-2023"
+categories: ["Writeup"]
+tags: ["Reverse", "CTF","Honors"]
+#externalUrl: ""
+date: 2023-05-08
+draft: false
+authors:
+  - Jinn
 ---
 # HCMUS-CTF 2023
 

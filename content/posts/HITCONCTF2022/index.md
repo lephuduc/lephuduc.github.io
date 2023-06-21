@@ -1,10 +1,14 @@
 ---
-layout: post
-title:  "HITCON CTF 2022"
-date:   2022-11-27 09:29:20 +0700
-categories: WriteUp
-tags: [ctf, rev, toptier, honors]
-description: Write up revering challenge HITCON CTF 2022!
+title: "HITCON CTF 2022"
+description: "Write up for rev problem in HITCON CTF 2022"
+summary: "Write up for rev problem in HITCON CTF 2022"
+categories: ["Writeup"]
+tags: ["Reverse", "CTF","Honors","Top tier"]
+#externalUrl: ""
+date: 2022-11-27
+draft: false
+authors:
+  - Jinn
 ---
 
 # HITCON CTF 2022

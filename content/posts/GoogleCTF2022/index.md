@@ -1,10 +1,14 @@
 ---
-layout: post
-title:  "GoogleCTF 2022"
-date:   2022-06-29 09:29:20 +0700
-categories: WriteUp
-tags: [ctf, rev, toptier, honors]
-description: Write up revering challenge GoogleCTF 2022!
+title: "Google CTF 2022"
+description: "Writeup for Google CTF 2022"
+summary: "Writeup for Google CTF 2022"
+categories: ["Writeup"]
+tags: ["Reverse","Honors","Top tier","CTF"]
+#externalUrl: ""
+date: 2022-06-29
+draft: false
+authors:
+  - Jinn
 ---
 
 # JS SAFE 4.0 

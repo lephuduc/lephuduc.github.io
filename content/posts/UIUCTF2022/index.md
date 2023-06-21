@@ -11,8 +11,6 @@ authors:
   - Jinn
 ---
 
-# **UIU CTF - Reverse Engineering**
-
 # Reject to Inject - 197 points
 
 ![](https://i.imgur.com/kzr9V9u.png)

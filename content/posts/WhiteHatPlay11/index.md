@@ -1,12 +1,16 @@
 ---
-layout: post
-title:  "WhiteHatPlay11"
-date:   2022-06-27 09:29:20 +0700
-modified: 2022-06-28 16:49:47 +07:00
-categories: WriteUp
-tags: [ctf, rev, beginner]
-description: Write up revering challenge for WhiteHatPlay11!
+title: "White Hat Play 11"
+description: "Write up for rev problem in White Hat Play 11"
+summary: "Write up for rev problem in White Hat Play 11"
+categories: ["Writeup"]
+tags: ["Reverse", "CTF"]
+#externalUrl: ""
+date: 2022-06-27
+draft: false
+authors:
+  - Jinn
 ---
+
 
 ## re01-WhiteHatPlay11v1 - 128pts
 

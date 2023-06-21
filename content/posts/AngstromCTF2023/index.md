@@ -1,10 +1,14 @@
 ---
-layout: post
-title:  "Angstrom CTF 2023"
-date:   2023-04-27 09:29:20 +0700
-categories: WriteUp
-tags: [ctf, rev, toptier, honors]
-description: Write up revering challenge Angstrom CTF 2023!
+title: "Angstrom CTF 2023"
+description: "Writeup for Angstrom CTF 2023"
+summary: "Writeup for Angstrom CTF 2023"
+categories: ["Writeup"]
+tags: ["Reverse", "Honors", "Top tier"]
+#externalUrl: ""
+date: 2023-04-27
+draft: false
+authors:
+  - Jinn
 ---
 
 # ångstromCTF 2023

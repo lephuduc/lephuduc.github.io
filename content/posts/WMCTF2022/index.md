@@ -1,10 +1,14 @@
 ---
-layout: post
-title:  "WMCTF 2022"
-date:   2022-08-20 09:29:20 +0700
-categories: WriteUp
-tags: [ctf, rev, weekly]
-description: Write up revering challenge WMCTF 2022!
+title: "WM CTF 2022"
+description: "Write up for rev problem in WM CTF 2022"
+summary: "Write up for rev problem in WM CTF 2022"
+categories: ["Writeup"]
+tags: ["Reverse", "CTF","Weekly"]
+#externalUrl: ""
+date: 2022-08-20
+draft: false
+authors:
+  - Jinn
 ---
 
 

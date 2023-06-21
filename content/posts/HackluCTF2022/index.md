@@ -1,10 +1,14 @@
 ---
-layout: post
-title:  "Hack.lu CTF 2022"
-date:   2022-10-29 09:29:20 +0700
-categories: WriteUp
-tags: [ctf, rev, toptier, honors]
-description: Write up revering challenge Hack.lu CTF 2022!
+title: "Hack.lu CTF 2022"
+description: "Writeup for Hack.lu CTF 2022"
+summary: "Writeup for Hack.lu CTF 2022"
+categories: ["Writeup"]
+tags: ["Reverse","Honors","Top tier","CTF"]
+#externalUrl: ""
+date: 2022-10-28
+draft: false
+authors:
+  - Jinn
 ---
 
 ## FingerFood - rev

@@ -1,10 +1,14 @@
 ---
-layout: post
-title:  "PicoCTF 2022"
-date:   2022-03-29 09:29:20 +0700
-categories: WriteUp
-tags: [ctf, rev, wargame, beginner]
-description: Write up revering challenge for PicoCTF 2022!
+title: "PicoCTF 2022"
+description: "Write up for rev problem in PicoCTF 2022"
+summary: "Write up for rev problem in PicoCTF 2022"
+categories: ["Writeup"]
+tags: ["Reverse", "CTF","Weekly","Wargame"]
+#externalUrl: ""
+date: 2022-03-09
+draft: false
+authors:
+  - Jinn
 ---
 
 

@@ -16,7 +16,7 @@ title = "Le Phu Duc"
 [author]
   name = "Jinn"
   image = "img/harrypotter.jpg"
-  headline = "Little nervous"
+  headline = "A little nervous"
   bio = "Anh thich Reverse Engineering boi vi anh thich ro e."
   links = [
   #   { email = "mailto:hello@your_domain.com" },

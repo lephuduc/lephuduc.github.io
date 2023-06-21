@@ -53,7 +53,7 @@ defaultBackgroundImage = "/img/Kikyo.jpg"
   showAuthor = true
   showHero = false
   heroStyle = "background" # valid options: basic, big, background, thumbAndBackground
-  layoutBackgroundBlur = true # only used when heroStyle equals background or thumbAndBackground
+  layoutBackgroundBlur = false # only used when heroStyle equals background or thumbAndBackground
   layoutBackgroundHeaderSpace = true # only used when heroStyle equals background
   showBreadcrumbs = false
   showDraftLabel = true
@@ -77,7 +77,7 @@ defaultBackgroundImage = "/img/Kikyo.jpg"
 [list]
   showHero = false
   heroStyle = "background" # valid options: basic, big, background, thumbAndBackground
-  layoutBackgroundBlur = true # only used when heroStyle equals background or thumbAndBackground
+  layoutBackgroundBlur = false # only used when heroStyle equals background or thumbAndBackground
   layoutBackgroundHeaderSpace = true # only used when heroStyle equals background
   showBreadcrumbs = false
   showSummary = false
@@ -96,7 +96,7 @@ defaultBackgroundImage = "/img/Kikyo.jpg"
 [taxonomy]
   showTermCount = true
   showHero = false
-  # heroStyle = "background" # valid options: basic, big, background, thumbAndBackground
+  heroStyle = "background" # valid options: basic, big, background, thumbAndBackground
   showBreadcrumbs = false
   showViews = false
   showLikes = false

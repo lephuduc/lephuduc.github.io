@@ -1,10 +1,14 @@
 ---
-layout: post
-title:  "reversing.kr"
-date:   2022-05-26 09:29:20 +0700
-categories: WriteUp
-tags: [ctf, rev, wargame]
-description: Write up revering challenge for reversing.kr!
+title: "reversing.kr"
+description: "Write up for rev problem in reversing.kr"
+summary: "Write up for rev problem in reversing.kr"
+categories: ["Writeup"]
+tags: ["Reverse", "CTF","Wargame"]
+#externalUrl: ""
+date: 2022-05-01
+draft: false
+authors:
+  - Jinn
 ---
 
 **Trước hết bạn cần có các tools cần thiết để dùng reverse:**

@@ -1,10 +1,14 @@
 ---
-layout: post
-title:  "Note"
-date:   2022-01-01 09:29:20 +0700
-categories: Note
-tags: [ctf, rev]
-description: just a rev note!
+title: "Note"
+description: "Just a simple note"
+summary: "Just a simple note"
+categories: ["Writeup"]
+tags: ["Note"]
+#externalUrl: ""
+date: 2021-01-01
+draft: false
+authors:
+  - Jinn
 ---
 
 # Note

@@ -8,9 +8,9 @@ title = "Le Phu Duc"
   isoCode = "en"
   rtl = false
   dateFormat = "2 January 2006"
-  # logo = "img/harrypotter.jpg"
+  logo = "img/CoolKikyo.jpg"
   # secondaryLogo = "img/harrypotter.jpg"
-  description = "Why are you here?"
+  description = "Le Phu Duc's persional page"
   copyright = "Copyright © Le Phu Duc"
 
 [author]

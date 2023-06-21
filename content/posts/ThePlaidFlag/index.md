@@ -1,13 +1,15 @@
 ---
-layout: post
-title:  "The Plaid Flag 2023"
-date:   2023-04-17 09:29:20 +0700
-categories: WriteUp
-tags: [ctf, rev, toptier, honors]
-description: Write up revering challenge for PlaidCTF-rev!
+title: "The Plaid Flag CTF 2023"
+description: "Writeup for The Plaid CTF 2023"
+summary: "Writeup for The Plaid CTF 2023"
+categories: ["Writeup"]
+tags: ["Reverse", "Hornors","CTF","Top tier"]
+#externalUrl: ""
+date: 2023-04-17
+draft: false
+authors:
+  - Jinn
 ---
-
-###### tags: `2023` `ctf` `writeup` `rev` 
 # The Plaid Flag 2023
 
 # Rev/CSS-crimes - 200pts

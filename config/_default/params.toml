@@ -17,8 +17,8 @@ enableCodeCopy = false
 
 disableImageOptimization = true
 
-defaultBackgroundImage = "/img/ocean.jpg"
-defaultFeaturedImage = "/img/ocean.jpg"
+defaultBackgroundImage = "/img/Kikyo.jpg"
+defaultFeaturedImage = "/img/Kikyo.jpg"
 
 # highlightCurrentMenuArea = true
 # smartTOC = true

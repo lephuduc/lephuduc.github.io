@@ -1,10 +1,14 @@
 ---
-layout: post
-title:  "Flare-on 9"
-date:   2022-12-07 09:29:20 +0700
-categories: Rev
-tags: [ctf, rev]
-description: Repos for flare-on 9!
+title: "Flare-on 9"
+description: "Repos contain all solve script and something else for fo9"
+summary: "Repos contain all solve script and something else for fo9"
+categories: ["Writeup"]
+tags: ["Reverse", "CTF","Honors"]
+#externalUrl: ""
+date: 2023-10-17
+draft: false
+authors:
+  - Jinn
 ---
 
 # Flare-on 9

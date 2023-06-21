@@ -3,7 +3,7 @@ title: "The Plaid Flag CTF 2023"
 description: "Writeup for The Plaid CTF 2023"
 summary: "Writeup for The Plaid CTF 2023"
 categories: ["Writeup"]
-tags: ["Reverse", "Hornors","CTF","Top tier"]
+tags: ["Reverse", "Honors","CTF","Top tier"]
 #externalUrl: ""
 date: 2023-04-17
 draft: false

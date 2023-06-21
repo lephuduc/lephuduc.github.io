@@ -16,8 +16,8 @@ title = "Le Phu Duc"
 [author]
   name = "Jinn"
   image = "img/blowfish_logo.png"
-  headline = "Anh thich Reverse Engineering boi vi anh thich ro e."
-  bio = "A little bit about you"
+  headline = "Little nervous"
+  bio = "Anh thich Reverse Engineering boi vi anh thich ro e."
   links = [
   #   { email = "mailto:hello@your_domain.com" },
   #   { link = "https://link-to-some-website.com/" },

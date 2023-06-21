@@ -6,19 +6,19 @@
 # https://blowfish.page/docs/configuration/#theme-parameters
 
 colorScheme = "blowfish"
-defaultAppearance = "light" # valid options: light or dark
+defaultAppearance = "dark" # valid options: light or dark
 autoSwitchAppearance = true
 
 enableSearch = true
 enableCodeCopy = false
 
-# mainSections = ["section1", "section2"]
+mainSections = ["posts", "section2"]
 # robots = ""
 
 disableImageOptimization = true
 
 defaultBackgroundImage = "/img/Kikyo.jpg"
-defaultFeaturedImage = "/img/Kikyo.jpg"
+# defaultFeaturedImage = "/img/Kikyo.jpg"
 
 # highlightCurrentMenuArea = true
 # smartTOC = true
@@ -35,7 +35,7 @@ defaultFeaturedImage = "/img/Kikyo.jpg"
   showScrollToTop = true
 
 [homepage]
-  layout = "profile" # valid options: page, profile, hero, card, background, custom
+  layout = "background" # valid options: page, profile, hero, card, background, custom
   #homepageImage = "IMAGE.jpg" # used in: hero, and card
   showRecent = false
   showRecentItems = 5

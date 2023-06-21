@@ -8,14 +8,14 @@ title = "Le Phu Duc"
   isoCode = "en"
   rtl = false
   dateFormat = "2 January 2006"
-  logo = "img/logo.png"
-  secondaryLogo = "img/secondary-logo.png"
+  logo = "img/harrypotter.jpg"
+  secondaryLogo = "img/harrypotter.jpg"
   description = "Why are you here?"
   copyright = "Copyright © Le Phu Duc"
 
 [author]
   name = "Jinn"
-  image = "img/blowfish_logo.png"
+  image = "img/harrypotter.jpg"
   headline = "Little nervous"
   bio = "Anh thich Reverse Engineering boi vi anh thich ro e."
   links = [

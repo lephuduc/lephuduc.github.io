@@ -5,7 +5,7 @@ summary: "Writeup for The UIUCTF 2022"
 categories: ["Writeup"]
 tags: ["Reverse","CTF","Mid tier"]
 #externalUrl: ""
-date: 2023-07-30
+date: 2022-07-30
 draft: false
 authors:
   - Jinn

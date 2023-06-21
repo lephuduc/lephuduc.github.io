@@ -5,7 +5,7 @@ summary: "Repos contain all solve script and something else for fo9"
 categories: ["Writeup"]
 tags: ["Reverse", "CTF","Honors"]
 #externalUrl: ""
-date: 2023-10-17
+date: 2022-10-17
 draft: false
 authors:
   - Jinn

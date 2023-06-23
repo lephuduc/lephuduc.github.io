@@ -11,8 +11,6 @@ authors:
   - Jinn
 ---
 
-# ångstromCTF 2023
-
 First of all, I'm very excited because my team made it into the top ten. Thanks to my teammate. Keep it up, **The Council of Sheep** !!!!
 
 ![](https://i.imgur.com/VetZWRd.png)
@@ -174,7 +172,7 @@ print(flag) #both_irregular_and_inexpessire
 ```
 Flag: `actf{both_irregular_and_inexpessive}`
 
-# TI
+## TI
 
 >80 points, 40 solves
 My friend sent me this [town simulator](https://files.actf.co/e93c52090cfe5c3de858bebee79af67066b825afa84ead4f1488b274f72000fb/TOWN.8xp). I can't seem to beat it. Can you help me?

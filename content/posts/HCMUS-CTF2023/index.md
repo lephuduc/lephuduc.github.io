@@ -10,7 +10,6 @@ draft: false
 authors:
   - Jinn
 ---
-# HCMUS-CTF 2023
 
 Hi, I'm Jinn
 As a reverser of the team, I try my best on 2 challenge: `Is that crypto?` and `Go Mal!`. These 2 challenges are fantastic and so cool. Btw, I also solve some other easy problems like `Japanese`, `python is safe?`, `grind`.Therefore, I will provide detailed explanations for 2 reverse challenges and briefly mention the remaining ones.

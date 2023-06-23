@@ -11,7 +11,7 @@ authors:
   - Jinn
 ---
 
-# Reject to Inject - 197 points
+## Reject to Inject - 197 points
 
 ![](https://i.imgur.com/kzr9V9u.png)
 
@@ -272,7 +272,7 @@ Ezflag:
 
 Go on...
 
-# Pierated Art - 311 points
+## Pierated Art - 311 points
 
 ![](https://i.imgur.com/u5w1QRQ.png)
 
@@ -489,7 +489,7 @@ Flag: `uiuctf{m0ndr14n_b3st_pr0gr4mm3r_ngl}`
 
 
 ...
-# Vast Cornfields - 223 points
+## Vast Cornfields - 223 points
 
 ![](https://i.imgur.com/zfrvovc.png)
 
@@ -785,7 +785,7 @@ Có được password, đó cũng là flag.
 
 Flag: `uiuctf{the_inside_of_a_field_of_corn_and_dreams}`
 
-# Library of Babel - 371 points
+## Library of Babel - 371 points
 
 ![](https://i.imgur.com/sab1UlB.png)
 

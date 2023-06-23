@@ -11,8 +11,6 @@ authors:
   - Jinn
 ---
 
-# HITCON CTF 2022
-
 Đây sẽ là write-up về trải nghiệm cá nhân mình khi tham gia giải [HITCON CTF 2022](https://scoreboard.hitconctf.com/campaigns/1). Đầu tiên, có một bất ngờ nhỏ đối với mình là bài mình làm đa số rất nhiều solve nhưng cách giải thì không đơn giản như mình nghĩ. (giải 100kg:v)
 Nhưng nhờ vậy mà qua giải này mình đã được mở mang kiến thức khá là nhiều, đặt biệt là mình đã học được cách debug windows drivers, thứ mà trước giờ mình chỉ static analysis, hơn nữa hiểu hơn về cách hoạt động của driver và biết được thêm 1 số kĩ thuật như [Heaven's gate](https://www.malwarebytes.com/blog/news/2018/01/a-coin-miner-with-a-heavens-gate) trong malware.
 

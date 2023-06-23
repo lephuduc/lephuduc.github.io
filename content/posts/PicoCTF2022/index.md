@@ -32,7 +32,7 @@ Mục lục:
 - Detect it easy (DIE)
 - Máy ảo (Ubuntu 20.04 hoặc Kali Linux)
 
-# file-run1
+## file-run1
 
 ![Untitled](https://user-images.githubusercontent.com/88520787/168028354-0cda410a-efc5-479b-99fe-f3ada12b311c.png)
 
@@ -45,7 +45,7 @@ GIải thích:
 - `chmod +x <file>`: cấp quyền chạy cho file
 - `./<file>`: chạy file thực thi trên linux
 
-# file-run2
+## file-run2
 
 ![Untitled 2](https://user-images.githubusercontent.com/88520787/168029042-b0b17508-7c59-41b1-ad1a-698fd1b86e77.png)
 
@@ -73,7 +73,7 @@ int main(int argc, char *argv[]) {
 
 Các parameter này sẽ lưu theo thứ tự vào `argv[1] argv[2]... ...` , mặc định `argv[0]` sẽ là file chương trình. Các parameter sẽ được lưu vào argv[] dưới kiểu chuỗi và được sử dụng vào các mục đích khác nhau tùy người viết chương trình. 
 
-# **GDB Test Drive**
+## **GDB Test Drive**
 
 ![Untitled 5](https://user-images.githubusercontent.com/88520787/168029388-274cb749-50b6-4f09-a4a3-a01d63294b34.png)
 
@@ -100,7 +100,7 @@ Tại đây, để bỏ qua lời gọi hàm `sleep` thì ta dùng `jump *(main+
 
 ![Untitled 9](https://user-images.githubusercontent.com/88520787/168029522-fc033623-5294-44df-b8e1-0c5dcc48c351.png)
 
-# patchme.py
+## patchme.py
 
 ![Untitled 10](https://user-images.githubusercontent.com/88520787/168029787-625b25ef-2dcf-4ccd-a2a2-f515bd040236.png)
 
@@ -124,7 +124,7 @@ Nhập password, ta được flag:
 
 ![Untitled 14](https://user-images.githubusercontent.com/88520787/168029897-86ce1665-03e3-46c6-b127-39cf44074994.png)
 
-# Safe Opener
+## Safe Opener
 
 ![Untitled 15](https://user-images.githubusercontent.com/88520787/168029922-8f1ef4a9-a4b1-44a8-989f-957b918d563a.png)
 
@@ -148,7 +148,7 @@ Decode base64 của đoạn này ta được password:
 
 Flag: `picoCTF{pl3as3_l3t_m3_1nt0_th3_saf}`
 
-# unpackme.py
+## unpackme.py
 
 ![Untitled 20](https://user-images.githubusercontent.com/88520787/168030086-0d9a9dbb-24eb-4cfd-8abd-a7c9d91cc4c9.png)
 
@@ -160,7 +160,7 @@ Mở file lên ta thấy chương trình dịch mã đoạn text dài trên và 
 
 Và thay vì chạy, ta có ngay flag của bài!
 
-# bloat.py
+## bloat.py
 
 ![Untitled 23](https://user-images.githubusercontent.com/88520787/168030186-287bb97a-2832-49b0-a4b9-64b511963950.png)
 
@@ -223,7 +223,7 @@ Nhập password vào chương trình, ta được flag:
 
 ![Untitled 26](https://user-images.githubusercontent.com/88520787/168030264-7bd58267-4ae7-4329-83da-dead21db2086.png)
 
-# **Fresh Java**
+## **Fresh Java**
 
 ![Untitled 27](https://user-images.githubusercontent.com/88520787/168030294-66b52661-b99d-47ca-a948-ee1dda05ae83.png)
 
@@ -393,7 +393,7 @@ public class KeygenMe
 
 Tại đây, ta sẽ dễ dàng nhìn thấy các kí tự của flag, Sắp xếp các kí tự theo index từ 0→33 ta được flag cần tìm.
 
-# Bbbbloat
+## Bbbbloat
 
 ![Untitled 28](https://user-images.githubusercontent.com/88520787/168030356-b55bd50e-8953-4566-8e79-d6de649f15b8.png)
 
@@ -411,7 +411,7 @@ Chạy file và nhập `549255` ta được flag:
 
 ![Untitled 31](https://user-images.githubusercontent.com/88520787/168030457-4f7091c7-b9ff-49b7-8477-22318fadf70d.png)
 
-# unpackme
+## unpackme
 
 ![Untitled 32](https://user-images.githubusercontent.com/88520787/168030479-1ec0a026-1363-47f4-9a34-956898c5df5e.png)
 
@@ -443,7 +443,7 @@ Chạy chương trình và nhập số vào ta được flag
 
 ![Untitled 37](https://user-images.githubusercontent.com/88520787/168030850-54b583e7-a9c3-40b1-bbd5-bd670f8b9d8d.png)
 
-# **Keygenme**
+## **Keygenme**
 
 ![Untitled 38](https://user-images.githubusercontent.com/88520787/168030873-e1d25493-d592-49e6-abbd-582806e442e0.png)
 
@@ -494,7 +494,7 @@ Chạy hết đoạn này và ta xem giá trị của`v17`, và nó cũng chứa
 
 ![Untitled 47](https://user-images.githubusercontent.com/88520787/168031122-61aa105a-5bb1-4f2a-927c-83c88b62863a.png)
 
-# Wizardlike
+## Wizardlike
 
 ![Untitled 48](https://user-images.githubusercontent.com/88520787/168031149-5c928715-d125-426c-8313-aaa03c54447c.png)
 
@@ -806,4 +806,4 @@ Và đây là thành quả sau khi chạy file.
 
 10 Màn chơi sẽ chứa các kí tự của flag theo thứ tự nhé. Chúc bạn thành công!
 
-# Cảm ơn các bạn đã xem!
+## Cảm ơn các bạn đã xem!

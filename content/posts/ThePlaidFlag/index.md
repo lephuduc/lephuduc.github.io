@@ -10,7 +10,6 @@ draft: false
 authors:
   - Jinn
 ---
-# The Plaid Flag 2023
 
 # Rev/CSS-crimes - 200pts
 

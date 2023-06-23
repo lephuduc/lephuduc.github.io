@@ -11,7 +11,7 @@ authors:
   - Jinn
 ---
 
-# JS SAFE 4.0 
+## JS SAFE 4.0 
 ![](https://i.imgur.com/HhKIUby.png)
 
 Tuy nhiên khi mở file chạy và mở devtools thì nó không hiện gì (f5 là lag luôn):

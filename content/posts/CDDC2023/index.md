@@ -5,7 +5,7 @@ summary: "Writeup for rev challenge in CDDC2023"
 categories: ["Writeup"]
 tags: ["Reverse"]
 #externalUrl: ""
-date: 2023-04-27
+date: 2023-06-14
 draft: false
 authors:
   - Jinn

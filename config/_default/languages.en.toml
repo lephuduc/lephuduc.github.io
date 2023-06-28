@@ -8,14 +8,14 @@ title = "Le Phu Duc"
   isoCode = "en"
   rtl = false
   dateFormat = "2 January 2006"
-  # logo = "img/CoolKikyo.jpg"
-  secondaryLogo = "img/CoolKikyo.jpg"
+  # logo = "img/abcd.jpg"
+  secondaryLogo = "img/Violeto10.jpg"
   description = "Le Phu Duc's personal page"
   copyright = "Copyright © Le Phu Duc"
 
 [author]
   name = "Jinn"
-  image = "img/CoolKikyo.jpg"
+  image = "img/Violeto10.jpg"
   headline = "There are no hard challenges. We are hard"
   bio = "Anh thich Reverse Engineering boi vi anh thich ro e."
   links = [

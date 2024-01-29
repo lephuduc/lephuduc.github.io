@@ -12,7 +12,7 @@ authors:
 ---
 
 
-# Rustly VM - TetCTF 2024
+# Rusty VM - TetCTF 2024
 
 TetCTF 2024 vừa rồi là giải TetCTF thứ 3 mà mình tham gia, tuy nhiên lần này có chúc ấn tượng rằng đề khá là thú vị. Với 2 bài đầu thì mình cảm thấy cũng khá đơn giản nên mình không note ở đây, còn 1 bài khác nữa tuy nhiên vì mình nghĩ rằng giải 24 giờ nên bài đó mình đã bỏ qua, đến lúc nhận ra thi đã quá muộn...
 

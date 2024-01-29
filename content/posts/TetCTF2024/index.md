@@ -58,7 +58,7 @@ Và trong vm lần này có cả `call` và `ret` lý do mình thấy vì ngoài
 
 ![image](https://hackmd.io/_uploads/r1teSJHq6.png)
 
-### Writing disassembler
+## Writing disassembler
 
 Do đó từ các dữ kiện này mình có thể dễ dàng viết ra một disassembler cơ bản.
 

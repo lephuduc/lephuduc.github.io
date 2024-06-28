@@ -249,7 +249,7 @@ Just get the xor_table from binary, and then I use this function to operate xor.
 
 I've tried this one but it didn't work when I do it again, even if I patch these words into IDA and let it run, still got the wrong answer.
 
-```python=
+```python
 buf2 = [0x1a, 0x12c, 0x24c, 0x11c, 0x12a, 0x137, 0x210, 0x111, 0x242, 0x31b, 0x126, 0x327, 0x329, 0x20b, 0x3, 0x220]
 # `another_buffer` a.k.a `buf2`
 
@@ -604,7 +604,7 @@ So, I finally found the correct input but still the wrong key for decryption. It
 
 Also, I tried to brute force the byte in the matrix and got the result:
 
-```python=
+```python
 A_inv = Inverse(Matrix_rns([208, 120, 107, 19, 138, 163, 11, 174, 217, 67, 60, 143, 13, 232, 181, 2],conv=True).as_list())
 A_inv = Matrix_rns(A_inv,ls = True)
 print("A_inv: ",A_inv.matrix) ### A_inv is correct

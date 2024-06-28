@@ -5,7 +5,7 @@ summary: "Writeup for Google CTF 2024"
 categories: ["Writeup"]
 tags: ["Reverse","Honors","CTF"]
 #externalUrl: ""
-date: 2024-06-29
+date: 2024-06-28
 draft: false
 authors:
   - Jinn

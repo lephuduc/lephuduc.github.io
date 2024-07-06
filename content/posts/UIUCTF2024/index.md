@@ -209,15 +209,71 @@ There are also many analyses about them:
 I took a lot of time on the binary before knowing them as an open source C2, so I see there is not much modification from the original, so I'll not mention here too much, and I decided to use the tool to decrypt the traffic.
 
 ```shell
-> python .\sliver_pcap_parser.py --pcap ..\evidence.pcapng --filter http --domain_name 10.0.0.101
-
-[+] Filtering for HTTP traffic
-[+] Collecting Sessions
+$ python3 sliver_pcap_parser.py --pcap ../evidence.pcapng --filter http --domain_name 10.0.0.101
 ```
 
 We also have given .dmp file, so I can use FORCE option to find the key automatically:
 
-
+```bash
+python3 sliver_decrypt.py --file_path http-sessions.json --transport http --force ../Goose.dmp
+```
 
 Luckily, the flag is here:
 
+```bash
+[+] Finding all possible keys in ../Goose.dmp
+  [-] Found 5391 possible keys
+  [*] Keys will be tested during first decryption attempt
+[+] Running HTTP Decoder
+[+] Processing: http://10.0.0.101:80/oauth2callback/oauth/api.html?bv=5849e5085&r=8r0345412
+  [-] Decoding: b64
+  [!] Session Key: Unable to find a valid key for this session
+[+] Processing: http://10.0.0.101:80/oauth2callback/oauth/api.html?bv=5849e5085&r=8r0345412
+  [-] Decoding: b64
+  [-] Session Key: ccb90e9bb8db3ef5e121d7cbba944bf1a0e16fdf8a8a0d543b960ce7989cda33
+[+] Processing: http://10.0.0.101:80/api.php?n=369d59499
+  [-] Decoding: gzip-b64
+  [-] Session Key: ccb90e9bb8db3ef5e121d7cbba944bf1a0e16fdf8a8a0d543b960ce7989cda33
+  [-] Message Type: 1
+[=] Message Data
+b'\n\ngoosechase\x12\x0fDESKTOP-DEQMME0\x1a$e1a84d56-400f-3cd4-a1f3-233922586739"\x15DESKTOP-DEQMME0\\Ronan*-S-1-5-21-1165601571-417196110-1223264716-10012,S-1-5-21-1165601571-417196110-1223264716-513:\x07windowsB\x05amd64H\x94)R\x18C:\\Users\\Ronan\\Goose.exeZ\x15https://10.0.0.101:80b\x1510 build 22631 x86_64h\x80\xb0\x9d\xc2\xdf\x01\x82\x01$aa00c4d8-3b17-4ff4-85cd-809c35cfd666\x88\x01\xe2\x9d\xb9\x91\xfd\xa0\x89\xb1\xfb\x01\x92\x01\x05en-US'
+
+[+] Processing: http://10.0.0.101:80/assets/array.js?o=68257360
+  [-] Decoding: gzip-words
+  [!] Session Key: Unable to find a valid key for this session
+[+] Processing: http://10.0.0.101:80/oauth2callback/oauth/auth/samples.php?h=m31953704
+  [-] Decoding: words
+  [-] Session Key: ccb90e9bb8db3ef5e121d7cbba944bf1a0e16fdf8a8a0d543b960ce7989cda33
+  [-] Message Type: 0
+[=] Message Data
+b'\n\x17C:\\Users\\Ronan\\flag.txt\x12\x04gzip\x18\x012O\x1f\x8b\x08\x00\x00\x00\x00\x00\x04\xff\x003\x00\xcc\xffuiuctf{GOOS3_CH4S3_ST0P_RUNN1NG_STR1NGS_0N_MY_CHAL}\x01\x00\x00\xff\xff\xe1\xd1\xe1\xcc3\x00\x00\x00@\x01J\x00'
+[+] Processing: http://10.0.0.101:80/bootstrap.min.js?i=70189559
+  [-] Decoding: b64
+  [-] Session Key: ccb90e9bb8db3ef5e121d7cbba944bf1a0e16fdf8a8a0d543b960ce7989cda33
+  [-] Message Type: 7
+[=] Message Data
+b'\n\x08flag.txtJ\x07\x10\x80\xb0\x9d\xc2\xdf\x01'
+
+...stripped...
+
+[+] Processing: http://10.0.0.101:80/auth/database/oauth2callback/api.php?n=59z33056
+  [-] Decoding: b64
+  [-] Session Key: ccb90e9bb8db3ef5e121d7cbba944bf1a0e16fdf8a8a0d543b960ce7989cda33
+  [-] Message Type: 0
+[=] Message Data
+b'\n\x17C:\\Users\\Ronan\\flag.txt\x12\x04gzip\x18\x012O\x1f\x8b\x08\x00\x00\x00\x00\x00\x04\xff\x003\x00\xcc\xff
+uiuctf{GOOS3_CH4S3_ST0P_RUNN1NG_STR1NGS_0N_MY_CHAL}\x01\x00\x00\xff\xff\xe1\xd1\xe1\xcc3\x00\x00\x00@\x01J\x00'
+```
+
+![image](https://hackmd.io/_uploads/rybB2TUDR.png)
+
+
+Special thanks to the Author who created a good challenge, I already have enjoyed it.
+
+
+Also, here is write-up from UIUCTF2022:
+
+https://lephuduc.github.io/posts/uiuctf2022/
+
+
+**Thanks for reading!**

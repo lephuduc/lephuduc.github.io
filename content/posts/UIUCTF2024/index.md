@@ -157,7 +157,7 @@ And here is main function:
 
 The first time I tried it debug with Assembly code, there was a simple anti-debugger using IsDebuggerPresent (found in the obfuscated string) and syscall.
 
-```clike
+```c
 __int64 __fastcall check_IsDebuggerPresent(__int64 a1, __int64 a2)
 {
   __int64 v2; // r14

@@ -1,3 +1,4 @@
 {{ $covers := .Site.Data.covers }}
-{{ $cover := index $covers (math.Rand | mul (len $covers) | math.Floor | int) }}
+{{ $randIndex := mod (now.UnixNano | int) (len $covers) }}
+{{ $cover := index $covers $randIndex }}
 {{ return $cover }}

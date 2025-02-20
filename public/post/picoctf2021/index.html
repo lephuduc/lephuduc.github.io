@@ -1,0 +1,2124 @@
+<!doctype html>
+<html
+  lang="en-us" 
+  
+    data-theme-mode="true"
+  
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no"
+/>
+
+
+
+
+
+
+
+  
+
+<title>
+  PicoCTF 2022 | Le Phu Duc
+</title>
+<meta
+  name="description"
+  content="Write up for rev problem in PicoCTF 2022"
+/>
+
+
+
+  <script>
+  (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "true");
+</script>
+
+
+  
+<script src="https://www.googletagmanager.com/gtag/js?id=true"></script>
+<script data-pjax>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+
+  gtag('js', new Date());
+
+  gtag('config', 'true');
+</script>
+
+
+
+
+
+
+
+
+<script>
+  window.siteConfig = JSON.parse("{\"anchor_icon\":null,\"clipboard\":{\"copyright\":{\"content\":\"All articles in this blog are licensed under BY-NC-SA unless otherwise stated. Please indicate the source when reprinting!\",\"count\":50,\"enable\":false},\"fail\":\"Failed to copy (ﾟ⊿ﾟ)ﾂ\",\"success\":\"Copied\"},\"code_block\":{\"expand\":true},\"icon_font\":\"4552607_0khxww3tj3q9\",\"outdate\":{\"daysago\":180,\"enable\":false,\"message\":\"本文最后更新于 {time}，请注意文中内容可能已经发生变化。\"}}");
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+    
+  
+
+  
+  
+  
+    
+  
+
+  
+  
+  
+    
+  
+
+  
+  
+  
+    
+  
+
+  
+  
+  
+
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="preload"
+  as="style"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7cUbuntu%20Mono:400,400italic,700,700italic%7cSource%20Code%20Pro:400,400italic,700,700italic%7cJetBrains%20Mono:400,400italic,700,700italic&amp;display=swap"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7cUbuntu%20Mono:400,400italic,700,700italic%7cSource%20Code%20Pro:400,400italic,700,700italic%7cJetBrains%20Mono:400,400italic,700,700italic&amp;display=swap"
+  media="print"
+  onload="this.media='all'"
+/>
+
+
+
+
+
+
+  <link
+    rel="preload"
+    href="//at.alicdn.com/t/c/font_4552607_0khxww3tj3q9.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin="anonymous"
+  />
+
+
+
+  
+
+
+
+
+
+
+ <link rel="stylesheet" href="/css/loader.css" />
+
+
+
+
+
+
+
+<link rel="shortcut icon" href="/favicon/favicon.ico">
+
+
+
+
+
+
+
+ <link rel="stylesheet" href="/css/main.css" />
+
+
+
+
+
+  <link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+
+
+
+
+
+
+  <link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/katex@0.16.9/dist/katex.min.css"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+  
+  
+  
+  <script
+    src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"
+    
+    
+    
+    
+    integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"
+  ></script>
+
+
+
+
+
+  
+
+
+  <link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.0/dist/aos.css" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.css" />
+
+
+
+  </head>
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        
+          <img src="/images/loading-golden.png" alt="loading" />
+        
+      </div>
+      <div class="loading-word"></div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+
+
+    <div id="container">
+      <div id="wrap">
+        
+<div id="header-nav">
+  <nav id="main-nav">
+    
+      <span class="main-nav-link-wrap">
+        <div class='main-nav-icon icon '>
+          
+            &#xe632;
+          
+        </div>
+        <a class="main-nav-link" href="/">Home</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <div class='main-nav-icon icon '>
+          
+            &#xe628;
+          
+        </div>
+        <a class="main-nav-link" href="/about">About</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <div class='main-nav-icon icon '>
+          
+            &#xe604;
+          
+        </div>
+        <a class="main-nav-link" href="/archives">Archives</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <div class='main-nav-icon icon '>
+          
+            &#xe621;
+          
+        </div>
+        <a class="main-nav-link" href="/achievements">Achievements</a>
+      </span>
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    
+    <picture></picture>
+      <img fetchpriority="high" src="/images/post_covers/picoctf2021.jpeg" alt="PicoCTF 2022">
+    
+  
+
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          
+        
+  
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">PicoCTF 2022</h1>
+          </a>
+        
+      
+  
+      
+        
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+        <div id="content"
+          class="sidebar-left"
+            >
+          <aside id="sidebar">
+  
+    <div id="aplayer" theme="var(--color-link)" data-aos="fade-up"></div>
+  
+  
+  <div class="sidebar-wrapper wrap-sticky">
+    <div
+      class="sidebar-wrap"
+      data-aos="fade-up"
+    >
+      
+        <div class="sidebar-toc-sidebar">
+          <div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper toc-div-class">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#file-run1">file-run1</a></li>
+    <li><a href="#file-run2">file-run2</a></li>
+    <li><a href="#gdb-test-drive"><strong>GDB Test Drive</strong></a></li>
+    <li><a href="#patchmepy">patchme.py</a></li>
+    <li><a href="#safe-opener">Safe Opener</a></li>
+    <li><a href="#unpackmepy">unpackme.py</a></li>
+    <li><a href="#bloatpy">bloat.py</a></li>
+    <li><a href="#fresh-java"><strong>Fresh Java</strong></a></li>
+    <li><a href="#bbbbloat">Bbbbloat</a></li>
+    <li><a href="#unpackme">unpackme</a></li>
+    <li><a href="#keygenme"><strong>Keygenme</strong></a></li>
+    <li><a href="#wizardlike">Wizardlike</a></li>
+    <li><a href="#cảm-ơn-các-bạn-đã-xem">Cảm ơn các bạn đã xem!</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+        </div>
+        <div class="sidebar-common-sidebar hidden">
+          
+<div class="sidebar-author">
+  <img
+    data-src="/avatar/shiba.jpg"
+    data-sizes="auto"
+    alt="Le Phu Duc"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Le Phu Duc</div>
+  <div class="sidebar-description">a.k.a Jinn</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>Posts</div>
+    
+    <div class="sidebar-state-number">16</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>Categories</div>
+    <div class="sidebar-state-number">
+      1
+    </div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>Tags</div>
+    <div class="sidebar-state-number">6</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class="icon-discord sidebar-social-icon">
+      <a
+        href="https://discordapp.com/users/lephuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="discord"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-facebook sidebar-social-icon">
+      <a
+        href="https://www.facebook.com/lephuduc0309"
+        itemprop="url"
+        target="_blank"
+        aria-label="facebook"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/lephuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-instagram sidebar-social-icon">
+      <a
+        href="https://www.instagram.com/le.phuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="instagram"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-linkedin sidebar-social-icon">
+      <a
+        href="https://www.linkedin.com/in/lephuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="linkedin"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-twitter sidebar-social-icon">
+      <a
+        href="https://twitter.com/lephuduck"
+        itemprop="url"
+        target="_blank"
+        aria-label="twitter"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="Home"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe632;
+        
+      </div>
+      <div class="sidebar-menu-link">Home</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="About"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe628;
+        
+      </div>
+      <div class="sidebar-menu-link">About</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="Archives"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe604;
+        
+      </div>
+      <div class="sidebar-menu-link">Archives</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/achievements"
+        aria-label="Achievements"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe621;
+        
+      </div>
+      <div class="sidebar-menu-link">Achievements</div>
+    </div>
+  
+</div>
+
+        </div>
+      
+
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
+      
+    </div>
+  </div>
+
+  <div class="sidebar-widget">
+    
+  </div>
+</aside>
+
+          <section id="main">
+  <article
+  class="h-entry article"
+  itemprop="blogPost"
+  itemscope
+  itemtype="https://schema.org/BlogPosting"
+>
+  <div
+    class="article-inner"
+    data-aos="fade-up"
+  >
+    <div class="article-meta">
+      <div class="article-date">
+  <a
+    href="http://localhost:1313/post/picoctf2021/"
+    class="article-date-link"
+    data-aos="zoom-in"
+  >
+    <time datetime="2021-03-09 00:00:00 &#43;0000 UTC" itemprop="datePublished"
+      >2021-03-09</time
+    >
+    <time style="display: none;" id="post-update-time"
+      >2021-03-09</time
+    >
+  </a>
+</div>
+
+      <div class="article-category">
+  
+    <a
+      class="article-category-link"
+      href="/categories/writeup"
+      data-aos="zoom-in"
+      >WRITEUP</a
+    >
+  
+</div>
+
+    </div>
+    <div class="hr-line"></div>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <p>Mục lục:</p>
+<ol>
+<li><a href="https://github.com/lephuduc/Write-up-PicoCTF2022#file-run1">file-run1</a></li>
+<li><a href="https://github.com/lephuduc/Write-up-PicoCTF2022#file-run2">file-run2</a></li>
+<li><a href="https://github.com/lephuduc/Write-up-PicoCTF2022#gdb-test-drive">GDB Test Drive</a></li>
+<li><a href="https://github.com/lephuduc/Write-up-PicoCTF2022#patchmepy">patchme.py</a></li>
+<li><a href="https://github.com/lephuduc/Write-up-PicoCTF2022#safe-opener">Safe Opener</a></li>
+<li><a href="https://github.com/lephuduc/Write-up-PicoCTF2022#unpackmepy">unpackme.py</a></li>
+<li><a href="https://github.com/lephuduc/Write-up-PicoCTF2022#bloatpy">bloat.py</a></li>
+<li><a href="https://github.com/lephuduc/Write-up-PicoCTF2022#fresh-java">Fresh Java</a></li>
+<li><a href="https://github.com/lephuduc/Write-up-PicoCTF2022#bbbbloat">Bbbbloat</a></li>
+<li><a href="https://github.com/lephuduc/Write-up-PicoCTF2022#unpackme">Unpackme</a></li>
+<li><a href="https://github.com/lephuduc/Write-up-PicoCTF2022#keygenme">Keygenme</a></li>
+<li><a href="https://github.com/lephuduc/Write-up-PicoCTF2022#wizardlike">Wizardlike</a></li>
+</ol>
+<p><strong>Trước hết bạn cần có các tools cần thiết để dùng reverse:</strong></p>
+<ul>
+<li>IDA Pro</li>
+<li>Detect it easy (DIE)</li>
+<li>Máy ảo (Ubuntu 20.04 hoặc Kali Linux)</li>
+</ul>
+<h2 id="file-run1">
+<a class="header-anchor" href="#file-run1"></a>
+file-run1
+</h2><p><img src="https://user-images.githubusercontent.com/88520787/168028354-0cda410a-efc5-479b-99fe-f3ada12b311c.png" alt="Untitled"></p>
+<p>Đây chỉ là bài warm-up nên sẽ khá là dễ nên ta chỉ cần dùng các lệnh mà <code>hints</code> có:</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168028410-0e48b03f-5754-49d2-84f6-4fe8fd5e3b26.png" alt="Untitled 1"></p>
+<p>GIải thích:</p>
+<ul>
+<li><code>chmod +x &lt;file&gt;</code>: cấp quyền chạy cho file</li>
+<li><code>./&lt;file&gt;</code>: chạy file thực thi trên linux</li>
+</ul>
+<h2 id="file-run2">
+<a class="header-anchor" href="#file-run2"></a>
+file-run2
+</h2><p><img src="https://user-images.githubusercontent.com/88520787/168029042-b0b17508-7c59-41b1-ad1a-698fd1b86e77.png" alt="Untitled 2"></p>
+<p>Ở bài này, ta không thể chạy như bài trước nữa</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168029245-aab0128b-9b19-419f-a86d-6e64b47ec981.png" alt="Untitled 3"></p>
+<p>thay vào đó ta cần truyền cho file một <code>parameter</code> là “Hello!” (theo như đề bài gợi ý), cú pháp như sau:</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168029278-1b5cc365-0345-45cd-ad4c-025fcaf93e59.png" alt="Untitled 4"></p>
+<p>Giải thích:</p>
+<p>Cú pháp truyền <strong>parameter</strong> khi chạy chương trình:</p>
+<p><code>./&lt;file&gt; &lt;parameter1&gt; &lt;parameter2&gt; ...</code></p>
+<p>trong đó ta có hàm <code>main</code> như sau:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="nb">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span><span class="n">something</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Các parameter này sẽ lưu theo thứ tự vào <code>argv[1] argv[2]... ...</code> , mặc định <code>argv[0]</code> sẽ là file chương trình. Các parameter sẽ được lưu vào argv[] dưới kiểu chuỗi và được sử dụng vào các mục đích khác nhau tùy người viết chương trình.</p>
+<h2 id="gdb-test-drive">
+<a class="header-anchor" href="#gdb-test-drive"></a>
+<strong>GDB Test Drive</strong>
+</h2><p><img src="https://user-images.githubusercontent.com/88520787/168029388-274cb749-50b6-4f09-a4a3-a01d63294b34.png" alt="Untitled 5"></p>
+<p>Bài này ta chỉ cần dùng các câu lệnh có sẵn của đề, nhưng sau đây tôi sẽ kèm theo các lời giải thích</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168029421-5a59ed3f-cf1e-4690-aff5-44a215d99beb.png" alt="Untitled 6"></p>
+<p>Tại đây, đối với những bạn chưa cài <code>gdb</code> và bị báo lỗi thì dùng lệnh<code>sudo apt-get install gdb</code> linux để cho máy tự cài gdb, sau đó chạy lại các lệnh trên.</p>
+<blockquote>
+<p>BTW, <a href="https://github.com/pwndbg/pwndbg#:~:text=Pwndbg%20is%20a%20Python%20module,to%20fill%20some%20these%20gaps.">pwndbg</a> cũng là một tools quan trọng nếu bạn muốn chơi reverse tốt, sử dụng kết hợp cùng với IDA</p></blockquote>
+<p>Dùng <code>layout asm</code> ta được màn hình như sau:</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168029460-1f7632b8-b94f-4757-8f32-3f497c7765f9.png" alt="Untitled 7"></p>
+<p><code>break *(main+99):</code> đặt breakpoint tại vị trí (<code>main</code> +99)</p>
+<p>Sau khi dùng <code>run</code>: ta được màn hình như sau:</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168029494-0d26b0ce-dae4-475d-a6ca-7464e779aafe.png" alt="Untitled 8"></p>
+<p>Tại đây, để bỏ qua lời gọi hàm <code>sleep</code> thì ta dùng <code>jump *(main+104)</code> để nhảy trực tiếp đến câu lệnh tiếp theo, từ đây, chương trình sẽ có thể in ra flag.</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168029522-fc033623-5294-44df-b8e1-0c5dcc48c351.png" alt="Untitled 9"></p>
+<h2 id="patchmepy">
+<a class="header-anchor" href="#patchmepy"></a>
+patchme.py
+</h2><p><img src="https://user-images.githubusercontent.com/88520787/168029787-625b25ef-2dcf-4ccd-a2a2-f515bd040236.png" alt="Untitled 10"></p>
+<p>Ở bài này ta tải 2 file về và đặt chung vào cùng 1 folder, và bạn cần cài thêm <a href="http://python.org">python</a> phiên bản 3. trở lên</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168029816-49d8046b-c2a7-48ed-98ae-4409bfa89ab6.png" alt="Untitled 11"></p>
+<p>Chạy file, ta thấy file kiểm tra password ta nhập vào, mở file bằng <a href="https://code.visualstudio.com/">VScode</a>:</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168029837-d31a03a3-df98-4eed-ad36-e00ccdd232af.png" alt="Untitled 12"></p>
+<p>Ta không cần phải rev hàm str_xor, chương trình này khi ta nhập đúng <code>password</code> , flag sẽ tự động được giải mã và in ra màn hình.</p>
+<p>Chương trình sẽ lấy input của chúng ta và so sánh với chuỗi khác:</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168029868-689e06a0-d1f8-4438-aee1-5132d5b00b53.png" alt="Untitled 13"></p>
+<p>ta có password: <code>ak98-=90adfjhgj321sleuth9000</code></p>
+<p>Nhập password, ta được flag:</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168029897-86ce1665-03e3-46c6-b127-39cf44074994.png" alt="Untitled 14"></p>
+<h2 id="safe-opener">
+<a class="header-anchor" href="#safe-opener"></a>
+Safe Opener
+</h2><p><img src="https://user-images.githubusercontent.com/88520787/168029922-8f1ef4a9-a4b1-44a8-989f-957b918d563a.png" alt="Untitled 15"></p>
+<p>Tải file về ta thấy đó là 1 file java, nhưng trong bài này ta không cần phải chạy file</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168029944-ca2dedba-ad73-42cd-844f-0d34531ea757.png" alt="Untitled 16"></p>
+<p>Đọc code ta thấy đề sẽ lấy <code>password</code> từ input của người dùng sau đó mã hóa và so sánh với chuỗi đã được mã hóa sẵn của chương trình.</p>
+<p>Để ý ta sẽ thấy chương trình dùng base64 để encode</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168029994-3ac8aa39-5d14-442a-86e7-e0ad1a31e8ef.png" alt="Untitled 17"></p>
+<p>Đồng nghĩa với ta sẽ có đoạn mã base64 của password:</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168030029-8c806226-8fed-4b7d-9868-0d2bff554508.png" alt="Untitled 18"></p>
+<p>Decode base64 của đoạn này ta được password:</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168030048-983835a2-7658-4a5a-ae07-df4840824099.png" alt="Untitled 19"></p>
+<p>Flag: <code>picoCTF{pl3as3_l3t_m3_1nt0_th3_saf}</code></p>
+<h2 id="unpackmepy">
+<a class="header-anchor" href="#unpackmepy"></a>
+unpackme.py
+</h2><p><img src="https://user-images.githubusercontent.com/88520787/168030086-0d9a9dbb-24eb-4cfd-8abd-a7c9d91cc4c9.png" alt="Untitled 20"></p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168030116-9867be62-c66a-4753-a8f4-e280d38f0114.png" alt="Untitled 21"></p>
+<p>Mở file lên ta thấy chương trình dịch mã đoạn text dài trên và dùng hàm <code>exec()</code> để thực thi đoạn mã đó, thay vì thực thi, ta thử <code>print</code> nó ra:</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168030155-143eed9a-1d5c-4960-9245-3f9ec0552c9e.png" alt="Untitled 22"></p>
+<p>Và thay vì chạy, ta có ngay flag của bài!</p>
+<h2 id="bloatpy">
+<a class="header-anchor" href="#bloatpy"></a>
+bloat.py
+</h2><p><img src="https://user-images.githubusercontent.com/88520787/168030186-287bb97a-2832-49b0-a4b9-64b511963950.png" alt="Untitled 23"></p>
+<p>Tải 2 file về đặt trong cùng 1 thư mục:</p>
+<p>Mở file <code>[bloat.flag.py](http://bloat.flag.py)</code> ta được đoạn code đã bị <a href="https://en.wikipedia.org/wiki/Obfuscation_(software)">obfuscate</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">sys</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="s2">&#34;!</span><span class="se">\&#34;</span><span class="s2">#$%&amp;&#39;()*+,-./0123456789:;&lt;=&gt;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ&#34;</span><span class="o">+</span> \
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;[</span><span class="se">\\</span><span class="s2">]^_`abcdefghijklmnopqrstuvwxyz{|}~ &#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">arg133</span><span class="p">(</span><span class="n">arg432</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="n">arg432</span> <span class="o">==</span> <span class="n">a</span><span class="p">[</span><span class="mi">71</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">64</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">79</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">79</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">88</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">66</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">71</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">64</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">77</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">66</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">68</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">51</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">71</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">64</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">83</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">94</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">79</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">64</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">82</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">82</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">86</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">78</span><span class="p">]</span><span class="o">+</span>\
+</span></span><span class="line"><span class="cl"><span class="n">a</span><span class="p">[</span><span class="mi">81</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">67</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">94</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">72</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">82</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">94</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">72</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">77</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">66</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">78</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">81</span><span class="p">]</span><span class="o">+</span>\
+</span></span><span class="line"><span class="cl"><span class="n">a</span><span class="p">[</span><span class="mi">81</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">68</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">66</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">83</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">arg111</span><span class="p">(</span><span class="n">arg444</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">arg122</span><span class="p">(</span><span class="n">arg444</span><span class="o">.</span><span class="n">decode</span><span class="p">(),</span> <span class="n">a</span><span class="p">[</span><span class="mi">81</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">64</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">79</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">82</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">66</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">64</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">75</span><span class="p">]</span><span class="o">+</span>\
+</span></span><span class="line"><span class="cl"><span class="n">a</span><span class="p">[</span><span class="mi">75</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">72</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">78</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">77</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">arg232</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nb">input</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">47</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">75</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">68</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">64</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">82</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">68</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">94</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">68</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">77</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">83</span><span class="p">]</span><span class="o">+</span>\
+</span></span><span class="line"><span class="cl"><span class="n">a</span><span class="p">[</span><span class="mi">68</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">81</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">94</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">66</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">78</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">81</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">81</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">68</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">66</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">83</span><span class="p">]</span><span class="o">+</span>\
+</span></span><span class="line"><span class="cl"><span class="n">a</span><span class="p">[</span><span class="mi">94</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">79</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">64</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">82</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">82</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">86</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">78</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">81</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">67</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">94</span><span class="p">]</span><span class="o">+</span>\
+</span></span><span class="line"><span class="cl"><span class="n">a</span><span class="p">[</span><span class="mi">69</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">78</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">81</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">94</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">69</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">75</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">64</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">70</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">25</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">94</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">arg132</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;flag.txt.enc&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">arg112</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">54</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">68</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">75</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">66</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">78</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">76</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">68</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">94</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">65</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">64</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">66</span><span class="p">]</span><span class="o">+</span>\
+</span></span><span class="line"><span class="cl"><span class="n">a</span><span class="p">[</span><span class="mi">74</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">94</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">88</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">78</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">84</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">81</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">94</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">69</span><span class="p">]</span><span class="o">+</span>\
+</span></span><span class="line"><span class="cl"><span class="n">a</span><span class="p">[</span><span class="mi">75</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">64</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">70</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">94</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">84</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">82</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">68</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">81</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">25</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">arg122</span><span class="p">(</span><span class="n">arg432</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">arg433</span> <span class="o">=</span> <span class="n">arg423</span>
+</span></span><span class="line"><span class="cl">    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">arg433</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">arg432</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">arg433</span> <span class="o">=</span> <span class="n">arg433</span> <span class="o">+</span> <span class="n">arg423</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">arg423</span><span class="p">)</span>        
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s2">&#34;&#34;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">chr</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">arg422</span><span class="p">)</span> <span class="o">^</span> <span class="nb">ord</span><span class="p">(</span><span class="n">arg442</span><span class="p">))</span> <span class="k">for</span> <span class="p">(</span><span class="n">arg422</span><span class="p">,</span><span class="n">arg442</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">arg432</span><span class="p">,</span><span class="n">arg433</span><span class="p">)])</span>
+</span></span><span class="line"><span class="cl"><span class="n">arg444</span> <span class="o">=</span> <span class="n">arg132</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">arg432</span> <span class="o">=</span> <span class="n">arg232</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">arg133</span><span class="p">(</span><span class="n">arg432</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">arg112</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">arg423</span> <span class="o">=</span> <span class="n">arg111</span><span class="p">(</span><span class="n">arg444</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">arg423</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span></code></pre></div><p>Quan sát ta thấy có 1 hàm dùng để kiểm tra 2 chuỗi có bằng nhau hay không, ta tạm đặt tên hàm là check:</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168030218-f7ce1874-4a1f-409a-9b31-7ac236f4d1df.png" alt="Untitled 24"></p>
+<p><code>print</code> chuỗi đó ra, ta được: <code>happychance</code></p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168030247-8a7ed01a-7a32-4ee0-a984-cf04adeeb261.png" alt="Untitled 25"></p>
+<p>Nhập password vào chương trình, ta được flag:</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168030264-7bd58267-4ae7-4329-83da-dead21db2086.png" alt="Untitled 26"></p>
+<h2 id="fresh-java">
+<a class="header-anchor" href="#fresh-java"></a>
+<strong>Fresh Java</strong>
+</h2><p><img src="https://user-images.githubusercontent.com/88520787/168030294-66b52661-b99d-47ca-a948-ee1dda05ae83.png" alt="Untitled 27"></p>
+<p>Đề sẽ cho mình một file <code>.class</code>, chúng ta có thể dùng tool để phân tích thành file <code>.java</code></p>
+<p>hoặc dùng <a href="http://www.javadecompilers.com/">Java Decompier Online</a> này.</p>
+<p>Ta có file <code>.java</code> như sau:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Scanner</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// Decompiled by Procyon v0.5.36</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">KeygenMe</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">array</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">Scanner</span><span class="w"> </span><span class="n">scanner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Scanner</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">in</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Enter key:&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nextLine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scanner</span><span class="p">.</span><span class="na">nextLine</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextLine</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">34</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Invalid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextLine</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">33</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;}&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Invalid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextLine</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">32</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;7&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Invalid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextLine</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">31</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;0&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Invalid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextLine</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">30</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;6&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Invalid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextLine</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">29</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;5&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Invalid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextLine</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">28</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;7&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Invalid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextLine</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">27</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;4&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Invalid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextLine</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">26</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;2&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Invalid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextLine</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">25</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;c&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Invalid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextLine</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">24</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;_&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Invalid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextLine</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">23</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;d&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Invalid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextLine</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">22</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;3&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Invalid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextLine</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">21</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;r&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Invalid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextLine</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">20</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;1&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Invalid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextLine</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">19</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;u&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Invalid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextLine</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">18</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;q&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Invalid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextLine</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">17</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;3&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Invalid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextLine</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">16</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;r&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Invalid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextLine</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">15</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;_&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Invalid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextLine</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">14</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;g&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Invalid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextLine</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">13</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;n&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Invalid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextLine</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">12</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;1&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Invalid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextLine</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">11</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;l&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Invalid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextLine</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">10</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;0&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Invalid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextLine</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">9</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;0&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Invalid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextLine</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">8</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;7&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Invalid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextLine</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">7</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;{&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Invalid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextLine</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">6</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;F&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Invalid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextLine</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">5</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;T&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Invalid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextLine</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">4</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;C&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Invalid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextLine</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">3</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;o&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Invalid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextLine</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">2</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;c&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Invalid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextLine</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">1</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;i&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Invalid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextLine</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">0</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;p&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Invalid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Valid key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>Tại đây, ta sẽ dễ dàng nhìn thấy các kí tự của flag, Sắp xếp các kí tự theo index từ 0→33 ta được flag cần tìm.</p>
+<h2 id="bbbbloat">
+<a class="header-anchor" href="#bbbbloat"></a>
+Bbbbloat
+</h2><p><img src="https://user-images.githubusercontent.com/88520787/168030356-b55bd50e-8953-4566-8e79-d6de649f15b8.png" alt="Untitled 28"></p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168030395-3a3400a8-41b5-443e-bc61-dbff914742a8.png" alt="Untitled 29"></p>
+<p>Kiểm tra file bằng Detect it Easy, ta biết được đây là file ELF64, mở file bằng IDA64bit:</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168030417-bb3f38ac-999b-417d-a697-65458c2965cf.png" alt="Untitled 30"></p>
+<p>Chọn hàm main và bấm <code>F5</code> ta được đoạn code C như trên;</p>
+<p>Phân tích code ta thấy chương trình bắt ta nhập vào 1 con số, nếu đúng với số của chương trình thì sẽ trả về flag, ta dễ dàng thấy con số đó cũng chính là <code>549255</code></p>
+<p>Chạy file và nhập <code>549255</code> ta được flag:</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168030457-4f7091c7-b9ff-49b7-8477-22318fadf70d.png" alt="Untitled 31"></p>
+<h2 id="unpackme">
+<a class="header-anchor" href="#unpackme"></a>
+unpackme
+</h2><p><img src="https://user-images.githubusercontent.com/88520787/168030479-1ec0a026-1363-47f4-9a34-956898c5df5e.png" alt="Untitled 32"></p>
+<p>Mở file bằng Detect it Easy:</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168030502-16ba62d1-3ad6-4a8f-9f5f-598607c0644e.png" alt="Untitled 33"></p>
+<p>Ta thấy vẫn là file ELF64 và bị pack bởi UPX 3.95</p>
+<p>UPX: một chương trình được sử dụng để nén các tệp thực thi, chứa một tệp thực thi được đóng gói.</p>
+<p>Để unpack file này, ta dùng <a href="https://github.com/upx/upx/releases/tag/v3.96">UPX</a> (tải và giải nén):</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168030528-0aac90fe-8ccc-48dd-bd33-52ac5b1c983e.png" alt="Untitled 34"></p>
+<p>copy file <code>unpackme-upx</code> và để chung thư mục với upx, mở cmd tại folder đó lên:</p>
+<p>dùng câu lệnh: <code>upx.exe -d unpackme-upx</code></p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168030565-1f65f09a-a895-4555-96ff-3f728aebc315.png" alt="Untitled 35"></p>
+<p>ta được file mới đã unpack, mở file này bằng IDA64:</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168030591-837a67f1-e5b4-4058-a121-6238eeee85f9.png" alt="Untitled 36"></p>
+<p>Tương tự với bài trước ta tìm thấy con số cần nhập là <code>754653</code>:</p>
+<p>Chạy chương trình và nhập số vào ta được flag</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168030850-54b583e7-a9c3-40b1-bbd5-bd670f8b9d8d.png" alt="Untitled 37"></p>
+<h2 id="keygenme">
+<a class="header-anchor" href="#keygenme"></a>
+<strong>Keygenme</strong>
+</h2><p><img src="https://user-images.githubusercontent.com/88520787/168030873-e1d25493-d592-49e6-abbd-582806e442e0.png" alt="Untitled 38"></p>
+<p>Xem thông tin file bằng Detect it Easy:</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168030900-02d5605d-b374-449e-a0d5-bd2a94ea8368.png" alt="Untitled 39"></p>
+<p>Mở file bằng IDA64, ta có hàm main:</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168030923-d26f50f4-17e2-4a5b-9e3a-5758da31128f.png" alt="Untitled 40"></p>
+<p>và ta thấy hàm kiểm tra cũng chưa thấy gì:</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168030945-fe153bb6-192b-4e26-9f45-edca73f2a450.png" alt="Untitled 41"></p>
+<p>Đặt breakpoint tại lệnh <code>if</code> và thử debug bằng Remote Linux debuger:</p>
+<ul>
+<li>Vào thư mục <code>dbgsrv</code> trong folder chứa IDA, tìm file <code>linux_server64</code> và đưa vào máy ảo</li>
+<li>trên máy ảo: dùng lệnh <code>ifconfig</code> ,copy ip tìm được</li>
+<li>Chạy file <code>linux_server64</code> trên linux</li>
+<li>tại IDA, chọn Debugger→Process Option: paste ip tìm được vào ô Hostname, bấm <code>Ok, use found</code>.</li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/88520787/168030968-22500ce0-e41a-41b9-8cc9-855cc15ec618.png" alt="Untitled 42"></p>
+<p>Kết quả là file đang được debug, nhập key rác bất kì</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168030994-5afffbaf-8379-45c7-97ac-ded02a66e14e.png" alt="Untitled 43"></p>
+<p>Khi chương trình chạy đến dòng lệnh <code>if</code> ta bấm F7 để step into (vào bên trong hàm) <code>sub_5621D0987208()</code></p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168031029-477a3593-41b8-40ba-9347-0c7b38bc167e.png" alt="Untitled 44"></p>
+<p>ta sẽ thấy xuất hiện nhiều lệnh <code>mov</code> và lệnh <code>lea</code> 2 lệnh này</p>
+<p>Khi chạy hết các lệnh cho đến lệnh <code>jump</code> thì ta dừng lại để kiểm tra, lúc này trên stack ta xem thanh ghi <code>rax</code> thì ta thấy 1 phần của flag:</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168031071-e8587d7b-8f79-47b8-b56a-1b7aea0b2cdb.png" alt="Untitled 45"></p>
+<p>Khi decompile được hàm trên, ta được đoạn code C như sau:</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168031102-fb233e09-dcfe-419e-ac5e-14f784f01839.png" alt="Untitled 46"></p>
+<p>ta sẽ thấy tại đây khúc cuối có 1 loạt phép gán được thực hiện, kiểm tra phần giá trị gán thì ta thấy đó là những kí tự cuối cùng của flag</p>
+<p>Chạy hết đoạn này và ta xem giá trị của<code>v17</code>, và nó cũng chứa flag:</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168031122-61aa105a-5bb1-4f2a-927c-83c88b62863a.png" alt="Untitled 47"></p>
+<h2 id="wizardlike">
+<a class="header-anchor" href="#wizardlike"></a>
+Wizardlike
+</h2><p><img src="https://user-images.githubusercontent.com/88520787/168031149-5c928715-d125-426c-8313-aaa03c54447c.png" alt="Untitled 48"></p>
+<p>Chạy file, ta được 1 trò chơi như sau:</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168031185-8ae26fb3-de9c-46f6-a38e-b802c9eaa7e5.png" alt="Untitled 49"></p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168031190-bb6cf1c6-7d71-492f-9e5c-e6913db08302.png" alt="Untitled 50"></p>
+<p>Khi nhân vật di chuyển đến <code>&gt;</code> sẽ qua màn chơi tiếp theo, <code>&lt;</code> sẽ quay lại màn chơi phía trước</p>
+<p>Tuy nhiên tại màn chơi thứ 4, ta không tiếp cận đươc <code>&gt;</code></p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168031220-501e3239-f212-4bbf-9e39-580f442314c6.png" alt="Untitled 51"></p>
+<p>Mình thử kiểm tra file thì vẫn là ELF64 và không bị pack, đưa vào IDA64 ta được đoạn code như sau:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kr">__int64</span> <span class="kr">__fastcall</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">a1</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">a2</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">a3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">v3</span><span class="p">;</span> <span class="c1">// eax
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int</span> <span class="n">v4</span><span class="p">;</span> <span class="c1">// eax
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">WINDOW</span> <span class="o">*</span><span class="n">v5</span><span class="p">;</span> <span class="c1">// rdi
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">__int64</span> <span class="n">v6</span><span class="p">;</span> <span class="c1">// rdx
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">__int64</span> <span class="n">v7</span><span class="p">;</span> <span class="c1">// rdx
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">__int64</span> <span class="n">v8</span><span class="p">;</span> <span class="c1">// rdx
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">__int64</span> <span class="n">v9</span><span class="p">;</span> <span class="c1">// rdx
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">__int64</span> <span class="n">v10</span><span class="p">;</span> <span class="c1">// rdx
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">__int64</span> <span class="n">v11</span><span class="p">;</span> <span class="c1">// rdx
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">__int64</span> <span class="n">v12</span><span class="p">;</span> <span class="c1">// rdx
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">__int64</span> <span class="n">v13</span><span class="p">;</span> <span class="c1">// rdx
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">__int64</span> <span class="n">v14</span><span class="p">;</span> <span class="c1">// rdx
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">__int64</span> <span class="n">v15</span><span class="p">;</span> <span class="c1">// rdx
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">char</span> <span class="n">v17</span><span class="p">;</span> <span class="c1">// [rsp+16h] [rbp-2Ah]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">char</span> <span class="n">v18</span><span class="p">;</span> <span class="c1">// [rsp+17h] [rbp-29h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int</span> <span class="n">i</span><span class="p">;</span> <span class="c1">// [rsp+18h] [rbp-28h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int</span> <span class="n">j</span><span class="p">;</span> <span class="c1">// [rsp+1Ch] [rbp-24h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int</span> <span class="n">k</span><span class="p">;</span> <span class="c1">// [rsp+20h] [rbp-20h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int</span> <span class="n">m</span><span class="p">;</span> <span class="c1">// [rsp+24h] [rbp-1Ch]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int</span> <span class="n">v23</span><span class="p">;</span> <span class="c1">// [rsp+28h] [rbp-18h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int</span> <span class="n">v24</span><span class="p">;</span> <span class="c1">// [rsp+2Ch] [rbp-14h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int</span> <span class="n">v25</span><span class="p">;</span> <span class="c1">// [rsp+30h] [rbp-10h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">char</span> <span class="n">v26</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span> <span class="c1">// [rsp+36h] [rbp-Ah] BYREF
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">unsigned</span> <span class="kr">__int64</span> <span class="n">v27</span><span class="p">;</span> <span class="c1">// [rsp+38h] [rbp-8h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="n">v27</span> <span class="o">=</span> <span class="nf">__readfsqword</span><span class="p">(</span><span class="mh">0x28u</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">v17</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">sub_1291</span><span class="p">(</span><span class="n">asc_7740</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="n">a3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">((</span><span class="kt">void</span> <span class="p">(</span><span class="kr">__fastcall</span> <span class="o">*</span><span class="p">)(</span><span class="kt">char</span> <span class="o">*</span><span class="p">))((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">sub_1228</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))(</span><span class="n">asc_7740</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">initscr</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span> <span class="n">stdscr</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">v3</span> <span class="o">=</span> <span class="n">stdscr</span><span class="o">-&gt;</span><span class="n">_maxy</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span>
+</span></span><span class="line"><span class="cl">    <span class="n">v3</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">v23</span> <span class="o">=</span> <span class="n">v3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span> <span class="n">stdscr</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">v4</span> <span class="o">=</span> <span class="n">stdscr</span><span class="o">-&gt;</span><span class="n">_maxx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span>
+</span></span><span class="line"><span class="cl">    <span class="n">v4</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">v24</span> <span class="o">=</span> <span class="n">v4</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">dword_1FE98</span> <span class="o">=</span> <span class="n">v4</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">dword_1FE9C</span> <span class="o">=</span> <span class="n">v23</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">noecho</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="n">v5</span> <span class="o">=</span> <span class="mi">0LL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">curs_set</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">while</span> <span class="p">(</span> <span class="n">v17</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span> <span class="n">dword_1FE78</span> <span class="o">!=</span> <span class="n">tele</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">switch</span> <span class="p">(</span> <span class="n">tele</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">          <span class="p">((</span><span class="kt">void</span> <span class="p">(</span><span class="kr">__fastcall</span> <span class="o">*</span><span class="p">)(</span><span class="n">WINDOW</span> <span class="o">*</span><span class="p">))((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">sub_1228</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))(</span><span class="n">v5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="nf">sub_1291</span><span class="p">(</span><span class="n">asc_7740</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="n">v6</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE70</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE74</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE90</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE94</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE78</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="mi">2</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">          <span class="p">((</span><span class="kt">void</span> <span class="p">(</span><span class="kr">__fastcall</span> <span class="o">*</span><span class="p">)(</span><span class="n">WINDOW</span> <span class="o">*</span><span class="p">))((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">sub_1228</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))(</span><span class="n">v5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="nf">sub_1291</span><span class="p">(</span><span class="n">asc_9E60</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="n">v7</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE70</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE74</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE90</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE94</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE78</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="mi">3</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">          <span class="p">((</span><span class="kt">void</span> <span class="p">(</span><span class="kr">__fastcall</span> <span class="o">*</span><span class="p">)(</span><span class="n">WINDOW</span> <span class="o">*</span><span class="p">))((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">sub_1228</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))(</span><span class="n">v5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="nf">sub_1291</span><span class="p">(</span><span class="n">asc_C580</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="n">v8</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE70</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE74</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE90</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE94</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE78</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="mi">4</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">          <span class="p">((</span><span class="kt">void</span> <span class="p">(</span><span class="kr">__fastcall</span> <span class="o">*</span><span class="p">)(</span><span class="n">WINDOW</span> <span class="o">*</span><span class="p">))((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">sub_1228</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))(</span><span class="n">v5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="nf">sub_1291</span><span class="p">(</span><span class="n">asc_ECA0</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="n">v9</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE70</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE74</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE90</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE94</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE78</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="mi">5</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">          <span class="p">((</span><span class="kt">void</span> <span class="p">(</span><span class="kr">__fastcall</span> <span class="o">*</span><span class="p">)(</span><span class="n">WINDOW</span> <span class="o">*</span><span class="p">))((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">sub_1228</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))(</span><span class="n">v5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="nf">sub_1291</span><span class="p">(</span><span class="n">asc_113C0</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="n">v10</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE70</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE74</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE90</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE94</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE78</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="mi">6</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">          <span class="p">((</span><span class="kt">void</span> <span class="p">(</span><span class="kr">__fastcall</span> <span class="o">*</span><span class="p">)(</span><span class="n">WINDOW</span> <span class="o">*</span><span class="p">))((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">sub_1228</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))(</span><span class="n">v5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="nf">sub_1291</span><span class="p">(</span><span class="n">asc_13AE0</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="n">v11</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE70</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE74</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE90</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE94</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE78</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="mi">7</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">          <span class="p">((</span><span class="kt">void</span> <span class="p">(</span><span class="kr">__fastcall</span> <span class="o">*</span><span class="p">)(</span><span class="n">WINDOW</span> <span class="o">*</span><span class="p">))((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">sub_1228</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))(</span><span class="n">v5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="nf">sub_1291</span><span class="p">(</span><span class="n">asc_16200</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="n">v12</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE70</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE74</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE90</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE94</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE78</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="mi">8</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">          <span class="p">((</span><span class="kt">void</span> <span class="p">(</span><span class="kr">__fastcall</span> <span class="o">*</span><span class="p">)(</span><span class="n">WINDOW</span> <span class="o">*</span><span class="p">))((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">sub_1228</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))(</span><span class="n">v5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="nf">sub_1291</span><span class="p">(</span><span class="n">asc_18920</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="n">v13</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE70</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE74</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE90</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE94</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE78</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="mi">9</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">          <span class="p">((</span><span class="kt">void</span> <span class="p">(</span><span class="kr">__fastcall</span> <span class="o">*</span><span class="p">)(</span><span class="n">WINDOW</span> <span class="o">*</span><span class="p">))((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">sub_1228</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))(</span><span class="n">v5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="nf">sub_1291</span><span class="p">(</span><span class="n">asc_1B040</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="n">v14</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE70</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE74</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE90</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE94</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE78</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="mi">10</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">          <span class="p">((</span><span class="kt">void</span> <span class="p">(</span><span class="kr">__fastcall</span> <span class="o">*</span><span class="p">)(</span><span class="n">WINDOW</span> <span class="o">*</span><span class="p">))((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">sub_1228</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))(</span><span class="n">v5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="nf">sub_1291</span><span class="p">(</span><span class="o">&amp;</span><span class="n">unk_1D760</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="n">v15</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE70</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE74</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE90</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE94</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">dword_1FE78</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">v23</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">for</span> <span class="p">(</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">v24</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">mvprintw</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">off_3000</span> <span class="o">+</span> <span class="mi">4</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">v23</span><span class="p">;</span> <span class="o">++</span><span class="n">k</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">for</span> <span class="p">(</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">m</span> <span class="o">&lt;</span> <span class="n">v24</span><span class="p">;</span> <span class="o">++</span><span class="n">m</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span> <span class="n">dword_1FE90</span> <span class="o">+</span> <span class="n">m</span> <span class="o">&gt;</span> <span class="mi">99</span> <span class="o">||</span> <span class="n">dword_1FE94</span> <span class="o">+</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="mi">99</span> <span class="o">||</span> <span class="n">dword_1FE90</span> <span class="o">+</span> <span class="n">m</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">dword_1FE94</span> <span class="o">+</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nf">mvprintw</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">off_3000</span> <span class="o">+</span> <span class="mi">4</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kr">__int8</span><span class="p">)</span><span class="nf">sub_1332</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                                     <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">dword_1FE70</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                     <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">dword_1FE74</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                     <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)(</span><span class="n">m</span> <span class="o">+</span> <span class="n">dword_1FE90</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                                     <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)(</span><span class="n">dword_1FE94</span> <span class="o">+</span> <span class="n">k</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">               <span class="o">||</span> <span class="n">byte_225C0</span><span class="p">[</span><span class="mi">100</span> <span class="o">*</span> <span class="n">dword_1FE94</span> <span class="o">+</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">k</span> <span class="o">+</span> <span class="n">dword_1FE90</span> <span class="o">+</span> <span class="n">m</span><span class="p">]</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="n">byte_225C0</span><span class="p">[</span><span class="mi">100</span> <span class="o">*</span> <span class="n">dword_1FE94</span> <span class="o">+</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">k</span> <span class="o">+</span> <span class="n">dword_1FE90</span> <span class="o">+</span> <span class="n">m</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="o">*</span><span class="p">(</span><span class="n">_WORD</span> <span class="o">*</span><span class="p">)</span><span class="n">v26</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">v26</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">byte_1FEA0</span><span class="p">[</span><span class="mi">100</span> <span class="o">*</span> <span class="n">dword_1FE94</span> <span class="o">+</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">k</span> <span class="o">+</span> <span class="n">dword_1FE90</span> <span class="o">+</span> <span class="n">m</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">          <span class="nf">mvprintw</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">v26</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">a2</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">**</span><span class="p">)(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)(</span><span class="n">dword_1FE70</span> <span class="o">-</span> <span class="n">dword_1FE90</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mvprintw</span><span class="p">(</span><span class="n">dword_1FE74</span> <span class="o">-</span> <span class="n">dword_1FE94</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">a2</span><span class="p">,</span> <span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">off_3000</span> <span class="o">+</span> <span class="mi">6</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">wrefresh</span><span class="p">(</span><span class="n">stdscr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">v5</span> <span class="o">=</span> <span class="n">stdscr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">v25</span> <span class="o">=</span> <span class="nf">wgetch</span><span class="p">(</span><span class="n">stdscr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">switch</span> <span class="p">(</span> <span class="n">v25</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">case</span> <span class="sc">&#39;Q&#39;</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">v17</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">case</span> <span class="sc">&#39;w&#39;</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">up</span><span class="p">(</span><span class="n">v5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">case</span> <span class="sc">&#39;s&#39;</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">down</span><span class="p">(</span><span class="n">v5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">case</span> <span class="sc">&#39;a&#39;</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">left</span><span class="p">(</span><span class="n">v5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">case</span> <span class="sc">&#39;d&#39;</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">right</span><span class="p">(</span><span class="n">v5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">v18</span> <span class="o">=</span> <span class="n">byte_1FEA0</span><span class="p">[</span><span class="mi">100</span> <span class="o">*</span> <span class="n">dword_1FE74</span> <span class="o">+</span> <span class="n">dword_1FE70</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span> <span class="n">v18</span> <span class="o">==</span> <span class="sc">&#39;&gt;&#39;</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="o">++</span><span class="n">tele</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span> <span class="n">v18</span> <span class="o">==</span> <span class="mi">60</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="o">--</span><span class="n">tele</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">endwin</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="mi">0LL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Bài này sử dụng <code>switch case</code> để di chuyển giữa các màn chơi, <code>case 1→10</code> tương ứng với 10 màn chơi, khi nhân vật gặp <code>&gt;</code> thì biến <code>tele</code> tăng lên để di chuyển đến màn tiếp theo.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">switch</span> <span class="p">(</span> <span class="n">v25</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">case</span> <span class="sc">&#39;Q&#39;</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">v17</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">case</span> <span class="sc">&#39;w&#39;</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">up</span><span class="p">(</span><span class="n">v5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">case</span> <span class="sc">&#39;s&#39;</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">down</span><span class="p">(</span><span class="n">v5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">case</span> <span class="sc">&#39;a&#39;</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">left</span><span class="p">(</span><span class="n">v5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">case</span> <span class="sc">&#39;d&#39;</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">right</span><span class="p">(</span><span class="n">v5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><p>switch còn được sử dụng để gọi các hàm di chuyển cho nhân vật, ta xem thử hàm <code>up()</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kr">__int64</span> <span class="nf">up</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">__int64</span> <span class="n">result</span><span class="p">;</span> <span class="c1">// rax
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="n">result</span> <span class="o">=</span> <span class="nf">check</span><span class="p">((</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">dword_1FE70</span><span class="p">,</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)(</span><span class="n">dword_1FE74</span> <span class="o">-</span> <span class="mi">1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span> <span class="p">(</span><span class="n">_BYTE</span><span class="p">)</span><span class="n">result</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span> <span class="n">dword_1FE74</span> <span class="o">&gt;</span> <span class="n">dword_1FE9C</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">&amp;&amp;</span> <span class="n">dword_1FE74</span> <span class="o">&lt;=</span> <span class="n">dword_1FE9C</span> <span class="o">/</span> <span class="o">-</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">100</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="o">--</span><span class="n">dword_1FE94</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="o">--</span><span class="n">dword_1FE74</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Trong hàm <code>up,down,...</code> còn có 1 hàm giống nhau là <code>check</code> :</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">_BOOL8</span> <span class="kr">__fastcall</span> <span class="nf">check</span><span class="p">(</span><span class="kt">int</span> <span class="n">a1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">a2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span> <span class="n">a1</span> <span class="o">&gt;</span> <span class="mi">99</span> <span class="o">||</span> <span class="n">a2</span> <span class="o">&gt;</span> <span class="mi">99</span> <span class="o">||</span> <span class="n">a1</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">a2</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0LL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">byte_1FEA0</span><span class="p">[</span><span class="mi">100</span> <span class="o">*</span> <span class="n">a2</span> <span class="o">+</span> <span class="n">a1</span><span class="p">]</span> <span class="o">!=</span> <span class="sc">&#39;#&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">byte_1FEA0</span><span class="p">[</span><span class="mi">100</span> <span class="o">*</span> <span class="n">a2</span> <span class="o">+</span> <span class="n">a1</span><span class="p">]</span> <span class="o">!=</span> <span class="sc">&#39; &#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Hàm này kiểm tra rằng bước tiếp theo có phải là <code>&quot; &quot;</code> hay là <code>&quot;#&quot;</code> không, nếu không thì sẽ thực hiện di chuyển, ngược lại thì không</p>
+<p>Việc của mình bây giờ đơn giản chỉ cần vô hiệu hóa đoạn kiểm tra này để cho nhân vật có để đến mọi nơi trong game.</p>
+<p>Có nhiều cách tiếp cận bài này, có thể chỉnh sửa byte trực tiếp bằng IDA:</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168031289-55ad12c0-524b-4418-917f-1e7f32f321fb.png" alt="Untitled 52"></p>
+<p>Xem hàm <code>up</code> dưới dạng asm, ta để ý lệnh <code>jz</code> (jump if zero) sẽ là đoạn kiểm tra của <code>if</code> trong code C, ta có thể bỏ qua lệnh bằng cách: chọn vào lệnh cần chỉnh sửa, vào Edit→Patch Program→Assemble</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168031316-d13bea85-43d5-48ec-a544-a347fc054e27.png" alt="Untitled 53">
+<img src="https://user-images.githubusercontent.com/88520787/168031329-917a4be8-b7a4-4ae0-af78-83c525871c90.png" alt="Untitled 54"></p>
+<p>chỉnh sửa <code>Instruction</code> thành <code>nop</code>. Sau đó vào Edit→Patch Program→ Apply patches to input file để lưu thay đổi này vào file gốc.</p>
+<p>Làm tương tự với các hàm <code>left(),right(),...</code></p>
+<p>Ngoài ra, các bạn còn có thể làm bằng cách sử dụng plugin <a href="https://github.com/keystone-engine/keypatch">keypatch</a> (lưu ý kĩ cách cài đặt để cài đặt thành công) để chỉnh sửa các lệnh một cách dễ dàng hơn, ví dụ:</p>
+<p>Chọn 1 dòng code C cần thay đổi, bấm tổ hợp <code>Ctrl + Alt + K</code>, cửa sổ hiện lên:</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168031356-829917fb-f55a-4d14-8608-ad37e2fdd69c.png" alt="Untitled 55"></p>
+<p>thay đổi thành <code>nop</code> và dùng <code>Apply patches to input file</code> để lưu file lại.</p>
+<p>Và đây là thành quả sau khi chạy file.</p>
+<p><img src="https://user-images.githubusercontent.com/88520787/168031385-5b92932d-6474-401c-b272-62708c029af1.png" alt="Untitled 56"></p>
+<p>10 Màn chơi sẽ chứa các kí tự của flag theo thứ tự nhé. Chúc bạn thành công!</p>
+<h2 id="cảm-ơn-các-bạn-đã-xem">
+<a class="header-anchor" href="#c%e1%ba%a3m-%c6%a1n-c%c3%a1c-b%e1%ba%a1n-%c4%91%c3%a3-xem"></a>
+Cảm ơn các bạn đã xem!
+</h2>
+      
+    </div>
+    <footer class="article-footer">
+      
+
+      
+        <div class="sponsor-wrapper">
+  <div class="sponsor-button-wrapper">
+    <div class="sponsor-icon rotate"></div>
+    <div class="sponsor-title">Sponsor</div>
+    <div class="sponsor-icon rotate"></div>
+  </div>
+  <div class="sponsor-tip">Please buy author a cup of coffee!</div>
+  
+    <div class="sponsor-qr">
+      
+        <div class="sponsor-qr-image-wrapper">
+          <img src="/images/bmc_qr_lephuduc.png" alt="Le Phu Duc" width="200" />
+          <p class="sponsor-qr-name">Le Phu Duc</p>
+        </div>
+      
+    </div>
+  
+</div>
+      
+
+      
+        
+
+<div class="share-wrapper">
+  
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:1313/post/picoctf2021/" target="_blank" rel="noopener noreferrer" title="PicoCTF 2022">
+      <div class="share-icon icon icon-facebook">
+        
+      </div>
+    </a>
+  
+    <a href="https://twitter.com/intent/tweet?url=http://localhost:1313/post/picoctf2021/&amp;text=PicoCTF%202022&amp;via=http://localhost:1313/" target="_blank" rel="noopener noreferrer" title="PicoCTF 2022">
+      <div class="share-icon icon icon-twitter">
+        
+      </div>
+    </a>
+  
+    <a href="https://www.linkedin.com/shareArticle?url=http://localhost:1313/post/picoctf2021/&amp;title=PicoCTF%202022&amp;summary=Write%20up%20for%20rev%20problem%20in%20PicoCTF%202022&amp;mini=true&amp;ro=true" target="_blank" rel="noopener noreferrer" title="PicoCTF 2022">
+      <div class="share-icon icon icon-linkedin">
+        
+      </div>
+    </a>
+  
+    <a href="https://www.reddit.com/submit?url=http://localhost:1313/post/picoctf2021/&amp;title=PicoCTF%202022" target="_blank" rel="noopener noreferrer" title="PicoCTF 2022">
+      <div class="share-icon icon icon-reddit">
+        
+      </div>
+    </a>
+  
+</div>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+      <ul class="article-tag-list" itemprop="keywords">
+  
+    <li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/reverse"
+        rel="tag"
+        >REVERSE</a
+      >
+    </li>
+  
+    <li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/vietnamese"
+        rel="tag"
+        >VIETNAMESE</a
+      >
+    </li>
+  
+    <li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/wargame"
+        rel="tag"
+        >WARGAME</a
+      >
+    </li>
+  
+</ul>
+
+    </footer>
+  </div>
+  
+    
+  <nav
+    id="article-nav"
+    data-aos="fade-up"
+  >
+    
+
+    
+      <div class="article-nav-link-wrap article-nav-link-right">
+        
+          
+          
+            <img
+              data-src="https://media.istockphoto.com/id/1404816522/photo/curious-cat-inside-the-cardboard-box-following-the-sounds-outside.jpg?s=612x612&amp;w=0&amp;k=20&amp;c=DvwdGj0leRkaEDgbphRRvo8zPS_M6IrOv7ImdAfh5EQ="
+              data-sizes="auto"
+              alt="reversing.kr"
+              class="lazyload"
+            />
+          
+        
+        <a href="http://localhost:1313/post/reversing.kr/"></a>
+        <div class="article-nav-caption">Older</div>
+        <h3 class="article-nav-title">
+          
+            reversing.kr
+          
+        </h3>
+      </div>
+    
+  </nav>
+
+
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+</section>
+        </div>
+        
+        
+        
+
+
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+
+
+<footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    <div>
+      <span class="icon-copyright"></span>
+      2022 -
+      2025
+      <span class="footer-info-sep rotate"></span>
+      Le Phu Duc
+    </div>
+    
+    
+    
+      <div>
+        <span class="icon-brush"
+          >&nbsp;
+            51.0k
+          </span
+        >
+        &nbsp;|&nbsp;
+        <span class="icon-coffee">&nbsp;
+          
+          
+
+          04:07
+        </span>
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv"
+          >Number of visits&nbsp;<span
+            id="busuanzi_value_site_pv"
+          ></span
+        ></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv"
+          >Number of visitors&nbsp;<span
+            id="busuanzi_value_site_uv"
+          ></span
+        ></span>
+      </div>
+    
+  </div>
+</footer>
+
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar">
+        <div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper toc-div-class">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#file-run1">file-run1</a></li>
+    <li><a href="#file-run2">file-run2</a></li>
+    <li><a href="#gdb-test-drive"><strong>GDB Test Drive</strong></a></li>
+    <li><a href="#patchmepy">patchme.py</a></li>
+    <li><a href="#safe-opener">Safe Opener</a></li>
+    <li><a href="#unpackmepy">unpackme.py</a></li>
+    <li><a href="#bloatpy">bloat.py</a></li>
+    <li><a href="#fresh-java"><strong>Fresh Java</strong></a></li>
+    <li><a href="#bbbbloat">Bbbbloat</a></li>
+    <li><a href="#unpackme">unpackme</a></li>
+    <li><a href="#keygenme"><strong>Keygenme</strong></a></li>
+    <li><a href="#wizardlike">Wizardlike</a></li>
+    <li><a href="#cảm-ơn-các-bạn-đã-xem">Cảm ơn các bạn đã xem!</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+      </div>
+      <div class="sidebar-common-sidebar hidden">
+        
+<div class="sidebar-author">
+  <img
+    data-src="/avatar/shiba.jpg"
+    data-sizes="auto"
+    alt="Le Phu Duc"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Le Phu Duc</div>
+  <div class="sidebar-description">a.k.a Jinn</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>Posts</div>
+    
+    <div class="sidebar-state-number">16</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>Categories</div>
+    <div class="sidebar-state-number">
+      1
+    </div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>Tags</div>
+    <div class="sidebar-state-number">6</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class="icon-discord sidebar-social-icon">
+      <a
+        href="https://discordapp.com/users/lephuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="discord"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-facebook sidebar-social-icon">
+      <a
+        href="https://www.facebook.com/lephuduc0309"
+        itemprop="url"
+        target="_blank"
+        aria-label="facebook"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/lephuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-instagram sidebar-social-icon">
+      <a
+        href="https://www.instagram.com/le.phuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="instagram"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-linkedin sidebar-social-icon">
+      <a
+        href="https://www.linkedin.com/in/lephuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="linkedin"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-twitter sidebar-social-icon">
+      <a
+        href="https://twitter.com/lephuduck"
+        itemprop="url"
+        target="_blank"
+        aria-label="twitter"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="Home"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe632;
+        
+      </div>
+      <div class="sidebar-menu-link">Home</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="About"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe628;
+        
+      </div>
+      <div class="sidebar-menu-link">About</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="Archives"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe604;
+        
+      </div>
+      <div class="sidebar-menu-link">Archives</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/achievements"
+        aria-label="Achievements"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe621;
+        
+      </div>
+      <div class="sidebar-menu-link">Achievements</div>
+    </div>
+  
+</div>
+
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
+
+    </div>
+    
+    
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  <script
+    src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"
+    
+    
+    
+    
+    integrity="sha384-3gT/vsepWkfz/ff7PpWNUeMzeWoH3cDhm/A8jM7ouoAK0/fP/9bcHHR5kHq2nf&#43;e" crossorigin="anonymous"
+  ></script>
+
+
+
+
+  
+  
+  
+  
+  
+  
+  <script
+    src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"
+    
+    
+    
+    
+    integrity="sha384-J08i8An/QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"
+  ></script>
+
+
+
+
+
+
+
+
+
+  
+      
+      <script src="/js/main.js" ></script>
+      
+
+
+
+  
+
+
+
+
+
+  
+      
+      <script src="/js/aos.js" ></script>
+      
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+
+
+
+
+
+  
+      
+      <script src="/js/pjax_main.js" data-pjax></script>
+      
+
+
+
+
+
+  
+
+  
+  
+  
+  
+  
+  
+  <script
+    src="https://npm.webcache.cn/mouse-firework@0.1.0/dist/index.umd.js"
+    
+    
+    
+    
+    integrity="sha384-KM6i7tu43nYd6e0beIljxHMC5tZc58XBDu7pPA58w50h18Jsx7gLdimfS09RXlKv" crossorigin="anonymous"
+  ></script>
+
+
+<script>
+  if (window.firework) {
+    const options = JSON.parse("{\"excludeelements\":[\"a\",\"button\"],\"particles\":[{\"colors\":[\"#c0971d\",\"#caa02f\",\"#d4aa40\",\"#ddbb62\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"emit\"],\"number\":20,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.3,0.5],\"radius\":[16,32]}},{\"colors\":[\"#f4e74d\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"diffuse\"],\"number\":1,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.2,0.5],\"lineWidth\":6,\"radius\":20}}]}");
+    options.excludeElements = options.excludeelements;
+    delete options.excludeelements;
+    window.firework(options);
+  }
+</script>
+
+
+
+  
+
+  
+  
+  
+  
+  
+  
+  <script
+    src="https://npm.webcache.cn/theme-shokax-pjax@0.0.3/dist/index.umd.js"
+    
+    
+    
+    
+    integrity="sha384-xneY1WY8hOfUzswrE4CrYq35N4BdVcxqxwHPr9zawE/jMSCxD&#43;jAPU55x/jj3wlf" crossorigin="anonymous"
+  ></script>
+
+
+  <script>
+    function loadScripts(scripts, index) {
+      if (index < scripts.length) {
+        const script = scripts[index];
+        const src = script.getAttribute('src');
+
+        const loadScript = (scriptContent) => {
+          return new Promise((resolve, reject) => {
+            const scriptElement = document.createElement('script');
+            if (script.type) {
+              scriptElement.type = script.type;
+            }
+            if (script.src) {
+              scriptElement.src = script.src;
+              scriptElement.onload = resolve;
+              scriptElement.onerror = reject;
+            }
+            if (scriptContent) {
+              scriptElement.text = scriptContent;
+            }
+            document.head.appendChild(scriptElement);
+            if (!script.src) {
+              resolve();
+            }
+          })
+          
+        }
+
+        ;(src ? loadScript() : loadScript(script.text))
+          .then(() => loadScripts(scripts, index + 1))
+          .catch(error => {
+            console.error(`Failed to load script: ${src || 'inline script'}`, error);
+            loadScripts(scripts, index + 1);
+          });
+      }
+    }
+    window.Pjax &&
+      new window.Pjax({
+        selectors: [
+          "#header>img",
+          "#header>picture",
+          "head title",
+          "#header-title",
+          "#subtitle-wrap",
+          "#main",
+          "#content",
+          ".sidebar-widget",
+          ".sidebar-wrapper",
+          "#mobile-nav",
+          "#lazy-script",
+        ],
+        switches: {
+          "#content": function(oldEl, newEl) {
+            
+            oldEl.className = newEl.className;
+            this.onSwitch();
+          },
+          "#header-title": Pjax.switches.outerHTML,
+          "#subtitle-wrap": Pjax.switches.outerHTML,
+          "#main": function (oldEl, newEl) {
+            const scripts = [...newEl.querySelectorAll("script")];
+            loadScripts(scripts, 0);
+            oldEl.outerHTML = newEl.outerHTML;
+            this.onSwitch();
+          },
+          "#mobile-nav": Pjax.switches.outerHTML,
+          "#lazy-script": function (oldEl, newEl) {
+            const scripts = [...newEl.querySelectorAll("script")];
+            loadScripts(scripts, 0);
+            oldEl.innerHTML = newEl.innerHTML;
+            this.onSwitch();
+          },
+        },
+        cacheBust: false,
+      });
+  </script>
+  
+
+
+
+
+
+  
+      
+      <script src="/js/pjax.js" ></script>
+      
+
+
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+      
+      
+        
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "Le Phu Duc",
+          title: "PicoCTF 2022",
+          url: "http:\/\/localhost:1313\/post\/picoctf2021\/",
+          description: "Write up for rev problem in PicoCTF 2022",
+          cover: "http:\/\/localhost:1313\/images\/post_covers\/picoctf2021.jpeg",
+        };
+      </script>
+    
+    
+    
+      
+
+
+
+
+
+  
+      
+      <script src="/js/insert_highlight.js" data-pjax></script>
+      
+
+      
+      
+      
+      
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js", "sha384-DiL6M\/gG\u002bwmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF\/N6lrZi\/")).default;
+
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8\u002boTJ7m3DfYEWX1fu1scuS4\u002bs")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8\u002boTJ7m3DfYEWX1fu1scuS4\u002bs")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+      
+    
+    
+  </div>
+</div>
+
+
+
+
+  
+
+  
+  
+  
+  
+  
+  
+  <script
+    src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js"
+    
+    async
+    
+    
+    integrity="sha384-0M75wtSkhjIInv4coYlaJU83&#43;OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id&#43;S" crossorigin="anonymous"
+  ></script>
+
+
+
+
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      });
+    }
+  </script>
+
+
+<script>
+  const reimuCopyright = String.raw`
+   ______     ______     __     __    __     __  __    
+  /\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+  \ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+   \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+    \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                    
+  `;
+  console.log(String.raw`%c ${reimuCopyright}`, "color: #ff5252;");
+  console.log(
+    "%c Theme.Reimu" + " %c https://github.com/D-Sketon/hugo-theme-reimu ",
+    "color: white; background: #ff5252; padding:5px 0;",
+    "padding:4px;border:1px solid #ff5252;",
+  );
+</script>
+
+
+  
+
+  
+  
+  
+  
+  
+  
+  <script
+    src="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.js"
+    
+    
+    
+    
+    integrity="sha384-gdGYZwHnfJM54evoZhpO0s6ZF5BQiybkiyW7VXr&#43;h5UfruuRL/aORyw&#43;5&#43;HZoU6e" crossorigin="anonymous"
+  ></script>
+
+
+  
+    <script>
+      const ap = new APlayer({
+          theme: "var(--color-link)",
+          container: document.getElementById('aplayer'),
+          audio: JSON.parse("[{\"artist\":\"NewJeans\",\"cover\":\"/images/song_covers/ditto.jpg\",\"name\":\"Ditto\",\"url\":\"/songs/ditto.mp3\"},{\"artist\":\"NewJeans\",\"cover\":\"/images/song_covers/eta.jpg\",\"name\":\"ETA\",\"url\":\"/songs/ETA.mp3\"}]") || [],
+          fixed:  null  || false,
+          autoplay:  null  || false,
+          loop: '' || 'all',
+          order: '' || 'list',
+          preload: '' || 'auto',
+          volume:  null  || 0.7,
+          mutex:  null  || true,
+          listFolded:  null  || false,
+          lrcType:  null  || 0,
+      });
+    </script>
+  
+
+
+
+  </body>
+</html>

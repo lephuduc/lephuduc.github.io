@@ -1,0 +1,512 @@
+########################################
+# Basic Configuration
+########################################
+
+# main menu navigation
+# for more icon information, please visit https://github.com/D-Sketon/hexo-theme-reimu/issues/30
+menu:
+  - name: home
+    url:
+    icon: e632
+  - name: about
+    url: /about
+    icon: e628
+  - name: archives
+    url: /archives
+    icon: e604
+  - name: achievements
+    url: /achievements
+    icon: e621
+
+mainSections: ["post"]
+
+# Format style for year,month,date & time
+yearFormat: "2006"
+monthFormat: "2006-01"
+dateFormat: "2006-01-02"
+timeFormat: "2006-01-02 15:04:05"
+
+author: Le Phu Duc
+description: "a.k.a Jinn"
+subtitle: "뒤집다, 뒤집다, 뒤집다,..."
+
+banner: "images/newjeans2.jpg"
+# You can also write it in the form of the following url
+# banner: "https://example.com"
+
+# If you want to use the srcset attribute, please enable it
+banner_srcset:
+  enable: false
+  srcset:
+    - src: "images/banner-600w.webp"
+      media: "(max-width: 479px)"
+    - src: "images/banner-800w.webp"
+      media: "(max-width: 799px)"
+    - src: "images/banner.webp"
+      media: "(min-width: 800px)"
+
+avatar: "shiba.jpg"
+
+# Open Graph
+open_graph:
+  enable: false
+  options:
+    twitter_card: <twitter:card>
+    twitter_id: <twitter:creator>
+    twitter_site: <twitter:site>
+    twitter_image: <twitter:image>
+    google_plus: <g+:profile_link>
+    fb_admins: <fb:admin_id>
+    fb_app_id: <fb:app_id>
+
+# Content
+excerpt_link: Read More
+
+footer:
+  since: 2022 # 2020-current year
+  powered: true
+  count: true
+  busuanzi: true
+  icon:
+    url: "../images/circle1.png" # this path is relative to the css/main.css, so it needs to go up one level to reach the images folder
+    rotate: true
+    mask: true # whether to use the images as a mask
+
+# Sidebar
+sidebar: left
+
+social:
+  # email: mailto:lephuduc111@gmail.com
+  github: https://github.com/lephuduc
+  # google: https://plus.google.com/yourname
+  twitter: https://twitter.com/lephuduck
+  facebook: https://www.facebook.com/lephuduc0309
+  instagram: https://www.instagram.com/le.phuduc
+  linkedin: https://www.linkedin.com/in/lephuduc
+  # pinterest: https://www.pinterest.com/yourname
+  # youtube: https://www.youtube.com/channel/yourname
+  # vimeo: https://vimeo.com/yourname
+  # flickr: https://www.flickr.com/photos/yourname
+  # dribbble: https://dribbble.com/yourname
+  # behance: https://www.behance.net/yourname
+  # bilibili: https://space.bilibili.com/yourname
+  # weibo: https://weibo.com/yourname
+  # zhihu: https://www.zhihu.com/people/yourname
+  # reddit: https://www.reddit.com/user/yourname
+  # tumblr: https://yourname.tumblr.com
+  # medium: https://medium.com/@yourname
+  # deviantart: https://yourname.deviantart.com
+  # stackoverflow: https://stackoverflow.com/users/yourname
+  # keybase: https://keybase.io/yourname
+  # telegram: https://t.me/yourname
+  discord: https://discordapp.com/users/lephuduc
+  # steam: https://steamcommunity.com/id/lephuduc
+
+widgets:
+  - category
+  - tag
+  - tagcloud
+  - recent_posts
+
+# Widget behavior
+recent_posts_limits: 5
+
+########################################
+# CSS
+########################################
+
+anchor_icon: # default use '#' icon, you can use a hexadecimal representation of fontawesome or icon_font, like 'f0c1'
+
+reimu_cursor:
+  enable: true
+  cursor:
+    default: ../images/cursor/reimu-cursor-default.png  # this path is relative to the css/main.css, so it needs to go up one level to reach the images folder
+    pointer: ../images/cursor/reimu-cursor-pointer.png
+    text: ../images/cursor/reimu-cursor-text.png
+
+icon_font: 4552607_0khxww3tj3q9
+
+# https://fonts.google.com/
+# Google Fonts, higher priority than local_font
+font:
+  article:
+    - Mulish
+    - Noto Serif SC
+  code:
+    - Ubuntu Mono
+    - Source Code Pro
+    - JetBrains Mono
+
+# Local FallBack Font
+local_font:
+  article:
+    - "-apple-system"
+    - PingFang SC
+    - Microsoft YaHei
+    - sans-serif
+  code:
+    - Menlo
+    - Monaco
+    - Consolas
+    - monospace
+
+dark_mode:
+  # true means that the dark mode is enabled by default
+  # false means that the dark mode is disabled by default
+  # auto means that the dark mode is automatically switched according to the system settings
+  enable: true # true | false | auto
+
+########################################
+# Analytics
+########################################
+
+baidu_analytics: false
+google_analytics: true
+clarity: true
+
+########################################
+# Markdown Display
+########################################
+
+code_block:
+  # whether to expand the code block by default
+  # true means expand all code blocks by default
+  # false means collapse all code blocks by default
+  # number means collapse the code block by default when the number of lines exceeds the specified value
+  expand: true
+
+math:
+  katex:
+    enable: true
+  mathjax:
+    enable: false
+    options: # see https://docs.mathjax.org/en/latest/web/configuration.html
+    # we need to put the configuration in an array, because hugo will automatically convert the key to lowercase
+      [
+        {
+          tex:
+            {
+              tags: "ams",
+              useLabelIds: true,
+              inlineMath: [["$", "$"], ['\\(', '\\)']],
+              displayMath: [["$$", "$$"], ['\\[', '\\]']],
+              processEscapes: true,
+              processEnvironments: true,
+              autoload: { color: [], colorv2: ["color"] },
+              packages: { "[+]": ["noerrors"] },
+            },
+          options:
+            {
+              skipHtmlTags:
+                ["script", "noscript", "style", "textarea", "pre", "code"],
+              ignoreHtmlClass: "tex2jax_ignore",
+              processHtmlClass: "tex2jax_process",
+            },
+          loader: { load: ["input/asciimath", "[tex]/noerrors"] },
+        },
+      ]
+
+########################################
+# Comment system
+########################################
+
+# valine comment system. https://valine.js.org
+# version 1.5.1
+# notify and verify have been deprecated
+valine:
+  enable: false # if you want to use valine,please set this value is true
+  appId: # leancloud application app id
+  appKey: # leancloud application app key
+  pageSize: 10 # comment list page size
+  avatar: mp # gravatar style https://valine.js.org/#/avatar
+  lang: zh-cn # i18n: zh-cn/en
+  placeholder: Just go go # valine comment input placeholder(like: Please leave your footprints )
+  guest_info: nick,mail,link #valine comment header info
+  recordIP: true # whether to record the IP address of the commenters
+  highlight: true # whether to highlight the code blocks
+  visitor: false # whether to display the number of visitors
+
+# https://waline.js.org/
+waline:
+  enable: false
+  serverURL:
+  lang: zh-CN
+  locale: {} # https://waline.js.org/guide/features/i18n.html#%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%AD%E8%A8%80
+  emoji:
+    - https://unpkg.com/@waline/emojis@1.2.0/weibo
+    - https://unpkg.com/@waline/emojis@1.2.0/alus
+    - https://unpkg.com/@waline/emojis@1.2.0/bilibili
+    - https://unpkg.com/@waline/emojis@1.2.0/qq
+    - https://unpkg.com/@waline/emojis@1.2.0/tieba
+    - https://unpkg.com/@waline/emojis@1.2.0/tw-emoji
+  meta:
+    - nick
+    - mail
+    - link
+  requiredMeta:
+    - nick
+    - mail
+  wordLimit: 0
+  pageSize: 10
+  pageview: true
+
+# https://twikoo.js.org
+twikoo:
+  enable: false
+  envId: # 腾讯云环境填 envId；Vercel 环境填地址（https://xxx.vercel.app）
+  region:
+
+# https://github.com/gitalk/gitalk/blob/master/readme-cn.md
+gitalk:
+  enable: false
+  clientID:
+  clientSecret:
+  repo:
+  owner:
+  admin:
+  md5: false
+
+# https://giscus.app/zh-CN
+giscus:
+  enable: false
+  repo:
+  repoId:
+  category:
+  categoryId:
+  mapping: mapping
+  strict: 0
+  reactionsEnabled: 1
+  emitMetadata: 0
+  inputPosition: bottom
+  # commentTheme: preferred_color_scheme invalid
+  lang: zh-CN
+
+########################################
+# Search
+########################################
+
+algolia_search:
+  enable: false
+  appID:
+  apiKey:
+  indexName:
+  hits:
+    per_page: 10
+  labels:
+    input_placeholder: "搜索....."
+    hits_empty: "未发现与 「${query}」相关内容"
+    hits_stats: "找到${hits}条结果（用时 ${time} ms）"
+
+########################################
+# Animation
+########################################
+
+preloader:
+  enable: true
+  text: 
+  icon: /images/loading-golden.png # default use inline svg for fast speed, you can use a image url
+
+# see https://github.com/D-Sketon/aos.js
+animation:
+  enable: true
+  options:
+    header:
+      title: slide-up
+      subTitle: slide-down
+    home:
+      post: fade-up
+      widget: fade-up
+      sidebar: fade-up
+    article:
+      whole: fade-up
+      date: zoom-in
+      category: zoom-in
+      tag: zoom-in
+      comment: zoom-in
+      reading: zoom-in
+      nav: fade-up
+    archive:
+      whole: fade-up
+      tag: zoom-in
+      category: zoom-in
+      section: fade-up
+      nav: fade-up
+
+# see https://github.com/D-Sketon/mouse-firework
+firework:
+  enable: true
+  options:
+    excludeElements: ["a", "button"]
+    particles:
+      - shape: circle
+        move: ["emit"]
+        easing: easeOutExpo
+        colors: ["#c0971d", "#caa02f", "#d4aa40", "#ddbb62"]
+        number: 20
+        duration: [1200, 1800]
+        shapeOptions:
+          radius: [16, 32]
+          alpha: [0.3, 0.5]
+      - shape: circle
+        move: ["diffuse"]
+        easing: easeOutExpo
+        colors: ["#f4e74d"]
+        number: 1
+        duration: [1200, 1800]
+        shapeOptions:
+          radius: 20
+          alpha: [0.2, 0.5]
+          lineWidth: 6
+
+########################################
+# Extended features
+########################################
+
+# show the copyright below each article
+article_copyright:
+  enable: false
+  content:
+    author: true
+    link: false
+    title: false
+    date: false
+    updated: true
+    license: false
+
+# Clipboard configuration
+clipboard:
+  success: Copied
+  fail: Failed to copy (ﾟ⊿ﾟ)ﾂ
+  copyright:
+    enable: false
+    count: 50 # The number of characters when the copyright is displayed
+    content: All articles in this blog are licensed under BY-NC-SA unless otherwise stated. Please indicate the source when reprinting!
+
+# Back To Top
+top:
+  enable: true
+  position: right # left or right
+  icon:
+    url: "../images/circle1.png" # this path is relative to the css/main.css, so it needs to go up one level to reach the images folder
+    rotate: true
+    mask: true # whether to use the images as a mask
+
+# whether to display the notification when the article is outdated
+outdate:
+  enable: false
+  daysAgo: 180 # The number of days after which the article is considered outdated
+  message: 本文最后更新于 {time}，请注意文中内容可能已经发生变化。
+
+# ICP 备案
+icp:
+  icpnumber: # ICP备案号
+  beian: # 网安备案号
+  recordcode: # 网安备案链接中的recordcode参数
+
+# Sponsor
+sponsor:
+  enable: true
+  tip: Please buy author a cup of coffee!
+  icon:
+    url: "../images/circle1.png" # this path is relative to the css/main.css, so it needs to go up one level to reach the images folder
+    rotate: true
+    mask: true # whether to use the images as a mask
+  qr:
+    - name: Le Phu Duc
+      src: "/images/bmc_qr_lephuduc.png"
+    # - name: 微信
+    #   src: "sponsor/wechat.png"
+
+# Share
+share:
+  - facebook
+  - twitter
+  - linkedin
+  - reddit
+  # - weibo
+  # - qq
+  # - weixin
+
+# show categories card on home page
+home_categories:
+  enable: false
+  content:
+    - categories: # string (single-layer category) or array (multi-layer category)
+      cover: # empty means random cover
+    - categories:
+      cover:
+
+########################################
+# Experimental features
+########################################
+
+# Experimental, may have a lot of bugs, open with caution!
+pjax:
+  enable: true
+
+# Experimental
+# https://github.com/GoogleChromeLabs/quicklink
+quicklink:
+  enable: false
+  # The `requestIdleCallback` timeout, in milliseconds.
+  timeout: 3000
+  # Whether or not the URLs within the options.el container should be treated as high priority.
+  # When true, quicklink will attempt to use the fetch() API if supported (rather than link[rel=prefetch]).
+  priority: true
+  # Determine if a URL should be prefetched.
+  # Only support string
+  ignores: []
+
+# Experimental
+service_worker:
+  enable: false
+
+# Experimental
+live2d:
+  enable: false
+  position: left # left or right
+
+# Experimental
+live2d_widgets:
+  enable: false
+  position: left # left or right
+
+# https://github.com/CodeByZach/pace
+pace:
+  enable: true
+
+# Experimental
+# Please turn on pjax to use this feature
+player:
+  # if you enable meting, you must enable aplayer first
+  aplayer:
+    enable: true
+    options:
+      audio: 
+        - name: "Ditto"
+          artist: "NewJeans"
+          url: /songs/ditto.mp3
+          cover: /images/song_covers/ditto.jpg
+        - name: "ETA"
+          artist: "NewJeans"
+          url: /songs/ETA.mp3
+          cover: /images/song_covers/eta.jpg
+      fixed:
+      autoplay:
+      loop:
+      order:
+      preload: 
+      volume:
+      mutex:
+      listFolded:
+      lrcType:
+  meting:
+    # https://github.com/metowolf/MetingJS
+    # if you want to use meting, please enable aplayer first
+    enable: false
+    meting_api: # custom api
+    options:
+      id: 2265921590
+      server: netease
+      type: playlist
+      auto:

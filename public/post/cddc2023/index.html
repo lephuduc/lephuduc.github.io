@@ -1,0 +1,1647 @@
+<!doctype html>
+<html
+  lang="en-us" 
+  
+    data-theme-mode="true"
+  
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no"
+/>
+
+
+
+
+
+
+
+  
+
+<title>
+  CDDC 2023 | Le Phu Duc
+</title>
+<meta
+  name="description"
+  content="Writeup for rev challenge in CDDC2023"
+/>
+
+
+
+  <script>
+  (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "true");
+</script>
+
+
+  
+<script src="https://www.googletagmanager.com/gtag/js?id=true"></script>
+<script data-pjax>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+
+  gtag('js', new Date());
+
+  gtag('config', 'true');
+</script>
+
+
+
+
+
+
+
+
+<script>
+  window.siteConfig = JSON.parse("{\"anchor_icon\":null,\"clipboard\":{\"copyright\":{\"content\":\"All articles in this blog are licensed under BY-NC-SA unless otherwise stated. Please indicate the source when reprinting!\",\"count\":50,\"enable\":false},\"fail\":\"Failed to copy (ﾟ⊿ﾟ)ﾂ\",\"success\":\"Copied\"},\"code_block\":{\"expand\":true},\"icon_font\":\"4552607_0khxww3tj3q9\",\"outdate\":{\"daysago\":180,\"enable\":false,\"message\":\"本文最后更新于 {time}，请注意文中内容可能已经发生变化。\"}}");
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+    
+  
+
+  
+  
+  
+    
+  
+
+  
+  
+  
+    
+  
+
+  
+  
+  
+    
+  
+
+  
+  
+  
+
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="preload"
+  as="style"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7cUbuntu%20Mono:400,400italic,700,700italic%7cSource%20Code%20Pro:400,400italic,700,700italic%7cJetBrains%20Mono:400,400italic,700,700italic&amp;display=swap"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7cUbuntu%20Mono:400,400italic,700,700italic%7cSource%20Code%20Pro:400,400italic,700,700italic%7cJetBrains%20Mono:400,400italic,700,700italic&amp;display=swap"
+  media="print"
+  onload="this.media='all'"
+/>
+
+
+
+
+
+
+  <link
+    rel="preload"
+    href="//at.alicdn.com/t/c/font_4552607_0khxww3tj3q9.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin="anonymous"
+  />
+
+
+
+  
+
+
+
+
+
+
+ <link rel="stylesheet" href="/css/loader.css" />
+
+
+
+
+
+
+
+<link rel="shortcut icon" href="/favicon/favicon.ico">
+
+
+
+
+
+
+
+ <link rel="stylesheet" href="/css/main.css" />
+
+
+
+
+
+  <link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+
+
+
+
+
+
+  <link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/katex@0.16.9/dist/katex.min.css"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+  
+  
+  
+  <script
+    src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"
+    
+    
+    
+    
+    integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"
+  ></script>
+
+
+
+
+
+  
+
+
+  <link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.0/dist/aos.css" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.css" />
+
+
+
+  </head>
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        
+          <img src="/images/loading-golden.png" alt="loading" />
+        
+      </div>
+      <div class="loading-word"></div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+
+
+    <div id="container">
+      <div id="wrap">
+        
+<div id="header-nav">
+  <nav id="main-nav">
+    
+      <span class="main-nav-link-wrap">
+        <div class='main-nav-icon icon '>
+          
+            &#xe632;
+          
+        </div>
+        <a class="main-nav-link" href="/">Home</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <div class='main-nav-icon icon '>
+          
+            &#xe628;
+          
+        </div>
+        <a class="main-nav-link" href="/about">About</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <div class='main-nav-icon icon '>
+          
+            &#xe604;
+          
+        </div>
+        <a class="main-nav-link" href="/archives">Archives</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <div class='main-nav-icon icon '>
+          
+            &#xe621;
+          
+        </div>
+        <a class="main-nav-link" href="/achievements">Achievements</a>
+      </span>
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    
+    <picture></picture>
+      <img fetchpriority="high" src="/images/post_covers/cddc2023.jpeg" alt="CDDC 2023">
+    
+  
+
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          
+        
+  
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">CDDC 2023</h1>
+          </a>
+        
+      
+  
+      
+        
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+        <div id="content"
+          class="sidebar-left"
+            >
+          <aside id="sidebar">
+  
+    <div id="aplayer" theme="var(--color-link)" data-aos="fade-up"></div>
+  
+  
+  <div class="sidebar-wrapper wrap-sticky">
+    <div
+      class="sidebar-wrap"
+      data-aos="fade-up"
+    >
+      
+        <div class="sidebar-toc-sidebar">
+          <div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper toc-div-class">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#challenge-description">Challenge description</a></li>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#code-flow">Code flow</a>
+      <ul>
+        <li><a href="#main-function">Main function</a></li>
+        <li><a href="#inside-_newcore_-function">Inside <code>_NewCore_</code> function</a></li>
+        <li><a href="#core_run-function"><code>Core_run</code> function</a></li>
+        <li><a href="#instruction-exec-function"><code>Instruction Exec</code> function</a></li>
+      </ul>
+    </li>
+    <li><a href="#solve">Solve</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+        </div>
+        <div class="sidebar-common-sidebar hidden">
+          
+<div class="sidebar-author">
+  <img
+    data-src="/avatar/shiba.jpg"
+    data-sizes="auto"
+    alt="Le Phu Duc"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Le Phu Duc</div>
+  <div class="sidebar-description">a.k.a Jinn</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>Posts</div>
+    
+    <div class="sidebar-state-number">16</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>Categories</div>
+    <div class="sidebar-state-number">
+      1
+    </div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>Tags</div>
+    <div class="sidebar-state-number">6</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class="icon-discord sidebar-social-icon">
+      <a
+        href="https://discordapp.com/users/lephuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="discord"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-facebook sidebar-social-icon">
+      <a
+        href="https://www.facebook.com/lephuduc0309"
+        itemprop="url"
+        target="_blank"
+        aria-label="facebook"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/lephuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-instagram sidebar-social-icon">
+      <a
+        href="https://www.instagram.com/le.phuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="instagram"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-linkedin sidebar-social-icon">
+      <a
+        href="https://www.linkedin.com/in/lephuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="linkedin"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-twitter sidebar-social-icon">
+      <a
+        href="https://twitter.com/lephuduck"
+        itemprop="url"
+        target="_blank"
+        aria-label="twitter"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="Home"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe632;
+        
+      </div>
+      <div class="sidebar-menu-link">Home</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="About"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe628;
+        
+      </div>
+      <div class="sidebar-menu-link">About</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="Archives"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe604;
+        
+      </div>
+      <div class="sidebar-menu-link">Archives</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/achievements"
+        aria-label="Achievements"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe621;
+        
+      </div>
+      <div class="sidebar-menu-link">Achievements</div>
+    </div>
+  
+</div>
+
+        </div>
+      
+
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
+      
+    </div>
+  </div>
+
+  <div class="sidebar-widget">
+    
+  </div>
+</aside>
+
+          <section id="main">
+  <article
+  class="h-entry article"
+  itemprop="blogPost"
+  itemscope
+  itemtype="https://schema.org/BlogPosting"
+>
+  <div
+    class="article-inner"
+    data-aos="fade-up"
+  >
+    <div class="article-meta">
+      <div class="article-date">
+  <a
+    href="http://localhost:1313/post/cddc2023/"
+    class="article-date-link"
+    data-aos="zoom-in"
+  >
+    <time datetime="2023-06-14 00:00:00 &#43;0000 UTC" itemprop="datePublished"
+      >2023-06-14</time
+    >
+    <time style="display: none;" id="post-update-time"
+      >2023-06-14</time
+    >
+  </a>
+</div>
+
+      <div class="article-category">
+  
+    <a
+      class="article-category-link"
+      href="/categories/writeup"
+      data-aos="zoom-in"
+      >WRITEUP</a
+    >
+  
+</div>
+
+    </div>
+    <div class="hr-line"></div>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <h2 id="challenge-description">
+<a class="header-anchor" href="#challenge-description"></a>
+Challenge description
+</h2><p><img src="https://hackmd.io/_uploads/SyWvCyvv3.png" alt=""></p>
+<p>Attachment: <a href="abcd">tinyx</a></p>
+<h2 id="overview">
+<a class="header-anchor" href="#overview"></a>
+Overview
+</h2><p>Chương trình này là một VM đơn giản được viết bằng golang, tuy nhiên nó đã mất hết symbols. Do đó, việc đầu tiên cần phải làm là khôi khục lại toàn bộ symbols để có thể rev dễ dàng hơn:</p>
+<p><img src="https://hackmd.io/_uploads/ryZ0XbwP3.png" alt=""></p>
+<p>Để khôi phục symbol, mình đã dùng tool này: <a href="https://github.com/mandiant/GoReSym">GoReSym</a></p>
+<p>Mình dùng bản windows build sẵn ở tab release, trước tiên chúng ta cần extract toàn bộ symbol vào 1 file json:</p>
+<p><code>GoReSym_win64.exe -t -d -p tinyx &gt; syms.json</code></p>
+<p><img src="https://hackmd.io/_uploads/rk5kLbwwh.png" alt=""></p>
+<p>Có được symbols, việc tiếp theo là load nó vào IDA, mình dùng python script có sẵn trong respos của tool <code>goresym_rename.py</code>, dùng script này để load file json vừa extract lúc nãy:</p>
+<p><img src="https://hackmd.io/_uploads/r1vI8Www2.png" alt=""></p>
+<p><img src="https://hackmd.io/_uploads/SkjFLZPv2.png" alt=""></p>
+<p>Vậy là xem như đã khôi phục được symbol tiếp theo mình sẽ nói sơ về flow của chương trình này.</p>
+<h2 id="code-flow">
+<a class="header-anchor" href="#code-flow"></a>
+Code flow
+</h2><p>Flow bài này cũng khá cơ bản, tuy có nhiều thứ để chúng ta phân tích tuy nhiên dựa trên yêu cầu của bài thì ta chỉ quan tâm 1 số instruction, không cần reverse toàn bộ chương trình. Tất cả tên hàm đều được recover nên bài này reverse khá là thích, ít nhất là mình không phải đoán quá nhiều. :heart:</p>
+<h3 id="main-function">
+<a class="header-anchor" href="#main-function"></a>
+Main function
+</h3><p>Về phần hàm main hay những hàm khác decompiled của golang thì nó bị strip một vài chổ, nên để chính xác hơn thì mình đọc assembly kết hợp:</p>
+<p>Main function:</p>
+<p><img src="https://hackmd.io/_uploads/rJHG6-Dw3.png" alt=""></p>
+<p><img src="https://hackmd.io/_uploads/rkNThWDDh.png" alt=""></p>
+<p>Về hàm main, mọi thứ đều clear, btw, chổ khó bài này là nằm ở phần <code>NewCore</code>, vì chương trình không chỉ nhận mỗi bytecode mà nó còn nhận bao gồm header, size section&hellip; nên nó cần processing chính xác với các thành phần đó.</p>
+<p>Hàm <code>InputProcess</code> chỉ đơn giản là upper tất cả các kí tự hexadecimal (input), trim các byte thừa và decode thành bytes</p>
+<h3 id="inside-_newcore_-function">
+<a class="header-anchor" href="#inside-_newcore_-function"></a>
+Inside <code>_NewCore_</code> function
+</h3><p>Đầu tiên, hàm này sử dụng <code>mapassign</code> để map vùng có tên là <code>GeneralRegister_uint32</code>, tổng cộng có 8 thanh ghi đánh số từ 0-7, mỗi thanh ghi có <code>32 bit</code>.</p>
+<p><img src="https://hackmd.io/_uploads/H1hSCbDv3.png" alt=""></p>
+<p>Tiếp theo đó, hàm này sẽ gọi <code>Memory_Loader</code> để load memory, phần này đối với mình là cực nhất tại vì lúc debug mình hay bị lỗi 1 vài chổ không rõ nguyên nhân&hellip;</p>
+<p><img src="https://hackmd.io/_uploads/rytaJfwvh.png" alt=""></p>
+<p>Trong hàm <code>NewMemory</code> sẽ quy định các offset của các section, trong đó section .text là nơi chứa đoạn mã thực thi của chương trình sẽ có baseoffset là <code>0x100000001000</code> và section .data là <code>0x100000008000</code>, do đó tương ứng ta sẽ ghi code vào offset 0x1000 và rất có thể dữ liệu string trả về của hàm main có thể sẽ lấy từ section data là offset 0x8000:</p>
+<p><img src="https://hackmd.io/_uploads/r1F3vEvDn.png" alt=""></p>
+<p>Sau đó, đoạn này sẽ lấy bytes input của mình để kiểm tra với các offset của các section .text và .const. Tương ứng là 0x1000 và 0x4000, do đó ta tạm thời có header là:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">header</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;RISCXBIN&#39;</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mh">0x1000</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mh">0x4000</span><span class="p">)</span>
+</span></span></code></pre></div><p><img src="https://hackmd.io/_uploads/BkEajVDPh.png" alt=""></p>
+<p>Sau đó chương trình đọc tiếp 8 bytes, mình không rõ chính xác các byte này là gì nhưng nó không ảnh hưởng đến chương trình lắm nên mình để ngẫu nhiên.</p>
+<p>Tiếp theo nó sẽ read 4 byte là size, size này sẽ là số byte cần read của các section, tính từ offset 0x00, mà code của mình (section .text) bắt đầu từ offset 0x1000, do đó:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="mh">0x1000</span><span class="o">*</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">code</span><span class="p">)</span>
+</span></span></code></pre></div><p><img src="https://hackmd.io/_uploads/HkhVANvv2.png" alt=""></p>
+<p>Vậy là mình đã tóm tắt xong phần header của file. Tiếp theo sẽ là phần thực thi code của chương trình.</p>
+<h3 id="core_run-function">
+<a class="header-anchor" href="#core_run-function"></a>
+<code>Core_run</code> function
+</h3><p>Về phần flow thực thi code của chương trình khá đơn giản, nó chỉ bao gồm một vòng lặp trong đó nó sẽ lần lượt lấy 4 byte tiếp theo của <code>code</code> (Instruction fetch), tương ứng với 1 instruction, decode instruction này và bắt đầu excute, lặp lại cho tới khi hết chương trình.</p>
+<p><img src="https://hackmd.io/_uploads/SkFyxSDwn.png" alt=""></p>
+<p>Đầu tiên hàm <code>decode</code> sẽ lấy 6 bit đầu (&amp;0x3f) của 4 byte instruction và gọi constructor <code>NewInstruction()</code>, được biết 6 bit này sẽ đại diện cho <code>Instruction type</code>, mình sẽ nói rõ phần này sau.</p>
+<p><img src="https://hackmd.io/_uploads/B1Z7ZrvDn.png" alt=""></p>
+<p>Ở hàm <code>NewInstruction()</code>, ta sẽ thấy rằng sẽ có 4 loại instruction tương ứng với 4 type khác nhau:</p>
+<p><img src="https://hackmd.io/_uploads/B1n_zrPw3.png" alt=""></p>
+<p>Tương ứng với:</p>
+<ul>
+<li>R-type instruction <code>0x1b</code>: Các instruction liên quan đến các toán tử trên thanh ghi hoặc các toán tử so sanh,&hellip;</li>
+<li>I-type instruction: Các instruction liên quan đến hằng số (immediate) trong đó Y type gồm 2 loại.
+<ul>
+<li>Toán hạng thanh ghi <code>0xB</code>: Sẽ thực thi các instruction tác động lên thanh ghi.</li>
+<li>Toán hạng bộ nhớ: <code>0xA</code>: Các instruction có tác động tới bộ nhớ.</li>
+</ul>
+</li>
+<li>B-type instruction <code>0x3</code>: Các instruction liên quan đến các nhảy và điều kiện nhảy&hellip;</li>
+</ul>
+<p>Tuy nhiên suy nghĩ kĩ lại thì trong yêu cầu bài này, sau khi execute, nó sẽ đọc chuỗi từ 1 section và so sánh với <code>&quot;Hello CDDC2023!&quot;</code>, do đó ta dường như chỉ cần dùng đến I-type instruction, hoàn toàn không cần dùng các tính toán thanh ghi hoặc các điều kiện nhảy.
+Trong đó <code>DecodeImm</code>:</p>
+<p><img src="https://hackmd.io/_uploads/HJgQBSvD2.png" alt=""></p>
+<p>Tương ứng với 2 hàm decode còn lại,ta biết được các instruction sẽ có cấu trúc như sau:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">6 bit đầu là instruction type, các bit còn lại là:
+</span></span><span class="line"><span class="cl">0x3:     B type: &lt;&gt;  4 - 4 - 3 - 1 - 14
+</span></span><span class="line"><span class="cl">0xA,0xB: I Type: &lt;&gt;  4 - 4 - 3 - 15
+</span></span><span class="line"><span class="cl">0x1B:    R Type: &lt;&gt;  4 - 4 - 3 - 4 - 11
+</span></span></code></pre></div><p>Decode instruction chỉ đơn giản là tách các bit ra, tuy nhiên để hiểu hơn các bit này làm gì thì mình cần phần tích hàm sau.</p>
+<h3 id="instruction-exec-function">
+<a class="header-anchor" href="#instruction-exec-function"></a>
+<code>Instruction Exec</code> function
+</h3><p>Tiếp theo mình đã phân tích hàm<code>tinyx_internal_core_Instruction_Exec</code>, hàm này sẽ sẽ làm mọi thứ trên 1 lệnh đã decode. Vì chỉ cần quan tâm tới I-type nên mình chỉ phân tích Itype, các ins khác các bạn có thể tự tham khảo thêm. Mình sẽ attach các file ở cuối post này.</p>
+<p>Nó sẽ lấy 3 bit của Ins(ở bảng trên) để làm opcode, tuy nhiên có 1 điều khá là chuối bởi vì 3 bit chỉ biểu diễn được 8 opcode, tuy nhiên chương trình lại có 9 case (0-8) =&gt; dùng lệnh thứ 9 không được. Trùng hợp thay lúc mình làm bài này lại cần dùng lệnh thứ 9 nhưng mãi mới phát hiện ra là nó không dùng được, thật là sax&hellip;</p>
+<p>Các toán hạng thanh ghi:</p>
+<p><img src="https://hackmd.io/_uploads/HyW-wSwPh.png" alt=""></p>
+<p>Các toán hạng bộ nhớ:</p>
+<p><img src="https://hackmd.io/_uploads/BJp-DrPD3.png" alt=""></p>
+<p>Sau 1 vài lần debug và check kĩ, mình đã biết được như sau, cấu trúc của lệnh I type như sau:</p>
+<p><code>| type | reg_dest | reg | opcode | 15 bit immediate number|</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">ImmIns</span><span class="p">(</span><span class="n">_type</span><span class="p">,</span><span class="n">dest</span><span class="p">,</span><span class="n">reg</span><span class="p">,</span><span class="n">opcode</span><span class="p">,</span><span class="n">imm</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ret</span> <span class="o">=</span> <span class="n">imm</span><span class="o">&lt;&lt;</span><span class="mi">3</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ret</span> <span class="o">|=</span> <span class="n">opcode</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ret</span> <span class="o">&lt;&lt;=</span><span class="mi">4</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ret</span> <span class="o">|=</span> <span class="n">reg</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ret</span> <span class="o">&lt;&lt;=</span><span class="mi">4</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ret</span> <span class="o">|=</span><span class="n">dest</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ret</span> <span class="o">&lt;&lt;=</span><span class="mi">6</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ret</span> <span class="o">|=</span><span class="n">_type</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">p32</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+</span></span></code></pre></div><h2 id="solve">
+<a class="header-anchor" href="#solve"></a>
+Solve
+</h2><p>Mình có thể dễ dàng có hết các opcode, giờ chỉ cần việc viết code sao cho nó trả về đúng result nữa là xong.</p>
+<p>Đầu tiên mình cần biết chuỗi cần ghi vào chổ nào, sau vài lần debug thì mình biết chuỗi mà chương trình cần kiểm tra lấy từ đầu section .data, tương ứng với offset 0x8000:</p>
+<p><img src="https://hackmd.io/_uploads/SyO5dBDv3.png" alt=""></p>
+<p>Tiếp theo chỉ cần viết đoạn code mov từng byte của Chuỗi vào các offset liên tiếp này là xong:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">code</span> <span class="o">+=</span> <span class="n">ImmIns</span><span class="p">(</span><span class="mh">0xB</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mh">0x3000</span><span class="p">)</span> <span class="c1"># addi reg1, reg1, 0x3000</span>
+</span></span><span class="line"><span class="cl"><span class="n">code</span> <span class="o">+=</span> <span class="n">ImmIns</span><span class="p">(</span><span class="mh">0xB</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mh">0x3000</span><span class="p">)</span> <span class="c1"># addi reg1, reg1, 0x3000</span>
+</span></span><span class="line"><span class="cl"><span class="n">code</span> <span class="o">+=</span> <span class="n">ImmIns</span><span class="p">(</span><span class="mh">0xB</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mh">0x2000</span><span class="p">)</span> <span class="c1"># addi reg1, reg1, 0x2000  ; reg1 = 0x8000</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">string</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;Hello CDDC2023!&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">string</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">code</span> <span class="o">+=</span> <span class="n">ImmIns</span><span class="p">(</span><span class="mh">0xB</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">c</span><span class="p">)</span> <span class="c1"># addi reg0, reg0, char</span>
+</span></span><span class="line"><span class="cl">    <span class="n">code</span> <span class="o">+=</span> <span class="n">ImmIns</span><span class="p">(</span><span class="mh">0xA</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># sb reg0, [reg1 + 0] ; store byte</span>
+</span></span><span class="line"><span class="cl">    <span class="n">code</span> <span class="o">+=</span> <span class="n">ImmIns</span><span class="p">(</span><span class="mh">0xB</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># andi reg0, reg0, 0 ; reset register</span>
+</span></span><span class="line"><span class="cl">    <span class="n">code</span> <span class="o">+=</span> <span class="n">ImmIns</span><span class="p">(</span><span class="mh">0xB</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># addi reg1, reg1, 1</span>
+</span></span></code></pre></div><p>Flag:</p>
+<p><img src="https://hackmd.io/_uploads/HJrDKHwPh.png" alt=""></p>
+<p>Full script:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># fast rev imm:</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 6 bit ins type : 0xb register ins, 0xA memory ins</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 4 dest reg</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 4 reg</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 3 bit opcode</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 15 bit imm</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># opcode: 5 store byte, </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 0: addi, 1 subi</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">ImmIns</span><span class="p">(</span><span class="n">_type</span><span class="p">,</span><span class="n">dest</span><span class="p">,</span><span class="n">reg</span><span class="p">,</span><span class="n">opcode</span><span class="p">,</span><span class="n">imm</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ret</span> <span class="o">=</span> <span class="n">imm</span><span class="o">&lt;&lt;</span><span class="mi">3</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ret</span> <span class="o">|=</span> <span class="n">opcode</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ret</span> <span class="o">&lt;&lt;=</span><span class="mi">4</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ret</span> <span class="o">|=</span> <span class="n">reg</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ret</span> <span class="o">&lt;&lt;=</span><span class="mi">4</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ret</span> <span class="o">|=</span><span class="n">dest</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ret</span> <span class="o">&lt;&lt;=</span><span class="mi">6</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ret</span> <span class="o">|=</span><span class="n">_type</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">p32</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">convert_hex</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:02x}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># header</span>
+</span></span><span class="line"><span class="cl"><span class="n">to_send</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;RISCXBIN&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#section</span>
+</span></span><span class="line"><span class="cl"><span class="n">to_send</span> <span class="o">+=</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="s1">&#39;00100000&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="s1">&#39;00400000&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="sa">b</span><span class="s1">&#39;badubadu&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#code</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#cay vai opcode 3 bit ma co tan 9 opcode?</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#code += ImmIns(0xB,1,1,8,15) # shli reg1, reg1 , 15 ; reg1 = 0x8000</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">code</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span> <span class="o">*</span> <span class="mh">0x1000</span>    <span class="c1"># padding</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># imm 15 bit</span>
+</span></span><span class="line"><span class="cl"><span class="n">code</span> <span class="o">+=</span> <span class="n">ImmIns</span><span class="p">(</span><span class="mh">0xB</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mh">0x3000</span><span class="p">)</span> <span class="c1"># addi reg1, reg1, 0x3000</span>
+</span></span><span class="line"><span class="cl"><span class="n">code</span> <span class="o">+=</span> <span class="n">ImmIns</span><span class="p">(</span><span class="mh">0xB</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mh">0x3000</span><span class="p">)</span> <span class="c1"># addi reg1, reg1, 0x3000</span>
+</span></span><span class="line"><span class="cl"><span class="n">code</span> <span class="o">+=</span> <span class="n">ImmIns</span><span class="p">(</span><span class="mh">0xB</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mh">0x2000</span><span class="p">)</span> <span class="c1"># addi reg1, reg1, 0x2000  ; reg1 = 0x8000</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">string</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;Hello CDDC2023!&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">string</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">code</span> <span class="o">+=</span> <span class="n">ImmIns</span><span class="p">(</span><span class="mh">0xB</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">c</span><span class="p">)</span> <span class="c1"># addi reg0, reg0, char</span>
+</span></span><span class="line"><span class="cl">    <span class="n">code</span> <span class="o">+=</span> <span class="n">ImmIns</span><span class="p">(</span><span class="mh">0xA</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># sb reg0, [reg1 + 0] ; store byte</span>
+</span></span><span class="line"><span class="cl">    <span class="n">code</span> <span class="o">+=</span> <span class="n">ImmIns</span><span class="p">(</span><span class="mh">0xB</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># andi reg0, reg0, 0 ; reset register</span>
+</span></span><span class="line"><span class="cl">    <span class="n">code</span> <span class="o">+=</span> <span class="n">ImmIns</span><span class="p">(</span><span class="mh">0xB</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># addi reg1, reg1, 1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">to_send</span> <span class="o">+=</span> <span class="n">p32</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">code</span><span class="p">))</span> <span class="o">+</span> <span class="n">code</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">to_send</span> <span class="o">=</span> <span class="n">convert_hex</span><span class="p">(</span><span class="n">to_send</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">to_send</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># io = process(&#39;./tinyx&#39;)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;challenges.pwn.cddc2023.com&#39;</span><span class="p">,</span><span class="mi">5564</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#raw_input(&#39;attach please: &#39;) # waiting for attach from debugger</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">to_send</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></div><p>File pdb: <a href="https://anonfiles.com/89K9G3w7za/tinyx_i64">tinyx.i64</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+
+      
+        <div class="sponsor-wrapper">
+  <div class="sponsor-button-wrapper">
+    <div class="sponsor-icon rotate"></div>
+    <div class="sponsor-title">Sponsor</div>
+    <div class="sponsor-icon rotate"></div>
+  </div>
+  <div class="sponsor-tip">Please buy author a cup of coffee!</div>
+  
+    <div class="sponsor-qr">
+      
+        <div class="sponsor-qr-image-wrapper">
+          <img src="/images/bmc_qr_lephuduc.png" alt="Le Phu Duc" width="200" />
+          <p class="sponsor-qr-name">Le Phu Duc</p>
+        </div>
+      
+    </div>
+  
+</div>
+      
+
+      
+        
+
+<div class="share-wrapper">
+  
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:1313/post/cddc2023/" target="_blank" rel="noopener noreferrer" title="CDDC 2023">
+      <div class="share-icon icon icon-facebook">
+        
+      </div>
+    </a>
+  
+    <a href="https://twitter.com/intent/tweet?url=http://localhost:1313/post/cddc2023/&amp;text=CDDC%202023&amp;via=http://localhost:1313/" target="_blank" rel="noopener noreferrer" title="CDDC 2023">
+      <div class="share-icon icon icon-twitter">
+        
+      </div>
+    </a>
+  
+    <a href="https://www.linkedin.com/shareArticle?url=http://localhost:1313/post/cddc2023/&amp;title=CDDC%202023&amp;summary=Writeup%20for%20rev%20challenge%20in%20CDDC2023&amp;mini=true&amp;ro=true" target="_blank" rel="noopener noreferrer" title="CDDC 2023">
+      <div class="share-icon icon icon-linkedin">
+        
+      </div>
+    </a>
+  
+    <a href="https://www.reddit.com/submit?url=http://localhost:1313/post/cddc2023/&amp;title=CDDC%202023" target="_blank" rel="noopener noreferrer" title="CDDC 2023">
+      <div class="share-icon icon icon-reddit">
+        
+      </div>
+    </a>
+  
+</div>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+      <ul class="article-tag-list" itemprop="keywords">
+  
+    <li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/reverse"
+        rel="tag"
+        >REVERSE</a
+      >
+    </li>
+  
+    <li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/vietnamese"
+        rel="tag"
+        >VIETNAMESE</a
+      >
+    </li>
+  
+</ul>
+
+    </footer>
+  </div>
+  
+    
+  <nav
+    id="article-nav"
+    data-aos="fade-up"
+  >
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          <img
+            data-src="images/post_covers/defconquals2023-ori.jpeg"
+            data-sizes="auto"
+            alt="DEFCON Quals 2023"
+            class="lazyload"
+          />
+        
+        <a href="http://localhost:1313/post/defconquals-2023/"></a>
+        <div class="article-nav-caption">Newer</div>
+        <h3 class="article-nav-title">
+          
+            DEFCON Quals 2023
+          
+        </h3>
+      </div>
+    
+
+    
+      <div class="article-nav-link-wrap article-nav-link-right">
+        
+          <img
+            data-src="/images/post_covers/tetctf2024.jpeg"
+            data-sizes="auto"
+            alt="TetCTF 2024"
+            class="lazyload"
+          />
+        
+        <a href="http://localhost:1313/post/tetctf-2024/"></a>
+        <div class="article-nav-caption">Older</div>
+        <h3 class="article-nav-title">
+          
+            TetCTF 2024
+          
+        </h3>
+      </div>
+    
+  </nav>
+
+
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+</section>
+        </div>
+        
+        
+        
+
+
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+
+
+<footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    <div>
+      <span class="icon-copyright"></span>
+      2022 -
+      2025
+      <span class="footer-info-sep rotate"></span>
+      Le Phu Duc
+    </div>
+    
+    
+    
+      <div>
+        <span class="icon-brush"
+          >&nbsp;
+            51.0k
+          </span
+        >
+        &nbsp;|&nbsp;
+        <span class="icon-coffee">&nbsp;
+          
+          
+
+          04:07
+        </span>
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv"
+          >Number of visits&nbsp;<span
+            id="busuanzi_value_site_pv"
+          ></span
+        ></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv"
+          >Number of visitors&nbsp;<span
+            id="busuanzi_value_site_uv"
+          ></span
+        ></span>
+      </div>
+    
+  </div>
+</footer>
+
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar">
+        <div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper toc-div-class">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#challenge-description">Challenge description</a></li>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#code-flow">Code flow</a>
+      <ul>
+        <li><a href="#main-function">Main function</a></li>
+        <li><a href="#inside-_newcore_-function">Inside <code>_NewCore_</code> function</a></li>
+        <li><a href="#core_run-function"><code>Core_run</code> function</a></li>
+        <li><a href="#instruction-exec-function"><code>Instruction Exec</code> function</a></li>
+      </ul>
+    </li>
+    <li><a href="#solve">Solve</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+      </div>
+      <div class="sidebar-common-sidebar hidden">
+        
+<div class="sidebar-author">
+  <img
+    data-src="/avatar/shiba.jpg"
+    data-sizes="auto"
+    alt="Le Phu Duc"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Le Phu Duc</div>
+  <div class="sidebar-description">a.k.a Jinn</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>Posts</div>
+    
+    <div class="sidebar-state-number">16</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>Categories</div>
+    <div class="sidebar-state-number">
+      1
+    </div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>Tags</div>
+    <div class="sidebar-state-number">6</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class="icon-discord sidebar-social-icon">
+      <a
+        href="https://discordapp.com/users/lephuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="discord"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-facebook sidebar-social-icon">
+      <a
+        href="https://www.facebook.com/lephuduc0309"
+        itemprop="url"
+        target="_blank"
+        aria-label="facebook"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/lephuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-instagram sidebar-social-icon">
+      <a
+        href="https://www.instagram.com/le.phuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="instagram"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-linkedin sidebar-social-icon">
+      <a
+        href="https://www.linkedin.com/in/lephuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="linkedin"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-twitter sidebar-social-icon">
+      <a
+        href="https://twitter.com/lephuduck"
+        itemprop="url"
+        target="_blank"
+        aria-label="twitter"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="Home"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe632;
+        
+      </div>
+      <div class="sidebar-menu-link">Home</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="About"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe628;
+        
+      </div>
+      <div class="sidebar-menu-link">About</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="Archives"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe604;
+        
+      </div>
+      <div class="sidebar-menu-link">Archives</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/achievements"
+        aria-label="Achievements"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe621;
+        
+      </div>
+      <div class="sidebar-menu-link">Achievements</div>
+    </div>
+  
+</div>
+
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
+
+    </div>
+    
+    
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  <script
+    src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"
+    
+    
+    
+    
+    integrity="sha384-3gT/vsepWkfz/ff7PpWNUeMzeWoH3cDhm/A8jM7ouoAK0/fP/9bcHHR5kHq2nf&#43;e" crossorigin="anonymous"
+  ></script>
+
+
+
+
+  
+  
+  
+  
+  
+  
+  <script
+    src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"
+    
+    
+    
+    
+    integrity="sha384-J08i8An/QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"
+  ></script>
+
+
+
+
+
+
+
+
+
+  
+      
+      <script src="/js/main.js" ></script>
+      
+
+
+
+  
+
+
+
+
+
+  
+      
+      <script src="/js/aos.js" ></script>
+      
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+
+
+
+
+
+  
+      
+      <script src="/js/pjax_main.js" data-pjax></script>
+      
+
+
+
+
+
+  
+
+  
+  
+  
+  
+  
+  
+  <script
+    src="https://npm.webcache.cn/mouse-firework@0.1.0/dist/index.umd.js"
+    
+    
+    
+    
+    integrity="sha384-KM6i7tu43nYd6e0beIljxHMC5tZc58XBDu7pPA58w50h18Jsx7gLdimfS09RXlKv" crossorigin="anonymous"
+  ></script>
+
+
+<script>
+  if (window.firework) {
+    const options = JSON.parse("{\"excludeelements\":[\"a\",\"button\"],\"particles\":[{\"colors\":[\"#c0971d\",\"#caa02f\",\"#d4aa40\",\"#ddbb62\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"emit\"],\"number\":20,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.3,0.5],\"radius\":[16,32]}},{\"colors\":[\"#f4e74d\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"diffuse\"],\"number\":1,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.2,0.5],\"lineWidth\":6,\"radius\":20}}]}");
+    options.excludeElements = options.excludeelements;
+    delete options.excludeelements;
+    window.firework(options);
+  }
+</script>
+
+
+
+  
+
+  
+  
+  
+  
+  
+  
+  <script
+    src="https://npm.webcache.cn/theme-shokax-pjax@0.0.3/dist/index.umd.js"
+    
+    
+    
+    
+    integrity="sha384-xneY1WY8hOfUzswrE4CrYq35N4BdVcxqxwHPr9zawE/jMSCxD&#43;jAPU55x/jj3wlf" crossorigin="anonymous"
+  ></script>
+
+
+  <script>
+    function loadScripts(scripts, index) {
+      if (index < scripts.length) {
+        const script = scripts[index];
+        const src = script.getAttribute('src');
+
+        const loadScript = (scriptContent) => {
+          return new Promise((resolve, reject) => {
+            const scriptElement = document.createElement('script');
+            if (script.type) {
+              scriptElement.type = script.type;
+            }
+            if (script.src) {
+              scriptElement.src = script.src;
+              scriptElement.onload = resolve;
+              scriptElement.onerror = reject;
+            }
+            if (scriptContent) {
+              scriptElement.text = scriptContent;
+            }
+            document.head.appendChild(scriptElement);
+            if (!script.src) {
+              resolve();
+            }
+          })
+          
+        }
+
+        ;(src ? loadScript() : loadScript(script.text))
+          .then(() => loadScripts(scripts, index + 1))
+          .catch(error => {
+            console.error(`Failed to load script: ${src || 'inline script'}`, error);
+            loadScripts(scripts, index + 1);
+          });
+      }
+    }
+    window.Pjax &&
+      new window.Pjax({
+        selectors: [
+          "#header>img",
+          "#header>picture",
+          "head title",
+          "#header-title",
+          "#subtitle-wrap",
+          "#main",
+          "#content",
+          ".sidebar-widget",
+          ".sidebar-wrapper",
+          "#mobile-nav",
+          "#lazy-script",
+        ],
+        switches: {
+          "#content": function(oldEl, newEl) {
+            
+            oldEl.className = newEl.className;
+            this.onSwitch();
+          },
+          "#header-title": Pjax.switches.outerHTML,
+          "#subtitle-wrap": Pjax.switches.outerHTML,
+          "#main": function (oldEl, newEl) {
+            const scripts = [...newEl.querySelectorAll("script")];
+            loadScripts(scripts, 0);
+            oldEl.outerHTML = newEl.outerHTML;
+            this.onSwitch();
+          },
+          "#mobile-nav": Pjax.switches.outerHTML,
+          "#lazy-script": function (oldEl, newEl) {
+            const scripts = [...newEl.querySelectorAll("script")];
+            loadScripts(scripts, 0);
+            oldEl.innerHTML = newEl.innerHTML;
+            this.onSwitch();
+          },
+        },
+        cacheBust: false,
+      });
+  </script>
+  
+
+
+
+
+
+  
+      
+      <script src="/js/pjax.js" ></script>
+      
+
+
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+      
+      
+        
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "Le Phu Duc",
+          title: "CDDC 2023",
+          url: "http:\/\/localhost:1313\/post\/cddc2023\/",
+          description: "Writeup for rev challenge in CDDC2023",
+          cover: "http:\/\/localhost:1313\/images\/post_covers\/cddc2023.jpeg",
+        };
+      </script>
+    
+    
+    
+      
+
+
+
+
+
+  
+      
+      <script src="/js/insert_highlight.js" data-pjax></script>
+      
+
+      
+      
+      
+      
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js", "sha384-DiL6M\/gG\u002bwmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF\/N6lrZi\/")).default;
+
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8\u002boTJ7m3DfYEWX1fu1scuS4\u002bs")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8\u002boTJ7m3DfYEWX1fu1scuS4\u002bs")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+      
+    
+    
+  </div>
+</div>
+
+
+
+
+  
+
+  
+  
+  
+  
+  
+  
+  <script
+    src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js"
+    
+    async
+    
+    
+    integrity="sha384-0M75wtSkhjIInv4coYlaJU83&#43;OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id&#43;S" crossorigin="anonymous"
+  ></script>
+
+
+
+
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      });
+    }
+  </script>
+
+
+<script>
+  const reimuCopyright = String.raw`
+   ______     ______     __     __    __     __  __    
+  /\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+  \ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+   \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+    \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                    
+  `;
+  console.log(String.raw`%c ${reimuCopyright}`, "color: #ff5252;");
+  console.log(
+    "%c Theme.Reimu" + " %c https://github.com/D-Sketon/hugo-theme-reimu ",
+    "color: white; background: #ff5252; padding:5px 0;",
+    "padding:4px;border:1px solid #ff5252;",
+  );
+</script>
+
+
+  
+
+  
+  
+  
+  
+  
+  
+  <script
+    src="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.js"
+    
+    
+    
+    
+    integrity="sha384-gdGYZwHnfJM54evoZhpO0s6ZF5BQiybkiyW7VXr&#43;h5UfruuRL/aORyw&#43;5&#43;HZoU6e" crossorigin="anonymous"
+  ></script>
+
+
+  
+    <script>
+      const ap = new APlayer({
+          theme: "var(--color-link)",
+          container: document.getElementById('aplayer'),
+          audio: JSON.parse("[{\"artist\":\"NewJeans\",\"cover\":\"/images/song_covers/ditto.jpg\",\"name\":\"Ditto\",\"url\":\"/songs/ditto.mp3\"},{\"artist\":\"NewJeans\",\"cover\":\"/images/song_covers/eta.jpg\",\"name\":\"ETA\",\"url\":\"/songs/ETA.mp3\"}]") || [],
+          fixed:  null  || false,
+          autoplay:  null  || false,
+          loop: '' || 'all',
+          order: '' || 'list',
+          preload: '' || 'auto',
+          volume:  null  || 0.7,
+          mutex:  null  || true,
+          listFolded:  null  || false,
+          lrcType:  null  || 0,
+      });
+    </script>
+  
+
+
+
+  </body>
+</html>

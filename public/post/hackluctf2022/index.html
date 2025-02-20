@@ -1,0 +1,1718 @@
+<!doctype html>
+<html
+  lang="en-us" 
+  
+    data-theme-mode="true"
+  
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no"
+/>
+
+
+
+
+
+
+
+  
+
+<title>
+  Hack.lu CTF 2022 | Le Phu Duc
+</title>
+<meta
+  name="description"
+  content="Writeup for Hack.lu CTF 2022"
+/>
+
+
+
+  <script>
+  (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "true");
+</script>
+
+
+  
+<script src="https://www.googletagmanager.com/gtag/js?id=true"></script>
+<script data-pjax>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+
+  gtag('js', new Date());
+
+  gtag('config', 'true');
+</script>
+
+
+
+
+
+
+
+
+<script>
+  window.siteConfig = JSON.parse("{\"anchor_icon\":null,\"clipboard\":{\"copyright\":{\"content\":\"All articles in this blog are licensed under BY-NC-SA unless otherwise stated. Please indicate the source when reprinting!\",\"count\":50,\"enable\":false},\"fail\":\"Failed to copy (ﾟ⊿ﾟ)ﾂ\",\"success\":\"Copied\"},\"code_block\":{\"expand\":true},\"icon_font\":\"4552607_0khxww3tj3q9\",\"outdate\":{\"daysago\":180,\"enable\":false,\"message\":\"本文最后更新于 {time}，请注意文中内容可能已经发生变化。\"}}");
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+    
+  
+
+  
+  
+  
+    
+  
+
+  
+  
+  
+    
+  
+
+  
+  
+  
+    
+  
+
+  
+  
+  
+
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="preload"
+  as="style"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7cUbuntu%20Mono:400,400italic,700,700italic%7cSource%20Code%20Pro:400,400italic,700,700italic%7cJetBrains%20Mono:400,400italic,700,700italic&amp;display=swap"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7cUbuntu%20Mono:400,400italic,700,700italic%7cSource%20Code%20Pro:400,400italic,700,700italic%7cJetBrains%20Mono:400,400italic,700,700italic&amp;display=swap"
+  media="print"
+  onload="this.media='all'"
+/>
+
+
+
+
+
+
+  <link
+    rel="preload"
+    href="//at.alicdn.com/t/c/font_4552607_0khxww3tj3q9.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin="anonymous"
+  />
+
+
+
+  
+
+
+
+
+
+
+ <link rel="stylesheet" href="/css/loader.css" />
+
+
+
+
+
+
+
+<link rel="shortcut icon" href="/favicon/favicon.ico">
+
+
+
+
+
+
+
+ <link rel="stylesheet" href="/css/main.css" />
+
+
+
+
+
+  <link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+
+
+
+
+
+
+  <link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/katex@0.16.9/dist/katex.min.css"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+  
+  
+  
+  <script
+    src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"
+    
+    
+    
+    
+    integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"
+  ></script>
+
+
+
+
+
+  
+
+
+  <link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.0/dist/aos.css" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.css" />
+
+
+
+  </head>
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        
+          <img src="/images/loading-golden.png" alt="loading" />
+        
+      </div>
+      <div class="loading-word"></div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+
+
+    <div id="container">
+      <div id="wrap">
+        
+<div id="header-nav">
+  <nav id="main-nav">
+    
+      <span class="main-nav-link-wrap">
+        <div class='main-nav-icon icon '>
+          
+            &#xe632;
+          
+        </div>
+        <a class="main-nav-link" href="/">Home</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <div class='main-nav-icon icon '>
+          
+            &#xe628;
+          
+        </div>
+        <a class="main-nav-link" href="/about">About</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <div class='main-nav-icon icon '>
+          
+            &#xe604;
+          
+        </div>
+        <a class="main-nav-link" href="/archives">Archives</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <div class='main-nav-icon icon '>
+          
+            &#xe621;
+          
+        </div>
+        <a class="main-nav-link" href="/achievements">Achievements</a>
+      </span>
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    
+    <picture></picture>
+      <img fetchpriority="high" src="/images/post_covers/hackluctf2022-ori.jpeg" alt="Hack.lu CTF 2022">
+    
+  
+
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          
+        
+  
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">Hack.lu CTF 2022</h1>
+          </a>
+        
+      
+  
+      
+        
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+        <div id="content"
+          class="sidebar-left"
+            >
+          <aside id="sidebar">
+  
+    <div id="aplayer" theme="var(--color-link)" data-aos="fade-up"></div>
+  
+  
+  <div class="sidebar-wrapper wrap-sticky">
+    <div
+      class="sidebar-wrap"
+      data-aos="fade-up"
+    >
+      
+        <div class="sidebar-toc-sidebar">
+          <div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper toc-div-class">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#fingerfood---rev">FingerFood - rev</a>
+      <ul>
+        <li></li>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#solve">Solve</a></li>
+        <li><a href="#update">Update:</a></li>
+      </ul>
+    </li>
+    <li><a href="#pazzzi---misc">Pazzzi - misc</a>
+      <ul>
+        <li></li>
+        <li><a href="#overview-1">Overview</a></li>
+        <li><a href="#approach-1">Approach</a></li>
+        <li><a href="#solve-1">Solve</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+        </div>
+        <div class="sidebar-common-sidebar hidden">
+          
+<div class="sidebar-author">
+  <img
+    data-src="/avatar/shiba.jpg"
+    data-sizes="auto"
+    alt="Le Phu Duc"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Le Phu Duc</div>
+  <div class="sidebar-description">a.k.a Jinn</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>Posts</div>
+    
+    <div class="sidebar-state-number">16</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>Categories</div>
+    <div class="sidebar-state-number">
+      1
+    </div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>Tags</div>
+    <div class="sidebar-state-number">6</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class="icon-discord sidebar-social-icon">
+      <a
+        href="https://discordapp.com/users/lephuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="discord"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-facebook sidebar-social-icon">
+      <a
+        href="https://www.facebook.com/lephuduc0309"
+        itemprop="url"
+        target="_blank"
+        aria-label="facebook"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/lephuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-instagram sidebar-social-icon">
+      <a
+        href="https://www.instagram.com/le.phuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="instagram"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-linkedin sidebar-social-icon">
+      <a
+        href="https://www.linkedin.com/in/lephuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="linkedin"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-twitter sidebar-social-icon">
+      <a
+        href="https://twitter.com/lephuduck"
+        itemprop="url"
+        target="_blank"
+        aria-label="twitter"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="Home"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe632;
+        
+      </div>
+      <div class="sidebar-menu-link">Home</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="About"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe628;
+        
+      </div>
+      <div class="sidebar-menu-link">About</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="Archives"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe604;
+        
+      </div>
+      <div class="sidebar-menu-link">Archives</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/achievements"
+        aria-label="Achievements"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe621;
+        
+      </div>
+      <div class="sidebar-menu-link">Achievements</div>
+    </div>
+  
+</div>
+
+        </div>
+      
+
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
+      
+    </div>
+  </div>
+
+  <div class="sidebar-widget">
+    
+  </div>
+</aside>
+
+          <section id="main">
+  <article
+  class="h-entry article"
+  itemprop="blogPost"
+  itemscope
+  itemtype="https://schema.org/BlogPosting"
+>
+  <div
+    class="article-inner"
+    data-aos="fade-up"
+  >
+    <div class="article-meta">
+      <div class="article-date">
+  <a
+    href="http://localhost:1313/post/hackluctf2022/"
+    class="article-date-link"
+    data-aos="zoom-in"
+  >
+    <time datetime="2022-10-28 00:00:00 &#43;0000 UTC" itemprop="datePublished"
+      >2022-10-28</time
+    >
+    <time style="display: none;" id="post-update-time"
+      >2022-10-28</time
+    >
+  </a>
+</div>
+
+      <div class="article-category">
+  
+    <a
+      class="article-category-link"
+      href="/categories/writeup"
+      data-aos="zoom-in"
+      >WRITEUP</a
+    >
+  
+</div>
+
+    </div>
+    <div class="hr-line"></div>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <h2 id="fingerfood---rev">
+<a class="header-anchor" href="#fingerfood---rev"></a>
+FingerFood - rev
+</h2><h4 id="description">
+<a class="header-anchor" href="#description"></a>
+Description
+</h4><blockquote>
+<p>Reversing Finger Food with a twist.</p></blockquote>
+<h4 id="attachment-file">
+<a class="header-anchor" href="#attachment-file"></a>
+Attachment file
+</h4><p><a href="https://flu.xxx/static/chall/FingerFood_f46ffce06df8d82671be57300485a83e.zip">Download challenge files</a></p>
+<h3 id="overview">
+<a class="header-anchor" href="#overview"></a>
+Overview
+</h3><p><img src="https://i.imgur.com/TQkQroL.png" alt=""></p>
+<p>Thử chạy file và không có thông tin gì, tiến hành dùng IDA để phân tích</p>
+<p><img src="https://i.imgur.com/MvfriMB.png" alt=""></p>
+<p>Bài này về cơ bản hướng giải cũng nhiều và cũng khá là dễ</p>
+<p><img src="https://i.imgur.com/bVLwdOo.png" alt=""></p>
+<p>Đối với các bài không có pdb nên nhiều hàm không rõ tên, việc để tìm hàm main là tìm hàm <code>start</code> hoặc là dùng shortcut <code>Ctrl + E</code> để đi tới entry point:</p>
+<p><img src="https://i.imgur.com/EGwZSWT.png" alt=""></p>
+<p><img src="https://i.imgur.com/ZHDBHss.png" alt=""></p>
+<h3 id="approach">
+<a class="header-anchor" href="#approach"></a>
+Approach
+</h3><p>Đập vào mắt mình là một dãy các số khởi tạo <code>v10</code> và vòng lặp dùng để so sánh <code>v3</code>
+<code>if ( v3 != (unsigned __int8)sub_405080(v10, v6) </code></p>
+<p>Nên tới đây mình đoán luôn, <code>v10</code> có thể là flag encrypted vậy <code>sub_405080(v10, v6)</code> có thể là hàm decrypt <code>v10</code> (kí tự của flag) trước khi dùng so sánh với <code>v3</code>, tạm thời bỏ qua các hàm khác, vì nó không ảnh hướng nhiều tới <code>v10</code></p>
+<p>Xem sơ qua <code>sub_405080()</code> thì mình thấy cũng không rắc rối lắm, mình đã comment trong code về tất cả những gì nó làm</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kr">__int64</span> <span class="kr">__fastcall</span> <span class="nf">sub_405080</span><span class="p">(</span><span class="kr">__int64</span> <span class="n">a1</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">a2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">char</span> <span class="n">v3</span><span class="p">;</span> <span class="c1">// [rsp+Ch] [rbp-24h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="o">*</span><span class="p">(</span><span class="n">_DWORD</span> <span class="o">*</span><span class="p">)</span><span class="n">qword_5CE518</span> <span class="o">=</span> <span class="mh">0x90909090</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span> <span class="n">a2</span> <span class="o">&lt;</span> <span class="mh">0x27uLL</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">v3</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="n">_BYTE</span> <span class="o">*</span><span class="p">)</span><span class="nf">sub_405100</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kr">__int8</span><span class="p">)(</span><span class="n">v3</span> <span class="o">-</span> <span class="o">*</span><span class="p">(</span><span class="n">_BYTE</span> <span class="o">*</span><span class="p">)</span><span class="nf">sub_405100</span><span class="p">(</span><span class="n">a1</span> <span class="o">+</span> <span class="mi">39</span><span class="p">,</span> <span class="n">a2</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">     <span class="c1">//return a1[a2] - a1[a2+39];
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="solve">
+<a class="header-anchor" href="#solve"></a>
+Solve
+</h3><p>Để decrypt mình chỉ cần viết 1 scipt nhỏ như sau:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">v10</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\n\x9b\xf7\xff\xbb</span><span class="s1">z</span><span class="se">\x89\xbc\xb3</span><span class="s1">g</span><span class="se">\x18\xae</span><span class="s1">d@h</span><span class="se">\xd8\x89\x06\x91</span><span class="s1">y</span><span class="se">\x91</span><span class="s1">]</span><span class="se">\x80\xa1\x13</span><span class="s1">V</span><span class="se">\xc4</span><span class="s1">F</span><span class="se">\xf5\x84</span><span class="s1">mb</span><span class="se">\xc6</span><span class="s1">(</span><span class="se">\x93\x1f\xfc\xe9\xd6\xa4</span><span class="s1">/</span><span class="se">\x96\x98</span><span class="s1">@DR</span><span class="se">\x85</span><span class="s1">~/</span><span class="se">\xe5</span><span class="s1">}3</span><span class="se">\xdf\x06</span><span class="s1">uQ</span><span class="se">\xd1</span><span class="s1">+A-</span><span class="se">\xfc</span><span class="s1">J;</span><span class="se">\xae</span><span class="s1"> </span><span class="se">\x8d\x11\x93</span><span class="s1">N;-`</span><span class="se">\xc3</span><span class="s1">1</span><span class="se">\xb9\xca</span><span class="s1">l</span><span class="se">\xcc\x00\x00</span><span class="s1">&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">40</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="nb">chr</span><span class="p">((</span><span class="n">v10</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">v10</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">39</span><span class="p">])</span><span class="o">&amp;</span><span class="mh">0xff</span><span class="p">),</span><span class="n">end</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#flag{67758311abc85f8da6fe675b625febf2}</span>
+</span></span></code></pre></div><p>Flag: <code>flag{67758311abc85f8da6fe675b625febf2}</code></p>
+<h3 id="update">
+<a class="header-anchor" href="#update"></a>
+Update:
+</h3><p><img src="https://i.imgur.com/K2Dfr6Z.png" alt=""></p>
+<p>Để lấy được các bytes của v10 thì chúng ta chỉ cần đặt breakpoint sau khi hoàn tất mảng <code>v10</code>:</p>
+<p><img src="https://i.imgur.com/dioKJpK.png" alt=""></p>
+<p>Sau đó dùng <code>get_bytes(&lt;v10 address&gt;,80)</code> để lấy các bytes ra</p>
+<p>Ngoài ra trong lúc mình debug tới hàm decrypt thì ngay tại chổ này nó sẽ có SIGNAL</p>
+<p><img src="https://i.imgur.com/xkiDU6w.png" alt=""></p>
+<p>Nhưng đối với cách làm của mình thì chỉ cần patch chổ này thành nop là xong</p>
+<p><img src="https://i.imgur.com/T3FUSOg.png" alt=""></p>
+<blockquote>
+<p>Hơi đáng tiếc là giải này còn có 2 bài rev khác mình có khả năng solve nhưng lại chưa solve được, do mình mải mê tập trung vào bài <code>LeakyOrders</code> mà quên mất là còn <code>Cocktail Bar</code> release sau và dễ hơn, lúc làm thì cũng đã muộn rồi. Bù lại mình được học thêm nhiều thứ mới khá hữu ích, mong rằng những giải khác sẽ cải thiện hơn :VV</p></blockquote>
+<hr>
+<h2 id="pazzzi---misc">
+<a class="header-anchor" href="#pazzzi---misc"></a>
+Pazzzi - misc
+</h2><h4 id="description-1">
+<a class="header-anchor" href="#description-1"></a>
+Description
+</h4><blockquote>
+<p>I would like to order Hawaiian pizza at my favourite pizza shop again. But the owner changed the website after my last order and now I am unable to order it. But I really want one more. Can you make it happen for me?</p></blockquote>
+<h4 id="attachment-files">
+<a class="header-anchor" href="#attachment-files"></a>
+Attachment files
+</h4><blockquote>
+<p><a href="https://pazzzi.flu.xxx/pizzarestaurant.lp">Pazzzi Shop</a>
+<a href="https://flu.xxx/static/chall/pazzzi_722669956884f35cbb152a6bee911c22.zip">Download challenge files</a></p></blockquote>
+<h3 id="overview-1">
+<a class="header-anchor" href="#overview-1"></a>
+Overview
+</h3><p>Bài này có lẽ hơi thiên về web nhiều hơn</p>
+<p><img src="https://i.imgur.com/kOW1wfS.png" alt=""></p>
+<p>Mở source html lên thì mình cũng không thấy gì quan trọng, chỉ có đoạn js và mục đích chính của nó là làm cho mình chỉ chọn được 1 trong 2 &ldquo;Ham&rdquo; hoặc &ldquo;Pineapple&rdquo;</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">ham</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&#34;pineapple&#34;</span><span class="p">).</span><span class="nx">checked</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="nx">pineapple</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&#34;ham&#34;</span><span class="p">).</span><span class="nx">checked</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><p>Sau khi <code>submit</code> thì nó sẽ đưa mình tới file <code>handle_pizzarestaurant.lua</code>, có lẽ đây là source cần phân tích đầu tiên của chương trình</p>
+<p><img src="https://i.imgur.com/9vVrorz.png" alt=""></p>
+<p>Hoặc sau khi thử xoá endpoint và click thẳng vào <code>handle_pizzarestaurant.lua</code> thì chúng ta sẽ được <code>bad request</code>.</p>
+<p><img src="https://i.imgur.com/sHu6PN7.png" alt=""></p>
+<p>Tới đây có thể hình dung được thứ mà mình kiểm soát chính là request nên là trong bài này mình sẽ dùng <code>burpsuit</code></p>
+<h3 id="approach-1">
+<a class="header-anchor" href="#approach-1"></a>
+Approach
+</h3><p>Phân tích file <code>public\pizzza_webroot\handle_pizzarestaurant.lua</code> sẽ thấy ngoài các parameter như <code>mushroom,...</code> thì lúc gửi đi thì <code>userIsDangerous</code> cũng được gửi theo.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl"><span class="kd">local</span> <span class="n">convert_str_to_bool</span> <span class="o">=</span> <span class="kr">function</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">if</span> <span class="n">all_the_data</span><span class="p">[</span><span class="s2">&#34;userIsDangerous&#34;</span><span class="p">]</span> <span class="kr">then</span>
+</span></span><span class="line"><span class="cl">        <span class="kr">return</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">elseif</span> <span class="n">all_the_data</span><span class="p">[</span><span class="s2">&#34;userIsDangerous&#34;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;false&#39;</span> <span class="kr">then</span>
+</span></span><span class="line"><span class="cl">        <span class="kr">return</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">end</span>
+</span></span><span class="line"><span class="cl"><span class="kr">end</span>
+</span></span><span class="line"><span class="cl"><span class="n">userIsDangerous</span> <span class="o">=</span> <span class="n">convert_str_to_bool</span><span class="p">(</span><span class="n">all_the_data</span><span class="p">[</span><span class="s2">&#34;userIsDangerous&#34;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">local</span> <span class="n">doAdminStuff</span> <span class="o">=</span> <span class="kr">function</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">--Note: we have not been using this for a long time, so better disable it</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">--assert if we are admin, then exit for safety reasons</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">if</span> <span class="n">userIsDangerous</span> <span class="o">==</span> <span class="kc">false</span> <span class="kr">then</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mg.write</span><span class="p">(</span><span class="s1">&#39;admin is currently disabled&#39;</span> <span class="o">..</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="kr">return</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">end</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">--Now we are admin</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">-- mg.write(&#39;hello Admin&#39; .. &#39;\n&#39;)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">-- In order to speed up the processing of the order significantly, we process the order</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">-- in our custom-crafted library written in C</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mg.process_order</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">setContains</span><span class="p">(</span><span class="n">all_the_data</span><span class="p">,</span> <span class="s2">&#34;check_mushroom&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">setContains</span><span class="p">(</span><span class="n">all_the_data</span><span class="p">,</span> <span class="s2">&#34;check_pepperoni&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">setContains</span><span class="p">(</span><span class="n">all_the_data</span><span class="p">,</span> <span class="s2">&#34;check_olives&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">setContains</span><span class="p">(</span><span class="n">all_the_data</span><span class="p">,</span> <span class="s2">&#34;check_garlic&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">setContains</span><span class="p">(</span><span class="n">all_the_data</span><span class="p">,</span> <span class="s2">&#34;check_ham&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">setContains</span><span class="p">(</span><span class="n">all_the_data</span><span class="p">,</span> <span class="s2">&#34;check_pineapple&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">all_the_data</span><span class="p">[</span><span class="s2">&#34;comment&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kr">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">-- only allow if user is safe</span>
+</span></span><span class="line"><span class="cl"><span class="kr">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">userIsDangerous</span><span class="p">)</span> <span class="kr">then</span>
+</span></span><span class="line"><span class="cl">    <span class="n">doAdminStuff</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="kr">else</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mg.write</span><span class="p">(</span><span class="s1">&#39;Sorry, but this action is not allowed for ordinary users.&#39;</span> <span class="o">..</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kr">end</span>
+</span></span></code></pre></div><p>Mình thử mở burpsuit và chỉnh request</p>
+<p><img src="" alt="Uploading file&hellip;_rjkmh4o4l"></p>
+<p>Mặc định value của <code>userIsDangerous</code> sẽ là true, mình thử chỉnh thành false nhưng kết quả vẫn tương tự</p>
+<p><img src="https://i.imgur.com/TCHKYCv.png" alt=""></p>
+<p>Tới đây thì để bypass được chổ này thì mình chỉ cần gửi request nhưng không kèm theo <code>userIsDangerous</code></p>
+<p>Và đây là kết quả:</p>
+<p><img src="https://i.imgur.com/64BZV8F.png" alt=""></p>
+<p>Tạm thời thì mình đã có thể send request một cách bình thường. Tuy nhiên đoạn <code>Success! The pizza will soon be delivered to you! </code> sẽ không nằm trong <code>handle_pizzarestaurant.lua</code> mà nằm ở 1 file khác <code>mod_lua.inl</code>.</p>
+<p>Code của file này cũng khá dài nhưng chúng ta chỉ cần quan tâm hàm <code>lsp_process_order()</code>:</p>
+<p>Cơ bản là sau khi order xong thì nó sẽ gọi <code>congratulate_customer_for_successful_order()</code> để lấy flag:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="nf">congratulate_customer_for_successful_order</span><span class="p">(</span><span class="k">struct</span> <span class="n">order</span> <span class="n">customer_pizza</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">flag</span> <span class="o">=</span> <span class="s">&#34;flag{fake_flag}&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="o">!</span><span class="n">customer_pizza</span><span class="p">.</span><span class="n">ingredient_mushroom</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">!</span><span class="n">customer_pizza</span><span class="p">.</span><span class="n">ingredient_pepperoni</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">!</span><span class="n">customer_pizza</span><span class="p">.</span><span class="n">ingredient_olives</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">!</span><span class="n">customer_pizza</span><span class="p">.</span><span class="n">ingredient_garlic</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">customer_pizza</span><span class="p">.</span><span class="n">ingredient_ham</span> <span class="o">&amp;&amp;</span> <span class="n">customer_pizza</span><span class="p">.</span><span class="n">ingredient_pineapple</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">flag</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s">&#34; &#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Nhìn ta sẽ thấy ngay là điều kiện có flag sẽ là không order <code>Mushroom Pepperoni Olives Garlic</code></p>
+<p>và order<code>Ham Pineapple</code>cùng lúc. Tất nhiên mình không thể thao tác trên browser nhưng có thể làm request này dễ dàng bằng cách sửa trong <code>burpsuit</code>:</p>
+<p><img src="https://i.imgur.com/OTeNwKd.png" alt=""></p>
+<p>Và đây là kết quả trả về:</p>
+<p><img src="https://i.imgur.com/iXDZkxk.png" alt=""></p>
+<p>Quay lại hàm <code>lsp_process_order()</code> ta sẽ thấy nó gọi hàm này:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">bool</span> <span class="nf">check_if_incompatible_selection</span><span class="p">(</span><span class="k">struct</span> <span class="nc">order</span> <span class="o">*</span><span class="n">some_order</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">some_order</span><span class="o">-&gt;</span><span class="n">ingredient_ham</span> <span class="o">&amp;&amp;</span> <span class="n">some_order</span><span class="o">-&gt;</span><span class="n">ingredient_pineapple</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">some_order</span><span class="o">-&gt;</span><span class="n">incompatible_selection</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Wait what? Tới đây sẽ có mâu thuẫn, nghĩa là mình phải order 2 cái cùng lúc nhưng không được order 2 cái cùng lúc ??</p>
+<p>Chắc chắn phải còn thứ gì đó chưa khai thác.</p>
+<p>Xem kĩ trong struct <code>order</code> có biến <code>incompatible_selection</code> dùng để check xem nó có thoã mãn hay không.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">order</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// If the checkbox for the ingredient was ticked
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">bool</span> <span class="n">ingredient_mushroom</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">ingredient_pepperoni</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">ingredient_olives</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">ingredient_garlic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">ingredient_ham</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">ingredient_pineapple</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Further important information by the customer regarding the order
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">char</span> <span class="n">comment</span><span class="p">[</span><span class="n">COMMENT_LEN</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Some combination of ingredients are forbidden
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">bool</span> <span class="n">incompatible_selection</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>Và đây là chổ gọi hàm của nó:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">check_if_incompatible_selection</span><span class="p">(</span><span class="o">&amp;</span><span class="n">customer_pizza</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">i</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="nf">lua_isstring</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="kt">size_t</span> <span class="n">size</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">str</span> <span class="o">=</span> <span class="nf">lua_tolstring</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">size</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// mg_write(conn, str, size);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="n">size</span> <span class="o">&gt;</span> <span class="n">COMMENT_LEN</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">print_output</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s">&#34;Fail!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">print_output</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s">&#34;Your comment can at most be 500 characters!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">strncat</span><span class="p">(</span><span class="n">customer_pizza</span><span class="p">.</span><span class="n">comment</span><span class="p">,</span> <span class="n">str</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">customer_pizza</span><span class="p">.</span><span class="n">comment</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">customer_pizza</span><span class="p">.</span><span class="n">incompatible_selection</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">print_output</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s">&#34;Fail!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">print_output</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s">&#34;This combination of ingredients is not allowed!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nf">print_output</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s">&#34;Success!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span></code></pre></div><h3 id="solve-1">
+<a class="header-anchor" href="#solve-1"></a>
+Solve
+</h3><p>Trước tiên ta có thể thấy, nó gọi <code>check_if_incompatible_selection()</code> nhưng không check <code>incompatible_selection</code> ngay lập tức mà còn check length của comment trước.</p>
+<p>Tuy nhiên lúc khởi tạo thì <code>char comment[COMMENT_LEN];</code> lớn hơn nhưng lúc check lại dùng <code>strncat</code> và length comment có thể tối da 500 kí tự. Cộng thêm việc <code>incompatible_selection</code> đứng ngay sau <code>comment[]</code> trong struct, vậy chúng ta sẽ có thể thay đổi <code>incompatible_selection</code> trước khi nó check combination.</p>
+<p>Vậy nên ta chỉ cần sửa lại comment trong lúc request = 500 kí tự:</p>
+<p><img src="https://i.imgur.com/u7hul0F.png" alt=""></p>
+<p>Flag: <code>flag{Hawaii_served_with_Lua_and_C_Yummy_yummy_yummyXD}</code></p>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+
+      
+        <div class="sponsor-wrapper">
+  <div class="sponsor-button-wrapper">
+    <div class="sponsor-icon rotate"></div>
+    <div class="sponsor-title">Sponsor</div>
+    <div class="sponsor-icon rotate"></div>
+  </div>
+  <div class="sponsor-tip">Please buy author a cup of coffee!</div>
+  
+    <div class="sponsor-qr">
+      
+        <div class="sponsor-qr-image-wrapper">
+          <img src="/images/bmc_qr_lephuduc.png" alt="Le Phu Duc" width="200" />
+          <p class="sponsor-qr-name">Le Phu Duc</p>
+        </div>
+      
+    </div>
+  
+</div>
+      
+
+      
+        
+
+<div class="share-wrapper">
+  
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:1313/post/hackluctf2022/" target="_blank" rel="noopener noreferrer" title="Hack.lu CTF 2022">
+      <div class="share-icon icon icon-facebook">
+        
+      </div>
+    </a>
+  
+    <a href="https://twitter.com/intent/tweet?url=http://localhost:1313/post/hackluctf2022/&amp;text=Hack.lu%20CTF%202022&amp;via=http://localhost:1313/" target="_blank" rel="noopener noreferrer" title="Hack.lu CTF 2022">
+      <div class="share-icon icon icon-twitter">
+        
+      </div>
+    </a>
+  
+    <a href="https://www.linkedin.com/shareArticle?url=http://localhost:1313/post/hackluctf2022/&amp;title=Hack.lu%20CTF%202022&amp;summary=Writeup%20for%20Hack.lu%20CTF%202022&amp;mini=true&amp;ro=true" target="_blank" rel="noopener noreferrer" title="Hack.lu CTF 2022">
+      <div class="share-icon icon icon-linkedin">
+        
+      </div>
+    </a>
+  
+    <a href="https://www.reddit.com/submit?url=http://localhost:1313/post/hackluctf2022/&amp;title=Hack.lu%20CTF%202022" target="_blank" rel="noopener noreferrer" title="Hack.lu CTF 2022">
+      <div class="share-icon icon icon-reddit">
+        
+      </div>
+    </a>
+  
+</div>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+      <ul class="article-tag-list" itemprop="keywords">
+  
+    <li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/reverse"
+        rel="tag"
+        >REVERSE</a
+      >
+    </li>
+  
+    <li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/vietnamese"
+        rel="tag"
+        >VIETNAMESE</a
+      >
+    </li>
+  
+</ul>
+
+    </footer>
+  </div>
+  
+    
+  <nav
+    id="article-nav"
+    data-aos="fade-up"
+  >
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          <img
+            data-src="/images/post_covers/flareon9.jpeg"
+            data-sizes="auto"
+            alt="Flare-on 9"
+            class="lazyload"
+          />
+        
+        <a href="http://localhost:1313/post/flareon9/"></a>
+        <div class="article-nav-caption">Newer</div>
+        <h3 class="article-nav-title">
+          
+            Flare-on 9
+          
+        </h3>
+      </div>
+    
+
+    
+      <div class="article-nav-link-wrap article-nav-link-right">
+        
+          <img
+            data-src="/images/post_covers/hitconctf2022.jpeg"
+            data-sizes="auto"
+            alt="HITCON CTF 2022"
+            class="lazyload"
+          />
+        
+        <a href="http://localhost:1313/post/hitconctf2022/"></a>
+        <div class="article-nav-caption">Older</div>
+        <h3 class="article-nav-title">
+          
+            HITCON CTF 2022
+          
+        </h3>
+      </div>
+    
+  </nav>
+
+
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+</section>
+        </div>
+        
+        
+        
+
+
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+
+
+<footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    <div>
+      <span class="icon-copyright"></span>
+      2022 -
+      2025
+      <span class="footer-info-sep rotate"></span>
+      Le Phu Duc
+    </div>
+    
+    
+    
+      <div>
+        <span class="icon-brush"
+          >&nbsp;
+            51.0k
+          </span
+        >
+        &nbsp;|&nbsp;
+        <span class="icon-coffee">&nbsp;
+          
+          
+
+          04:07
+        </span>
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv"
+          >Number of visits&nbsp;<span
+            id="busuanzi_value_site_pv"
+          ></span
+        ></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv"
+          >Number of visitors&nbsp;<span
+            id="busuanzi_value_site_uv"
+          ></span
+        ></span>
+      </div>
+    
+  </div>
+</footer>
+
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar">
+        <div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper toc-div-class">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#fingerfood---rev">FingerFood - rev</a>
+      <ul>
+        <li></li>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#solve">Solve</a></li>
+        <li><a href="#update">Update:</a></li>
+      </ul>
+    </li>
+    <li><a href="#pazzzi---misc">Pazzzi - misc</a>
+      <ul>
+        <li></li>
+        <li><a href="#overview-1">Overview</a></li>
+        <li><a href="#approach-1">Approach</a></li>
+        <li><a href="#solve-1">Solve</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+      </div>
+      <div class="sidebar-common-sidebar hidden">
+        
+<div class="sidebar-author">
+  <img
+    data-src="/avatar/shiba.jpg"
+    data-sizes="auto"
+    alt="Le Phu Duc"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Le Phu Duc</div>
+  <div class="sidebar-description">a.k.a Jinn</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>Posts</div>
+    
+    <div class="sidebar-state-number">16</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>Categories</div>
+    <div class="sidebar-state-number">
+      1
+    </div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>Tags</div>
+    <div class="sidebar-state-number">6</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class="icon-discord sidebar-social-icon">
+      <a
+        href="https://discordapp.com/users/lephuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="discord"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-facebook sidebar-social-icon">
+      <a
+        href="https://www.facebook.com/lephuduc0309"
+        itemprop="url"
+        target="_blank"
+        aria-label="facebook"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/lephuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-instagram sidebar-social-icon">
+      <a
+        href="https://www.instagram.com/le.phuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="instagram"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-linkedin sidebar-social-icon">
+      <a
+        href="https://www.linkedin.com/in/lephuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="linkedin"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-twitter sidebar-social-icon">
+      <a
+        href="https://twitter.com/lephuduck"
+        itemprop="url"
+        target="_blank"
+        aria-label="twitter"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="Home"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe632;
+        
+      </div>
+      <div class="sidebar-menu-link">Home</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="About"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe628;
+        
+      </div>
+      <div class="sidebar-menu-link">About</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="Archives"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe604;
+        
+      </div>
+      <div class="sidebar-menu-link">Archives</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/achievements"
+        aria-label="Achievements"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe621;
+        
+      </div>
+      <div class="sidebar-menu-link">Achievements</div>
+    </div>
+  
+</div>
+
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
+
+    </div>
+    
+    
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  <script
+    src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"
+    
+    
+    
+    
+    integrity="sha384-3gT/vsepWkfz/ff7PpWNUeMzeWoH3cDhm/A8jM7ouoAK0/fP/9bcHHR5kHq2nf&#43;e" crossorigin="anonymous"
+  ></script>
+
+
+
+
+  
+  
+  
+  
+  
+  
+  <script
+    src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"
+    
+    
+    
+    
+    integrity="sha384-J08i8An/QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"
+  ></script>
+
+
+
+
+
+
+
+
+
+  
+      
+      <script src="/js/main.js" ></script>
+      
+
+
+
+  
+
+
+
+
+
+  
+      
+      <script src="/js/aos.js" ></script>
+      
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+
+
+
+
+
+  
+      
+      <script src="/js/pjax_main.js" data-pjax></script>
+      
+
+
+
+
+
+  
+
+  
+  
+  
+  
+  
+  
+  <script
+    src="https://npm.webcache.cn/mouse-firework@0.1.0/dist/index.umd.js"
+    
+    
+    
+    
+    integrity="sha384-KM6i7tu43nYd6e0beIljxHMC5tZc58XBDu7pPA58w50h18Jsx7gLdimfS09RXlKv" crossorigin="anonymous"
+  ></script>
+
+
+<script>
+  if (window.firework) {
+    const options = JSON.parse("{\"excludeelements\":[\"a\",\"button\"],\"particles\":[{\"colors\":[\"#c0971d\",\"#caa02f\",\"#d4aa40\",\"#ddbb62\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"emit\"],\"number\":20,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.3,0.5],\"radius\":[16,32]}},{\"colors\":[\"#f4e74d\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"diffuse\"],\"number\":1,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.2,0.5],\"lineWidth\":6,\"radius\":20}}]}");
+    options.excludeElements = options.excludeelements;
+    delete options.excludeelements;
+    window.firework(options);
+  }
+</script>
+
+
+
+  
+
+  
+  
+  
+  
+  
+  
+  <script
+    src="https://npm.webcache.cn/theme-shokax-pjax@0.0.3/dist/index.umd.js"
+    
+    
+    
+    
+    integrity="sha384-xneY1WY8hOfUzswrE4CrYq35N4BdVcxqxwHPr9zawE/jMSCxD&#43;jAPU55x/jj3wlf" crossorigin="anonymous"
+  ></script>
+
+
+  <script>
+    function loadScripts(scripts, index) {
+      if (index < scripts.length) {
+        const script = scripts[index];
+        const src = script.getAttribute('src');
+
+        const loadScript = (scriptContent) => {
+          return new Promise((resolve, reject) => {
+            const scriptElement = document.createElement('script');
+            if (script.type) {
+              scriptElement.type = script.type;
+            }
+            if (script.src) {
+              scriptElement.src = script.src;
+              scriptElement.onload = resolve;
+              scriptElement.onerror = reject;
+            }
+            if (scriptContent) {
+              scriptElement.text = scriptContent;
+            }
+            document.head.appendChild(scriptElement);
+            if (!script.src) {
+              resolve();
+            }
+          })
+          
+        }
+
+        ;(src ? loadScript() : loadScript(script.text))
+          .then(() => loadScripts(scripts, index + 1))
+          .catch(error => {
+            console.error(`Failed to load script: ${src || 'inline script'}`, error);
+            loadScripts(scripts, index + 1);
+          });
+      }
+    }
+    window.Pjax &&
+      new window.Pjax({
+        selectors: [
+          "#header>img",
+          "#header>picture",
+          "head title",
+          "#header-title",
+          "#subtitle-wrap",
+          "#main",
+          "#content",
+          ".sidebar-widget",
+          ".sidebar-wrapper",
+          "#mobile-nav",
+          "#lazy-script",
+        ],
+        switches: {
+          "#content": function(oldEl, newEl) {
+            
+            oldEl.className = newEl.className;
+            this.onSwitch();
+          },
+          "#header-title": Pjax.switches.outerHTML,
+          "#subtitle-wrap": Pjax.switches.outerHTML,
+          "#main": function (oldEl, newEl) {
+            const scripts = [...newEl.querySelectorAll("script")];
+            loadScripts(scripts, 0);
+            oldEl.outerHTML = newEl.outerHTML;
+            this.onSwitch();
+          },
+          "#mobile-nav": Pjax.switches.outerHTML,
+          "#lazy-script": function (oldEl, newEl) {
+            const scripts = [...newEl.querySelectorAll("script")];
+            loadScripts(scripts, 0);
+            oldEl.innerHTML = newEl.innerHTML;
+            this.onSwitch();
+          },
+        },
+        cacheBust: false,
+      });
+  </script>
+  
+
+
+
+
+
+  
+      
+      <script src="/js/pjax.js" ></script>
+      
+
+
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+      
+      
+        
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "Le Phu Duc",
+          title: "Hack.lu CTF 2022",
+          url: "http:\/\/localhost:1313\/post\/hackluctf2022\/",
+          description: "Writeup for Hack.lu CTF 2022",
+          cover: "http:\/\/localhost:1313\/images\/post_covers\/hackluctf2022-ori.jpeg",
+        };
+      </script>
+    
+    
+    
+      
+
+
+
+
+
+  
+      
+      <script src="/js/insert_highlight.js" data-pjax></script>
+      
+
+      
+      
+      
+      
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js", "sha384-DiL6M\/gG\u002bwmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF\/N6lrZi\/")).default;
+
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8\u002boTJ7m3DfYEWX1fu1scuS4\u002bs")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8\u002boTJ7m3DfYEWX1fu1scuS4\u002bs")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+      
+    
+    
+  </div>
+</div>
+
+
+
+
+  
+
+  
+  
+  
+  
+  
+  
+  <script
+    src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js"
+    
+    async
+    
+    
+    integrity="sha384-0M75wtSkhjIInv4coYlaJU83&#43;OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id&#43;S" crossorigin="anonymous"
+  ></script>
+
+
+
+
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      });
+    }
+  </script>
+
+
+<script>
+  const reimuCopyright = String.raw`
+   ______     ______     __     __    __     __  __    
+  /\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+  \ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+   \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+    \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                    
+  `;
+  console.log(String.raw`%c ${reimuCopyright}`, "color: #ff5252;");
+  console.log(
+    "%c Theme.Reimu" + " %c https://github.com/D-Sketon/hugo-theme-reimu ",
+    "color: white; background: #ff5252; padding:5px 0;",
+    "padding:4px;border:1px solid #ff5252;",
+  );
+</script>
+
+
+  
+
+  
+  
+  
+  
+  
+  
+  <script
+    src="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.js"
+    
+    
+    
+    
+    integrity="sha384-gdGYZwHnfJM54evoZhpO0s6ZF5BQiybkiyW7VXr&#43;h5UfruuRL/aORyw&#43;5&#43;HZoU6e" crossorigin="anonymous"
+  ></script>
+
+
+  
+    <script>
+      const ap = new APlayer({
+          theme: "var(--color-link)",
+          container: document.getElementById('aplayer'),
+          audio: JSON.parse("[{\"artist\":\"NewJeans\",\"cover\":\"/images/song_covers/ditto.jpg\",\"name\":\"Ditto\",\"url\":\"/songs/ditto.mp3\"},{\"artist\":\"NewJeans\",\"cover\":\"/images/song_covers/eta.jpg\",\"name\":\"ETA\",\"url\":\"/songs/ETA.mp3\"}]") || [],
+          fixed:  null  || false,
+          autoplay:  null  || false,
+          loop: '' || 'all',
+          order: '' || 'list',
+          preload: '' || 'auto',
+          volume:  null  || 0.7,
+          mutex:  null  || true,
+          listFolded:  null  || false,
+          lrcType:  null  || 0,
+      });
+    </script>
+  
+
+
+
+  </body>
+</html>

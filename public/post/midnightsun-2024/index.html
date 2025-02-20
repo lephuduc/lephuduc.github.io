@@ -1,0 +1,2046 @@
+<!doctype html>
+<html
+  lang="en-us" 
+  
+    data-theme-mode="true"
+  
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no"
+/>
+
+
+
+
+
+
+
+  
+
+<title>
+  MidnightSun CTF 2024 | Le Phu Duc
+</title>
+<meta
+  name="description"
+  content="Write up all reverse challenges in MidnightSun CTF 2024"
+/>
+
+
+
+  <script>
+  (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "true");
+</script>
+
+
+  
+<script src="https://www.googletagmanager.com/gtag/js?id=true"></script>
+<script data-pjax>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+
+  gtag('js', new Date());
+
+  gtag('config', 'true');
+</script>
+
+
+
+
+
+
+
+
+<script>
+  window.siteConfig = JSON.parse("{\"anchor_icon\":null,\"clipboard\":{\"copyright\":{\"content\":\"All articles in this blog are licensed under BY-NC-SA unless otherwise stated. Please indicate the source when reprinting!\",\"count\":50,\"enable\":false},\"fail\":\"Failed to copy (ﾟ⊿ﾟ)ﾂ\",\"success\":\"Copied\"},\"code_block\":{\"expand\":true},\"icon_font\":\"4552607_0khxww3tj3q9\",\"outdate\":{\"daysago\":180,\"enable\":false,\"message\":\"本文最后更新于 {time}，请注意文中内容可能已经发生变化。\"}}");
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+    
+  
+
+  
+  
+  
+    
+  
+
+  
+  
+  
+    
+  
+
+  
+  
+  
+    
+  
+
+  
+  
+  
+
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="preload"
+  as="style"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7cUbuntu%20Mono:400,400italic,700,700italic%7cSource%20Code%20Pro:400,400italic,700,700italic%7cJetBrains%20Mono:400,400italic,700,700italic&amp;display=swap"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7cUbuntu%20Mono:400,400italic,700,700italic%7cSource%20Code%20Pro:400,400italic,700,700italic%7cJetBrains%20Mono:400,400italic,700,700italic&amp;display=swap"
+  media="print"
+  onload="this.media='all'"
+/>
+
+
+
+
+
+
+  <link
+    rel="preload"
+    href="//at.alicdn.com/t/c/font_4552607_0khxww3tj3q9.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin="anonymous"
+  />
+
+
+
+  
+
+
+
+
+
+
+ <link rel="stylesheet" href="/css/loader.css" />
+
+
+
+
+
+
+
+<link rel="shortcut icon" href="/favicon/favicon.ico">
+
+
+
+
+
+
+
+ <link rel="stylesheet" href="/css/main.css" />
+
+
+
+
+
+  <link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+
+
+
+
+
+
+  <link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/katex@0.16.9/dist/katex.min.css"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+  
+  
+  
+  <script
+    src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"
+    
+    
+    
+    
+    integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"
+  ></script>
+
+
+
+
+
+  
+
+
+  <link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.0/dist/aos.css" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.css" />
+
+
+
+  </head>
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        
+          <img src="/images/loading-golden.png" alt="loading" />
+        
+      </div>
+      <div class="loading-word"></div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+
+
+    <div id="container">
+      <div id="wrap">
+        
+<div id="header-nav">
+  <nav id="main-nav">
+    
+      <span class="main-nav-link-wrap">
+        <div class='main-nav-icon icon '>
+          
+            &#xe632;
+          
+        </div>
+        <a class="main-nav-link" href="/">Home</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <div class='main-nav-icon icon '>
+          
+            &#xe628;
+          
+        </div>
+        <a class="main-nav-link" href="/about">About</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <div class='main-nav-icon icon '>
+          
+            &#xe604;
+          
+        </div>
+        <a class="main-nav-link" href="/archives">Archives</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <div class='main-nav-icon icon '>
+          
+            &#xe621;
+          
+        </div>
+        <a class="main-nav-link" href="/achievements">Achievements</a>
+      </span>
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    
+    <picture></picture>
+      <img fetchpriority="high" src="/images/post_covers/midnightsun2024-ori.jpeg" alt="MidnightSun CTF 2024">
+    
+  
+
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          
+        
+  
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">MidnightSun CTF 2024</h1>
+          </a>
+        
+      
+  
+      
+        
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+        <div id="content"
+          class="sidebar-left"
+            >
+          <aside id="sidebar">
+  
+    <div id="aplayer" theme="var(--color-link)" data-aos="fade-up"></div>
+  
+  
+  <div class="sidebar-wrapper wrap-sticky">
+    <div
+      class="sidebar-wrap"
+      data-aos="fade-up"
+    >
+      
+        <div class="sidebar-toc-sidebar">
+          <div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper toc-div-class">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#minus10">minus10</a></li>
+    <li><a href="#roprot">roprot</a></li>
+    <li><a href="#07u4">07u4</a>
+      <ul>
+        <li><a href="#type-1">Type 1:</a></li>
+        <li><a href="#type-2">Type 2:</a></li>
+        <li><a href="#type-3">Type 3:</a></li>
+      </ul>
+    </li>
+    <li><a href="#bonus-redacted">Bonus [REDACTED]</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+        </div>
+        <div class="sidebar-common-sidebar hidden">
+          
+<div class="sidebar-author">
+  <img
+    data-src="/avatar/shiba.jpg"
+    data-sizes="auto"
+    alt="Le Phu Duc"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Le Phu Duc</div>
+  <div class="sidebar-description">a.k.a Jinn</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>Posts</div>
+    
+    <div class="sidebar-state-number">16</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>Categories</div>
+    <div class="sidebar-state-number">
+      1
+    </div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>Tags</div>
+    <div class="sidebar-state-number">6</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class="icon-discord sidebar-social-icon">
+      <a
+        href="https://discordapp.com/users/lephuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="discord"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-facebook sidebar-social-icon">
+      <a
+        href="https://www.facebook.com/lephuduc0309"
+        itemprop="url"
+        target="_blank"
+        aria-label="facebook"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/lephuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-instagram sidebar-social-icon">
+      <a
+        href="https://www.instagram.com/le.phuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="instagram"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-linkedin sidebar-social-icon">
+      <a
+        href="https://www.linkedin.com/in/lephuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="linkedin"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-twitter sidebar-social-icon">
+      <a
+        href="https://twitter.com/lephuduck"
+        itemprop="url"
+        target="_blank"
+        aria-label="twitter"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="Home"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe632;
+        
+      </div>
+      <div class="sidebar-menu-link">Home</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="About"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe628;
+        
+      </div>
+      <div class="sidebar-menu-link">About</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="Archives"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe604;
+        
+      </div>
+      <div class="sidebar-menu-link">Archives</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/achievements"
+        aria-label="Achievements"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe621;
+        
+      </div>
+      <div class="sidebar-menu-link">Achievements</div>
+    </div>
+  
+</div>
+
+        </div>
+      
+
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
+      
+    </div>
+  </div>
+
+  <div class="sidebar-widget">
+    
+  </div>
+</aside>
+
+          <section id="main">
+  <article
+  class="h-entry article"
+  itemprop="blogPost"
+  itemscope
+  itemtype="https://schema.org/BlogPosting"
+>
+  <div
+    class="article-inner"
+    data-aos="fade-up"
+  >
+    <div class="article-meta">
+      <div class="article-date">
+  <a
+    href="http://localhost:1313/post/midnightsun-2024/"
+    class="article-date-link"
+    data-aos="zoom-in"
+  >
+    <time datetime="2024-04-20 00:00:00 &#43;0000 UTC" itemprop="datePublished"
+      >2024-04-20</time
+    >
+    <time style="display: none;" id="post-update-time"
+      >2024-04-20</time
+    >
+  </a>
+</div>
+
+      <div class="article-category">
+  
+    <a
+      class="article-category-link"
+      href="/categories/writeup"
+      data-aos="zoom-in"
+      >WRITEUP</a
+    >
+  
+</div>
+
+    </div>
+    <div class="hr-line"></div>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <h1 id="midnightsun-2024-qualifications">
+<a class="header-anchor" href="#midnightsun-2024-qualifications"></a>
+MidnightSun 2024 Qualifications
+</h1><p>Last weekend I have play Midnight CTF with <code>purf3ct</code>. It was a good time  that I try so hard. There are three reverse challenges I&rsquo;ve done and one crypto with hardware/reverse tag that I try as must as I can and it&rsquo;s a happy ending that we&rsquo;ve got into top ten, big shoudout for <code>purf3ct</code>!
+Let&rsquo;s go Sweden! 🇸🇪 🇸🇪</p>
+<p><img src="https://hackmd.io/_uploads/Syl8HHW4bC.png" alt="image"></p>
+<blockquote>
+<p>There are 3 reverse challenges and all of them are very doable, so I enjoy so much, thanks for the authors.</p></blockquote>
+<h2 id="minus10">
+<a class="header-anchor" href="#minus10"></a>
+minus10
+</h2><p>Attachment: <a href="https://github.com/lephuduc/CTFs-Honors/blob/main/2024-Writeups/MidnightSun2024/minus_10_fold/minus10.sr">minus10.sr</a></p>
+<p>This is the first one I tried, not regular reverse, and it involves hardware analysis.</p>
+<p>After a while search for what is <code>.sr</code> file and I found the tools:</p>
+<p>First of all, extrac the file as zip:</p>
+<p><img src="https://hackmd.io/_uploads/S18kdZ4b0.png" alt="image"></p>
+<p><img src="https://hackmd.io/_uploads/B1vgObVWR.png" alt="image"></p>
+<p>It&rsquo;s a sigrok file, as a signal capture and there are 2 channel, so I quickly find the tool:</p>
+<p><a href="https://sigrok.org/wiki/Main_Page">https://sigrok.org/wiki/Main_Page</a></p>
+<p>I think this one is the easiest, so I just used the CLI version and referred to the <a href="https://github.com/sigrokproject/sigrok-cli/blob/master/doc/sigrok-cli.1">documents there</a>, I found it was <code>uart</code> one:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sigrok-cli -i minus10.sr -P uart:tx=D0:rx=D1 &gt; decoded.txt
+</span></span></code></pre></div><p><code>decoded.txt</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">uart-1: Start bit
+</span></span><span class="line"><span class="cl">uart-1: 0
+</span></span><span class="line"><span class="cl">uart-1: 1
+</span></span><span class="line"><span class="cl">uart-1: 0
+</span></span><span class="line"><span class="cl">uart-1: 1
+</span></span><span class="line"><span class="cl">uart-1: 1
+</span></span><span class="line"><span class="cl">uart-1: 1
+</span></span><span class="line"><span class="cl">uart-1: 0
+</span></span><span class="line"><span class="cl">uart-1: 0
+</span></span><span class="line"><span class="cl">uart-1: 3A
+</span></span><span class="line"><span class="cl">uart-1: Stop bit
+</span></span><span class="line"><span class="cl">uart-1: Start bit
+</span></span><span class="line"><span class="cl">uart-1: 1
+</span></span><span class="line"><span class="cl">uart-1: 0
+</span></span><span class="line"><span class="cl">uart-1: 0
+</span></span><span class="line"><span class="cl">uart-1: 0
+</span></span><span class="line"><span class="cl">uart-1: 1
+</span></span><span class="line"><span class="cl">uart-1: 1
+</span></span><span class="line"><span class="cl">uart-1: 0
+</span></span><span class="line"><span class="cl">uart-1: 0
+</span></span><span class="line"><span class="cl">uart-1: 31
+</span></span><span class="line"><span class="cl">uart-1: Stop bit
+</span></span><span class="line"><span class="cl">uart-1: Start bit
+</span></span><span class="line"><span class="cl">uart-1: 0
+</span></span></code></pre></div><p>There are some hex byte, extract them into another file I found:</p>
+<p><code>extracted.hex</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">:10FD00005542200135D0085A824526023140000470
+</span></span><span class="line"><span class="cl">:10FD10003F4000000F9308249242260220012F83C7
+</span></span><span class="line"><span class="cl">:10FD20009F4F8AFF0002F8233F4026000F930724CD
+</span></span><span class="line"><span class="cl">:10FD30009242260220011F83CF430002F9233B4059
+</span></span><span class="line"><span class="cl">:10FD40003CFE3A403EFE924226022001BB120B9A34
+</span></span><span class="line"><span class="cl">:10FD5000FA233B4000FD3BB00F0012207F403A00E9
+</span></span><span class="line"><span class="cl">:10FD6000B01242FE7F401000B01264FE0F4B8F10A5
+</span></span><span class="line"><span class="cl">:10FD7000B01264FE4F4BB01264FE4F43B01264FEEB
+</span></span><span class="line"><span class="cl">...stripped...
+</span></span><span class="line"><span class="cl">:10FF600058640D161A7B67692300303132333435FB
+</span></span><span class="line"><span class="cl">:10FF7000363738394142434445466763632D6D73D4
+</span></span><span class="line"><span class="cl">:10FF8000703433302D342E362E33FFFFFFFFFFFF4A
+</span></span><span class="line"><span class="cl">:10FF9000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF71
+</span></span><span class="line"><span class="cl">:10FFA000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF61
+</span></span><span class="line"><span class="cl">:10FFB000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF51
+</span></span><span class="line"><span class="cl">:10FFC000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF41
+</span></span><span class="line"><span class="cl">:10FFD000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF31
+</span></span><span class="line"><span class="cl">:10FFE0003EFE3EFE3EFE3EFE3EFE3EFE3EFEA8FEC7
+</span></span><span class="line"><span class="cl">:10FFF0003EFE3EFE3EFE3EFE3EFE3EFE3EFE00FD60
+</span></span><span class="line"><span class="cl">:00000001FF
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">12345612345123456789
+</span></span><span class="line"><span class="cl">:(
+</span></span><span class="line"><span class="cl">passwordiloveyouprincess
+</span></span><span class="line"><span class="cl">:(
+</span></span><span class="line"><span class="cl">1234567rockyou12345678
+</span></span><span class="line"><span class="cl">:(
+</span></span><span class="line"><span class="cl">abc123nicoledaniel
+</span></span><span class="line"><span class="cl">:(
+</span></span><span class="line"><span class="cl">babygirlmonkeylovely
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">... more
+</span></span></code></pre></div><p>This is a Intel hex format for Microchip and I also quickly found <a href="https://github.com/pda/intelhex">a tool</a> that coneverts it&rsquo;s into binary correctly:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nv">$ruby</span> intel_hex.rb &lt; extracted.hex &gt; program.bin
+</span></span><span class="line"><span class="cl"><span class="nv">$strings</span> program.bin
+</span></span><span class="line"><span class="cl"><span class="c1">#?@&amp;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#;@&lt;</span>
+</span></span><span class="line"><span class="cl"> _B$
+</span></span><span class="line"><span class="cl">nO_B
+</span></span><span class="line"><span class="cl"><span class="p">;</span>A0A
+</span></span><span class="line"><span class="cl">KOIONO
+</span></span><span class="line"><span class="cl">NN:@j
+</span></span><span class="line"><span class="cl">9A:A<span class="p">;</span>A0A
+</span></span><span class="line"><span class="cl">OLO_O_O<span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>,_B
+</span></span><span class="line"><span class="cl">?S?P
+</span></span><span class="line"><span class="cl">&lt;<span class="nv">A</span><span class="o">=</span>A&gt;A?A
+</span></span><span class="line"><span class="cl">e<span class="o">{</span>cv<span class="p">|</span>BWWs^Xd
+</span></span><span class="line"><span class="cl"><span class="o">{</span>gi#
+</span></span><span class="line"><span class="cl">0123456789ABCDEFgcc-msp430-4.6.3
+</span></span></code></pre></div><p>Known it was <code>msp430</code>, load it into IDA:</p>
+<p><img src="https://hackmd.io/_uploads/ByCTsWV-A.png" alt="image"></p>
+<p>Keep in mind this is the easiest one, so, after reverse for a while, I found something:</p>
+<p><img src="https://hackmd.io/_uploads/BJ2Z3WEZC.png" alt="image"></p>
+<p>Here&rsquo;s compare 2 buffer, I guess the <code>0xff4c</code> one is the encrypted flag and the <code>0x200</code> is buffer received input:</p>
+<p><img src="https://hackmd.io/_uploads/BJp7hbEWR.png" alt="image"></p>
+<p>Here&rsquo;s the encrypt part:</p>
+<p><img src="https://hackmd.io/_uploads/SkV_hbEWA.png" alt="image"></p>
+<p>It&rsquo;s just xor every bytes with <code>(0xD2 + i*5)</code> with <code>i</code> is the index.</p>
+<p>Let decrypt and get flag:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Python&gt;enc <span class="o">=</span> get_bytes<span class="o">(</span>0xFF4C,29<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Python&gt;bytes<span class="o">([((</span>0xd2+i*5<span class="o">)</span>^enc<span class="o">[</span>i<span class="o">])</span><span class="p">&amp;</span>0xff <span class="k">for</span> i in range<span class="o">(</span>len<span class="o">(</span>enc<span class="o">))])</span>
+</span></span><span class="line"><span class="cl">b<span class="s1">&#39;midnight{warmed_up_on_MSP430}&#39;</span>
+</span></span></code></pre></div><p>Flag: <code>midnight{warmed_up_on_MSP430}</code></p>
+<h2 id="roprot">
+<a class="header-anchor" href="#roprot"></a>
+roprot
+</h2><p>Attachment: <a href="https://github.com/lephuduc/CTFs-Honors/blob/main/2024-Writeups/MidnightSun2024/roprot/roprot.tar.xz">roprot.tar.xz</a></p>
+<p>The next one is more interest.</p>
+<p><img src="https://hackmd.io/_uploads/H1BFJMEZC.png" alt="image"></p>
+<p><code>roprot</code> after load into IDA:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kr">__int64</span> <span class="kr">__fastcall</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">a3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="o">*</span><span class="n">v3</span><span class="p">;</span> <span class="c1">// rbx
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int</span> <span class="n">i</span><span class="p">;</span> <span class="c1">// [rsp+14h] [rbp-34h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="o">*</span><span class="n">v6</span><span class="p">;</span> <span class="c1">// [rsp+18h] [rbp-30h] BYREF
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int</span> <span class="o">*</span><span class="n">v7</span><span class="p">;</span> <span class="c1">// [rsp+20h] [rbp-28h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">_QWORD</span> <span class="o">*</span><span class="n">mapped</span><span class="p">;</span> <span class="c1">// [rsp+28h] [rbp-20h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="o">*</span><span class="n">addr</span><span class="p">;</span> <span class="c1">// [rsp+30h] [rbp-18h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">unsigned</span> <span class="kr">__int64</span> <span class="n">v10</span><span class="p">;</span> <span class="c1">// [rsp+38h] [rbp-10h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">unsigned</span> <span class="kr">__int16</span> <span class="n">xored</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">v10</span> <span class="o">=</span> <span class="nf">__readfsqword</span><span class="p">(</span><span class="mh">0x28u</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">set_handler_and_message</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span> <span class="n">argc</span> <span class="o">!=</span> <span class="mi">2</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">goto</span> <span class="n">FAIL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">v6</span> <span class="o">=</span> <span class="mi">0LL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">mapped</span> <span class="o">=</span> <span class="mi">0LL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="nf">check</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">goto</span> <span class="n">FAIL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">addr</span> <span class="o">=</span> <span class="nf">mmap</span><span class="p">(</span><span class="mi">0LL</span><span class="p">,</span> <span class="mh">0x20000000uLL</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0LL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">v7</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span><span class="n">addr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span> <span class="n">addr</span> <span class="o">==</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="o">-</span><span class="mi">1LL</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">goto</span> <span class="n">FAIL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mh">0x7FFFFFF</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">v3</span> <span class="o">=</span> <span class="n">v7</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">*</span><span class="n">v3</span> <span class="o">=</span> <span class="nf">rand</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">mprotect</span><span class="p">(</span><span class="n">addr</span><span class="p">,</span> <span class="mh">0x20000000uLL</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span> <span class="nf">getrandom</span><span class="p">(</span><span class="o">&amp;</span><span class="n">v6</span><span class="p">,</span> <span class="mi">8LL</span><span class="p">,</span> <span class="mi">1LL</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">8</span>
+</span></span><span class="line"><span class="cl">    <span class="o">||</span> <span class="p">(</span><span class="n">v6</span> <span class="o">=</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)((</span><span class="kt">unsigned</span> <span class="kr">__int64</span><span class="p">)</span><span class="n">v6</span> <span class="o">&amp;</span> <span class="mh">0x7FFFFFFFF000LL</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mapped</span> <span class="o">=</span> <span class="nf">mmap</span><span class="p">(</span><span class="n">v6</span><span class="p">,</span> <span class="mi">4096uLL</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">306</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0LL</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mapped</span> <span class="o">==</span> <span class="p">(</span><span class="n">_QWORD</span> <span class="o">*</span><span class="p">)</span><span class="o">-</span><span class="mi">1LL</span><span class="p">)</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="nl">FAIL</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">fail</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\x1B</span><span class="s">[1;31mFAIL:</span><span class="se">\x1B</span><span class="s">[0m Invalid license key.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">mov_data</span><span class="p">(</span><span class="n">mapped</span><span class="p">,</span> <span class="p">(</span><span class="kr">__int64</span><span class="p">)</span><span class="n">addr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="mi">0LL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">__int64</span> <span class="kr">__fastcall</span> <span class="nf">check</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">key</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">__int64</span> <span class="n">n</span><span class="p">;</span> <span class="c1">// rax
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int</span> <span class="n">i</span><span class="p">;</span> <span class="c1">// [rsp+14h] [rbp-14h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">__int64</span> <span class="n">seed</span><span class="p">;</span> <span class="c1">// [rsp+18h] [rbp-10h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span> <span class="nf">strlen</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">!=</span> <span class="mh">0x13</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mh">0xFFFFFFFFLL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">seed</span> <span class="o">=</span> <span class="mi">0LL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">18</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="o">||</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">5</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span> <span class="p">((</span><span class="o">*</span><span class="nf">__ctype_b_loc</span><span class="p">())[</span><span class="n">key</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">&amp;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mh">0xFFFFFFFFLL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span> <span class="p">((</span><span class="o">*</span><span class="nf">__ctype_b_loc</span><span class="p">())[</span><span class="n">key</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">&amp;</span> <span class="mh">0x400</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="p">((</span><span class="o">*</span><span class="nf">__ctype_b_loc</span><span class="p">())[</span><span class="n">key</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">&amp;</span> <span class="mh">0x100</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mh">0xFFFFFFFFLL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span> <span class="p">((</span><span class="o">*</span><span class="nf">__ctype_b_loc</span><span class="p">())[</span><span class="n">key</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">&amp;</span> <span class="mh">0x800</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">n</span> <span class="o">=</span> <span class="n">key</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">else</span>
+</span></span><span class="line"><span class="cl">        <span class="n">n</span> <span class="o">=</span> <span class="n">key</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;7&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">seed</span> <span class="o">=</span> <span class="mi">36</span> <span class="o">*</span> <span class="n">seed</span> <span class="o">+</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span> <span class="n">key</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="sc">&#39;-&#39;</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="mh">0xFFFFFFFFLL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">xored</span> <span class="o">=</span> <span class="nf">crc16</span><span class="p">(</span><span class="nf">HIDWORD</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span> <span class="o">^</span> <span class="n">seed</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">xored</span> <span class="o">!=</span> <span class="nf">crc16</span><span class="p">(</span><span class="mh">0xBAC9AB0C</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">srand</span><span class="p">(</span><span class="n">xored</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="mi">0LL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">__int64</span> <span class="kr">__fastcall</span> <span class="nf">mov_data</span><span class="p">(</span><span class="n">_QWORD</span> <span class="o">*</span><span class="n">a1</span><span class="p">,</span> <span class="kr">__int64</span> <span class="n">a2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">__int64</span> <span class="n">result</span><span class="p">;</span> <span class="c1">// rax
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span><span class="p">;</span> <span class="c1">// [rsp+10h] [rbp-18h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="p">;</span> <span class="o">++</span><span class="n">i</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">result</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mh">0x127</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">a1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">indexs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">a2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>The idea:</p>
+<p><code>check()</code></p>
+<ul>
+<li>Check the key with format XXXX-XXXX-XXXX-XXXX, which X from <code>01234...XYZ</code>.</li>
+<li>Then get the number calculated from key.</li>
+<li>Check the crc16 of the xored calculated with the given one</li>
+<li>Using the above number as seed into srand()</li>
+</ul>
+<p><code>main()</code></p>
+<ul>
+<li>After check the key, create the buffer with size 0x20000000 and set the random numbers into it.</li>
+<li>mapping new buffer, then call <code>mov_data</code></li>
+</ul>
+<p><code>mov_data</code></p>
+<ul>
+<li>Set values of the buffer with given <code>indexs</code> array to the new buffer.</li>
+<li>jump into the buffer.</li>
+</ul>
+<blockquote>
+<p>The <code>tool</code> file is using to generate the buffer and searching buffer, for <code>xor</code>: search for 2 buffer that&rsquo;s match with the given bytes after xor, the <code>find</code> is find bytes in the generated buffer.</p></blockquote>
+<p>So we need to find the correct seed that get the right buffer (the correct rop-chain)</p>
+<p>I guess that rop-chain with print flag or do something not so hard.</p>
+<p>First, I can see there are 65536 possibly seeds that make it correct:</p>
+<p><code>get_seed.c</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdint.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int16_t</span> <span class="nf">check_sum</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="n">a1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint16_t</span> <span class="n">checksum</span><span class="p">;</span> <span class="c1">// [rsp+Ch] [rbp-18h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int16_t</span> <span class="n">v4</span><span class="p">;</span> <span class="c1">// [rsp+Eh] [rbp-16h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int</span> <span class="n">j</span><span class="p">;</span> <span class="c1">// [rsp+10h] [rbp-14h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint64_t</span> <span class="n">i</span><span class="p">;</span> <span class="c1">// [rsp+14h] [rbp-10h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint8_t</span> <span class="o">*</span><span class="n">v7</span><span class="p">;</span> <span class="c1">// [rsp+1Ch] [rbp-8h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="n">checksum</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">v4</span> <span class="o">=</span> <span class="mi">4129</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">v7</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint8_t</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">a1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0LL</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">checksum</span> <span class="o">^=</span> <span class="n">v7</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="mi">7</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span> <span class="p">(</span><span class="n">checksum</span> <span class="o">&amp;</span> <span class="mh">0x8000u</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">checksum</span> <span class="o">*=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">else</span>
+</span></span><span class="line"><span class="cl">        <span class="n">checksum</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">checksum</span><span class="p">)</span> <span class="o">^</span> <span class="n">v4</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">checksum</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">uint32_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">4294967295</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nf">check_sum</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">==</span><span class="mh">0x2cc2</span><span class="p">){</span> <span class="c1">//check_sum(0xBAC9AB0C)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%u</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">gcc ./get_seed.c -o get_seed &amp;&amp; ./get_seed &gt; seed.txt
+</span></span></code></pre></div><p><img src="https://hackmd.io/_uploads/rJ8_XfNZR.png" alt="image"></p>
+<p>Then looking at the <code>indexs</code>:</p>
+<p><img src="https://hackmd.io/_uploads/BkhsNGE-A.png" alt="image"></p>
+<p>I see two numbers: 1355 and 586, so I think to check if every seed is correct or not, we need to generate at least 1355 bytes.</p>
+<p>I have some ideas, like finding &lsquo;0xc3&rsquo; (the &lsquo;ret&rsquo; opcode) in the buffer, but there are too many occurrences.</p>
+<p>So, I quickly found the &lsquo;capstone&rsquo; module, which helped me disassemble these bytes easier.</p>
+<p>I also used the CDLL in the &lsquo;ctypes&rsquo; module in Python. The reason I didn&rsquo;t use &lsquo;C&rsquo; to make it faster is because I think 65536 and 1355 are not too big, so it&rsquo;s easier to check.</p>
+<p>Full script:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># key format XXXX-XXXX-XXXX-XXXX, number of uppercase -&gt; seed </span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># if (check(seed))==0x2c02 -&gt; srand(seed)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># `mmap(addr)`, move every byte in addr, addr[i] = (_DWORD)rand();</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># `mmap(mapped)`, then move every possible rop-gadget from `addr` -&gt; exec rop-chain</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">ctypes</span> <span class="kn">import</span> <span class="n">CDLL</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">struct</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">capstone</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">subprocess</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">libc</span> <span class="o">=</span> <span class="n">CDLL</span><span class="p">(</span><span class="s2">&#34;libc.so.6&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;roprot&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">roprot</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;seed.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">is_good</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">seeds</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">&amp;</span> <span class="mh">0xffffffff</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">is_good</span><span class="o">.</span><span class="n">readlines</span><span class="p">()]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="n">seed</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">newb</span> <span class="o">=</span> <span class="n">roprot</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x78\x56\x34\x12</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s1">&#39;&lt;I&#39;</span><span class="p">,</span><span class="n">seed</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;roprot_new&#39;</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">wf</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">wf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">newb</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">wf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">([</span><span class="s1">&#39;./roprot_new&#39;</span><span class="p">,</span><span class="s1">&#39;0123-5678-ABCD-EFGH&#39;</span><span class="p">]))</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;seed </span><span class="si">{</span><span class="n">seed</span><span class="si">}</span><span class="s1"> good.&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;seed </span><span class="si">{</span><span class="n">seed</span><span class="si">}</span><span class="s1"> fail.&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">pass</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">md</span> <span class="o">=</span> <span class="n">Cs</span><span class="p">(</span><span class="n">CS_ARCH_X86</span><span class="p">,</span> <span class="n">CS_MODE_64</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">md</span><span class="o">.</span><span class="n">detail</span> <span class="o">=</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl"><span class="n">possible_seed</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">seed</span> <span class="ow">in</span> <span class="n">seeds</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">idx1</span> <span class="o">=</span> <span class="mi">1355</span>
+</span></span><span class="line"><span class="cl">    <span class="n">libc</span><span class="o">.</span><span class="n">srand</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">buf</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">idx1</span><span class="o">//</span><span class="mi">4</span><span class="o">+</span><span class="mi">4</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">r</span> <span class="o">=</span> <span class="n">libc</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">buf</span> <span class="o">+=</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s1">&#39;&lt;i&#39;</span><span class="p">,</span><span class="n">r</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># print(hex(r),buf)</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># exit()</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># check1</span>
+</span></span><span class="line"><span class="cl">    <span class="n">disassembled</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">md</span><span class="o">.</span><span class="n">disasm</span><span class="p">(</span><span class="n">buf</span><span class="p">[</span><span class="n">idx1</span><span class="p">:</span><span class="n">idx1</span><span class="o">+</span><span class="mi">4</span><span class="p">],</span><span class="mi">0</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">disassembled</span><span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">mnemonic</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">op_str</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># check 2</span>
+</span></span><span class="line"><span class="cl">    <span class="n">disassembled2</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">idx2</span> <span class="o">=</span> <span class="mi">586</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">md</span><span class="o">.</span><span class="n">disasm</span><span class="p">(</span><span class="n">buf</span><span class="p">[</span><span class="n">idx2</span><span class="p">:</span><span class="n">idx2</span><span class="o">+</span><span class="mi">4</span><span class="p">],</span><span class="mi">0</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">disassembled2</span><span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">mnemonic</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">op_str</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># final check</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span>  <span class="n">disassembled</span> <span class="o">!=</span> <span class="p">{}</span> <span class="ow">and</span> \
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="s1">&#39;ret&#39;</span> <span class="ow">in</span> <span class="n">disassembled</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">or</span> <span class="s1">&#39;retn&#39;</span> <span class="ow">in</span> <span class="n">disassembled</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="ow">and</span>\
+</span></span><span class="line"><span class="cl">        <span class="n">disassembled2</span> <span class="o">!=</span> <span class="p">{}</span> <span class="ow">and</span> \
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="s1">&#39;ret&#39;</span> <span class="ow">in</span> <span class="n">disassembled2</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">or</span> <span class="s1">&#39;retn&#39;</span> <span class="ow">in</span> <span class="n">disassembled2</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># print(&#39;first&#39;,disassembled)</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># print(&#39;second&#39;,disassembled2)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;seed: &#39;</span><span class="p">,</span><span class="n">seed</span><span class="p">,</span><span class="nb">hex</span><span class="p">(</span><span class="n">seed</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">check</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">possible_seed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">counter</span><span class="o">+=</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># print(buf)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Found:</span><span class="si">{</span><span class="n">counter</span><span class="si">}</span><span class="s1"> possibly seeds.&#39;</span> <span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">possible_seed</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># print(hex(libc.rand()))</span>
+</span></span></code></pre></div><p>The idea was easy: get the seed, generate a buffer, then check the indexes to find where &lsquo;ret&rsquo; appears after disassembling these bytes.</p>
+<p>The <code>roprot_new</code> file is patched that not call the function <code>verifying_key</code> and directly call <code>srand()</code>:</p>
+<p><img src="https://hackmd.io/_uploads/BkwevM4bC.png" alt="image"></p>
+<p>Then every check, I&rsquo;m only replace the bytes with the seed.</p>
+<p>Luckly, I found the one that&rsquo;s print the flag:</p>
+<p><img src="https://hackmd.io/_uploads/r1zCPfVbA.png" alt="image"></p>
+<p>Flag: <code>midnight{r0pP1nG_7hr0uGh_rand()}</code></p>
+<h2 id="07u4">
+<a class="header-anchor" href="#07u4"></a>
+07u4
+</h2><p>This one is the latest reverse challenge released and is easier than the previous one.</p>
+<p>The server is turned off, so I can&rsquo;t test it anymore. Luckily, I have some files that we can take a look at:</p>
+<ul>
+<li>The idea is: we need to solve each binary that is given as a gzip from the server. When 25 binaries are solved, we get the flag.</li>
+</ul>
+<p><img src="https://hackmd.io/_uploads/Syf7YfVb0.png" alt="image"></p>
+<p>So, I take a look every binary I found. The first of my idea is using <code>angr</code> for auto analysis and find the flag in every binary:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">angr</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">claripy</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">log_level</span><span class="o">=</span><span class="s1">&#39;warn&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">path_to_binary</span> <span class="o">=</span> <span class="s1">&#39;bins/bin0.elf&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">elf_</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="n">path_to_binary</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">start_address</span> <span class="o">=</span> <span class="n">elf_</span><span class="o">.</span><span class="n">entry</span>
+</span></span><span class="line"><span class="cl"><span class="n">password_length</span> <span class="o">=</span> <span class="mh">0x28</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">project</span> <span class="o">=</span> <span class="n">angr</span><span class="o">.</span><span class="n">Project</span><span class="p">(</span><span class="n">path_to_binary</span><span class="p">,</span><span class="n">main_opts</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;base_addr&#39;</span><span class="p">:</span><span class="mh">0x00</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">password</span> <span class="o">=</span> <span class="p">[</span><span class="n">claripy</span><span class="o">.</span><span class="n">BVS</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;pw_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">password_length</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># password=claripy.BVS(&#39;password&#39;,25*8)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">getcwd_hook</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">addr_needtofeed</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">regs</span><span class="o">.</span><span class="n">rax</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">addr_needtofeed</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">byte_symbolic</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">password</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">addr_byte</span> <span class="o">=</span> <span class="n">addr_needtofeed</span> <span class="o">+</span> <span class="n">i</span>
+</span></span><span class="line"><span class="cl">        <span class="n">state</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">store</span><span class="p">(</span><span class="n">addr_byte</span><span class="p">,</span> <span class="n">byte_symbolic</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">hook_func</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">addr_needtofeed</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">regs</span><span class="o">.</span><span class="n">rdi</span>
+</span></span><span class="line"><span class="cl">    <span class="n">buf</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">addr_needtofeed</span><span class="p">,</span><span class="n">password_length</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">addr_needtofeed</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">regs</span><span class="o">.</span><span class="n">rax</span>
+</span></span><span class="line"><span class="cl">    <span class="n">buf</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">addr_needtofeed</span><span class="p">,</span><span class="n">password_length</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># project.hook_symbol(&#39;getcwd&#39;,getcwd_hook)</span>
+</span></span><span class="line"><span class="cl"><span class="n">project</span><span class="o">.</span><span class="n">hook</span><span class="p">(</span><span class="mh">0x11FA</span><span class="p">,</span><span class="n">getcwd_hook</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">project</span><span class="o">.</span><span class="n">hook</span><span class="p">(</span><span class="mh">0x123C</span><span class="p">,</span><span class="n">hook_func</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">state</span><span class="o">=</span><span class="n">project</span><span class="o">.</span><span class="n">factory</span><span class="o">.</span><span class="n">entry_state</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">add_options</span> <span class="o">=</span> <span class="p">{</span> <span class="n">angr</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">SYMBOL_FILL_UNCONSTRAINED_MEMORY</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">angr</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">SYMBOL_FILL_UNCONSTRAINED_REGISTERS</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">sim_manager</span><span class="o">=</span><span class="n">project</span><span class="o">.</span><span class="n">factory</span><span class="o">.</span><span class="n">simgr</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">sim_manager</span><span class="o">.</span><span class="n">explore</span><span class="p">(</span><span class="n">find</span><span class="o">=</span><span class="mh">0x1245</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sim_manager</span><span class="o">.</span><span class="n">found</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">):</span>     
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">sim_manager</span><span class="o">.</span><span class="n">found</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">password</span><span class="p">,</span><span class="n">cast_to</span><span class="o">=</span><span class="nb">bytes</span><span class="p">))</span>
+</span></span></code></pre></div><p>But every password length is random and some binaries are different ways to feed input, differnt ways to check the input. So, this is fail, I give up&hellip;</p>
+<p>Atleast you think so, I check these binaries and I see that only 3 types of binary, It&rsquo;s also fine if there are 4 or 5.</p>
+<p>So, I just wrote the solver for every type of binary.</p>
+<h3 id="type-1">
+<a class="header-anchor" href="#type-1"></a>
+Type 1:
+</h3><p>This one is simple xor with a single byte.</p>
+<p><img src="https://hackmd.io/_uploads/HJ-wxQNWC.png" alt="image"></p>
+<p>So, I checked that using to move these bytes and the byte xor one.</p>
+<p>Here is the code.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">    <span class="k">if</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\xC6\x45\xEE</span><span class="s1">&#39;</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span> <span class="c1"># mov [ebp + X], 0x##</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Type 1&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">start</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\xC6\x45\xEE</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">i</span> <span class="o">=</span> <span class="n">start</span>
+</span></span><span class="line"><span class="cl">        <span class="n">buf</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">3</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">i</span><span class="o">+=</span><span class="mi">4</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">buf</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">3</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">            <span class="n">i</span> <span class="o">+=</span> <span class="mi">4</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x83\xf0</span><span class="s1">&#39;</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span> <span class="c1"># xor al, 0x##</span>
+</span></span><span class="line"><span class="cl">            <span class="n">xor_val</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x83\xf0</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>               <span class="c1"># xor eax, 0x##</span>
+</span></span><span class="line"><span class="cl">            <span class="n">xor_val</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x0F\xBE\xC0</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">+</span><span class="mi">4</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pw</span> <span class="o">=</span> <span class="n">xor</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span><span class="p">),</span><span class="n">xor_val</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">pw</span>
+</span></span></code></pre></div><h3 id="type-2">
+<a class="header-anchor" href="#type-2"></a>
+Type 2:
+</h3><p>This is the easiest one:</p>
+<p><img src="https://hackmd.io/_uploads/BkBNCzEZC.png" alt="image"></p>
+<p>So, just checked for <code>strcmp</code> symbol in the binary, when i use <code>strings</code> to binary, the password always appeared after <code>u+UH</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1">### Type2, string cmp</span>
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="s1">&#39;strcmp&#39;</span> <span class="ow">in</span> <span class="n">elf</span><span class="o">.</span><span class="n">symbols</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Type 2&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">res</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">([</span><span class="s1">&#39;strings&#39;</span><span class="p">,</span><span class="n">file_path</span><span class="p">])</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">res</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="n">res</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;u+UH&#39;</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span>
+</span></span></code></pre></div><h3 id="type-3">
+<a class="header-anchor" href="#type-3"></a>
+Type 3:
+</h3><p>The last one also is create password from 2 buffer, look simple but I have many things to check.</p>
+<p><img src="https://hackmd.io/_uploads/BJpNZQVb0.png" alt="image"></p>
+<p><img src="https://hackmd.io/_uploads/BJVxWmEWR.png" alt="image"></p>
+<p>I also check for every opcode and takes these words, then create and get the password.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">    <span class="c1">## Type3, word</span>
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x66\xC7\x85</span><span class="s1">&#39;</span> <span class="ow">in</span> <span class="n">d</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x66\xC7\x45</span><span class="s1">&#39;</span> <span class="ow">in</span> <span class="n">d</span><span class="p">):</span> <span class="c1"># two types of &#34;mov [rbp+X], 0xABCD&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Type 3&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x66\xC7\x85</span><span class="s1">&#39;</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">start</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x66\xC7\x85</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">start</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x66\xC7\x45</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">i</span> <span class="o">=</span> <span class="n">start</span>
+</span></span><span class="line"><span class="cl">        <span class="n">buf</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span> <span class="c1"># get these numbers</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">3</span><span class="p">]</span><span class="o">==</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x66\xC7\x45</span><span class="s1">&#39;</span><span class="p">:</span> 
+</span></span><span class="line"><span class="cl">                <span class="n">buf</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s1">&#39;&lt;H&#39;</span><span class="p">,</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">4</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">6</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">                <span class="n">i</span><span class="o">+=</span><span class="mi">6</span>
+</span></span><span class="line"><span class="cl">            <span class="k">elif</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">3</span><span class="p">]</span><span class="o">==</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x66\xC7\x85</span><span class="s1">&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">buf</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s1">&#39;&lt;H&#39;</span><span class="p">,</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">7</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">9</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">                <span class="n">i</span> <span class="o">+=</span> <span class="mi">9</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">buf</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">buf</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">buf</span> <span class="o">=</span> <span class="n">buf</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># strip</span>
+</span></span><span class="line"><span class="cl">                <span class="n">buf1</span> <span class="o">=</span> <span class="n">buf</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                <span class="n">buf2</span> <span class="o">=</span> <span class="n">buf</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">:]</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># print(buf,len(buf))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">s</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">l</span><span class="p">)]</span>   <span class="c1"># create the flag</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">l</span><span class="o">//</span><span class="mi">2</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">n</span> <span class="o">=</span> <span class="n">buf2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">buf1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="n">s</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">n</span><span class="o">&amp;</span><span class="mh">0xff</span>
+</span></span><span class="line"><span class="cl">            <span class="n">s</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="o">&gt;&gt;</span><span class="mi">8</span><span class="p">)</span><span class="o">&amp;</span><span class="mh">0xff</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</span></span></code></pre></div><p>So, here&rsquo;s full script:</p>
+<p><code>solve_binary.py</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">subprocess</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">struct</span> <span class="kn">import</span> <span class="n">unpack</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">log_level</span><span class="o">=</span><span class="s1">&#39;warn&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">file_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;bins/bin</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">.elf&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">d</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">elf</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#### Type1, simple xor</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\xC6\x45\xEE</span><span class="s1">&#39;</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span> <span class="c1"># mov [ebp + X], 0x##</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Type 1&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">start</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\xC6\x45\xEE</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">i</span> <span class="o">=</span> <span class="n">start</span>
+</span></span><span class="line"><span class="cl">        <span class="n">buf</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">3</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">i</span><span class="o">+=</span><span class="mi">4</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">buf</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">3</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">            <span class="n">i</span> <span class="o">+=</span> <span class="mi">4</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x83\xf0</span><span class="s1">&#39;</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span> <span class="c1"># xor al, 0x##</span>
+</span></span><span class="line"><span class="cl">            <span class="n">xor_val</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x83\xf0</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>               <span class="c1"># xor eax, 0x##</span>
+</span></span><span class="line"><span class="cl">            <span class="n">xor_val</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x0F\xBE\xC0</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">+</span><span class="mi">4</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pw</span> <span class="o">=</span> <span class="n">xor</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span><span class="p">),</span><span class="n">xor_val</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">pw</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">### Type2, string cmp</span>
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="s1">&#39;strcmp&#39;</span> <span class="ow">in</span> <span class="n">elf</span><span class="o">.</span><span class="n">symbols</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Type 2&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">res</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">([</span><span class="s1">&#39;strings&#39;</span><span class="p">,</span><span class="n">file_path</span><span class="p">])</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">res</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="n">res</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;u+UH&#39;</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">## Type3, word</span>
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x66\xC7\x85</span><span class="s1">&#39;</span> <span class="ow">in</span> <span class="n">d</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x66\xC7\x45</span><span class="s1">&#39;</span> <span class="ow">in</span> <span class="n">d</span><span class="p">):</span> <span class="c1"># two types of &#34;mov [rbp+X], 0xABCD&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Type 3&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x66\xC7\x85</span><span class="s1">&#39;</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">start</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x66\xC7\x85</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">start</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x66\xC7\x45</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">i</span> <span class="o">=</span> <span class="n">start</span>
+</span></span><span class="line"><span class="cl">        <span class="n">buf</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span> <span class="c1"># get these numbers</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">3</span><span class="p">]</span><span class="o">==</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x66\xC7\x45</span><span class="s1">&#39;</span><span class="p">:</span> 
+</span></span><span class="line"><span class="cl">                <span class="n">buf</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s1">&#39;&lt;H&#39;</span><span class="p">,</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">4</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">6</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">                <span class="n">i</span><span class="o">+=</span><span class="mi">6</span>
+</span></span><span class="line"><span class="cl">            <span class="k">elif</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">3</span><span class="p">]</span><span class="o">==</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x66\xC7\x85</span><span class="s1">&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">buf</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s1">&#39;&lt;H&#39;</span><span class="p">,</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">7</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">9</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">                <span class="n">i</span> <span class="o">+=</span> <span class="mi">9</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">buf</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">buf</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">buf</span> <span class="o">=</span> <span class="n">buf</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># strip</span>
+</span></span><span class="line"><span class="cl">                <span class="n">buf1</span> <span class="o">=</span> <span class="n">buf</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                <span class="n">buf2</span> <span class="o">=</span> <span class="n">buf</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">:]</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># print(buf,len(buf))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">s</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">l</span><span class="p">)]</span>   <span class="c1"># create the flag</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">l</span><span class="o">//</span><span class="mi">2</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">n</span> <span class="o">=</span> <span class="n">buf2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">buf1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="n">s</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">n</span><span class="o">&amp;</span><span class="mh">0xff</span>
+</span></span><span class="line"><span class="cl">            <span class="n">s</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="o">&gt;&gt;</span><span class="mi">8</span><span class="p">)</span><span class="o">&amp;</span><span class="mh">0xff</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="sa">b</span><span class="s1">&#39;None&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>
+</span></span></code></pre></div><p><code>auto_script.py</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">gzip</span> <span class="kn">import</span> <span class="n">decompress</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">solve_binary</span> <span class="kn">import</span> <span class="n">solve</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;07u4-1.play.hfsc.tf&#39;</span><span class="p">,</span> <span class="mi">3991</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;Play</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;2&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">25</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">hex_string</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;ANSWER:&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">ANSWER:&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">hex_string</span> <span class="o">=</span> <span class="n">hex_string</span><span class="p">[</span><span class="n">hex_string</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;1f8b08&#39;</span><span class="p">):]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">d</span> <span class="o">=</span> <span class="n">decompress</span><span class="p">(</span><span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">hex_string</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;bins/bin</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">.elf&#39;</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">wf</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">wf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">wf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pw</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">pw</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">pw</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># io.interactive()</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># break</span>
+</span></span></code></pre></div><p>Then I run this script and got the flag.</p>
+<p>Flag <code>*the server turned off</code></p>
+<h2 id="bonus-redacted">
+<a class="header-anchor" href="#bonus-redacted"></a>
+Bonus [REDACTED]
+</h2><p>That&rsquo;s all, thanks for reading.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+
+      
+        <div class="sponsor-wrapper">
+  <div class="sponsor-button-wrapper">
+    <div class="sponsor-icon rotate"></div>
+    <div class="sponsor-title">Sponsor</div>
+    <div class="sponsor-icon rotate"></div>
+  </div>
+  <div class="sponsor-tip">Please buy author a cup of coffee!</div>
+  
+    <div class="sponsor-qr">
+      
+        <div class="sponsor-qr-image-wrapper">
+          <img src="/images/bmc_qr_lephuduc.png" alt="Le Phu Duc" width="200" />
+          <p class="sponsor-qr-name">Le Phu Duc</p>
+        </div>
+      
+    </div>
+  
+</div>
+      
+
+      
+        
+
+<div class="share-wrapper">
+  
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:1313/post/midnightsun-2024/" target="_blank" rel="noopener noreferrer" title="MidnightSun CTF 2024">
+      <div class="share-icon icon icon-facebook">
+        
+      </div>
+    </a>
+  
+    <a href="https://twitter.com/intent/tweet?url=http://localhost:1313/post/midnightsun-2024/&amp;text=MidnightSun%20CTF%202024&amp;via=http://localhost:1313/" target="_blank" rel="noopener noreferrer" title="MidnightSun CTF 2024">
+      <div class="share-icon icon icon-twitter">
+        
+      </div>
+    </a>
+  
+    <a href="https://www.linkedin.com/shareArticle?url=http://localhost:1313/post/midnightsun-2024/&amp;title=MidnightSun%20CTF%202024&amp;summary=Write%20up%20all%20reverse%20challenges%20in%20MidnightSun%20CTF%202024&amp;mini=true&amp;ro=true" target="_blank" rel="noopener noreferrer" title="MidnightSun CTF 2024">
+      <div class="share-icon icon icon-linkedin">
+        
+      </div>
+    </a>
+  
+    <a href="https://www.reddit.com/submit?url=http://localhost:1313/post/midnightsun-2024/&amp;title=MidnightSun%20CTF%202024" target="_blank" rel="noopener noreferrer" title="MidnightSun CTF 2024">
+      <div class="share-icon icon icon-reddit">
+        
+      </div>
+    </a>
+  
+</div>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+      <ul class="article-tag-list" itemprop="keywords">
+  
+    <li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/reverse"
+        rel="tag"
+        >REVERSE</a
+      >
+    </li>
+  
+</ul>
+
+    </footer>
+  </div>
+  
+    
+  <nav
+    id="article-nav"
+    data-aos="fade-up"
+  >
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          <img
+            data-src="/images/post_covers/tetctf2024.jpeg"
+            data-sizes="auto"
+            alt="TetCTF 2024"
+            class="lazyload"
+          />
+        
+        <a href="http://localhost:1313/post/tetctf-2024/"></a>
+        <div class="article-nav-caption">Newer</div>
+        <h3 class="article-nav-title">
+          
+            TetCTF 2024
+          
+        </h3>
+      </div>
+    
+
+    
+      <div class="article-nav-link-wrap article-nav-link-right">
+        
+          <img
+            data-src="/images/post_covers/googlectf2024.jpeg"
+            data-sizes="auto"
+            alt="Google CTF 2024"
+            class="lazyload"
+          />
+        
+        <a href="http://localhost:1313/post/googlectf-2024/"></a>
+        <div class="article-nav-caption">Older</div>
+        <h3 class="article-nav-title">
+          
+            Google CTF 2024
+          
+        </h3>
+      </div>
+    
+  </nav>
+
+
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+</section>
+        </div>
+        
+        
+        
+
+
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+
+
+<footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    <div>
+      <span class="icon-copyright"></span>
+      2022 -
+      2025
+      <span class="footer-info-sep rotate"></span>
+      Le Phu Duc
+    </div>
+    
+    
+    
+      <div>
+        <span class="icon-brush"
+          >&nbsp;
+            51.0k
+          </span
+        >
+        &nbsp;|&nbsp;
+        <span class="icon-coffee">&nbsp;
+          
+          
+
+          04:07
+        </span>
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv"
+          >Number of visits&nbsp;<span
+            id="busuanzi_value_site_pv"
+          ></span
+        ></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv"
+          >Number of visitors&nbsp;<span
+            id="busuanzi_value_site_uv"
+          ></span
+        ></span>
+      </div>
+    
+  </div>
+</footer>
+
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar">
+        <div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper toc-div-class">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#minus10">minus10</a></li>
+    <li><a href="#roprot">roprot</a></li>
+    <li><a href="#07u4">07u4</a>
+      <ul>
+        <li><a href="#type-1">Type 1:</a></li>
+        <li><a href="#type-2">Type 2:</a></li>
+        <li><a href="#type-3">Type 3:</a></li>
+      </ul>
+    </li>
+    <li><a href="#bonus-redacted">Bonus [REDACTED]</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+      </div>
+      <div class="sidebar-common-sidebar hidden">
+        
+<div class="sidebar-author">
+  <img
+    data-src="/avatar/shiba.jpg"
+    data-sizes="auto"
+    alt="Le Phu Duc"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Le Phu Duc</div>
+  <div class="sidebar-description">a.k.a Jinn</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>Posts</div>
+    
+    <div class="sidebar-state-number">16</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>Categories</div>
+    <div class="sidebar-state-number">
+      1
+    </div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>Tags</div>
+    <div class="sidebar-state-number">6</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class="icon-discord sidebar-social-icon">
+      <a
+        href="https://discordapp.com/users/lephuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="discord"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-facebook sidebar-social-icon">
+      <a
+        href="https://www.facebook.com/lephuduc0309"
+        itemprop="url"
+        target="_blank"
+        aria-label="facebook"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/lephuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-instagram sidebar-social-icon">
+      <a
+        href="https://www.instagram.com/le.phuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="instagram"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-linkedin sidebar-social-icon">
+      <a
+        href="https://www.linkedin.com/in/lephuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="linkedin"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-twitter sidebar-social-icon">
+      <a
+        href="https://twitter.com/lephuduck"
+        itemprop="url"
+        target="_blank"
+        aria-label="twitter"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="Home"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe632;
+        
+      </div>
+      <div class="sidebar-menu-link">Home</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="About"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe628;
+        
+      </div>
+      <div class="sidebar-menu-link">About</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="Archives"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe604;
+        
+      </div>
+      <div class="sidebar-menu-link">Archives</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/achievements"
+        aria-label="Achievements"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe621;
+        
+      </div>
+      <div class="sidebar-menu-link">Achievements</div>
+    </div>
+  
+</div>
+
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
+
+    </div>
+    
+    
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  <script
+    src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"
+    
+    
+    
+    
+    integrity="sha384-3gT/vsepWkfz/ff7PpWNUeMzeWoH3cDhm/A8jM7ouoAK0/fP/9bcHHR5kHq2nf&#43;e" crossorigin="anonymous"
+  ></script>
+
+
+
+
+  
+  
+  
+  
+  
+  
+  <script
+    src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"
+    
+    
+    
+    
+    integrity="sha384-J08i8An/QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"
+  ></script>
+
+
+
+
+
+
+
+
+
+  
+      
+      <script src="/js/main.js" ></script>
+      
+
+
+
+  
+
+
+
+
+
+  
+      
+      <script src="/js/aos.js" ></script>
+      
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+
+
+
+
+
+  
+      
+      <script src="/js/pjax_main.js" data-pjax></script>
+      
+
+
+
+
+
+  
+
+  
+  
+  
+  
+  
+  
+  <script
+    src="https://npm.webcache.cn/mouse-firework@0.1.0/dist/index.umd.js"
+    
+    
+    
+    
+    integrity="sha384-KM6i7tu43nYd6e0beIljxHMC5tZc58XBDu7pPA58w50h18Jsx7gLdimfS09RXlKv" crossorigin="anonymous"
+  ></script>
+
+
+<script>
+  if (window.firework) {
+    const options = JSON.parse("{\"excludeelements\":[\"a\",\"button\"],\"particles\":[{\"colors\":[\"#c0971d\",\"#caa02f\",\"#d4aa40\",\"#ddbb62\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"emit\"],\"number\":20,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.3,0.5],\"radius\":[16,32]}},{\"colors\":[\"#f4e74d\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"diffuse\"],\"number\":1,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.2,0.5],\"lineWidth\":6,\"radius\":20}}]}");
+    options.excludeElements = options.excludeelements;
+    delete options.excludeelements;
+    window.firework(options);
+  }
+</script>
+
+
+
+  
+
+  
+  
+  
+  
+  
+  
+  <script
+    src="https://npm.webcache.cn/theme-shokax-pjax@0.0.3/dist/index.umd.js"
+    
+    
+    
+    
+    integrity="sha384-xneY1WY8hOfUzswrE4CrYq35N4BdVcxqxwHPr9zawE/jMSCxD&#43;jAPU55x/jj3wlf" crossorigin="anonymous"
+  ></script>
+
+
+  <script>
+    function loadScripts(scripts, index) {
+      if (index < scripts.length) {
+        const script = scripts[index];
+        const src = script.getAttribute('src');
+
+        const loadScript = (scriptContent) => {
+          return new Promise((resolve, reject) => {
+            const scriptElement = document.createElement('script');
+            if (script.type) {
+              scriptElement.type = script.type;
+            }
+            if (script.src) {
+              scriptElement.src = script.src;
+              scriptElement.onload = resolve;
+              scriptElement.onerror = reject;
+            }
+            if (scriptContent) {
+              scriptElement.text = scriptContent;
+            }
+            document.head.appendChild(scriptElement);
+            if (!script.src) {
+              resolve();
+            }
+          })
+          
+        }
+
+        ;(src ? loadScript() : loadScript(script.text))
+          .then(() => loadScripts(scripts, index + 1))
+          .catch(error => {
+            console.error(`Failed to load script: ${src || 'inline script'}`, error);
+            loadScripts(scripts, index + 1);
+          });
+      }
+    }
+    window.Pjax &&
+      new window.Pjax({
+        selectors: [
+          "#header>img",
+          "#header>picture",
+          "head title",
+          "#header-title",
+          "#subtitle-wrap",
+          "#main",
+          "#content",
+          ".sidebar-widget",
+          ".sidebar-wrapper",
+          "#mobile-nav",
+          "#lazy-script",
+        ],
+        switches: {
+          "#content": function(oldEl, newEl) {
+            
+            oldEl.className = newEl.className;
+            this.onSwitch();
+          },
+          "#header-title": Pjax.switches.outerHTML,
+          "#subtitle-wrap": Pjax.switches.outerHTML,
+          "#main": function (oldEl, newEl) {
+            const scripts = [...newEl.querySelectorAll("script")];
+            loadScripts(scripts, 0);
+            oldEl.outerHTML = newEl.outerHTML;
+            this.onSwitch();
+          },
+          "#mobile-nav": Pjax.switches.outerHTML,
+          "#lazy-script": function (oldEl, newEl) {
+            const scripts = [...newEl.querySelectorAll("script")];
+            loadScripts(scripts, 0);
+            oldEl.innerHTML = newEl.innerHTML;
+            this.onSwitch();
+          },
+        },
+        cacheBust: false,
+      });
+  </script>
+  
+
+
+
+
+
+  
+      
+      <script src="/js/pjax.js" ></script>
+      
+
+
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+      
+      
+        
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "Le Phu Duc",
+          title: "MidnightSun CTF 2024",
+          url: "http:\/\/localhost:1313\/post\/midnightsun-2024\/",
+          description: "Write up all reverse challenges in MidnightSun CTF 2024",
+          cover: "http:\/\/localhost:1313\/images\/post_covers\/midnightsun2024-ori.jpeg",
+        };
+      </script>
+    
+    
+    
+      
+
+
+
+
+
+  
+      
+      <script src="/js/insert_highlight.js" data-pjax></script>
+      
+
+      
+      
+      
+      
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js", "sha384-DiL6M\/gG\u002bwmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF\/N6lrZi\/")).default;
+
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8\u002boTJ7m3DfYEWX1fu1scuS4\u002bs")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8\u002boTJ7m3DfYEWX1fu1scuS4\u002bs")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+      
+    
+    
+  </div>
+</div>
+
+
+
+
+  
+
+  
+  
+  
+  
+  
+  
+  <script
+    src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js"
+    
+    async
+    
+    
+    integrity="sha384-0M75wtSkhjIInv4coYlaJU83&#43;OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id&#43;S" crossorigin="anonymous"
+  ></script>
+
+
+
+
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      });
+    }
+  </script>
+
+
+<script>
+  const reimuCopyright = String.raw`
+   ______     ______     __     __    __     __  __    
+  /\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+  \ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+   \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+    \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                    
+  `;
+  console.log(String.raw`%c ${reimuCopyright}`, "color: #ff5252;");
+  console.log(
+    "%c Theme.Reimu" + " %c https://github.com/D-Sketon/hugo-theme-reimu ",
+    "color: white; background: #ff5252; padding:5px 0;",
+    "padding:4px;border:1px solid #ff5252;",
+  );
+</script>
+
+
+  
+
+  
+  
+  
+  
+  
+  
+  <script
+    src="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.js"
+    
+    
+    
+    
+    integrity="sha384-gdGYZwHnfJM54evoZhpO0s6ZF5BQiybkiyW7VXr&#43;h5UfruuRL/aORyw&#43;5&#43;HZoU6e" crossorigin="anonymous"
+  ></script>
+
+
+  
+    <script>
+      const ap = new APlayer({
+          theme: "var(--color-link)",
+          container: document.getElementById('aplayer'),
+          audio: JSON.parse("[{\"artist\":\"NewJeans\",\"cover\":\"/images/song_covers/ditto.jpg\",\"name\":\"Ditto\",\"url\":\"/songs/ditto.mp3\"},{\"artist\":\"NewJeans\",\"cover\":\"/images/song_covers/eta.jpg\",\"name\":\"ETA\",\"url\":\"/songs/ETA.mp3\"}]") || [],
+          fixed:  null  || false,
+          autoplay:  null  || false,
+          loop: '' || 'all',
+          order: '' || 'list',
+          preload: '' || 'auto',
+          volume:  null  || 0.7,
+          mutex:  null  || true,
+          listFolded:  null  || false,
+          lrcType:  null  || 0,
+      });
+    </script>
+  
+
+
+
+  </body>
+</html>

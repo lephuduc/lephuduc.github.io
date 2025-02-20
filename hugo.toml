@@ -1,4 +1,8 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://lephuduc.github.io/'
 languageCode = 'en-us'
-title = 'My New Hugo Site'
+title = "You just landed on Jinn's site, let's find out.."
 theme = 'hugo-theme-reimu'
+
+[markup.highlight]
+guessSyntax = true
+noClasses = false

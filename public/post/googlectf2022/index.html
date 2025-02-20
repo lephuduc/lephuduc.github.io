@@ -1,0 +1,1567 @@
+<!doctype html>
+<html
+  lang="en-us" 
+  
+    data-theme-mode="true"
+  
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no"
+/>
+
+
+
+
+
+
+
+  
+
+<title>
+  Google CTF 2022 | Le Phu Duc
+</title>
+<meta
+  name="description"
+  content="Writeup for Google CTF 2022"
+/>
+
+
+
+  <script>
+  (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "true");
+</script>
+
+
+  
+<script src="https://www.googletagmanager.com/gtag/js?id=true"></script>
+<script data-pjax>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+
+  gtag('js', new Date());
+
+  gtag('config', 'true');
+</script>
+
+
+
+
+
+
+
+
+<script>
+  window.siteConfig = JSON.parse("{\"anchor_icon\":null,\"clipboard\":{\"copyright\":{\"content\":\"All articles in this blog are licensed under BY-NC-SA unless otherwise stated. Please indicate the source when reprinting!\",\"count\":50,\"enable\":false},\"fail\":\"Failed to copy (ﾟ⊿ﾟ)ﾂ\",\"success\":\"Copied\"},\"code_block\":{\"expand\":true},\"icon_font\":\"4552607_0khxww3tj3q9\",\"outdate\":{\"daysago\":180,\"enable\":false,\"message\":\"本文最后更新于 {time}，请注意文中内容可能已经发生变化。\"}}");
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+    
+  
+
+  
+  
+  
+    
+  
+
+  
+  
+  
+    
+  
+
+  
+  
+  
+    
+  
+
+  
+  
+  
+
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="preload"
+  as="style"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7cUbuntu%20Mono:400,400italic,700,700italic%7cSource%20Code%20Pro:400,400italic,700,700italic%7cJetBrains%20Mono:400,400italic,700,700italic&amp;display=swap"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7cUbuntu%20Mono:400,400italic,700,700italic%7cSource%20Code%20Pro:400,400italic,700,700italic%7cJetBrains%20Mono:400,400italic,700,700italic&amp;display=swap"
+  media="print"
+  onload="this.media='all'"
+/>
+
+
+
+
+
+
+  <link
+    rel="preload"
+    href="//at.alicdn.com/t/c/font_4552607_0khxww3tj3q9.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin="anonymous"
+  />
+
+
+
+  
+
+
+
+
+
+
+ <link rel="stylesheet" href="/css/loader.css" />
+
+
+
+
+
+
+
+<link rel="shortcut icon" href="/favicon/favicon.ico">
+
+
+
+
+
+
+
+ <link rel="stylesheet" href="/css/main.css" />
+
+
+
+
+
+  <link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+
+
+
+
+
+
+  <link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/katex@0.16.9/dist/katex.min.css"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+  
+  
+  
+  <script
+    src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"
+    
+    
+    
+    
+    integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"
+  ></script>
+
+
+
+
+
+  
+
+
+  <link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.0/dist/aos.css" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.css" />
+
+
+
+  </head>
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        
+          <img src="/images/loading-golden.png" alt="loading" />
+        
+      </div>
+      <div class="loading-word"></div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+
+
+    <div id="container">
+      <div id="wrap">
+        
+<div id="header-nav">
+  <nav id="main-nav">
+    
+      <span class="main-nav-link-wrap">
+        <div class='main-nav-icon icon '>
+          
+            &#xe632;
+          
+        </div>
+        <a class="main-nav-link" href="/">Home</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <div class='main-nav-icon icon '>
+          
+            &#xe628;
+          
+        </div>
+        <a class="main-nav-link" href="/about">About</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <div class='main-nav-icon icon '>
+          
+            &#xe604;
+          
+        </div>
+        <a class="main-nav-link" href="/archives">Archives</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <div class='main-nav-icon icon '>
+          
+            &#xe621;
+          
+        </div>
+        <a class="main-nav-link" href="/achievements">Achievements</a>
+      </span>
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    
+    <picture></picture>
+      <img fetchpriority="high" src="/images/post_covers/googlectf2022.jpeg" alt="Google CTF 2022">
+    
+  
+
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          
+        
+  
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">Google CTF 2022</h1>
+          </a>
+        
+      
+  
+      
+        
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+        <div id="content"
+          class="sidebar-left"
+            >
+          <aside id="sidebar">
+  
+    <div id="aplayer" theme="var(--color-link)" data-aos="fade-up"></div>
+  
+  
+  <div class="sidebar-wrapper wrap-sticky">
+    <div
+      class="sidebar-wrap"
+      data-aos="fade-up"
+    >
+      
+        <div class="sidebar-toc-sidebar">
+          <div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper toc-div-class">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#js-safe-40">JS SAFE 4.0</a>
+      <ul>
+        <li><a href="#code-and-overview">Code and overview:</a></li>
+      </ul>
+    </li>
+    <li><a href="#first-approach">First approach</a></li>
+    <li><a href="#second-approach">Second approach</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+        </div>
+        <div class="sidebar-common-sidebar hidden">
+          
+<div class="sidebar-author">
+  <img
+    data-src="/avatar/shiba.jpg"
+    data-sizes="auto"
+    alt="Le Phu Duc"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Le Phu Duc</div>
+  <div class="sidebar-description">a.k.a Jinn</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>Posts</div>
+    
+    <div class="sidebar-state-number">16</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>Categories</div>
+    <div class="sidebar-state-number">
+      1
+    </div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>Tags</div>
+    <div class="sidebar-state-number">6</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class="icon-discord sidebar-social-icon">
+      <a
+        href="https://discordapp.com/users/lephuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="discord"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-facebook sidebar-social-icon">
+      <a
+        href="https://www.facebook.com/lephuduc0309"
+        itemprop="url"
+        target="_blank"
+        aria-label="facebook"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/lephuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-instagram sidebar-social-icon">
+      <a
+        href="https://www.instagram.com/le.phuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="instagram"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-linkedin sidebar-social-icon">
+      <a
+        href="https://www.linkedin.com/in/lephuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="linkedin"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-twitter sidebar-social-icon">
+      <a
+        href="https://twitter.com/lephuduck"
+        itemprop="url"
+        target="_blank"
+        aria-label="twitter"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="Home"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe632;
+        
+      </div>
+      <div class="sidebar-menu-link">Home</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="About"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe628;
+        
+      </div>
+      <div class="sidebar-menu-link">About</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="Archives"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe604;
+        
+      </div>
+      <div class="sidebar-menu-link">Archives</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/achievements"
+        aria-label="Achievements"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe621;
+        
+      </div>
+      <div class="sidebar-menu-link">Achievements</div>
+    </div>
+  
+</div>
+
+        </div>
+      
+
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
+      
+    </div>
+  </div>
+
+  <div class="sidebar-widget">
+    
+  </div>
+</aside>
+
+          <section id="main">
+  <article
+  class="h-entry article"
+  itemprop="blogPost"
+  itemscope
+  itemtype="https://schema.org/BlogPosting"
+>
+  <div
+    class="article-inner"
+    data-aos="fade-up"
+  >
+    <div class="article-meta">
+      <div class="article-date">
+  <a
+    href="http://localhost:1313/post/googlectf2022/"
+    class="article-date-link"
+    data-aos="zoom-in"
+  >
+    <time datetime="2022-06-29 00:00:00 &#43;0000 UTC" itemprop="datePublished"
+      >2022-06-29</time
+    >
+    <time style="display: none;" id="post-update-time"
+      >2022-06-29</time
+    >
+  </a>
+</div>
+
+      <div class="article-category">
+  
+    <a
+      class="article-category-link"
+      href="/categories/writeup"
+      data-aos="zoom-in"
+      >WRITEUP</a
+    >
+  
+</div>
+
+    </div>
+    <div class="hr-line"></div>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <h2 id="js-safe-40">
+<a class="header-anchor" href="#js-safe-40"></a>
+JS SAFE 4.0
+</h2><p><img src="https://i.imgur.com/HhKIUby.png" alt=""></p>
+<p>Tuy nhiên khi mở file chạy và mở devtools thì nó không hiện gì (f5 là lag luôn):</p>
+<p><img src="https://i.imgur.com/jCyShIZ.png" alt=""></p>
+<h3 id="code-and-overview">
+<a class="header-anchor" href="#code-and-overview"></a>
+Code and overview:
+</h3><p><img src="https://i.imgur.com/I6F9D7k.png" alt=""></p>
+<p>Ban đầu mình bị thu hút bởi đoạn code này:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">var</span> <span class="n">code</span> <span class="o">=</span> <span class="err">`</span>\<span class="n">x60</span>
+</span></span><span class="line"><span class="cl">  <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">({</span><span class="n">flag</span><span class="p">});</span> 
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">100</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="n">setTimeout</span><span class="p">(</span><span class="s1">&#39;debugger&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="s2">&#34;</span><span class="se">\x24\x7B\x22</span><span class="s2">   .?  K 7 hA  [Cdml&lt;U}9P  @dBpM) -$A%!X5[ &#39;% U(!_ (]c 4zp$RpUi(mv!u4!D</span><span class="si">%i</span><span class="s2">%6!D&#39;Af$Iu8HuCP&gt;qH.*(Nex.)X&amp;{I&#39;$ ~Y0mDPL1 U08&lt;2G{ ~ _:h\ys! K A( f.&#39;0 p!s    fD] (  H  E &lt; 9Gf.&#39; XH,V1 P * -P</span><span class="se">\x22\x7D</span><span class="s2">&#34;</span> <span class="o">!=</span> <span class="p">(</span><span class="s2">&#34;</span><span class="se">\x24\x7B\x22</span><span class="s2">&#34;</span> <span class="o">+</span> <span class="n">checksum</span><span class="p">(</span><span class="n">code</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\x22\x7D</span><span class="s2">&#34;</span><span class="p">))</span> <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">flag</span> <span class="o">=</span> <span class="n">flag</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">i‍</span> <span class="o">=</span> <span class="mi">1337</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">pool</span> <span class="o">=</span> <span class="s1">&#39;c_3L9zKw_l1HusWN_b_U0c3d5_1&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">while</span> <span class="p">(</span><span class="n">pool</span><span class="o">.</span><span class="n">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">if</span><span class="p">(</span><span class="n">flag</span><span class="o">.</span><span class="n">shift</span><span class="p">()</span> <span class="o">!=</span> <span class="n">pool</span><span class="o">.</span><span class="n">splice</span><span class="p">((</span><span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">||</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">16807</span> <span class="o">%</span> <span class="mi">2147483647</span><span class="p">)</span><span class="o">%</span><span class="n">pool</span><span class="o">.</span><span class="n">length</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span> <span class="k">return</span> <span class="bp">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="bp">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">\<span class="n">x60</span><span class="err">`</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">setTimeout</span><span class="p">(</span><span class="s2">&#34;x = Function(&#39;flag&#39;, &#34;</span> <span class="o">+</span> <span class="n">code</span> <span class="o">+</span> <span class="s2">&#34;)&#34;</span><span class="p">);</span>  
+</span></span></code></pre></div><p>Và mấy cái comment kiểu vầy:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">WARNING</span><span class="p">:</span> <span class="n">Do</span> <span class="n">NOT</span> <span class="n">modify</span> <span class="n">your</span> <span class="n">HTML</span> <span class="n">once</span> <span class="n">downloaded</span><span class="o">.</span> <span class="n">Otherwise</span><span class="p">,</span> <span class="n">it</span><span class="s1">&#39;ll stop working</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="n">it</span><span class="s1">&#39;ll not accept the correct password) and might compromise your stored data.</span>
+</span></span><span class="line"><span class="cl"><span class="o">--&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="n">TODO</span><span class="p">:</span> <span class="n">Whole</span> <span class="n">document</span> <span class="n">integrity</span> <span class="n">check</span><span class="p">:</span> <span class="k">if</span> <span class="p">(</span><span class="n">document</span><span class="o">.</span><span class="n">documentElement</span><span class="o">.</span><span class="n">outerHTML</span><span class="o">.</span><span class="n">length</span> <span class="o">==</span> <span class="mi">23082</span><span class="p">)</span> <span class="o">//...</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="n">TODO</span><span class="p">:</span> <span class="n">Utility</span> <span class="n">function</span> <span class="k">for</span> <span class="n">detecting</span> <span class="n">the</span> <span class="n">opening</span> <span class="n">of</span> <span class="n">DevTools</span><span class="p">,</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">stackoverflow</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">q</span><span class="o">/</span><span class="mi">7798748</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="n">TODO</span><span class="p">:</span> <span class="n">Create</span> <span class="n">wrapper</span> <span class="n">function</span> <span class="n">to</span> <span class="n">support</span> <span class="n">async</span><span class="o">/</span><span class="n">await</span> <span class="k">for</span> <span class="n">setTimeout</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span>       <span class="n">E</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="n">something</span> <span class="n">like</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">stackoverflow</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">q</span><span class="o">/</span><span class="mi">33289726</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="n">TODO</span><span class="p">:</span> <span class="n">Checksum</span> <span class="n">check</span> <span class="k">for</span> <span class="n">the</span> <span class="n">utility</span> <span class="n">funcitons</span> <span class="n">themselves</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="p">(</span><span class="n">checksum</span><span class="p">(</span><span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">checksum</span><span class="p">))</span> <span class="o">==</span> <span class="s1">&#39;...&#39;</span>
+</span></span></code></pre></div><h2 id="first-approach">
+<a class="header-anchor" href="#first-approach"></a>
+First approach
+</h2><p>Sau đó mình trace ra và rev hàm <code>open_safe()</code> trước:</p>
+<p>Thì <code>keyhold.value</code> là giá trị từ hộp thoại mình nhập vào, sau đó được check regex:</p>
+<p>Nói chung là sau khi tìm hiểu thì đoạn regex này sẽ lấy password = &ldquo;CTF{&hellip;}&rdquo; và password[1] sẽ là content bên trong {}, sau đó nó sẽ được đưa vào x để xử lí.</p>
+<p>Tới đây, mình đã thư copy hàm <code>x()</code> sang file mới và run thử:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">  function x(){ 
+</span></span><span class="line"><span class="cl">    i = 1337;
+</span></span><span class="line"><span class="cl">    pool = &#39;c_3L9zKw_l1HusWN_b_U0c3d5_1&#39;.split(&#39;&#39;);
+</span></span><span class="line"><span class="cl">    while (pool.length &gt; 0) 
+</span></span><span class="line"><span class="cl">        process.stdout.write(pool.splice((i = (i || 1) * 16807 % 2147483647)%pool.length, 1)[0]);
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">x(); //01Kb3W_5l__9LUzNcH3cu1dw_s_
+</span></span></code></pre></div><p><code>01Kb3W_5l__9LUzNcH3cu1dw_s_</code></p>
+<p>Nhìn có vẻ không giống password lắm nhưng mình từng nghĩ là nó đúng, tuy nhiên:</p>
+<p><img src="https://i.imgur.com/aqgYFVF.png" alt=""></p>
+<p>Mình có thắc mắc là chương trình này dùng <code>splice()</code> built-in hay là của code chương trình nên mình thử copy <code>splice()</code> của qua file khác chạy và kết quả cũng tương tự.</p>
+<p>Mình ban đầu thử xóa <code>ChecksumError()</code> và mấy hàm lạ lạ ở phía dưới, xong thử viết lại code và debug trên browser:</p>
+<p><img src="https://i.imgur.com/3XFTNlA.png" alt=""></p>
+<p><img src="https://i.imgur.com/7UNUgB2.png" alt=""></p>
+<p>Lần này kết quả có vẻ khác nhưng nó cũng không phải là flag.</p>
+<p>Vậy là các hàm <code>checksum(),...</code> có ảnh hưởng đến đoạn <code>x()</code> này và hơn nữa là code của đoạn hàm <code>x()</code> sẽ không được sửa vì sửa sẽ ảnh hưởng đến kết quả</p>
+<p>Sau khi hỏi anh <code>Mochi</code> thì mình mới biết là chỉ có dòng này là antidebug, và mình đã tìm hiểu thử:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Object.defineProperty(Object.prototype, &#39;splice&#39;, {get:splice});
+</span></span></code></pre></div><blockquote>
+<p>Nó sẽ phát hiện devtools có đang mở hay không bằng gợi ý trong comment này:</p>
+<p><code>// TODO: Utility function for detecting the opening of DevTools, https://stackoverflow.com/q/7798748</code></p>
+<p>Và nó sẽ phát hiện và gọi getter liên tục tạo thành vòng lặp vô tận khiến browser bị đơ không debug được</p></blockquote>
+<p>Mình đã thử download file mới và xóa mỗi dòng này thì debug được:</p>
+<p>Thử đặt breakpoint và trace tới đoạn so sánh:</p>
+<p><img src="https://i.imgur.com/fodvvZR.png" alt=""></p>
+<p>Ban đầu mình bị stuck và không biết làm sao để lấy giá trị đoạn code phía sau, mình thử tìm kiếm check funtion retrun value,&hellip; nhưng không được. Sau một khoảng thời gian lâu, mình đưa chuột vào để kiểm tra cái khúc này thì mình thấy có chữ cái hiện lên, mình thử vài lần thì nó là một chuỗi có nghĩa:</p>
+<p><img src="https://i.imgur.com/wN1IQ6z.png" alt=""></p>
+<p>Thì ra là mình có thể debug bằng cách này, lần tiếp theo sẽ là kí tự tiếp theo, sau 1 hồi thì mình thu được đoạn này:</p>
+<p><code>W0w_5ucH_N1c3_d3bU9_sK1lLz_</code></p>
+<p>Được đoạn này nhưng lúc mình nhập vào file gốc thì vẫn bị <strong><code>Access Denied</code></strong></p>
+<h2 id="second-approach">
+<a class="header-anchor" href="#second-approach"></a>
+Second approach
+</h2><p>Và tới đây mình thấy đoạn mâu thuẫn nếu mà file chỉ có đoạn check là hàm <code>x()</code> mà hàm này chỉ check đoạn đầu, vậy thì còn đoạn check ở phía sau đâu?</p>
+<p>Mình luôn nghĩ là điều gì đó có đoạn checksum ảnh hưởng tới chổ checkflag nhưng vẫn không biết nó là gì:</p>
+<p><img src="https://i.imgur.com/89Im5kr.png" alt=""></p>
+<p>Quay lại đoạn comment ở trên, vẫn còn vài chổ mình chưa khai thác:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// TODO: Whole document integrity check: if (document.documentElement.outerHTML.length == 23082) //...
+</span></span><span class="line"><span class="cl">// TODO: Create wrapper function to support async/await for setTimeout
+</span></span><span class="line"><span class="cl">//       E.g. something like https://stackoverflow.com/q/33289726
+</span></span><span class="line"><span class="cl">// TODO: Checksum check for the utility funcitons themselves, e.g. (checksum(&#39; &#39; + checksum)) == &#39;...&#39;
+</span></span></code></pre></div><p>Đầu tiên là file cần check length và bài này yêu cầu mình làm một cái hàm hỗ trợ async/await cho <code>setTimeout</code> và checksum cho chính bản thân nó</p>
+<p>Đầu tiên mình giữ nguyên length file (sau này mình mới biết là nó không ảnh hưởng lắm), mình không làm hàm settime out mà dùng thẳng <code>(checksum(' ' + checksum)) == '...'</code> luôn:</p>
+<p>Mình thử sửa từ đoạn này:</p>
+<p><code>console.log(&quot;checksum test&quot;, checksum(checksum + ' '));</code></p>
+<p>thành đoạn này:</p>
+<p><code>console.log(&quot;checksum test&quot;, checksum(' ' + checksum));</code></p>
+<p>Và đây là kết quả:</p>
+<p><img src="https://i.imgur.com/4bZXq8Z.png" alt=""></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">checksum test pA: Object.defineProperty(document.body, &#39;className&#39;, {
+</span></span><span class="line"><span class="cl">    get() {
+</span></span><span class="line"><span class="cl">        return this.getAttribute(&#39;class&#39;) || &#39;&#39;
+</span></span><span class="line"><span class="cl">    },
+</span></span><span class="line"><span class="cl">    set(x) {
+</span></span><span class="line"><span class="cl">        this.setAttribute(&#39;class&#39;, (x != &#39;granted&#39; || (/^CTF{([0-9a-zA-Z_@!?-]+)}$/.exec(keyhole.value) || x)[1].endsWith(&#39;Br0w53R_Bu9s_C4Nt_s70p_Y0u&#39;)) ? x : &#39;denied&#39;)
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}) //
+</span></span></code></pre></div><p>Đoạn hidden code này chính là những gì mình nhìn thấy khi mà checksum checksum chính bản thân nó, nó sẽ làm hiện lên những kí tự không nhìn thấy trong VScode:</p>
+<p><img src="https://i.imgur.com/M4B3Epm.png" alt=""></p>
+<p>Có thể thấy đoạn checkflag ở khúc cuối bằng <code>endsWith()</code> và tổng hợp lại mình có được flag.</p>
+<p>Flag: <code>CTF{W0w_5ucH_N1c3_d3bU9_sK1lLz_Br0w53R_Bu9s_C4Nt_s70p_Y0u}</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+
+      
+        <div class="sponsor-wrapper">
+  <div class="sponsor-button-wrapper">
+    <div class="sponsor-icon rotate"></div>
+    <div class="sponsor-title">Sponsor</div>
+    <div class="sponsor-icon rotate"></div>
+  </div>
+  <div class="sponsor-tip">Please buy author a cup of coffee!</div>
+  
+    <div class="sponsor-qr">
+      
+        <div class="sponsor-qr-image-wrapper">
+          <img src="/images/bmc_qr_lephuduc.png" alt="Le Phu Duc" width="200" />
+          <p class="sponsor-qr-name">Le Phu Duc</p>
+        </div>
+      
+    </div>
+  
+</div>
+      
+
+      
+        
+
+<div class="share-wrapper">
+  
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:1313/post/googlectf2022/" target="_blank" rel="noopener noreferrer" title="Google CTF 2022">
+      <div class="share-icon icon icon-facebook">
+        
+      </div>
+    </a>
+  
+    <a href="https://twitter.com/intent/tweet?url=http://localhost:1313/post/googlectf2022/&amp;text=Google%20CTF%202022&amp;via=http://localhost:1313/" target="_blank" rel="noopener noreferrer" title="Google CTF 2022">
+      <div class="share-icon icon icon-twitter">
+        
+      </div>
+    </a>
+  
+    <a href="https://www.linkedin.com/shareArticle?url=http://localhost:1313/post/googlectf2022/&amp;title=Google%20CTF%202022&amp;summary=Writeup%20for%20Google%20CTF%202022&amp;mini=true&amp;ro=true" target="_blank" rel="noopener noreferrer" title="Google CTF 2022">
+      <div class="share-icon icon icon-linkedin">
+        
+      </div>
+    </a>
+  
+    <a href="https://www.reddit.com/submit?url=http://localhost:1313/post/googlectf2022/&amp;title=Google%20CTF%202022" target="_blank" rel="noopener noreferrer" title="Google CTF 2022">
+      <div class="share-icon icon icon-reddit">
+        
+      </div>
+    </a>
+  
+</div>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+      <ul class="article-tag-list" itemprop="keywords">
+  
+    <li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/reverse"
+        rel="tag"
+        >REVERSE</a
+      >
+    </li>
+  
+    <li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/vietnamese"
+        rel="tag"
+        >VIETNAMESE</a
+      >
+    </li>
+  
+</ul>
+
+    </footer>
+  </div>
+  
+    
+  <nav
+    id="article-nav"
+    data-aos="fade-up"
+  >
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          <img
+            data-src="/images/post_covers/corctf2022.jpeg"
+            data-sizes="auto"
+            alt="CORCTF 2022"
+            class="lazyload"
+          />
+        
+        <a href="http://localhost:1313/post/corctf2022/"></a>
+        <div class="article-nav-caption">Newer</div>
+        <h3 class="article-nav-title">
+          
+            CORCTF 2022
+          
+        </h3>
+      </div>
+    
+
+    
+      <div class="article-nav-link-wrap article-nav-link-right">
+        
+          <img
+            data-src="/images/post_covers/uiuctf2022.jpeg"
+            data-sizes="auto"
+            alt="UIUCTF 2022"
+            class="lazyload"
+          />
+        
+        <a href="http://localhost:1313/post/uiuctf2022/"></a>
+        <div class="article-nav-caption">Older</div>
+        <h3 class="article-nav-title">
+          
+            UIUCTF 2022
+          
+        </h3>
+      </div>
+    
+  </nav>
+
+
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+</section>
+        </div>
+        
+        
+        
+
+
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+
+
+<footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    <div>
+      <span class="icon-copyright"></span>
+      2022 -
+      2025
+      <span class="footer-info-sep rotate"></span>
+      Le Phu Duc
+    </div>
+    
+    
+    
+      <div>
+        <span class="icon-brush"
+          >&nbsp;
+            51.0k
+          </span
+        >
+        &nbsp;|&nbsp;
+        <span class="icon-coffee">&nbsp;
+          
+          
+
+          04:07
+        </span>
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv"
+          >Number of visits&nbsp;<span
+            id="busuanzi_value_site_pv"
+          ></span
+        ></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv"
+          >Number of visitors&nbsp;<span
+            id="busuanzi_value_site_uv"
+          ></span
+        ></span>
+      </div>
+    
+  </div>
+</footer>
+
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar">
+        <div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper toc-div-class">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#js-safe-40">JS SAFE 4.0</a>
+      <ul>
+        <li><a href="#code-and-overview">Code and overview:</a></li>
+      </ul>
+    </li>
+    <li><a href="#first-approach">First approach</a></li>
+    <li><a href="#second-approach">Second approach</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+      </div>
+      <div class="sidebar-common-sidebar hidden">
+        
+<div class="sidebar-author">
+  <img
+    data-src="/avatar/shiba.jpg"
+    data-sizes="auto"
+    alt="Le Phu Duc"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Le Phu Duc</div>
+  <div class="sidebar-description">a.k.a Jinn</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>Posts</div>
+    
+    <div class="sidebar-state-number">16</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>Categories</div>
+    <div class="sidebar-state-number">
+      1
+    </div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>Tags</div>
+    <div class="sidebar-state-number">6</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class="icon-discord sidebar-social-icon">
+      <a
+        href="https://discordapp.com/users/lephuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="discord"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-facebook sidebar-social-icon">
+      <a
+        href="https://www.facebook.com/lephuduc0309"
+        itemprop="url"
+        target="_blank"
+        aria-label="facebook"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/lephuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-instagram sidebar-social-icon">
+      <a
+        href="https://www.instagram.com/le.phuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="instagram"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-linkedin sidebar-social-icon">
+      <a
+        href="https://www.linkedin.com/in/lephuduc"
+        itemprop="url"
+        target="_blank"
+        aria-label="linkedin"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+    <div class="icon-twitter sidebar-social-icon">
+      <a
+        href="https://twitter.com/lephuduck"
+        itemprop="url"
+        target="_blank"
+        aria-label="twitter"
+        rel="noopener external nofollow noreferrer"
+      ></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="Home"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe632;
+        
+      </div>
+      <div class="sidebar-menu-link">Home</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="About"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe628;
+        
+      </div>
+      <div class="sidebar-menu-link">About</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="Archives"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe604;
+        
+      </div>
+      <div class="sidebar-menu-link">Archives</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/achievements"
+        aria-label="Achievements"
+      ></a>
+      <div class='sidebar-menu-icon icon '>
+        
+          &#xe621;
+        
+      </div>
+      <div class="sidebar-menu-link">Achievements</div>
+    </div>
+  
+</div>
+
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
+
+    </div>
+    
+    
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  <script
+    src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"
+    
+    
+    
+    
+    integrity="sha384-3gT/vsepWkfz/ff7PpWNUeMzeWoH3cDhm/A8jM7ouoAK0/fP/9bcHHR5kHq2nf&#43;e" crossorigin="anonymous"
+  ></script>
+
+
+
+
+  
+  
+  
+  
+  
+  
+  <script
+    src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"
+    
+    
+    
+    
+    integrity="sha384-J08i8An/QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"
+  ></script>
+
+
+
+
+
+
+
+
+
+  
+      
+      <script src="/js/main.js" ></script>
+      
+
+
+
+  
+
+
+
+
+
+  
+      
+      <script src="/js/aos.js" ></script>
+      
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+
+
+
+
+
+  
+      
+      <script src="/js/pjax_main.js" data-pjax></script>
+      
+
+
+
+
+
+  
+
+  
+  
+  
+  
+  
+  
+  <script
+    src="https://npm.webcache.cn/mouse-firework@0.1.0/dist/index.umd.js"
+    
+    
+    
+    
+    integrity="sha384-KM6i7tu43nYd6e0beIljxHMC5tZc58XBDu7pPA58w50h18Jsx7gLdimfS09RXlKv" crossorigin="anonymous"
+  ></script>
+
+
+<script>
+  if (window.firework) {
+    const options = JSON.parse("{\"excludeelements\":[\"a\",\"button\"],\"particles\":[{\"colors\":[\"#c0971d\",\"#caa02f\",\"#d4aa40\",\"#ddbb62\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"emit\"],\"number\":20,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.3,0.5],\"radius\":[16,32]}},{\"colors\":[\"#f4e74d\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"diffuse\"],\"number\":1,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.2,0.5],\"lineWidth\":6,\"radius\":20}}]}");
+    options.excludeElements = options.excludeelements;
+    delete options.excludeelements;
+    window.firework(options);
+  }
+</script>
+
+
+
+  
+
+  
+  
+  
+  
+  
+  
+  <script
+    src="https://npm.webcache.cn/theme-shokax-pjax@0.0.3/dist/index.umd.js"
+    
+    
+    
+    
+    integrity="sha384-xneY1WY8hOfUzswrE4CrYq35N4BdVcxqxwHPr9zawE/jMSCxD&#43;jAPU55x/jj3wlf" crossorigin="anonymous"
+  ></script>
+
+
+  <script>
+    function loadScripts(scripts, index) {
+      if (index < scripts.length) {
+        const script = scripts[index];
+        const src = script.getAttribute('src');
+
+        const loadScript = (scriptContent) => {
+          return new Promise((resolve, reject) => {
+            const scriptElement = document.createElement('script');
+            if (script.type) {
+              scriptElement.type = script.type;
+            }
+            if (script.src) {
+              scriptElement.src = script.src;
+              scriptElement.onload = resolve;
+              scriptElement.onerror = reject;
+            }
+            if (scriptContent) {
+              scriptElement.text = scriptContent;
+            }
+            document.head.appendChild(scriptElement);
+            if (!script.src) {
+              resolve();
+            }
+          })
+          
+        }
+
+        ;(src ? loadScript() : loadScript(script.text))
+          .then(() => loadScripts(scripts, index + 1))
+          .catch(error => {
+            console.error(`Failed to load script: ${src || 'inline script'}`, error);
+            loadScripts(scripts, index + 1);
+          });
+      }
+    }
+    window.Pjax &&
+      new window.Pjax({
+        selectors: [
+          "#header>img",
+          "#header>picture",
+          "head title",
+          "#header-title",
+          "#subtitle-wrap",
+          "#main",
+          "#content",
+          ".sidebar-widget",
+          ".sidebar-wrapper",
+          "#mobile-nav",
+          "#lazy-script",
+        ],
+        switches: {
+          "#content": function(oldEl, newEl) {
+            
+            oldEl.className = newEl.className;
+            this.onSwitch();
+          },
+          "#header-title": Pjax.switches.outerHTML,
+          "#subtitle-wrap": Pjax.switches.outerHTML,
+          "#main": function (oldEl, newEl) {
+            const scripts = [...newEl.querySelectorAll("script")];
+            loadScripts(scripts, 0);
+            oldEl.outerHTML = newEl.outerHTML;
+            this.onSwitch();
+          },
+          "#mobile-nav": Pjax.switches.outerHTML,
+          "#lazy-script": function (oldEl, newEl) {
+            const scripts = [...newEl.querySelectorAll("script")];
+            loadScripts(scripts, 0);
+            oldEl.innerHTML = newEl.innerHTML;
+            this.onSwitch();
+          },
+        },
+        cacheBust: false,
+      });
+  </script>
+  
+
+
+
+
+
+  
+      
+      <script src="/js/pjax.js" ></script>
+      
+
+
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+      
+      
+        
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "Le Phu Duc",
+          title: "Google CTF 2022",
+          url: "http:\/\/localhost:1313\/post\/googlectf2022\/",
+          description: "Writeup for Google CTF 2022",
+          cover: "http:\/\/localhost:1313\/images\/post_covers\/googlectf2022.jpeg",
+        };
+      </script>
+    
+    
+    
+      
+
+
+
+
+
+  
+      
+      <script src="/js/insert_highlight.js" data-pjax></script>
+      
+
+      
+      
+      
+      
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js", "sha384-DiL6M\/gG\u002bwmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF\/N6lrZi\/")).default;
+
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8\u002boTJ7m3DfYEWX1fu1scuS4\u002bs")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8\u002boTJ7m3DfYEWX1fu1scuS4\u002bs")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+      
+    
+    
+  </div>
+</div>
+
+
+
+
+  
+
+  
+  
+  
+  
+  
+  
+  <script
+    src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js"
+    
+    async
+    
+    
+    integrity="sha384-0M75wtSkhjIInv4coYlaJU83&#43;OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id&#43;S" crossorigin="anonymous"
+  ></script>
+
+
+
+
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      });
+    }
+  </script>
+
+
+<script>
+  const reimuCopyright = String.raw`
+   ______     ______     __     __    __     __  __    
+  /\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+  \ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+   \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+    \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                    
+  `;
+  console.log(String.raw`%c ${reimuCopyright}`, "color: #ff5252;");
+  console.log(
+    "%c Theme.Reimu" + " %c https://github.com/D-Sketon/hugo-theme-reimu ",
+    "color: white; background: #ff5252; padding:5px 0;",
+    "padding:4px;border:1px solid #ff5252;",
+  );
+</script>
+
+
+  
+
+  
+  
+  
+  
+  
+  
+  <script
+    src="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.js"
+    
+    
+    
+    
+    integrity="sha384-gdGYZwHnfJM54evoZhpO0s6ZF5BQiybkiyW7VXr&#43;h5UfruuRL/aORyw&#43;5&#43;HZoU6e" crossorigin="anonymous"
+  ></script>
+
+
+  
+    <script>
+      const ap = new APlayer({
+          theme: "var(--color-link)",
+          container: document.getElementById('aplayer'),
+          audio: JSON.parse("[{\"artist\":\"NewJeans\",\"cover\":\"/images/song_covers/ditto.jpg\",\"name\":\"Ditto\",\"url\":\"/songs/ditto.mp3\"},{\"artist\":\"NewJeans\",\"cover\":\"/images/song_covers/eta.jpg\",\"name\":\"ETA\",\"url\":\"/songs/ETA.mp3\"}]") || [],
+          fixed:  null  || false,
+          autoplay:  null  || false,
+          loop: '' || 'all',
+          order: '' || 'list',
+          preload: '' || 'auto',
+          volume:  null  || 0.7,
+          mutex:  null  || true,
+          listFolded:  null  || false,
+          lrcType:  null  || 0,
+      });
+    </script>
+  
+
+
+
+  </body>
+</html>

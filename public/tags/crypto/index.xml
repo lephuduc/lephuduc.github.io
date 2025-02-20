@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Crypto on You just landed on Jinn&#39;s site, let&#39;s find out..</title>
+    <link>http://localhost:1313/tags/crypto/</link>
+    <description>Recent content in Crypto on You just landed on Jinn&#39;s site, let&#39;s find out..</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 06 Jun 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/crypto/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DEFCON Quals 2023</title>
+      <link>http://localhost:1313/post/defconquals-2023/</link>
+      <pubDate>Tue, 06 Jun 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/defconquals-2023/</guid>
+      <description>Writeup mirrored from The Council of Sheep</description>
+    </item>
+  </channel>
+</rss>

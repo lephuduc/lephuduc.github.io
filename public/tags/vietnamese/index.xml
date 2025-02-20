@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vietnamese on You just landed on Jinn&#39;s site, let&#39;s find out..</title>
+    <link>http://localhost:1313/tags/vietnamese/</link>
+    <description>Recent content in Vietnamese on You just landed on Jinn&#39;s site, let&#39;s find out..</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 29 Jan 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/vietnamese/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>TetCTF 2024</title>
+      <link>http://localhost:1313/post/tetctf-2024/</link>
+      <pubDate>Mon, 29 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/tetctf-2024/</guid>
+      <description>Write up all reverse challenges in Tet CTF 2024</description>
+    </item>
+    <item>
+      <title>CDDC 2023</title>
+      <link>http://localhost:1313/post/cddc2023/</link>
+      <pubDate>Wed, 14 Jun 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/cddc2023/</guid>
+      <description>Writeup for rev challenge in CDDC2023</description>
+    </item>
+    <item>
+      <title>HITCON CTF 2022</title>
+      <link>http://localhost:1313/post/hitconctf2022/</link>
+      <pubDate>Sun, 27 Nov 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/hitconctf2022/</guid>
+      <description>Write up for rev problem in HITCON CTF 2022</description>
+    </item>
+    <item>
+      <title>Hack.lu CTF 2022</title>
+      <link>http://localhost:1313/post/hackluctf2022/</link>
+      <pubDate>Fri, 28 Oct 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/hackluctf2022/</guid>
+      <description>Writeup for Hack.lu CTF 2022</description>
+    </item>
+    <item>
+      <title>WM CTF 2022</title>
+      <link>http://localhost:1313/post/wmctf2022/</link>
+      <pubDate>Sat, 20 Aug 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/wmctf2022/</guid>
+      <description>Write up for rev problem in WM CTF 2022</description>
+    </item>
+    <item>
+      <title>UIUCTF 2022</title>
+      <link>http://localhost:1313/post/uiuctf2022/</link>
+      <pubDate>Sat, 30 Jul 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/uiuctf2022/</guid>
+      <description>Writeup for The UIUCTF 2022</description>
+    </item>
+    <item>
+      <title>Google CTF 2022</title>
+      <link>http://localhost:1313/post/googlectf2022/</link>
+      <pubDate>Wed, 29 Jun 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/googlectf2022/</guid>
+      <description>Writeup for Google CTF 2022</description>
+    </item>
+    <item>
+      <title>CORCTF 2022</title>
+      <link>http://localhost:1313/post/corctf2022/</link>
+      <pubDate>Tue, 28 Jun 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/corctf2022/</guid>
+      <description>Writeup for CORCTF 2022</description>
+    </item>
+    <item>
+      <title>reversing.kr</title>
+      <link>http://localhost:1313/post/reversing.kr/</link>
+      <pubDate>Sun, 01 May 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/reversing.kr/</guid>
+      <description>Write up for rev problem in reversing.kr</description>
+    </item>
+    <item>
+      <title>PicoCTF 2022</title>
+      <link>http://localhost:1313/post/picoctf2021/</link>
+      <pubDate>Tue, 09 Mar 2021 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/picoctf2021/</guid>
+      <description>Write up for rev problem in PicoCTF 2022</description>
+    </item>
+  </channel>
+</rss>

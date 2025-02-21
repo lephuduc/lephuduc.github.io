@@ -302,7 +302,7 @@ algolia_search:
 ########################################
 
 preloader:
-  enable: true
+  enable: false
   text: 
   icon: /images/loading-golden.png # default use inline svg for fast speed, you can use a image url
 

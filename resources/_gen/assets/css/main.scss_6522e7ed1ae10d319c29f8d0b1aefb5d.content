@@ -6,14 +6,14 @@
 }
 
 :root {
-  --red-0: #ecc756;
-  --red-1: #ebcf7c;
-  --red-2: #d8c16d;
-  --red-3: #e0cf8b  ;
-  --red-4: #ddce90;
-  --red-5: #dfd3a4;
-  --red-5-5: #030302;
-  --red-6: #faf5e1;
+  --red-0: #d4af37;
+  --red-1: #dbb94e;
+  --red-2: #e2c265;
+  --red-3: #e9cc7c;
+  --red-4: #f0d693;
+  --red-5: #f7e0aa;
+  --red-5-5: #2c2508;
+  --red-6: #fdf8e7;
   --grey-9: #999;
   --grey-7: #777;
   --color-archive-year: black;
@@ -31,8 +31,8 @@
   --color-meta-shadow: var(--red-6);
   --color-hover-shadow: rgba(150, 150, 150, 0.1);
   --color-h2-after: var(--red-1);
-  --color-red-6-shadow: #ebcb6199;
-  --color-red-3-shadow: #cfb7664d;
+  --color-red-6-shadow: rgba(212, 175, 55, 0.6);
+  --color-red-3-shadow: rgba(233, 204, 124, 0.3);
   --highlight-nav: #e6e6e6;
   --highlight-scrollbar: #d6d6d6;
   --highlight-background: #f7f7f7;

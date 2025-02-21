@@ -131,16 +131,6 @@
 
 
 
-  
-
-
-
-
-
-
- <link rel="stylesheet" href="/css/loader.css" />
-
-
 
 
 
@@ -226,44 +216,6 @@
   </head>
   <body>
     
-  <div id='loader'>
-    <div class="loading-left-bg loading-bg"></div>
-    <div class="loading-right-bg loading-bg"></div>
-    <div class="spinner-box">
-      <div class="loading-taichi">
-        
-          <img src="/images/loading-golden.png" alt="loading" />
-        
-      </div>
-      <div class="loading-word"></div>
-    </div>
-  </div>
-  </div>
-  <script>
-    var time = null;
-    var startLoading = () => {
-      time = Date.now();
-      document.getElementById('loader').classList.remove("loading");
-    }
-    var endLoading = () => {
-      if (!time) {
-        document.body.style.overflow = 'auto';
-        document.getElementById('loader').classList.add("loading");
-      } else {
-        if (Date.now() - time > 500) {
-          time = null;
-          document.body.style.overflow = 'auto';
-          document.getElementById('loader').classList.add("loading");
-        } else {
-          setTimeout(endLoading, 500 - (Date.now() - time));
-          time = null;
-        }
-      }
-    }
-    window.addEventListener('DOMContentLoaded', endLoading);
-    document.getElementById('loader').addEventListener('click', endLoading);
-  </script>
-
 
 <div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
 </div>
@@ -773,22 +725,18 @@
 <a class="header-anchor" href="#2024-22-11-asean-cyber-shield-2024"></a>
 [2024-22-11] ASEAN Cyber Shield 2024
 </h1><p>Won the <strong>First prize</strong> in the <strong>General</strong> group <strong>ASEAN Cyber Shield 2024</strong></p>
-<p><img src="/achievement_images/acs2024.png" alt="UIT.Wolf_Brigade"></p>
-<p>General Group - UIT team. Wolf_Brigade include (left to the right): Le Khac Trung Nam, Le Phu Duc, Le Mau Anh Phong, Nguyen Huu Duong</p>
 <p>The team of the University of Information Technology, Vietnam National University Ho Chi Minh City excellently won the First Prize in the General group of the ASEAN Cyber Shield 2024 contest with a total value of 20,000 USD.</p>
 <p>Issued by <strong>The Agency of Digital Policy and Security of Korea (KISA)</strong></p>
 <h1 id="2024-25-10-cyber-sea-game---thailand">
 <a class="header-anchor" href="#2024-25-10-cyber-sea-game---thailand"></a>
 [2024-25-10] Cyber SEA Game - Thailand
 </h1><p>Won the <strong>Second prize</strong> in <strong>Cyber SEA Game 2024</strong></p>
-<p><img src="/achievement_images/csg2024.png" alt="UIT.Wolf_Brigade"></p>
 <p>The Cyber SEA Game is an annual Capture the Flag (CTF) competition for students and young engineers (under 26) from ASEAN member countries, sponsored by the Japanese government. In 2024, the competition was held in Bangkok, Thailand, from October 24–25, 2024. Each country is represented by one team. Representing Vietnam, the UIT.Wolf_Brigade team excelled in the competition, securing Second Place.</p>
 <p>Issued by <strong>ASEAN-Japan Cybersecurity Capacity Building Centre (AJCCBC)</strong></p>
 <h1 id="2023-11-11-asean-student-contest-on-information-security-2023">
 <a class="header-anchor" href="#2023-11-11-asean-student-contest-on-information-security-2023"></a>
 [2023-11-11] ASEAN Student Contest on Information Security 2023
 </h1><p>Won the <strong>First prize</strong> in <strong>ASEAN Student Contest on Information Security 2023</strong></p>
-<p><img src="/achievement_images/ascis2023.jpg" alt="UIT.Wolf_Brigade"></p>
 <p>ASEAN Student Contest on Information Security (ASCIS) is Capture the Flag contest for students from higher-education institutions in ASEAN. This year marked the 16th time the contest is organized for Vietnamese students and the fifth time its eligibility is expanded to include students from ASEAN region.</p>
 <p>Issued by <strong>Vietnam Information Security Association (VNISA)</strong></p>
 <h1 id="202220232024-flare-on-challenges-9-10-11">

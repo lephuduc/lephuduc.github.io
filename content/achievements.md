@@ -10,9 +10,9 @@ lastmod: 2025-02-20T20:12:52+08:00
 
 Won the **First prize** in the **General** group **ASEAN Cyber Shield 2024**
 
-![UIT.Wolf_Brigade](/achievement_images/acs2024.png)
+<!-- ![UIT.Wolf_Brigade](/achievement_images/acs2024.png) -->
 
-General Group - UIT team. Wolf_Brigade include (left to the right): Le Khac Trung Nam, Le Phu Duc, Le Mau Anh Phong, Nguyen Huu Duong
+<!-- General Group - UIT team. Wolf_Brigade include (left to the right): Le Khac Trung Nam, Le Phu Duc, Le Mau Anh Phong, Nguyen Huu Duong -->
 
 The team of the University of Information Technology, Vietnam National University Ho Chi Minh City excellently won the First Prize in the General group of the ASEAN Cyber Shield 2024 contest with a total value of 20,000 USD.
 
@@ -22,7 +22,7 @@ Issued by **The Agency of Digital Policy and Security of Korea (KISA)**
 
 Won the **Second prize** in **Cyber SEA Game 2024**
 
-![UIT.Wolf_Brigade](/achievement_images/csg2024.png)
+<!-- ![UIT.Wolf_Brigade](/achievement_images/csg2024.png) -->
 
 The Cyber SEA Game is an annual Capture the Flag (CTF) competition for students and young engineers (under 26) from ASEAN member countries, sponsored by the Japanese government. In 2024, the competition was held in Bangkok, Thailand, from October 24–25, 2024. Each country is represented by one team. Representing Vietnam, the UIT.Wolf_Brigade team excelled in the competition, securing Second Place.
 
@@ -32,7 +32,7 @@ Issued by **ASEAN-Japan Cybersecurity Capacity Building Centre (AJCCBC)**
 
 Won the **First prize** in **ASEAN Student Contest on Information Security 2023**
 
-![UIT.Wolf_Brigade](/achievement_images/ascis2023.jpg)
+<!-- ![UIT.Wolf_Brigade](/achievement_images/ascis2023.jpg) -->
 
 ASEAN Student Contest on Information Security (ASCIS) is Capture the Flag contest for students from higher-education institutions in ASEAN. This year marked the 16th time the contest is organized for Vietnamese students and the fifth time its eligibility is expanded to include students from ASEAN region.
 

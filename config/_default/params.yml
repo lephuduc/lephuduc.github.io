@@ -412,8 +412,9 @@ sponsor:
     rotate: true
     mask: true # whether to use the images as a mask
   qr:
-    - name: Le Phu Duc
+    - name: buymeacoffee.com/lephuduc                
       src: "/images/bmc_qr_lephuduc.png"
+      # url: buymeacoffee.com/lephuduc                
     # - name: 微信
     #   src: "sponsor/wechat.png"
 

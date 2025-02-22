@@ -28,21 +28,21 @@ timeFormat: "2006-01-02 15:04:05"
 
 author: Le Phu Duc
 description: "a.k.a Jinn"
-subtitle: "뒤집다, 뒤집다, 뒤집다,..."
+subtitle: "Reverse, 리버스, リバース,..."
 
-banner: "images/newjeans2.jpg"
+banner: "images/newjeans3.jpg"
 # You can also write it in the form of the following url
 # banner: "https://example.com"
 
 # If you want to use the srcset attribute, please enable it
 banner_srcset:
-  enable: false
+  enable: true
   srcset:
-    - src: "images/banner-600w.webp"
+    - src: "images/newjeans3.jpg"
       media: "(max-width: 479px)"
-    - src: "images/banner-800w.webp"
+    - src: "images/newjeans3.jpg"
       media: "(max-width: 799px)"
-    - src: "images/banner.webp"
+    - src: "images/newjeans3.jpg"
       media: "(min-width: 800px)"
 
 avatar: "shiba.jpg"
@@ -484,23 +484,31 @@ player:
     enable: true
     options:
       audio: 
+        - name: "Die With A Smile"
+          artist: "Lady Gaga, Bruno Mars"
+          url: /songs/die_with_a_smile.mp3
+          cover: /images/song_covers/die_with_a_smile.jpg
+          lrc: /songs/die_with_a_smile.lrc
         - name: "Ditto"
-          artist: "NewJeans"
+          artist: "NewJeans (뉴진스)"
           url: /songs/ditto.mp3
           cover: /images/song_covers/ditto.jpg
-        - name: "ETA"
-          artist: "NewJeans"
-          url: /songs/ETA.mp3
-          cover: /images/song_covers/eta.jpg
-      fixed:
-      autoplay:
-      loop:
+          lrc: /songs/ditto.lrc
+        - name: "光るなら"
+          artist: "Goose house"
+          url: /songs/hikarunara.mp3
+          cover: /images/song_covers/hikarunara.jpg
+          lrc: /songs/hikarunara.lrc
+      fixed: 
+      mini: false
+      autoplay: false
+      loop: 'all'
       order:
       preload: 
       volume:
       mutex:
-      listFolded:
-      lrcType:
+      listFolded: false
+      lrcType: 3
   meting:
     # https://github.com/metowolf/MetingJS
     # if you want to use meting, please enable aplayer first

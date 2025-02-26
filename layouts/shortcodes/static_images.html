@@ -1,0 +1,6 @@
+<div class="flex gap-2 [&>*>*]:my-0 items-center">
+    {{ range .Params }}
+      <img src="{{ printf "images/%s" . | relURL }}" alt="Image" class="w-auto h-auto">
+    {{ end }}
+  </div>
+  

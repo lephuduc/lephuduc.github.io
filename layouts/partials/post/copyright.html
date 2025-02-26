@@ -7,29 +7,29 @@
 
 <blockquote class="article-copyright">
   {{ if $articleCopyright.content.author }}
-    <p><strong><span class="icon-user icon"></span>本文作者：</strong>{{ $author }} @ {{ $title }}</p>
+    <p><strong><span class="icon-user icon"></span>Author：</strong>{{ $author }} @ {{ $title }}</p>
   {{ end }}
   {{ if $articleCopyright.content.link }}
     <p>
-      <strong><span class="icon-link icon"></span>本文链接：</strong><a href="{{ $permalink }}">{{ $permalink }}</a>
+      <strong><span class="icon-link icon"></span>Article link：</strong><a href="{{ $permalink }}">{{ $permalink }}</a>
     </p>
   {{ end }}
   {{ if $articleCopyright.content.title }}
-    <p><strong><span class="icon-pencil icon"></span>本文标题：</strong>{{ .Title }}</p>
+    <p><strong><span class="icon-pencil icon"></span>Article title：</strong>{{ .Title }}</p>
   {{ end }}
   {{ if $articleCopyright.content.date }}
-    <p><strong><span class="icon-calendar icon"></span>本文发布时间：</strong>{{ $date }}</p>
+    <p><strong><span class="icon-calendar icon"></span>Publication time：</strong>{{ $date }}</p>
   {{ end }}
   {{ if $articleCopyright.content.updated }}
-    <p><strong><span class="icon-calendar icon"></span>本文修改时间：</strong>{{ $updated }}</p>
+    <p><strong><span class="icon-calendar icon"></span>Last modified time：</strong>{{ $updated }}</p>
   {{ end }}
   {{ if $articleCopyright.content.license }}
     <p>
-      <strong><span class="icon-copyright icon"></span>本文版权：</strong>本博客所有文章除特别声明外，均采用
+      <strong><span class="icon-copyright icon"></span>Copyright Noice：</strong>All articles on this blog, unless otherwise stated, are licensed under
       <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener external nofollow noreferrer" target="_blank"
         ><span class="icon-creative-commons"></span>BY-NC-SA</a
       >
-      许可协议。转载请注明出处！
+      the license agreement. Please credit the source when sharing.！
     </p>
     <span class="icon-creative-commons article-copyright-bg"></span>
   {{ end }}

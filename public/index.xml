@@ -6,8 +6,15 @@
     <description>Recent content on You just landed on Jinn&#39;s site, let&#39;s find out..</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 20 Feb 2025 20:12:52 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 21 Feb 2025 13:30:40 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>7-Day Journey at GCC Taiwan</title>
+      <link>http://localhost:1313/post/gcc2025/</link>
+      <pubDate>Fri, 21 Feb 2025 13:30:40 +0000</pubDate>
+      <guid>http://localhost:1313/post/gcc2025/</guid>
+      <description>This is my journey about GCC 2025 in Taiwan</description>
+    </item>
     <item>
       <title>What about me?</title>
       <link>http://localhost:1313/about/</link>
@@ -21,6 +28,13 @@
       <pubDate>Thu, 20 Feb 2025 20:12:52 +0800</pubDate>
       <guid>http://localhost:1313/achievements/</guid>
       <description>&lt;h1 id=&#34;2024-22-11-asean-cyber-shield-2024&#34;&gt;&#xD;&#xA;&lt;a class=&#34;header-anchor&#34; href=&#34;#2024-22-11-asean-cyber-shield-2024&#34;&gt;&lt;/a&gt;&#xD;&#xA;[2024-22-11] ASEAN Cyber Shield 2024&#xD;&#xA;&lt;/h1&gt;&lt;p&gt;Won the &lt;strong&gt;First prize&lt;/strong&gt; in the &lt;strong&gt;General&lt;/strong&gt; group &lt;strong&gt;ASEAN Cyber Shield 2024&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;The team of the University of Information Technology, Vietnam National University Ho Chi Minh City excellently won the First Prize in the General group of the ASEAN Cyber Shield 2024 contest with a total value of 20,000 USD.&lt;/p&gt;&#xA;&lt;p&gt;Issued by &lt;strong&gt;The Agency of Digital Policy and Security of Korea (KISA)&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;h1 id=&#34;2024-25-10-cyber-sea-game---thailand&#34;&gt;&#xD;&#xA;&lt;a class=&#34;header-anchor&#34; href=&#34;#2024-25-10-cyber-sea-game---thailand&#34;&gt;&lt;/a&gt;&#xD;&#xA;[2024-25-10] Cyber SEA Game - Thailand&#xD;&#xA;&lt;/h1&gt;&lt;p&gt;Won the &lt;strong&gt;Second prize&lt;/strong&gt; in &lt;strong&gt;Cyber SEA Game 2024&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>UIUCTF 2024</title>
+      <link>http://localhost:1313/post/uiuctf2024/</link>
+      <pubDate>Sat, 06 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/uiuctf2024/</guid>
+      <description>Writeup for UIUCTF 2024</description>
     </item>
     <item>
       <title>Google CTF 2024</title>

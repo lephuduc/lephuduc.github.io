@@ -286,7 +286,7 @@ giscus:
 ########################################
 
 algolia_search:
-  enable: false
+  enable: true
   appID:
   apiKey:
   indexName:
@@ -364,14 +364,14 @@ firework:
 
 # show the copyright below each article
 article_copyright:
-  enable: false
+  enable: true
   content:
     author: true
     link: false
-    title: false
-    date: false
-    updated: true
-    license: false
+    title: true
+    date: true
+    updated: false
+    license: true
 
 # Clipboard configuration
 clipboard:
@@ -395,7 +395,7 @@ top:
 outdate:
   enable: false
   daysAgo: 180 # The number of days after which the article is considered outdated
-  message: 本文最后更新于 {time}，请注意文中内容可能已经发生变化。
+  message: This article was last updated on {time}. Please note that the content may have changed.
 
 # ICP 备案
 icp:
@@ -465,7 +465,7 @@ service_worker:
 # Experimental
 live2d:
   enable: false
-  position: left # left or right
+  position: right # left or right
 
 # Experimental
 live2d_widgets:

@@ -499,6 +499,11 @@ player:
           url: /songs/hikarunara.mp3
           cover: /images/song_covers/hikarunara.jpg
           lrc: /songs/hikarunara.lrc
+        - name: "高嶺の花子さん"
+          artist: "back number"
+          url: /songs/Takaneno_Hanakosan.mp3
+          cover: /images/song_covers/takaneno_hanakosan.png
+          lrc: /songs/takaneno_hanakosan.lrc
       fixed: 
       mini: false
       autoplay: false

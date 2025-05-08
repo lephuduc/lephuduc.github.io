@@ -8,5 +8,3 @@ pnpm-lock.yaml
 .hugo_build.lock
 
 resources/_gen/
-
-content/post/gcc2025.md

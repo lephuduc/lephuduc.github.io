@@ -501,7 +501,7 @@ player:
           lrc: /songs/hikarunara.lrc
         - name: "高嶺の花子さん"
           artist: "back number"
-          url: /songs/Takaneno_Hanakosan.mp3
+          url: /songs/takaneno_hanakosan.mp3
           cover: /images/song_covers/takaneno_hanakosan.png
           lrc: /songs/takaneno_hanakosan.lrc
       fixed: 
@@ -515,12 +515,4 @@ player:
       listFolded: false
       lrcType: 3
   meting:
-    # https://github.com/metowolf/MetingJS
-    # if you want to use meting, please enable aplayer first
-    enable: false
-    meting_api: # custom api
-    options:
-      id: 2265921590
-      server: netease
-      type: playlist
-      auto:
+    # https://github

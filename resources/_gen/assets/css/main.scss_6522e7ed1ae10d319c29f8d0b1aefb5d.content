@@ -61,12 +61,12 @@
   --color-archive-year: #999;
   --color-default: #999;
   --color-border: var(--red-5);
-  --color-background: #000;
+  --color-background: #0a0a0a;
   --color-code-background: rgba(232, 232, 232, 0.1);
-  --color-header-background: #000;
-  --color-footer-background: #000;
-  --color-mobile-nav-background: #000;
-  --color-wrap: #0a0a0a;
+  --color-header-background: #0a0a0a;
+  --color-footer-background: #0a0a0a;
+  --color-mobile-nav-background: #0a0a0a;
+  --color-wrap: #101010;
   --color-h2-border: #47474a;
   --color-meta-shadow: rgba(0, 0, 0, 0.2);
   --color-hover-shadow: rgba(0, 0, 0, 0.2);

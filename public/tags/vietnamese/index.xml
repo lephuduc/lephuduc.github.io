@@ -6,8 +6,15 @@
     <description>Recent content in Vietnamese on You just landed on Jinn&#39;s site, let&#39;s find out..</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 29 Jan 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 24 Jun 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/vietnamese/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The 37% rule</title>
+      <link>http://localhost:1313/post/32percentrule/</link>
+      <pubDate>Tue, 24 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/32percentrule/</guid>
+      <description>Toán học không chỉ để giải phương trình – nó còn giúp ta hiểu khi nào nên dừng lại để không đánh mất điều tốt đẹp nhất. Bài viết kết nối quy tắc 37% với những quyết định lớn trong cuộc sống.</description>
+    </item>
     <item>
       <title>TetCTF 2024</title>
       <link>http://localhost:1313/post/tetctf-2024/</link>

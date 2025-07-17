@@ -23,6 +23,13 @@ Hope you enjoy it and have a great day!
 
 ## Journeys Around the World
 
-Yes, I love traveling. Anyway, I hope that someday I can visit other countries (Japan, Korea, USA,...) as well. I love experiencing different cultures...
+Yes, I love traveling. Anyway, I hope that someday I can visit other countries (Japan, ~~Korea~~, USA, ...) as well. I love experiencing different cultures...
 
-![countries](/images/countries.png)
+![countries](/images/myVisitedPlaces.gif)
+
+- Sweden
+- China
+- Taiwan
+- Thailand
+- Singapore
+- South Korea

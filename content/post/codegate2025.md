@@ -362,7 +362,7 @@ Once the maze is completely generated, it will handle the player’s movement an
 
 The program seems straightforward until we look at `get_player_pos` and `get_enemy_pos`.
 
-These two functions are just undecompilable — even disassemblable.
+These two functions are just undecompilableeven disassemblable.
 
 
 ![alt text](/images/codegate2025/image-5.png)
@@ -371,8 +371,7 @@ And even the code that handles the initialization of the random is unreadable:
 
 ![alt text](/images/codegate2025/image-6.png)
 
-
-I thought this was a decompiler error, so I didn't think too much and got stuck for a while—until I tried another approach.
+I thought this was a decompiler error, so I didn't think too much and got stuck for a while until I tried another approach.
 
 ### Debugging
 
@@ -520,7 +519,7 @@ def get_player_pos(seed):
 
 ### Solve
 
-To solve this challenge, we need to find the correct initial seed — the first seed that is passed into `get_player_pos` at level 1.
+To solve this challenge, we need to find the correct initial seedthe first seed that is passed into `get_player_pos` at level 1.
 
 To find that seed, I took the first level state (enemy positions, player position, and destination), then tried to brute-force (0x1000) seeds until I found one that generated the exact same map as level 1 (the only level visible to us).
 
@@ -620,7 +619,7 @@ def find_seed(enemy_pos, player_pos,goal):
 
 Let's talk about `next_player_pos`:
 
-After trying with the first state, it gave me too many correct seeds — meaning there's not only one seed that can generate the same level 1.
+After trying with the first state, it gave me too many correct seedsmeaning there's not only one seed that can generate the same level 1.
 
 So from there, I took the found seeds to generate the level 2 maze and checked the player position ("Y", the only visible element) to filter the seeds.
 
@@ -904,7 +903,7 @@ You can find it here:
 
 Since we arrived on Tuesday, the **Gyeongbokgung Palace** was closed, so we went to **Changdeokgung Palace** instead.
 
-It was 1:00 PM, and it was crazy walking under the sunlight at 35°C while taking pictures — but it was still fun though.
+It was 1:00 PM, and it was crazy walking under the sunlight at 35°C while taking picturesbut it was still fun though.
 
 ![alt text](/images/codegate2025/palace.JPEG)
 
@@ -920,7 +919,7 @@ Then, we got back to the hotel at 5:00 PM to check in (check-in had to be after 
 
 ### Myeong-dong Shopping Street
 
-After waking up, we saw a little rain — and fortunately, it was over before we arrived at the street, which made it even more beautiful and pleasant.
+After waking up, we saw a little rainand fortunately, it was over before we arrived at the street, which made it even more beautiful and pleasant.
 
 ![alt text](/images/codegate2025/myeongdong_street_night.JPEG)
 
@@ -956,7 +955,7 @@ After that, we went to the COEX Mall, especially the Starfield Library:
 
 ![alt text](/images/codegate2025/starfield_library.JPEG)
 
-The mall is just soooo big — I couldn't even explore all of it in several hours. But at least, we visited many stores and bought some interesting things. I even found LEGO there — one of my favorite things, haha.
+The mall is just soooo bigI couldn't even explore all of it in several hours. But at least, we visited many stores and bought some interesting things. I even found LEGO thereone of my favorite things, haha.
 
 ![alt text](/images/codegate2025/lego.JPEG)
 
@@ -970,11 +969,11 @@ You know? 24 hours straight with this view is crazyyyy...
 
 ![alt text](/images/codegate2025/laptop_view.JPEG)
 
-But they also had a food table and gave us some food at night — I almost forgot to eat because I was so focused on solving a challenge :D
+But they also had a food table and gave us some food at nightI almost forgot to eat because I was so focused on solving a challenge :D
 
 ![alt text](/images/codegate2025/foot_table.JPEG)
 
-I also went outside and saw some 8-bit arcade games — it was fun.
+I also went outside and saw some 8-bit arcade gamesit was fun.
 
 ![alt text](/images/codegate2025/8bit.JPEG)
 

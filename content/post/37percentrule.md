@@ -5,7 +5,7 @@ summary: "Toán học không chỉ để giải phương trình – nó còn gi�
 categories: ["Blogs"]
 tags: ["Math in life","Philosophy", "Vietnamese"]
 date: 2025-06-24
-draft: true
+draft: false
 authors:
   - Jinn
 cover: /images/post_covers/37percentrule.jpg

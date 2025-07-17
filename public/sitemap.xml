@@ -2,10 +2,28 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/categories/blogs/</loc>
-    <lastmod>2025-06-24T00:00:00+00:00</lastmod>
+    <loc>http://localhost:1313/tags/blogs/</loc>
+    <lastmod>2025-07-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/</loc>
+    <lastmod>2025-07-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/post/codegate2025/</loc>
+    <lastmod>2025-07-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/reverse/</loc>
+    <lastmod>2025-07-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/</loc>
+    <lastmod>2025-07-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/writeup/</loc>
+    <lastmod>2025-07-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/</loc>
+    <lastmod>2025-07-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/blogs/</loc>
     <lastmod>2025-06-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/math-in-life/</loc>
@@ -14,16 +32,10 @@
     <loc>http://localhost:1313/tags/philosophy/</loc>
     <lastmod>2025-06-24T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
-    <lastmod>2025-06-24T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/post/37percentrule/</loc>
     <lastmod>2025-06-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/vietnamese/</loc>
-    <lastmod>2025-06-24T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/</loc>
     <lastmod>2025-06-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/post/gcc2025/</loc>
@@ -38,13 +50,7 @@
     <loc>http://localhost:1313/achievements/</loc>
     <lastmod>2025-02-20T20:12:52+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/reverse/</loc>
-    <lastmod>2024-07-06T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/post/uiuctf2024/</loc>
-    <lastmod>2024-07-06T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/categories/writeup/</loc>
     <lastmod>2024-07-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/post/googlectf-2024/</loc>

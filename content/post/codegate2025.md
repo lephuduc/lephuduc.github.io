@@ -362,7 +362,7 @@ Once the maze is completely generated, it will handle the player’s movement an
 
 The program seems straightforward until we look at `get_player_pos` and `get_enemy_pos`.
 
-These two functions are just undecompilableeven disassemblable.
+These two functions are just undecompilable even disassemblable.
 
 
 ![alt text](/images/codegate2025/image-5.png)
@@ -898,6 +898,10 @@ But on the other hand, the weather at the time I arrived was very hot. It was ar
 The first food I tried in Korea was called ...
 
 You can find it here:
+
+(bro, I can't found it again:, this is image only)
+
+![alt text](/images/codegate2025/food0.JPEG)
 
 ### Changdeokgung Palace
 

@@ -25,7 +25,7 @@ Hope you enjoy it and have a great day!
 
 Yes, I love traveling. Anyway, I hope that someday I can visit other countries (Japan, ~~Korea~~, USA, ...) as well. I love experiencing different cultures...
 
-![countries](/images/myVisitedPlaces.webm)
+![countries](/images/myVisitedPlaces.gif)
 
 - Sweden
 - China

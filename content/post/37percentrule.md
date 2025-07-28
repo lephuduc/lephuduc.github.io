@@ -13,7 +13,7 @@ math: true
 
 ---
 
-# Từ Hành Trình Tìm Kiếm Nữa Kia Đến Quy Tắc 37% Của Cuộc Đời
+# Từ Hành Trình Tìm Kiếm Nửa Kia Đến Quy Tắc 37% Của Cuộc Đời
 
 **"Trong tình yêu, sự nghiệp, và cuộc sống, đâu là lúc ta nên ngừng tìm kiếm và bắt đầu lựa chọn?"**
 
@@ -114,11 +114,11 @@ Theo lời giải chi tiết, gọi:
 
 Theo đó, ta có công thức xác suất:
 
-\[
+$$
 \begin{aligned}
 P(r) = \frac{r}{n} \sum_{k=r+1}^{n} \frac{1}{k-1}
 \end{aligned}
-\]
+$$
 
 Bạn muốn tìm 𝑟 sao cho 𝑃\(𝑟) là lớn nhất.
 

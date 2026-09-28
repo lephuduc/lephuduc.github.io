@@ -2,10 +2,10 @@
 title: "Le Phu Duc"
 ---
 
-Hi, I’m Le Phu Duc, but you can call me *Jinn* for simplicity.
+Here beginneth the tale of **Le Phu Duc**, called **Jinn**.
 
-I’m a student from [VNUHCM - University of Information Technology](https://en.uit.edu.vn/),
-currently working at [ECQ](https://e-cq.net/) as a Security Analyst.
+He is a Security Researcher at [ECQ](https://e-cq.net), and a graduate of the **University of Information Technology**. 
 
-I love playing CTFs and exploring cybersecurity. In particular, I’m diving into Reverse Engineering
-and other binary-related topics. I’m also playing for [Project Sekai](https://sekai.team/).
+He delighteth in the study of cybersecurity, with a particular fondness for Reverse Engineering and the secrets hidden within binaries.
+
+Also a member of the CTF team [Project Sekai](https://sekai.team), where he seeketh knowledge through challenge and craft.

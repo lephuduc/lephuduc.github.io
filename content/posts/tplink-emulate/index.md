@@ -1,8 +1,9 @@
 ---
 title: "Emulate TP-Link devices"
-subtitle: "The way I use to emulate TP-Link BE230 and you can also use it for other ARM IoT devices"
+subtitle: "How I emulate the TP-Link BE230, and how the same approach works for other ARM IoT devices."
 date: 2026-09-03
 category: research
+draft: true
 # tags:
 ---
 ## Guys, I'm back
@@ -79,8 +80,7 @@ b'\xfd7zXZ' -1
 b"'\x05\x19V" -1
 ```
 
-A compressed image still shows its superblock magic, and still has low entropy at the partition borders. Here we have neither, so the body is ciphertext.
-{{< note >}}Entropy tells how random the bytes are. 8.0 is the highest value for one byte. Compressed data is close to 8.0 too, but it still keeps some structure. Encrypted data is 8.0 everywhere and keeps nothing.{{< /note >}}
+A compressed image still shows its superblock magic, and still has low entropy at the partition borders. Here we have neither, so the body is ciphertext.{{< note >}}Entropy tells how random the bytes are. 8.0 is the highest value for one byte. Compressed data is close to 8.0 too, but it still keeps some structure. Encrypted data is 8.0 everywhere and keeps nothing.{{< /note >}}
 
 ### The header
 

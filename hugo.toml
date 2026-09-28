@@ -31,6 +31,11 @@ disableKinds = ['taxonomy', 'term']
 [markup]
   [markup.goldmark.renderer]
     unsafe = true
+  [markup.goldmark.extensions.passthrough]
+    enable = true                 # hands math to layouts/_markup/render-passthrough.html
+    [markup.goldmark.extensions.passthrough.delimiters]
+      block = [['\[', '\]'], ['$$', '$$']]
+      inline = [['\(', '\)']]
   [markup.highlight]
     noClasses = false       # colors are in assets/css/syntax.css
     style = 'github-dark'

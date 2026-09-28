@@ -1,6 +1,6 @@
 ---
-title: "Google CTF 2024"
-subtitle: "Reverse challenges, and a whole bunch of code that turned out to be matrices."
+title: "When the compiler is the obfuscator"
+subtitle: "Nobody wrote an obfuscator for this one. Clang with optimizations on was enough to hide a single matrix multiply - Google CTF 2024"
 date: 2024-06-28
 category: writeup
 tags: ["reverse"]
@@ -209,9 +209,9 @@ Keep in mind this, the matrix uses `rns`, which is like another base.
 #### rns
 
 > **Residue number system**  
-> A residue numeral system (RNS) is a numeral system representing integers by their values modulo several pairwise coprime integers called the moduli. This representation is allowed by the Chinese remainder theorem, which asserts that, if M is the product of the moduli, there is, in an interval of length M, exactly one integer having any given set of modular values. The arithmetic of a residue numeral system is also called multi-modular arithmetic.  
-> [https://en.wikipedia.org/wiki/Residue_number_system](https://en.wikipedia.org/wiki/Residue_number_system)  
-> [https://personal.utdallas.edu/~ivor/ce6305/m5p.pdf](https://personal.utdallas.edu/~ivor/ce6305/m5p.pdf)
+> A residue numeral system (RNS) is a numeral system representing integers by their values modulo several pairwise coprime integers called the moduli. This representation is allowed by the Chinese remainder theorem, which asserts that, if M is the product of the moduli, there is, in an interval of length M, exactly one integer having any given set of modular values. The arithmetic of a residue numeral system is also called multi-modular arithmetic.
+
+{{< side >}}Reference: [residue number system](https://en.wikipedia.org/wiki/Residue_number_system), and [these lecture notes](https://personal.utdallas.edu/~ivor/ce6305/m5p.pdf) if you want the arithmetic worked through.{{< /side >}}
 
 ```c
 conv_from_inp[i] = (hex_byte % 13u) | (16 * ((hex_byte % 5u) | (16 * hex_byte) & 0x30));
@@ -407,16 +407,9 @@ So, I compiled with Clang++ and see the different between without optimize and o
 
 We easily see that optimization makes the code harder. Even if it is just a built-in type, the challenge is using a custom one, which is almost impossible.
 
-It’s just a point of view from a reverser, here’s more about clang optimize:
+It’s just a point of view from a reverser.{{< side >}}More on what the optimizer does: [Clang optimization flags](https://www.incredibuild.com/blog/compiling-with-clang-optimization-flags), a [Hacker News thread](https://news.ycombinator.com/item?id=28207207) and [this r/C_Programming thread](https://www.reddit.com/r/C_Programming/comments/conavx/clangs_optimizer_is_ridiculously_smart_like/) on how far it will go.{{< /side >}}
 
-> [https://www.incredibuild.com/blog/compiling-with-clang-optimization-flags](https://www.incredibuild.com/blog/compiling-with-clang-optimization-flags)  
-> [https://news.ycombinator.com/item?id=28207207](https://news.ycombinator.com/item?id=28207207)  
-> [https://www.reddit.com/r/C_Programming/comments/conavx/clangs_optimizer_is_ridiculously_smart_like/](https://www.reddit.com/r/C_Programming/comments/conavx/clangs_optimizer_is_ridiculously_smart_like/)
-
-In the challenge, we see it as **SIMD**:
-
-> [https://ftp.cvut.cz/kernel/people/geoff/cell/ps3-linux-docs/CellProgrammingTutorial/BasicsOfSIMDProgramming.html](https://ftp.cvut.cz/kernel/people/geoff/cell/ps3-linux-docs/CellProgrammingTutorial/BasicsOfSIMDProgramming.html)  
-> [https://www.codeproject.com/Articles/5298048/Using-SIMD-to-Optimize-x86-Assembly-Code-in-Array](https://www.codeproject.com/Articles/5298048/Using-SIMD-to-Optimize-x86-Assembly-Code-in-Array)
+In the challenge, we see it as **SIMD**.{{< note >}}SIMD means one instruction operating on several values at once. The compiler rewrote the three nested loops of a matrix multiply into a handful of wide register operations, which is why the result looks nothing like the source.{{< /note >}}{{< side >}}Reference: [the basics of SIMD programming](https://ftp.cvut.cz/kernel/people/geoff/cell/ps3-linux-docs/CellProgrammingTutorial/BasicsOfSIMDProgramming.html) and [using SIMD to optimize x86 assembly](https://www.codeproject.com/Articles/5298048/Using-SIMD-to-Optimize-x86-Assembly-Code-in-Array).{{< /side >}}
 
 We know that the code just doing some simple operations but is optimized.
 

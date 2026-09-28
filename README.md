@@ -1,4 +1,4 @@
-# Le Phu Duc — Personal Site
+# Le Phu Duc - Personal Site
 
 Source code of Le Phu Duc's personal site: writeups and research on reverse engineering, CTFs and security.
 

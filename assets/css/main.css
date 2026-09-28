@@ -197,27 +197,14 @@ hr {
 
 .dropcap {
   float: left;
-  display: grid;
-  place-items: center;
-  width: 5.3rem;
-  height: 5.3rem;
-  margin: 0.4rem 0.8rem 0 0;
-  padding-top: 0.08em;
-  background: #e7e2d6 url("../images/dropcap.svg") center / cover;
-  border: 2px solid #e7e2d6;
-  outline: 1px solid #8e877a;
-  outline-offset: 2px;
-  box-shadow: inset 0 0 0 1px #1d1c1a;
-  font-family: var(--font-body);
-  font-size: 4.6rem;
-  font-weight: 700;
+  margin: 0 0.6rem 0 0;
+  font-family: "Floral Capitals", var(--font-body);
+  font-size: 9.3rem;
+  font-weight: 400;
   font-style: normal;
-  line-height: 1;
+  line-height: 0.8;
   text-transform: uppercase;
-  color: #fbf8f0;
-  -webkit-text-stroke: 3.2px #1d1c1a;
-  paint-order: stroke fill;
-  text-shadow: 0 0 2px #efe9dc, 0 0 5px #efe9dc, 0 0 8px #efe9dc;
+  color: var(--ornament);
 }
 /* A short first paragraph must not let the drop cap overlap the next block */
 .prose > p:has(> .dropcap) { display: flow-root; }
@@ -350,5 +337,4 @@ pre {
 
   h1 { font-size: 2rem; letter-spacing: 0.08em; }
 
-  .dropcap { width: 4.6rem; height: 4.6rem; font-size: 4rem; }
 }

@@ -62,6 +62,7 @@ assets/
 └─ images/                      #   avatar (Hugo resizes it)
 static/
 ├─ fonts/                       #   font files (Alegreya, Alegreya SC, Inconsolata)
+│  └─ floral-capitals/          #     drop cap font, one file per letter A-Z
 ├─ js/site.js                   #   Copy button on code blocks
 └─ images/                      #   other images, served at /images/...
 ```

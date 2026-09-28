@@ -21,19 +21,19 @@ After a quick check, I found the code flow is effortless:
 
 First, it reads 32 chars from the console, then converts it from hex bytes. It saves these bytes as a rc4 key.{{< note >}}RC4 is a stream cipher: it makes a key stream from the key and XORs it with the data.{{< /note >}} So we know that it takes the 16-byte key from our input.
 
-![image](HkCLoJoLR.png)
+![image](HkCLoJoLR.webp)
 
-![image](BkFfVeoIA.png)
+![image](BkFfVeoIA.webp)
 
 That key is just used for rc4 to decrypt a given buffer, a.k.a flag.{{< side >}}Reference: [RC4 on Wikipedia](https://en.wikipedia.org/wiki/RC4){{< /side >}}
 
-![image](H1fW8liUA.png)
+![image](H1fW8liUA.webp)
 
 After that, it converts 16 bytes to an array, also a 4x4 matrix{{< note >}}16 numbers read row by row: items 0-3 are row 1, items 4-7 are row 2, and so on.{{< /note >}} (the matrix is that thing I don’t think about when doing the challenge, so I got stuck while analyzing and guessing that thing).
 
-![image](Bk_kvliL0.png)
+![image](Bk_kvliL0.webp)
 
-![image](H1CDdeoIR.png)
+![image](H1CDdeoIR.webp)
 
 So, here is the code flow of the challenge:
 
@@ -55,11 +55,11 @@ To be honest, I didn’t solve the challenge but after a quick check of the src,
 
 Okay, just think, if we know that a 16-word array is a matrix, so `do_something` is probably an operation of the matrix, like add, multiply, inverse,...vv.
 
-![image](HJ2IpxsU0.png)
+![image](HJ2IpxsU0.webp)
 
 So I decided to test it, this one is the input matrix.
 
-![image](rkI70xsLR.png)
+![image](rkI70xsLR.webp)
 
 ```python
 import numpy as np
@@ -154,9 +154,9 @@ add(inp,matrix2)
 
 I found another matrix that I didn’t know while doing this challenge (it looked like an unknown xmmword, so I formatted and renamed it):
 
-![image](r1mRUbj8C.png)
+![image](r1mRUbj8C.webp)
 
-![image](BJbTwbsUA.png)
+![image](BJbTwbsUA.webp)
 
 Do you think a whole bunch of code means just a simple operation? Yes, that’s it, the matrix multiplied with the other given matrix I found.
 
@@ -188,7 +188,7 @@ It’s not working, am I missing something?
 
 After a quick check, I found that `another_matrix` is used for later, and I see that just a simple xor operation but in the form of substitution.
 
-![image](Sk29lfsUC.png)
+![image](Sk29lfsUC.webp)
 
 ```python
 def rns_xor_with_buf2(buf):
@@ -322,7 +322,7 @@ and we have: `matrix_1`, `matrix_2`, `another_matrix`, and `buf`
 
 The feeling...
 
-![image](Syo9UQjLR.png)
+![image](Syo9UQjLR.webp)
 
 **RULE 35: It just a matrix operation**
 
@@ -403,7 +403,7 @@ int main()
 
 So, I compiled with Clang++ and see the different between without optimize and optimize flag enabled:
 
-![image](rkSrkVi8A.png)
+![image](rkSrkVi8A.webp)
 
 We easily see that optimization makes the code harder. Even if it is just a built-in type, the challenge is using a custom one, which is almost impossible.
 
@@ -596,7 +596,7 @@ fcedd5ab42f188b49760fca0d51e6fb1
 
 So, I finally found the correct input but still the wrong key for decryption. It is probably the problem from 2 matrices that I found above.
 
-![image](rJbxDuh8A.png)
+![image](rJbxDuh8A.webp)
 
 Also, I tried to brute force the byte in the matrix and got the result:
 

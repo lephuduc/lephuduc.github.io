@@ -57,6 +57,7 @@ layouts/                        # HTML templates
    ├─ nav.html                  #     menu
    └─ footer.html               #     copyright line
 archetypes/posts.md             # template for `hugo new posts/...`
+scripts/to-webp.py              # convert post images to WebP (see Images in a post)
 assets/
 ├─ css/                         #   joined into one file when building
 │  ├─ fonts.css                 #     font files and fallback fonts
@@ -115,6 +116,17 @@ content/posts/<post-name>/main.png
 ```
 
 No need to resize. Hugo makes small WebP copies when building. The browser loads only the size it needs, and only when the reader scrolls near the image. Click an image to open the original.
+
+To make the repo lighter, convert the original files to WebP too. This also updates the links in `index.md`:
+
+```bash
+python scripts/to-webp.py --dry-run   # show what will change
+python scripts/to-webp.py             # convert (needs: pip install pillow)
+python scripts/to-webp.py --delete    # convert and delete the originals
+```
+
+PNG becomes lossless WebP, so screenshots keep full quality.
+Originals are moved to `backup/` (same folder path, not pushed to git). Delete that folder when you no longer need it.
 
 ## Notes on the right
 

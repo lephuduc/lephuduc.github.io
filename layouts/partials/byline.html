@@ -1,0 +1,5 @@
+<aside class="aside byline">
+  <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+  <span><i>by</i> {{ site.Params.author }}</span>
+  <span class="tags">{{ delimit (union (slice (.Params.category | default "writeup")) (.Params.tags | default slice)) " · " }}</span>
+</aside>

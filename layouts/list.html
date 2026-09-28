@@ -1,0 +1,4 @@
+{{ define "main" }}
+  {{ .Content }}
+  {{ partial "post-list.html" (dict "pages" .Pages.ByDate.Reverse "byYear" true) }}
+{{ end }}

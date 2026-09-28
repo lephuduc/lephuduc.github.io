@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} | {{ site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ or .Params.subtitle .Description site.Params.description }}">
+  <link rel="canonical" href="{{ .Permalink }}">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.Title }}" href="{{ "index.xml" | absURL }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&family=Alegreya+SC:wght@500;700&family=Inconsolata:wght@400;500;600&display=swap">
+  {{ with resources.Get "css/main.css" | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+  {{ end }}
+</head>
+<body>
+  <div class="page">
+    {{ block "masthead" . }}{{ partial "masthead.html" (dict "heading" .Title "subtitle" .Params.subtitle) }}{{ end }}
+    <main>
+      {{ block "main" . }}{{ end }}
+    </main>
+    {{ partial "nav.html" . }}
+    {{ partial "footer.html" . }}
+  </div>
+  <script src="{{ "js/site.js" | relURL }}" defer></script>
+</body>
+</html>

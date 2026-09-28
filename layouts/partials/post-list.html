@@ -1,0 +1,11 @@
+{{/* Usage: partial "post-list.html" (dict "pages" $pages "byYear" true) */}}
+{{ if .byYear }}
+  {{ range .pages.GroupByDate "2006" }}
+    <section>
+      <h2>{{ .Key }}</h2>
+      <div class="entries">{{ range .Pages }}{{ partial "post-entry.html" . }}{{ end }}</div>
+    </section>
+  {{ end }}
+{{ else }}
+  <div class="entries">{{ range .pages }}{{ partial "post-entry.html" . }}{{ end }}</div>
+{{ end }}

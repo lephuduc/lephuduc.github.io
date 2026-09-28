@@ -1,0 +1,20 @@
+{{ define "masthead" }}{{ partial "masthead.html" (dict "heading" site.Title "subtitle" site.Params.tagline) }}{{ end }}
+{{ define "main" }}
+  <section class="intro">
+    <div class="intro-text">
+      {{ .Content }}  {{/* edit content/_index.md */}}
+    </div>
+    <div class="aside">
+      {{ with site.Params.portrait }}
+        <img class="portrait" src="{{ . | relURL }}" alt="{{ site.Params.author }}" width="240" height="240">
+      {{ else }}
+        <div class="image-slot" role="img" aria-label="Image placeholder">[ image ]</div>
+      {{ end }}
+    </div>
+  </section>
+
+  <h2>Recent posts</h2>
+  {{ $posts := where site.RegularPages "Section" "posts" }}
+  {{ partial "post-list.html" (dict "pages" (first site.Params.recentPosts $posts.ByDate.Reverse)) }}
+  <p><a href="{{ "/posts/" | relURL }}">All posts →</a></p>
+{{ end }}

@@ -1,0 +1,7 @@
+{{/* Page header: ornament + title + subtitle. Pass "aside" to put something in the right margin. */}}
+<header class="masthead">
+  {{ partial "ornament.html" . }}
+  <h1>{{ .heading }}</h1>
+  {{ with .subtitle }}<p class="subtitle">{{ . }}</p>{{ end }}
+  {{ with .aside }}{{ . }}{{ end }}
+</header>

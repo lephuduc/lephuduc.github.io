@@ -1,0 +1,37 @@
+baseURL = 'https://lephuduc.github.io/'
+locale = 'en-US'
+title = 'Le Phu Duc'
+disableKinds = ['taxonomy', 'term']
+
+[params]
+  tagline = 'Reverse · 리버스 · リバース'
+  description = 'Personal site of Le Phu Duc — writeups and notes on reverse engineering, CTFs and security.'
+  author = 'Le Phu Duc'
+  recentPosts = 5
+  portrait = ''            # add avt here, e.g. '/images/portrait.jpg'
+
+[menus]
+  [[menus.main]]
+    name = 'Home'
+    pageRef = '/'
+    weight = 10
+  [[menus.main]]
+    name = 'Posts'
+    pageRef = '/posts'
+    weight = 20
+  [[menus.main]]
+    name = 'About'
+    pageRef = '/about'
+    weight = 30
+  [[menus.main]]
+    name = 'Achievements'
+    pageRef = '/achievements'
+    weight = 40
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.highlight]
+    noClasses = true
+    style = 'github-dark'
+    lineNos = false

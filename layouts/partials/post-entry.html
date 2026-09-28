@@ -1,0 +1,11 @@
+{{/* One row in a post list: title + summary on the left, date + tags in the margin. */}}
+<article class="entry">
+  <div class="entry-main">
+    <a class="entry-title" href="{{ .RelPermalink }}">{{ .Title }}</a>
+    {{ with .Params.subtitle }}<p class="entry-summary">{{ . }}</p>{{ end }}
+  </div>
+  <div class="aside entry-meta">
+    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+    <span class="tags">{{ delimit (union (slice (.Params.category | default "writeup")) (.Params.tags | default slice)) " · " }}</span>
+  </div>
+</article>

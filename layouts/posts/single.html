@@ -1,0 +1,12 @@
+{{/* Blog post: date / author / tags in the right margin. */}}
+{{ define "masthead" }}
+  {{ $aside := partial "byline.html" . }}
+  {{ partial "masthead.html" (dict "heading" .Title "subtitle" .Params.subtitle "aside" $aside) }}
+{{ end }}
+{{ define "main" }}
+  <article class="prose">
+    {{ .Content }}
+  </article>
+  <div class="end-mark" aria-hidden="true">☾</div>
+  <p><a href="{{ "/posts/" | relURL }}">← All posts</a></p>
+{{ end }}

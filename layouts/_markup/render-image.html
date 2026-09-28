@@ -12,7 +12,7 @@
     {{ if le $res.Width . }}{{ break }}{{ end }}
   {{ end }}
   <a class="img-link" href="{{ $res.RelPermalink }}" target="_blank" rel="noopener">
-    <img src="{{ $first.RelPermalink }}" srcset="{{ delimit $srcset ", " }}" sizes="(max-width: 1000px) 100vw, 940px"
+    <img src="{{ $first.RelPermalink }}" srcset="{{ delimit $srcset ", " }}" sizes="(max-width: 860px) 100vw, 700px"
       width="{{ $first.Width }}" height="{{ $first.Height }}" alt="{{ $alt }}" loading="lazy" decoding="async">
   </a>
 {{ else }}

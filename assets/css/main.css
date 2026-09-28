@@ -2,7 +2,7 @@
 
 :root {
   color-scheme: dark;
-  font-size: 112.5%;          /* all sizes are in rem, so this scales the whole site */
+  font-size: 103.25%;            /* all sizes are in rem, so this scales the whole site */
 
   --bg: #18171b;
   --text: #ecebe7;
@@ -19,10 +19,10 @@
   --font-sc: 'Alegreya SC', 'Alegreya SC Fallback', 'Alegreya SC Fallback Noto', 'Alegreya SC Fallback DejaVu', serif;
   --font-mono: 'Inconsolata', 'Inconsolata Fallback', monospace;
 
-  --fs-body: 1.55rem;
-  --lh-body: 2.3rem;
+  --fs-body: 1.4rem;
+  --lh-body: 2rem;
   --aside-w: 20rem;           /* right column: date, tags, avatar */
-  --aside-gap: 3rem;
+  --aside-gap: 4rem;
 }
 
 * { box-sizing: border-box; }
@@ -44,11 +44,11 @@ body {
 /* Layout: a text column and a right column */
 
 .page {
-  max-width: 75rem;
+  max-width: 1140px;
   margin: 0 auto;
   padding: 4rem 2rem;
 }
-@media (min-width: 1480px) {
+@media (min-width: 1200px) {
   .page { position: relative; left: 3rem; }
 }
 
@@ -63,8 +63,8 @@ body {
 }
 
 .aside {
-  font-size: 1.15rem;
-  line-height: 1.65rem;
+  font-size: 1.1rem;
+  line-height: 1.55rem;
 }
 
 /* Page header */
@@ -111,7 +111,7 @@ h1, h2, h3, h4, .tags { font-family: var(--font-sc); }
 
 h1 {
   margin: 0;
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   font-weight: 700;
   line-height: 1.15;
   letter-spacing: 0.12em;
@@ -121,7 +121,7 @@ h1 {
 }
 h2 {
   margin: 2.8rem 0 0.8rem;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 700;
   line-height: 1.3;
   letter-spacing: 0.06em;
@@ -130,7 +130,7 @@ h2 {
 }
 h3 {
   margin: 2.2rem 0 0.6rem;
-  font-size: 1.45rem;
+  font-size: 1.4rem;
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: lowercase;
@@ -176,7 +176,6 @@ blockquote {
   margin: 0 0 1.2rem;
   padding: 0.1rem 0 0.1rem 1.4rem;
   border-left: 3px double var(--accent);
-  font-style: italic;
   color: #c9c9cc;
 }
 blockquote p { margin: 0 !important; }
@@ -200,8 +199,8 @@ hr {
   float: left;
   display: grid;
   place-items: center;
-  width: 6rem;
-  height: 6rem;
+  width: 5.3rem;
+  height: 5.3rem;
   margin: 0.4rem 0.8rem 0 0;
   padding-top: 0.08em;
   background: #e7e2d6 url("../images/dropcap.svg") center / cover;
@@ -210,7 +209,7 @@ hr {
   outline-offset: 2px;
   box-shadow: inset 0 0 0 1px #1d1c1a;
   font-family: var(--font-body);
-  font-size: 5.2rem;
+  font-size: 4.6rem;
   font-weight: 700;
   font-style: normal;
   line-height: 1;
@@ -273,7 +272,7 @@ pre {
 
 .portrait {
   display: block;
-  width: 19rem;
+  width: 240px;
   max-width: 100%;
   height: auto;
   outline: 1px solid #6b655a;
@@ -335,14 +334,14 @@ pre {
 
 /* Phone and tablet: one column */
 
-@media (max-width: 1000px) {
-  :root { font-size: 100%; }
-  .page { max-width: 40rem; padding: 2.2rem 1.2rem; }
+@media (max-width: 860px) {
+  :root { font-size: 93.75%; }
+  .page { max-width: 600px; padding: 2.2rem 1.2rem; }
   .page > * { margin-right: 0; }
 
   .intro, .entry { grid-template-columns: 1fr; margin-right: 0; }
   .intro .aside { order: -1; margin-bottom: 1.2rem; }
-  .portrait { width: 14rem; margin: 0 auto; }
+  .portrait { width: 180px; margin: 0 auto; }
 
   .entry-meta { flex-direction: row; flex-wrap: wrap; gap: 0 0.5rem; padding-top: 0.2rem; }
   .entry-meta .tags::before { content: '· '; }
@@ -350,5 +349,6 @@ pre {
   .byline { position: static; width: auto; margin-top: 1.2rem; text-align: center; }
 
   h1 { font-size: 2rem; letter-spacing: 0.08em; }
+
   .dropcap { width: 4.6rem; height: 4.6rem; font-size: 4rem; }
 }

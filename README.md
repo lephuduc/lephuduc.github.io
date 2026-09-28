@@ -137,7 +137,8 @@ It saves these bytes as a rc4 key.{{< note >}}RC4 is a stream cipher.{{< /note >
 The flag is encrypted.{{< side >}}Reference: [RC4](https://en.wikipedia.org/wiki/RC4){{< /side >}}
 ```
 
-`note` adds a number, `side` has no number. Links and `code` work inside. On phones the note shows under the line.
+`note` adds a number, `side` has no number. Links, `code` and images work inside, for example
+`{{< side >}}![Stack layout](stack.webp) The stack after the call.{{< /side >}}`. On phones the note shows under the line.
 
 ## Deploy
 

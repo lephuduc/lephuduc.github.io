@@ -25,7 +25,7 @@ First, it reads 32 chars from the console, then converts it from hex bytes. It s
 
 ![image](BkFfVeoIA.webp)
 
-That key is just used for rc4 to decrypt a given buffer, a.k.a flag.{{< side >}}Reference: [RC4 on Wikipedia](https://en.wikipedia.org/wiki/RC4){{< /side >}}
+That key is just used for rc4 to decrypt a given buffer, a.k.a flag.{{< side >}}![RC4 keystream and XOR](RC4.svg.webp) Reference: [RC4 on Wikipedia](https://en.wikipedia.org/wiki/RC4){{< /side >}}
 
 ![image](H1fW8liUA.webp)
 

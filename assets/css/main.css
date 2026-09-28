@@ -181,7 +181,7 @@ blockquote {
 blockquote p { margin: 0 !important; }
 blockquote a { word-break: break-all; }
 
-main img { display: block; max-width: 100%; height: auto; margin: 0 auto 1.2rem; }
+main img { display: block; max-width: 100%; height: auto; margin: 0 auto 1.2rem; background: #f4f2ec; }  /* light paper behind transparent diagrams */
 .img-link { display: block; cursor: zoom-in; }
 
 /* Markdown --- shows as a small ornament */
@@ -207,6 +207,7 @@ hr {
 }
 .side sup, .note-ref { color: var(--accent); font-size: 0.75em; line-height: 0; }
 .note-ref { margin-left: 0.1em; }
+.side img { margin: 0.2rem 0 0.5rem; }
 
 /* Drop cap: big decorated first letter */
 

@@ -259,11 +259,21 @@ pre {
 
 .portrait {
   display: block;
-  width: 240px;
-  max-width: 100%;
+  width: 100%;
   height: auto;
+  margin: 0;
   outline: 1px solid #6b655a;
   outline-offset: 4px;
+}
+
+.image-slot {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  border: 1px dashed #4a4e58;
+  color: #6d737e;
+  font-style: italic;
+  letter-spacing: 0.1em;
 }
 
 /* Post list */

@@ -3,11 +3,15 @@
   <section class="intro">
     <div class="intro-text">{{ partial "dropcap.html" . }}</div>
     <div class="aside">
-      {{/* Avatar from assets/, made smaller as WebP */}}
-      {{ with site.Params.portrait }}{{ with resources.Get . }}
-        {{ $img := .Process "resize 480x webp q85" }}
+      {{/* Avatar from assets/, made smaller as WebP. Empty frame until the file exists. */}}
+      {{ $avatar := "" }}
+      {{ with site.Params.portrait }}{{ $avatar = resources.Get . }}{{ end }}
+      {{ with $avatar }}
+        {{ $img := .Process "resize 700x webp q85" }}
         <img class="portrait" src="{{ $img.RelPermalink }}" alt="{{ site.Params.author }}" width="{{ $img.Width }}" height="{{ $img.Height }}">
-      {{ end }}{{ end }}
+      {{ else }}
+        <div class="portrait image-slot" role="img" aria-label="Image placeholder">[ image ]</div>
+      {{ end }}
     </div>
   </section>
 

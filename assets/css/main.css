@@ -2,7 +2,7 @@
 
 :root {
   color-scheme: dark;
-  font-size: 103.25%;            /* all sizes are in rem, so this scales the whole site */
+  font-size: 105.25%;            /* all sizes are in rem, so this scales the whole site */
 
   --bg: #18171b;
   --text: #ecebe7;
@@ -21,7 +21,7 @@
 
   --fs-body: 1.4rem;
   --lh-body: 2rem;
-  --aside-w: 20rem;           /* right column: date, tags, avatar */
+  --aside-w: 22rem;           /* right column: date, tags, avatar */
   --aside-gap: 4rem;
 }
 
@@ -44,7 +44,7 @@ body {
 /* Layout: a text column and a right column */
 
 .page {
-  max-width: 1140px;
+  max-width: 1270px;
   margin: 0 auto;
   padding: 4rem 2rem;
 }

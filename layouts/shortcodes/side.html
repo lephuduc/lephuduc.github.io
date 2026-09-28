@@ -1,0 +1,3 @@
+{{- /* Unnumbered note in the right column, for references. Usage: {{< side >}}text{{< /side >}} */ -}}
+<span class="side">{{ .Inner | strings.TrimSpace | .Page.RenderString }}</span>
+{{- /**/ -}}

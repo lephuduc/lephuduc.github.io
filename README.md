@@ -39,6 +39,9 @@ layouts/                        # HTML templates
 ├─ list.html                    #   /posts/: all posts by year
 ├─ single.html                  #   simple pages (About, Achievements)
 ├─ posts/single.html            #   a post, with date and tags in the right margin
+├─ shortcodes/
+│  ├─ note.html                 #   numbered note in the right column
+│  └─ side.html                 #   note without number, for references
 ├─ _markup/
 │  ├─ render-heading.html       #   adds the § link to headings
 │  └─ render-image.html         #   makes WebP copies, lazy loading
@@ -112,6 +115,17 @@ content/posts/<post-name>/main.png
 ```
 
 No need to resize. Hugo makes small WebP copies when building. The browser loads only the size it needs, and only when the reader scrolls near the image. Click an image to open the original.
+
+## Notes on the right
+
+In a post, put a note right after the word it explains:
+
+```markdown
+It saves these bytes as a rc4 key.{{< note >}}RC4 is a stream cipher.{{< /note >}}
+The flag is encrypted.{{< side >}}Reference: [RC4](https://en.wikipedia.org/wiki/RC4){{< /side >}}
+```
+
+`note` adds a number, `side` has no number. Links and `code` work inside. On phones the note shows under the line.
 
 ## Deploy
 

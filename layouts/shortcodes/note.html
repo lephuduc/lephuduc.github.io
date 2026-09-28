@@ -1,0 +1,5 @@
+{{- /* Numbered note in the right column. Usage: text{{< note >}}Explanation{{< /note >}} */ -}}
+{{- $n := add (.Page.Store.Get "notes" | default 0) 1 -}}
+{{- .Page.Store.Set "notes" $n -}}
+<sup class="note-ref">{{ $n }}</sup><span class="side"><sup>{{ $n }}</sup> {{ .Inner | strings.TrimSpace | .Page.RenderString }}</span>
+{{- /**/ -}}

@@ -19,17 +19,17 @@ Description:
 
 After a quick check, I found the code flow is effortless:
 
-First, it reads 32 chars from the console, then converts it from hex bytes. It saves these bytes as a rc4 key. So we know that it takes the 16-byte key from our input.
+First, it reads 32 chars from the console, then converts it from hex bytes. It saves these bytes as a rc4 key.{{< note >}}RC4 is a stream cipher: it makes a key stream from the key and XORs it with the data.{{< /note >}} So we know that it takes the 16-byte key from our input.
 
 ![image](HkCLoJoLR.png)
 
 ![image](BkFfVeoIA.png)
 
-That key is just used for rc4 to decrypt a given buffer, a.k.a flag.
+That key is just used for rc4 to decrypt a given buffer, a.k.a flag.{{< side >}}Reference: [RC4 on Wikipedia](https://en.wikipedia.org/wiki/RC4){{< /side >}}
 
 ![image](H1fW8liUA.png)
 
-After that, it converts 16 bytes to an array, also a 4x4 matrix (the matrix is that thing I don’t think about when doing the challenge, so I got stuck while analyzing and guessing that thing).
+After that, it converts 16 bytes to an array, also a 4x4 matrix{{< note >}}16 numbers read row by row: items 0-3 are row 1, items 4-7 are row 2, and so on.{{< /note >}} (the matrix is that thing I don’t think about when doing the challenge, so I got stuck while analyzing and guessing that thing).
 
 ![image](Bk_kvliL0.png)
 

@@ -1,4 +1,4 @@
-{{/* Usage: partial "post-list.html" (dict "pages" $pages "byYear" true) */}}
+{{/* List of posts. Usage: partial "post-list.html" (dict "pages" $pages "byYear" true) */}}
 {{ if .byYear }}
   {{ range .pages.GroupByDate "2006" }}
     <section>

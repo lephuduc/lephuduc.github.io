@@ -8,7 +8,7 @@ disableKinds = ['taxonomy', 'term']
   description = 'Personal site of Le Phu Duc — writeups and notes on reverse engineering, CTFs and security.'
   author = 'Le Phu Duc'
   recentPosts = 5
-  portrait = ''            # add avt here, e.g. '/images/portrait.jpg'
+  portrait = 'images/avt_sketch.png'   # file in assets/
 
 [menus]
   [[menus.main]]
@@ -32,6 +32,6 @@ disableKinds = ['taxonomy', 'term']
   [markup.goldmark.renderer]
     unsafe = true
   [markup.highlight]
-    noClasses = true
+    noClasses = false       # colors are in assets/css/syntax.css
     style = 'github-dark'
     lineNos = false

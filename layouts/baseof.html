@@ -7,10 +7,14 @@
   <meta name="description" content="{{ or .Params.subtitle .Description site.Params.description }}">
   <link rel="canonical" href="{{ .Permalink }}">
   <link rel="alternate" type="application/rss+xml" title="{{ site.Title }}" href="{{ "index.xml" | absURL }}">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&family=Alegreya+SC:wght@500;700&family=Inconsolata:wght@400;500;600&display=swap">
-  {{ with resources.Get "css/main.css" | minify | fingerprint }}
+  <link rel="preload" href="{{ "fonts/alegreya-normal-latin.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ "fonts/alegreya-sc-normal-700-latin.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
+  {{/* Join the CSS files into one */}}
+  {{ $css := slice }}
+  {{ range slice "css/fonts.css" "css/main.css" "css/syntax.css" }}
+    {{ $css = $css | append (resources.Get .) }}
+  {{ end }}
+  {{ with $css | resources.Concat "css/site.css" | minify | fingerprint }}
     <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
   {{ end }}
 </head>

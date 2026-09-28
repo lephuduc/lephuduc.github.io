@@ -1,0 +1,2 @@
+{{/* Category and tags of a post, for example "writeup · reverse" */}}
+<span class="tags">{{ delimit (union (slice (.Params.category | default "writeup")) (.Params.tags | default slice)) " · " }}</span>

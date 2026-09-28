@@ -1,115 +1,129 @@
 # Le Phu Duc - Personal Site
 
-Source code of Le Phu Duc's personal site: writeups and research on reverse engineering, CTFs and security.
+Personal site of Le Phu Duc. Writeups and notes on reverse engineering, CTFs and security.
 
-Built with [Hugo](https://gohugo.io). Posts are written in Markdown. No Node.js required.
+Built with [Hugo](https://gohugo.io). Posts are written in Markdown. No Node.js needed.
 
-## Requirements
+## Setup
 
-- [Hugo **extended**](https://gohugo.io/installation/) 0.146 or newer (built and tested with 0.166.0)
-
-```bash
-# macOS
-brew install hugo
-# Windows
-winget install Hugo.Hugo.Extended
-# Linux: download the "extended" release from https://github.com/gohugoio/hugo/releases
-```
-
-## Getting started
+Install Hugo extended, version 0.146 or newer (tested with 0.166.0).
 
 ```bash
-hugo server -D        # dev server at http://localhost:1313 (-D also shows drafts)
-hugo --minify         # build the static site into public/
+winget install Hugo.Hugo.Extended     # Windows
+brew install hugo                     # macOS
 ```
 
-## Project structure
+Run the site:
+
+```bash
+hugo server -D      # local site at http://localhost:1313, -D also shows drafts
+hugo --minify       # build the site into public/
+```
+
+## Folders
 
 ```
-hugo.toml                   # site name, tagline, portrait, recent-post count, menu, code theme
-content/                    # all text content, in Markdown
-├─ _index.md                #   home page introduction
-├─ about.md                 #   /about/
-├─ achievements.md          #   /achievements/
+hugo.toml                       # site name, tagline, avatar, menu
+content/
+├─ _index.md                    #   home page text
+├─ about.md                     #   /about/
+├─ achievements.md              #   /achievements/
 └─ posts/
-   ├─ _index.md             #   /posts/ page title and subtitle
-   └─ <post-name>.md        #   one file per post → /posts/<post-name>/
-layouts/                    # HTML templates
-├─ baseof.html              #   shell for every page: <head>, masthead, nav, footer
-├─ home.html                #   home page: intro, portrait, recent posts
-├─ list.html                #   /posts/: all posts grouped by year
-├─ single.html              #   simple pages (About, Achievements, …)
-├─ posts/single.html        #   blog post: byline in the right margin
-├─ _markup/render-heading.html  # adds the § link to headings
-└─ partials/                #   reusable pieces
-   ├─ masthead.html         #     ornament + title + subtitle
-   ├─ ornament.html         #     crescent-moon SVG
-   ├─ byline.html           #     post date / author / tags
-   ├─ post-list.html        #     list of posts (optionally by year)
-   ├─ post-entry.html       #     one row in a post list
-   ├─ nav.html              #     bottom menu
-   └─ footer.html           #     copyright line
-archetypes/posts.md         # template used by `hugo new posts/…`
-assets/css/main.css         # colors, fonts and layout
-static/js/site.js           # Copy buttons on code blocks
-static/images/              # images, served at /images/...
+   ├─ _index.md                 #   /posts/ title and subtitle
+   └─ <post-name>/              #   one folder per post, link /posts/<post-name>/
+      ├─ index.md               #     the post
+      └─ *.png, *.jpg           #     images of the post
+layouts/                        # HTML templates
+├─ baseof.html                  #   frame of every page: head, header, menu, footer
+├─ home.html                    #   home page: intro, avatar, recent posts
+├─ list.html                    #   /posts/: all posts by year
+├─ single.html                  #   simple pages (About, Achievements)
+├─ posts/single.html            #   a post, with date and tags in the right margin
+├─ _markup/
+│  ├─ render-heading.html       #   adds the § link to headings
+│  └─ render-image.html         #   makes WebP copies, lazy loading
+└─ partials/                    #   small reusable pieces
+   ├─ masthead.html             #     ornament, title, subtitle
+   ├─ ornament.html             #     vine ornament at the top
+   ├─ fleuron.html              #     small ornament at the end of posts and in footer
+   ├─ dropcap.html              #     big decorated first letter
+   ├─ byline.html               #     post date, author, tags
+   ├─ tags.html                 #     category and tags of a post
+   ├─ post-list.html            #     list of posts
+   ├─ post-entry.html           #     one row in the list
+   ├─ nav.html                  #     menu
+   └─ footer.html               #     copyright line
+archetypes/posts.md             # template for `hugo new posts/...`
+assets/
+├─ css/                         #   joined into one file when building
+│  ├─ fonts.css                 #     font files and fallback fonts
+│  ├─ main.css                  #     colors, sizes and layout
+│  └─ syntax.css                #     code highlighting colors
+└─ images/                      #   avatar (Hugo resizes it)
+static/
+├─ fonts/                       #   font files (Alegreya, Alegreya SC, Inconsolata)
+├─ js/site.js                   #   Copy button on code blocks
+└─ images/                      #   other images, served at /images/...
 ```
 
-## Editing content
+## Common changes
 
-| To change… | Edit |
+| To change | Edit |
 |---|---|
-| Home page introduction | `content/_index.md` |
-| Site name, tagline, portrait, number of recent posts | `[params]` in `hugo.toml` |
-| Menu links | `[menus]` in `hugo.toml` |
-| About / Achievements | `content/about.md`, `content/achievements.md` |
-| Add a page (e.g. Projects) | create `content/projects.md`, then add it to `[menus]` |
-| How every post looks | `layouts/posts/single.html` |
-| Header / footer on every page | `layouts/partials/masthead.html`, `layouts/partials/footer.html` |
-| Colors and fonts | top of `assets/css/main.css` |
-| Code highlighting theme | `[markup.highlight] style` in `hugo.toml` |
+| Home page text | `content/_index.md` |
+| Site name, tagline, avatar | `[params]` in `hugo.toml` |
+| Menu | `[menus]` in `hugo.toml` |
+| Colors and sizes | top of `assets/css/main.css` |
+| Fonts | `assets/css/fonts.css` and `static/fonts/` |
+| Code colors | `assets/css/syntax.css` (make a new one with `hugo gen chromastyles --style=<name>`) |
+| Add a page | create `content/<name>.md`, then add it to `[menus]` |
 
-To show a portrait on the home page, put the image in `static/images/` and set
-`portrait = '/images/portrait.png'` in `hugo.toml`.
-
-## Writing a post
+## Write a post
 
 ```bash
-hugo new posts/<post-name>.md
+hugo new posts/<post-name>/index.md
 ```
 
-This creates `content/posts/<post-name>.md` from `archetypes/posts.md`. The file name becomes the URL
-(`/posts/<post-name>/`), so use lowercase letters, numbers and hyphens. Then:
+The folder name is the link: `/posts/<post-name>/`. Use lowercase letters, numbers and `-` only.
 
-1. Edit the frontmatter (`title`, `subtitle`, `category`, `tags`).
-2. Write the content in Markdown. Add the language after the opening ``` to get syntax highlighting.
-3. Set `draft: false` (or delete the line) to publish.
+Fields at the top of the post:
 
-| Field | Description |
+| Field | Meaning |
 |---|---|
 | `title` | Post title |
-| `subtitle` | Short summary shown under the title and in lists |
+| `subtitle` | Short line under the title |
 | `date` | Publish date |
-| `category` | `writeup` (default) or `blogs` |
-| `tags` | List of tags, e.g. `["reverse", "crypto"]` |
-| `draft` | `true` hides the post from the built site |
+| `category` | `writeup` or `blogs` |
+| `tags` | For example `["reverse", "crypto"]` |
+| `draft` | `true` hides the post |
+| `dropcap` | `false` turns off the big first letter |
 
-Images: put files in `static/images/` and reference them as `/images/name.png`
+## Images in a post
 
-## Deploying
+Put the image in the post folder and use its file name:
 
-**Vercel or Cloudflare Pages** (works with private repositories):
+```
+content/posts/<post-name>/main.png
+```
 
-- Import the GitHub repository.
-- Framework preset: **Hugo**. Build command: `hugo --minify`. Output directory: `public`.
-- Add the environment variable `HUGO_VERSION` = `0.166.0` so the host uses the same Hugo version.
+```markdown
+![Disassembly of main](main.png)
+```
+
+No need to resize. Hugo makes small WebP copies when building. The browser loads only the size it needs, and only when the reader scrolls near the image. Click an image to open the original.
+
+## Deploy
+
+Vercel or Cloudflare Pages:
+
+- Import the GitHub repo.
+- Framework: Hugo. Build command: `hugo --minify`. Output folder: `public`.
+- Add env variable `HUGO_VERSION` = `0.166.0`.
 
 ## Credits
 
-Website built with the assistance of **plebaotrn**.
+Website built with the help of @plebaotrn.
 
 ## License
 
-Copyright (c) 2026 Le Phu Duc. All rights reserved.
-
-The source code of this website is proprietary. See [LICENSE](./LICENSE) for details.
+Copyright (c) 2026 Le Phu Duc. All rights reserved. See [LICENSE](./LICENSE).

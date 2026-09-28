@@ -1,0 +1,6 @@
+{{/* Page content with the first letter as a drop cap. Turn off with `dropcap: false`. */}}
+{{ if eq .Params.dropcap false }}
+  {{ .Content }}
+{{ else }}
+  {{ replaceRE `(?s)^(.*?<p>)([\pL\pN])` `$1<span class="dropcap">$2</span>` .Content 1 | safeHTML }}
+{{ end }}

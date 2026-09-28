@@ -1,0 +1,20 @@
+{{/* Images in posts. A file in the post folder becomes WebP in up to two widths,
+     loads lazily, and links to the original. Other images are used as they are. */}}
+{{ $alt := .PlainText }}
+{{ $res := .PageInner.Resources.Get .Destination }}
+{{ if and $res (in (slice "png" "jpeg" "webp") $res.MediaType.SubType) }}
+  {{ $srcset := slice }}
+  {{ $first := "" }}
+  {{ range slice 700 1400 }}
+    {{ $img := $res.Process (printf "resize %dx webp q90 drawing" (int (math.Min . $res.Width))) }}
+    {{ $srcset = $srcset | append (printf "%s %dw" $img.RelPermalink $img.Width) }}
+    {{ $first = $first | default $img }}
+    {{ if le $res.Width . }}{{ break }}{{ end }}
+  {{ end }}
+  <a class="img-link" href="{{ $res.RelPermalink }}" target="_blank" rel="noopener">
+    <img src="{{ $first.RelPermalink }}" srcset="{{ delimit $srcset ", " }}" sizes="(max-width: 1000px) 100vw, 940px"
+      width="{{ $first.Width }}" height="{{ $first.Height }}" alt="{{ $alt }}" loading="lazy" decoding="async">
+  </a>
+{{ else }}
+  <img src="{{ with $res }}{{ .RelPermalink }}{{ else }}{{ $.Destination | safeURL }}{{ end }}" alt="{{ $alt }}" loading="lazy" decoding="async">
+{{ end }}

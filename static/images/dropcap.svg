@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100">
+  <!-- Engraved foliage panel behind the drop cap. One quarter is drawn, then mirrored four ways. -->
+  <defs>
+    <path id="l" d="M0 0 C3 -4 9 -6 15 -5 C11 -1 5 1.5 0 0 Z"/>
+    <g id="q" fill="none" stroke="#1d1c1a" stroke-linecap="round">
+      <path stroke-width="1.6" d="M2 50 C2 26 14 10 34 8 C46 7 52 14 48 22 C45 28 37 27 37 21 C37 17 42 16 43 19"/>
+      <path stroke-width="1.2" d="M8 34 C14 30 22 30 24 36 C26 42 20 46 16 43 C13 41 15 37 18 38"/>
+      <path stroke-width="1.1" d="M22 10 C18 16 12 18 6 16"/>
+      <path stroke-width="1" d="M4 4 C10 6 14 3 16 2"/>
+      <path stroke-width="0.8" d="M28 20 C30 24 29 28 26 30"/>
+      <g fill="#1d1c1a" stroke="none">
+        <use xlink:href="#l" transform="translate(12 22) rotate(-60)"/>
+        <use xlink:href="#l" transform="translate(26 13) rotate(-150) scale(.8)"/>
+        <use xlink:href="#l" transform="translate(4 42) rotate(-100) scale(.8)"/>
+        <use xlink:href="#l" transform="translate(30 36) rotate(20) scale(.7)"/>
+        <use xlink:href="#l" transform="translate(40 10) rotate(-20) scale(.6)"/>
+        <circle cx="10" cy="10" r="1.6"/><circle cx="14" cy="8" r="1.1"/>
+        <circle cx="34" cy="30" r="1.2"/><circle cx="22" cy="46" r="1"/>
+      </g>
+      <g stroke-width="0.5" opacity=".7">
+        <path d="M6 28 l4 -2 M7 31 l4 -2 M8 34 l3 -1.5"/>
+        <path d="M30 4 l2 3 M33 3.6 l2 3 M36 3.4 l2 3"/>
+      </g>
+    </g>
+    <pattern id="h" width="2.4" height="2.4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <path d="M0 0 V2.4" stroke="#1d1c1a" stroke-width=".45" opacity=".35"/>
+    </pattern>
+  </defs>
+  <rect width="100" height="100" fill="#e7e2d6"/>
+  <rect width="100" height="100" fill="url(#h)"/>
+  <use xlink:href="#q"/>
+  <use xlink:href="#q" transform="matrix(-1 0 0 1 100 0)"/>
+  <use xlink:href="#q" transform="matrix(1 0 0 -1 0 100)"/>
+  <use xlink:href="#q" transform="matrix(-1 0 0 -1 100 100)"/>
+</svg>

@@ -1,10 +1,18 @@
 ---
-title: What I've done...
+title: What the practice has added up to so far.
 description: Achievements
 
 date: 2025-02-20T20:12:52+08:00
 lastmod: 2025-02-20T20:12:52+08:00
 ---
+
+A short list of the competitions that went well. Three of them are team results with UIT.Wolf_Brigade and one with international friends, across Korea, Thailand, Vietnam and China. The last entry is Flare-On, I go back to every year because it is the only one where reverse engineering is the whole contest rather than one category inside it.
+
+## [2025-28-10] XCTF Final 2025
+
+Won the **First prize** in the **International** group **XCTF Final**
+
+Playing with international teams in XCTF that held at Ningbo,China and won the first prize! 
 
 ## [2024-22-11] ASEAN Cyber Shield 2024
 

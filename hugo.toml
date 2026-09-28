@@ -7,7 +7,7 @@ disableKinds = ['taxonomy', 'term']
   tagline = 'Classic & Respect'
   description = 'Personal site of Le Phu Duc'
   author = 'Le Phu Duc'
-  recentPosts = 5
+  recentPosts = 4
   portrait = 'images/avt.png'   # file in assets/
 
 [menus]

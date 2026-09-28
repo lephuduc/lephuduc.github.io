@@ -6,6 +6,8 @@ category: writeup
 tags: ["reverse", "wargame"]
 ---
 
+Dây là write-up toàn bộ mảng reverse của picoCTF, và cũng là bài mình viết cho người mới bắt đầu. Các bài được xếp theo đúng thứ tự từ dễ tới khó, nên nếu bạn chưa rev bao giờ thì cứ đi lần lượt từ trên xuống: bắt đầu chỉ với mỗi lệnh `file`, rồi tới gdb, patch file, Java, packer, và cuối cùng là tự viết keygen.
+
 Mục lục:
 
 1. [file-run1](https://github.com/lephuduc/Write-up-PicoCTF2022#file-run1)

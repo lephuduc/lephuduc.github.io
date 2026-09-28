@@ -6,8 +6,6 @@ category: writeup
 tags: ["reverse", "blogs"]
 ---
 
-## Overview
-
 Recent days, I was traveling to South Korea and participating in CODEGATE 2025 Final, and that was really, really fun.
 
 So, today I will talk about the one Reversing challenge that I managed to solve and my trip in Seoul.

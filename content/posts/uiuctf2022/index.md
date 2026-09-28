@@ -6,6 +6,8 @@ category: writeup
 tags: ["reverse"]
 ---
 
+Có tổng cộng bốn bài mà mình làm được trong UIU2022: Reject to Inject, Pierated Art, Vast Cornfields và Library of Babel. Bài mình thích nhất là Pierated Art, server gửi cho mình những bức tranh trừu tượng mà hoá ra mỗi bức lại là một chương trình chạy được, và mỗi vòng chỉ cho đúng 15 giây để giải. Còn bài đầu tiên thì dạy mình cách debug một file DLL, thứ mà trước đó mình toàn chỉ đọc tĩnh.
+
 ## Reject to Inject - 197 points
 
 ![](kzr9V9u.webp)

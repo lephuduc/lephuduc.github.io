@@ -6,6 +6,8 @@ category: writeup
 tags: ["reverse"]
 ---
 
+Hi there! Hack.lu CTF 2022 mình note lại hai bài: FingerFood bên rev và Pazzzi bên misc. Hơi tiếc là giải này còn hai bài rev nữa mình đủ sức làm, nhưng vì mải tập trung vào `LeakyOrders` nên mình quên mất `Cocktail Bar` ra sau và dễ hơn, tới lúc nhận ra thì đã muộn. Bù lại thì bài Pazzzi cho mình một lỗi C kinh điển mà mình nghĩ ai viết C cũng nên gặp một lần.
+
 ## FingerFood - rev
 
 #### Description

@@ -6,6 +6,8 @@ category: writeup
 tags: ["reverse"]
 ---
 
+Có một bài reverse mà mình note lại ở đây: `tinyx`. Đề là một máy ảo viết bằng Go, bị strip sạch symbol, và thay vì chạy sẵn một chương trình thì nó nhận bytecode do mình gửi lên. Nghĩa là muốn giải thì phải hiểu tập lệnh của nó đủ rõ để tự viết chương trình cho nó chạy, chứ đọc hiểu không thôi thì chưa đủ.
+
 ## Challenge description
 
 ![](SyWvCyvv3.webp)

@@ -6,6 +6,8 @@ category: writeup
 tags: ["reverse"]
 ---
 
+One challenge from PlaidCTF 2023, and the only one I wrote up: `CSS-crimes`, worth 200 points. It is a flag checker with no `<script>` tag anywhere in the page, which sounds impossible until you realise the checking is being done by the layout engine itself. Solving it meant measuring pixels and turning them into equations, which is not a sentence I expected to write about a reverse challenge.
+
 ## Rev/CSS-crimes - 200pts
 
 Description:

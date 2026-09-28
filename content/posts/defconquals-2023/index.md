@@ -5,8 +5,9 @@ date: 2023-06-06
 category: writeup
 tags: ["reverse", "crypto", "pwnable", "forensics"]
 ---
+`6df5a07fcefb7c636b3f9828784dd561503f05efcd41fdc7bd5b5dbab8637ef7`
 
-6df5a07fcefb7c636b3f9828784dd561503f05efcd41fdc7bd5b5dbab8637ef7
+This is our team write-up for DEF CON Quals 2023, mirrored here from The Council of Sheep, so the voice changes a little from section to section. It is also the only post on this blog that is not just reverse: the challenges below run across reverse, crypto, pwn and forensics, from a compressor that rewrites its own tree after every byte to a hash length extension and a game script binary nobody had a working decompiler for.
 
 ## OMG zip
 First of all, this challenge is vẻi côl (xin chao,fucking pho ga pho ga), I means it's easiest challenge in this time, except for liveCTF.

@@ -6,6 +6,8 @@ category: writeup
 tags: ["reverse"]
 ---
 
+WM CTF 2022 mình note lại một bài: BabyDriver, 353 điểm. Đúng như cái tên, phần check flag không nằm trong file exe mà nằm trong một driver do chính file đó thả ra rồi cài vào máy. Đây cũng là bài driver đầu tiên mình làm, và để chạy được đề mình phải dựng hẳn một máy ảo Win7 64-bit.
+
 ## BabyDriver - 353pts
 
 >Description: `<empty>`

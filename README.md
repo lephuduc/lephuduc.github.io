@@ -1,6 +1,6 @@
-# Le Phu Duc - Personal Site
+# Le Phu Duc
 
-Personal site of Le Phu Duc. Writeups and notes on reverse engineering, CTFs and security.
+Personal site of Le Phu Duc. 
 
 Built with [Hugo](https://gohugo.io). Posts are written in Markdown. No Node.js needed.
 

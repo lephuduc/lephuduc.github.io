@@ -4,6 +4,7 @@ subtitle: "The whole check is CSS layout. Opening one tag changes the page heigh
 date: 2023-04-17
 category: writeup
 tags: ["reverse"]
+aliases: ["/post/plaidctf2023/"]
 ---
 
 One challenge from PlaidCTF 2023, and the only one I wrote up: `CSS-crimes`, worth 200 points. It is a flag checker with no `<script>` tag anywhere in the page, which sounds impossible until you realise the checking is being done by the layout engine itself.

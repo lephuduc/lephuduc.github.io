@@ -4,6 +4,7 @@ subtitle: "A self-modifying compressor, a heap note, a hash length extension and
 date: 2023-06-06
 category: writeup
 tags: ["reverse", "crypto", "pwnable", "forensics"]
+aliases: ["/post/defconquals-2023/"]
 ---
 `6df5a07fcefb7c636b3f9828784dd561503f05efcd41fdc7bd5b5dbab8637ef7`
 

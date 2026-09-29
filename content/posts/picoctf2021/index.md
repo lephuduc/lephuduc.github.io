@@ -4,6 +4,7 @@ subtitle: "The whole beginner track in Vietnamese, with the tools you need and w
 date: 2021-03-09
 category: writeup
 tags: ["reverse", "wargame"]
+aliases: ["/post/picoctf2021/"]
 ---
 
 Dây là write-up toàn bộ mảng reverse của picoCTF, và cũng là bài mình viết cho người mới bắt đầu.

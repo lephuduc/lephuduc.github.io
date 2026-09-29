@@ -4,6 +4,7 @@ subtitle: "A signal capture is just another file format. Decoding the UART, rebu
 date: 2024-04-20
 category: writeup
 tags: ["reverse"]
+aliases: ["/post/midnightsun-2024/"]
 ---
 
 Last weekend I have play Midnight CTF with `purf3ct`. It was a good time  that I try so hard. There are three reverse challenges I've done and one crypto with hardware/reverse tag that I try as must as I can and it's a happy ending that we've got into top ten, big shoudout for `purf3ct`!

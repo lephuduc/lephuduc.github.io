@@ -4,6 +4,7 @@ subtitle: "Eight IOCTLs, each patching the decrypt function before the next. Sta
 date: 2022-11-27
 category: writeup
 tags: ["reverse"]
+aliases: ["/post/hitconctf2022/"]
 ---
 
 Đây sẽ là write-up về trải nghiệm cá nhân mình khi tham gia giải [HITCON CTF 2022](https://scoreboard.hitconctf.com/campaigns/1). Đầu tiên, có một bất ngờ nhỏ đối với mình là bài mình làm đa số rất nhiều solve nhưng cách giải thì không đơn giản như mình nghĩ. (giải 100kg:v)

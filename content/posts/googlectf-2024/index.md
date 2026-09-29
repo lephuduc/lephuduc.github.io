@@ -4,6 +4,7 @@ subtitle: "Nobody wrote an obfuscator for this one. Clang with optimizations on 
 date: 2024-06-28
 category: writeup
 tags: ["reverse"]
+aliases: ["/post/googlectf-2024/"]
 ---
 
 Hi there! Google CTF 2024 had three reverse challenges I looked at, but only `not_obfuscate` is written up here so far. `X86PERM` and `IEEE` will follow. The interesting part is that I did not solve this one during the contest: the author never wrote an obfuscator at all, Clang did that work for him, and what stopped me was not the assembly but the arithmetic sitting underneath it. Reverse engineering keeps turning into a maths problem, and this challenge made that obvious to me.

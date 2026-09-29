@@ -4,6 +4,7 @@ subtitle: "Hanbok at Changdeokgung, Myeong-dong after the rain, and the reverse 
 date: 2025-07-12
 category: writeup
 tags: ["reverse", "blogs"]
+aliases: ["/post/codegate2025/"]
 ---
 
 Recent days, I was traveling to South Korea and participating in CODEGATE 2025 Final, and that was really, really fun.

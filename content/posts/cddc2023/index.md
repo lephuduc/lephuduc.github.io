@@ -4,6 +4,7 @@ subtitle: "Once you know the instruction encoding, you can write programs for a 
 date: 2023-06-14
 category: writeup
 tags: ["reverse"]
+aliases: ["/post/cddc2023/"]
 ---
 
 Có một bài reverse mà mình note lại ở đây: `tinyx`. Đề là một máy ảo viết bằng Go, bị strip sạch symbol, và thay vì chạy sẵn một chương trình thì nó nhận bytecode do mình gửi lên. Nghĩa là muốn giải thì phải hiểu tập lệnh của nó đủ rõ để tự viết chương trình cho nó chạy, chứ đọc hiểu không thôi thì chưa đủ.

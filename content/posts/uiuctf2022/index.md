@@ -4,6 +4,7 @@ subtitle: "From debugging a DLL to reversing a program written in pixels, agains
 date: 2022-07-30
 category: writeup
 tags: ["reverse"]
+aliases: ["/post/uiuctf2022/"]
 ---
 
 Có tổng cộng bốn bài mà mình làm được trong UIU2022: Reject to Inject, Pierated Art, Vast Cornfields và Library of Babel. Bài mình thích nhất là Pierated Art, server gửi cho mình những bức tranh trừu tượng mà hoá ra mỗi bức lại là một chương trình chạy được, và mỗi vòng chỉ cho đúng 15 giây để giải. Còn bài đầu tiên thì dạy mình cách debug một file DLL, thứ mà trước đó mình toàn chỉ đọc tĩnh.

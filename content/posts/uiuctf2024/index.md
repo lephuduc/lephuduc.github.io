@@ -4,6 +4,7 @@ subtitle: "Knowing when to stop is a skill. A teammate found the flag with one c
 date: 2024-07-06
 category: writeup
 tags: ["reverse"]
+aliases: ["/post/uiuctf2024/"]
 ---
 
 At the weekend, our team **CoSGang** from the **Vietnamese Gang** joined UIUCTF 2024 and got into the top 5 (1 point above the top 6), big shoutout to my team for fair plays, they got into The Liems and has good prize. Also, this is the third time we have played UIUCTF, special thanks to the organizer for a good CTF.

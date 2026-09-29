@@ -4,6 +4,7 @@ subtitle: "Full solutions in Vietnamese, from the first crackme up to a kernel d
 date: 2022-05-01
 category: writeup
 tags: ["reverse", "wargame"]
+aliases: ["/post/reversing.kr/"]
 ---
 
 Reversing.kr là wargame mà mình dùng để học rev một cách có hệ thống, và đây là toàn bộ lời giải của mình, xếp theo đúng thứ tự của trang. Cái hay của nó là mỗi bài lại ném cho bạn một định dạng khác nhau: crackme thường, file ELF, AutoHotKey, C#, file bị packed, rồi cuối cùng là một driver Windows.

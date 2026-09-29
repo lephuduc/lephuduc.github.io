@@ -5,6 +5,7 @@ date: 2025-06-24
 category: blogs
 tags: ["math in life", "philosophy"]
 math: true
+aliases: ["/post/37percentrule/"]
 ---
 
 ## Từ Hành Trình Tìm Kiếm Nửa Kia Đến Quy Tắc 37% Của Cuộc Đời

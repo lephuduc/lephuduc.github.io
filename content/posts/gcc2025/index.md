@@ -4,6 +4,7 @@ subtitle: "How you make friends with students from six countries, finish a proje
 date: 2025-02-21 13:30:40
 category: blogs
 tags: ["journey"]
+aliases: ["/post/gcc2025/"]
 ---
 
 <!-- TODO

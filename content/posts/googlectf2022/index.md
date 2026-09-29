@@ -4,6 +4,7 @@ subtitle: "How DevTools detection makes a page impossible to debug, and why dele
 date: 2022-06-29
 category: writeup
 tags: ["reverse"]
+aliases: ["/post/googlectf2022/"]
 ---
 
 Hi there! Google CTF 2022 mình chỉ note lại một bài: JS SAFE 4.0. Đây là bài rev JavaScript chạy thẳng trong trình duyệt, và cái khó không nằm ở thuật toán mà nằm ở chỗ trang web chống debug, cứ mở DevTools lên là trình duyệt đơ luôn. Tệ hơn nữa, một nửa đoạn check flag lại giấu trong những kí tự mà editor không hiển thị ra.

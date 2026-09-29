@@ -4,6 +4,7 @@ subtitle: "Reversing a bytecode interpreter down to readable code, then solving 
 date: 2024-01-29
 category: writeup
 tags: ["reverse"]
+aliases: ["/post/tetctf-2024/"]
 ---
 
 ## Rusty VM - TetCTF 2024

@@ -4,6 +4,7 @@ subtitle: "An ELF wearing an .exe extension, and a checker that only exists once
 date: 2022-06-28
 category: writeup
 tags: ["reverse"]
+aliases: ["/post/corctf2022/"]
 ---
 
 Welcome back! corCTF 2022 mình làm được bốn bài reverse, ở đây mình xếp theo thứ tự từ nhiều solve tới ít solve: Microsoft ❤️ Linux, turbocrab, msfrob và hackermans dungeon.

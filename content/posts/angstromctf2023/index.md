@@ -4,6 +4,7 @@ subtitle: "What to do when the file format is one you have never seen before, an
 date: 2023-04-27
 category: writeup
 tags: ["reverse"]
+aliases: ["/post/angstromctf2023/"]
 ---
 
 First of all, I'm very excited because my team made it into the top ten. Thanks to my teammate. Keep it up, **The Council of Sheep** !!!!

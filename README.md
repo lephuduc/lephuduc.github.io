@@ -155,10 +155,12 @@ Website built with the help of [@plebaotrn](https://github.com/plebaotrn). Inspi
 
 ## License
 
+Copyright (C) 2026 Le Phu Duc
+
 Unless otherwise stated:
 
-Source code is licensed under the GNU General Public License v3.0. See [LICENSE](/LICENSE)
-Written content, including articles, write-ups, and documentation, is licensed under CC BY-NC-SA 4.0. See [LICENSE-CONTENT](/LICENSE-CONTENT)
-Images, artwork, logos, and other media are not covered by either license unless explicitly stated.
+- Source code is licensed under the GNU General Public License v3.0. See [LICENSE](./LICENSE).
+- Written content, including articles, write-ups, and documentation, is licensed under CC BY-NC-SA 4.0. See [LICENSE-CONTENT](./LICENSE-CONTENT).
+- Images, artwork, logos, and other media are not covered by either license unless explicitly stated.
 
 Website design inspired by and originally based on the work of David Álvarez Rosa. Thank you so much, David!

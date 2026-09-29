@@ -193,7 +193,7 @@ hr {
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 24'%3E%3Cg fill='%238a9bb3'%3E%3Cpath d='M60 4 64 12 60 20 56 12Z'/%3E%3Ccircle cx='36' cy='12' r='2.4'/%3E%3Ccircle cx='84' cy='12' r='2.4'/%3E%3C/g%3E%3C/svg%3E");
 }
 
-/* Contents list. Right column when there is one, fold-out box on phones. */
+/* Contents list */
 
 main { position: relative; }
 
@@ -213,7 +213,7 @@ main { position: relative; }
 .toc a:hover, .toc a.active { color: var(--text); }
 .toc a.active { box-shadow: -0.6rem 0 0 -0.45rem var(--accent); }
 
-/* Top of the right column, floated like the notes so later notes stack below it */
+/* Right column, floated so notes stack below */
 @media (min-width: 861px) {
   .toc {
     float: right;
@@ -428,3 +428,43 @@ pre {
   h1 { font-size: 2rem; letter-spacing: 0.08em; }
 
 }
+
+/* Motion */
+
+/* Note number and note light up together */
+.note-ref, .side { transition: color 0.25s, background-color 0.25s; }
+.note-ref.lit { color: var(--text); }
+.side.lit { color: var(--text); background-color: rgba(138, 155, 179, 0.1); }
+.side.lit sup { color: var(--text); }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Ornament draws itself */
+  .ornament .stroke {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw 1.4s cubic-bezier(0.45, 0, 0.25, 1) 0.1s both;
+  }
+  /* Curls start when the vine reaches them */
+  .ornament .stroke:nth-child(2) { animation-duration: 0.6s; animation-delay: 1.35s; }
+  .ornament .stroke:nth-child(3) { animation-duration: 0.6s; animation-delay: 0.6s; }
+  .ornament .stroke:nth-child(4) { animation-duration: 0.6s; animation-delay: 0.95s; }
+  .ornament .center { animation: ink 0.5s ease-out both; }
+  .ornament .leaves { animation: ink 0.9s ease-out 1s both; }
+
+  /* End fleuron draws on scroll */
+  .end-mark.will-draw .stroke { stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 0; }
+  .end-mark.will-draw g[fill="currentColor"] { opacity: 0; }
+  .end-mark.drawn .stroke { animation: draw 1.1s cubic-bezier(0.45, 0, 0.25, 1) both; }
+  .end-mark.drawn g[fill="currentColor"] { animation: ink 0.7s ease-out 0.6s both; }
+
+  /* Page turn between pages */
+  @view-transition { navigation: auto; }
+  ::view-transition-old(root) { animation: leaf-out 0.25s ease-in both; }
+  ::view-transition-new(root) { animation: leaf-in 0.4s ease-out both; }
+}
+
+/* Hidden at start so round caps don't show as dots */
+@keyframes draw { from { stroke-dashoffset: 1; opacity: 0; } 2% { opacity: 1; } to { stroke-dashoffset: 0; opacity: 1; } }
+@keyframes ink { from { opacity: 0; } to { opacity: 1; } }
+@keyframes leaf-out { to { opacity: 0; transform: translateX(-1.5rem); } }
+@keyframes leaf-in { from { opacity: 0; transform: translateX(1.5rem); } }

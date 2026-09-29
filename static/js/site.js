@@ -23,10 +23,7 @@ document.querySelectorAll('.prose .highlight pre, .prose > pre').forEach((pre) =
   wrap.append(pre, btn);
 });
 
-// Visit counts from busuanzi (the counter the old blog used): site total in the footer,
-// and per post under the byline. The site total carries on from the old blog.
-// The script tag must send the full page URL as Referer, since busuanzi counts pages by it.
-// With the browser default it only sends the origin, and every view lands on "/".
+// Visit counts from busuanzi. Full URL as Referer, else all views count as "/".
 if (!['localhost', '127.0.0.1'].includes(location.hostname)) {
   const show = (el, n) => {
     if (!el || !n) return;
@@ -47,7 +44,29 @@ if (!['localhost', '127.0.0.1'].includes(location.hostname)) {
   document.head.append(s);
 }
 
-// Contents list: always open when it sits in the right column, and mark the section being read.
+// Hovering a note number lights up its note, and back.
+document.querySelectorAll('.note-ref').forEach((ref) => {
+  const note = ref.nextElementSibling;
+  if (!note?.classList.contains('side')) return;
+  const lit = (on) => { ref.classList.toggle('lit', on); note.classList.toggle('lit', on); };
+  for (const el of [ref, note]) {
+    el.addEventListener('mouseenter', () => lit(true));
+    el.addEventListener('mouseleave', () => lit(false));
+  }
+});
+
+// Draw the end fleuron on scroll.
+const endMark = document.querySelector('.end-mark');
+if (endMark && 'IntersectionObserver' in window) {
+  endMark.classList.add('will-draw');
+  new IntersectionObserver((entries, obs) => {
+    if (!entries[0].isIntersecting) return;
+    endMark.classList.add('drawn');
+    obs.disconnect();
+  }, { threshold: 0.6 }).observe(endMark);
+}
+
+// Contents list: open in the right column, mark the current section.
 const toc = document.querySelector('.toc details');
 if (toc) {
   const wide = matchMedia('(min-width: 861px)');

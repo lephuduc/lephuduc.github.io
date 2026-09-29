@@ -46,6 +46,6 @@ ASEAN Student Contest on Information Security (ASCIS) is Capture the Flag contes
 
 Issued by **Vietnam Information Security Association (VNISA)**
 
-## [2022/23/24/25/26] Flare-on Challenges 9, 10, 11, 12 but 13
+## [2022/23/24/25] Flare-on Challenges 9, 10, 11, 12
 
 The Flare-On Challenge is one of the world’s hardest reverse engineering competitions, organized annually by Mandiant (a subsidiary of Google Cloud). Designed for elite malware analysts, reverse engineers, and cybersecurity professionals, it presents a series of highly sophisticated challenges that replicate real-world malware analysis and exploitation scenarios.

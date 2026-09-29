@@ -143,22 +143,22 @@ The flag is encrypted.{{< side >}}Reference: [RC4](https://en.wikipedia.org/wiki
 
 ## Deploy
 
-Vercel or Cloudflare Pages:
+GitHub Pages, with the workflow in `.github/workflows/hugo.yml`:
 
-- Import the GitHub repo.
-- Framework: Hugo. Build command: `hugo --minify`. Output folder: `public`.
-- Add env variable `HUGO_VERSION` = `0.166.0`.
+- One time setup: in the repo, Settings > Pages > Source > GitHub Actions.
+- Push to `main`. The workflow builds the site with Hugo 0.166.0 and publishes it.
+- Check the Actions tab. The site is live at https://lephuduc.github.io after 1 to 2 minutes.
 
 ## Credits
 
-Website built with the help of @plebaotrn. Inspired from [David Álvarez Rosa](https://david.alvarezrosa.com).
+Website built with the help of [@plebaotrn](https://github.com/plebaotrn). Inspired from [David Álvarez Rosa](https://david.alvarezrosa.com).
 
 ## License
 
 Unless otherwise stated:
 
-Source code is licensed under the GNU General Public License v3.0. See [LICENSE](/LICENSE)
-Written content, including articles, write-ups, and documentation, is licensed under CC BY-NC-SA 4.0. See [LICENSE-CONTENT](/LICENSE-CONTENT)
-Images, artwork, logos, and other media are not covered by either license unless explicitly stated.
+- Source code is licensed under the GNU General Public License v3.0. See [LICENSE](./LICENSE).
+- Written content, including articles, write-ups, and documentation, is licensed under CC BY-NC-SA 4.0. See [LICENSE-CONTENT](./LICENSE-CONTENT).
+- Images, artwork, logos, and other media are not covered by either license unless explicitly stated.
 
 Website design inspired by and originally based on the work of David Álvarez Rosa. Thank you so much, David!

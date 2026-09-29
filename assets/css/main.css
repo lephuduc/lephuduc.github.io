@@ -242,6 +242,20 @@ main { position: relative; }
 .note-ref { margin-left: 0.1em; }
 .side img { margin: 0.2rem 0 0.5rem; }
 
+/* Tables */
+
+table {
+  border-collapse: collapse;
+  margin: 1.6rem auto;
+  font-size: 1.2rem;
+  font-feature-settings: 'lnum' 1;   
+  border-block: 2px solid var(--text);
+}
+th, td { padding: 0.5rem 1rem; text-align: left; vertical-align: top; }
+th { font-weight: 700; }
+tbody tr:first-child td { border-top: 1px solid var(--text); padding-top: 0.6rem; }
+td code { font-size: 1.05em; }
+
 /* Math (MathML from the passthrough render hook) */
 
 math { font-size: 1.05em; }
@@ -388,6 +402,8 @@ pre {
 
 @media (max-width: 860px) {
   :root { font-size: 93.75%; }
+  table { display: block; width: fit-content; max-width: 100%; overflow-x: auto; }
+  th, td { padding: 0.5rem; }
   .page { max-width: 600px; padding: 2.2rem 1.2rem; }
   .page > * { margin-right: 0; }
 

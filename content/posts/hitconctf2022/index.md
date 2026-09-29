@@ -72,7 +72,7 @@ Có một điều khá là lạ khi mà không có chổ để mình nhập inpu
 ### file checker_drv.sys
 
 Đây là toàn bộ code của hàm main
-```c=
+```c
 __int64 __fastcall sub_140001B50(struct _DRIVER_OBJECT *driverObj)
 {
   unsigned int v2; // edi

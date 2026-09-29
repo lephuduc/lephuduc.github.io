@@ -1676,7 +1676,7 @@ Check file `WindowKernel.exe` bằng DiE và mở bằng ida:
 
 ![](7dcnwSs.webp)
 
-```c=
+```c
 INT_PTR __stdcall DialogFunc(HWND hWnd, UINT a2, WPARAM a3, LPARAM a4)
 {
   if ( a2 == 272 )
@@ -1722,7 +1722,7 @@ Nếu xem các hàm lướt qua thì các bạn có thể biết là `sub_401310
 
 Riêng hàm `sub_401110(hWnd);` sẽ có chổ `Correct!`
 
-```c=
+```c
 HWND __thiscall sub_401110(HWND hDlg)
 {
   HWND result; // eax
@@ -1768,7 +1768,7 @@ Theo như mình debug được thì `lstrcmpW(String, L"Enable")` và `lstrcmpW(
 
 Mình chỉ để ý đến hàm `sub_401280(0x2000) == 1`, để kiểm tra điều kiện và trả về giá trị đúng để in ra "Correct!":{{< note >}}Bài cuối của wargame này là bài duy nhất bắt phải đụng tới kernel. Phần check nằm trong driver, còn file exe chỉ là cái vỏ gửi IOCTL xuống, nên đọc mỗi exe thì không bao giờ ra.{{< /note >}}
 
-```c=
+```c
 int __usercall sub_401280@<eax>(HWND a1@<edi>, DWORD dwIoControlCode)
 {
   HANDLE FileW; // esi
@@ -1800,7 +1800,7 @@ DeviceIoControl(FileW, dwIoControlCode, 0, 0, &OutBuffer, 4u, &BytesReturned, 0)
 ```
 Cơ bản thì nó là viết tắt của Device In Out Control, quay lại check file `WinKer.sys`:
 
-```c=
+```c
 NTSTATUS __stdcall DriverEntry(_DRIVER_OBJECT *DriverObject, PUNICODE_STRING RegistryPath)
 {
   int v3; // edi
@@ -1894,7 +1894,7 @@ Mình thấy đoạn `DbgPrint("IoCreateDevice Error\n");` nên cơ bản là c�
 
 Check kĩ file, mình thấy có vài hàm khả nghi:
 
-```c=
+```c
 int __stdcall sub_111DC(char a1)
 {
   int result; // eax
@@ -1940,7 +1940,7 @@ LABEL_7:
 }
 ```
 
-```c=
+```c
 int __stdcall sub_11156(char a1)
 {
   int result; // eax
@@ -1985,7 +1985,7 @@ LABEL_5:
 }
 ```
 
-```c=
+```c
 int __stdcall sub_110D0(char a1)
 {
   int result; // eax
@@ -2036,7 +2036,7 @@ Quay trở lại hàm đầu tiên, thì biến count bắt đầu từ 0 => hà
 
 Xem đầu vào của hàm đầu tiên:
 
-```c=
+```c
 void __stdcall sub_11266(_KDPC *Dpc, PVOID DeferredContext, PVOID SystemArgument1, PVOID SystemArgument2)
 {
   char v4; // al
@@ -2052,7 +2052,7 @@ Các bạn xem `scancodes-keys map table` [tại đây](https://wiki.osdev.org/P
 
 Dựa theo tín hiệu và hàm check đầu tiên, mình tìm được 4 kí tự đầu:
 
-```c=
+```c
 int __stdcall first(char a1)
 {
   int result; // eax
@@ -2099,7 +2099,7 @@ LABEL_7:
 ```
 Tương tự:
 
-```c=
+```c
 int __stdcall second(char a1)
 {
   int result; // eax
@@ -2143,7 +2143,7 @@ LABEL_5:
   return result;
 }
 ```
-```c=
+```c
 int __stdcall last(char a1)
 {
   int result; // eax

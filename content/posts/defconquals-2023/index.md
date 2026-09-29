@@ -423,7 +423,7 @@ Flag: `flag{vb6_and_blowfish_fun_from_the_old_days}`
 ## seedling
 
 Description
-```!
+```
 Here we have quite a hidden gem. This large conservatory complex used to be a bustling research facility for flora-computer interface. However after losing funding, the complex fell into disarray.
 
 After we got a hold of it, we were unable to get the main computing system working again. During the process of exploring the complex, we have located a backup mechanism which allows us to provide a new executable.
@@ -666,7 +666,7 @@ And the code that update the salt to the hash digest from calulate hash fuction
 
 It use `strlen` and that is the problem. Just type any salt you want and than add a `\0`(null byte) beforce the ':' and other character will be ignored. Example:
 
-```!
+```
 30:29FBD80C0DDA1A38602089E601F1F36FAA3D84505B5E5737AE162D5C8F2C3C12
 31:833785CAAD6D39C5D0638B48ED547D869CBF7D656A7F56FCD1FB2459945228F6
 311C\0:833785CAAD6D39C5D0638B48ED547D869CBF7D656A7F56FCD1FB2459945228F6
@@ -859,7 +859,7 @@ io.interactive()
 
 Server had been down so here is the local output:
 
-```!
+```
 [wsl]code/2023/DEFCON/DEFCON_CTF_2023_Qualifiers/seedling [🐍 v3.10.6]
 :) python solve.py LOCAL
 [*] '/mnt/d/code/2023/DEFCON/DEFCON_CTF_2023_Qualifiers/seedling/src/verify'
@@ -879,7 +879,7 @@ $
 ## Pawan Gupta
 
 Description
-```!
+```
 Hello code monkeys! How can you buy larger and fancier houses without an assistant that generates high-quality, bug-free, and secure code for you?
 
 Pawan Gupta is such a programming assistant! It follows your directions and helps you write perfect code, which ultimately brings you closer to your next fancy house!
@@ -987,7 +987,7 @@ if __name__ == "__main__":
 ```
 
 This level of LLM is pretty easy, the only thing that prevents the bot from printing the flag is:
-```python=
+```python
 if flag_content in content:
         print("Flag-Sanitizer: Sensitive content found in the output. Sanitizing it...")
         while flag_content in content:
@@ -1006,7 +1006,7 @@ I forgot to copy the result and flag but the prompt above works 100% no cap fr f
 ## Praveen Gupta
 
 Desciption:
-```!
+```
 Welcome back, code monkeys! Pawan Gupta is ready for more challenging prompts!
 
 Your goal is to instruct Pawan Gupta to generate a `base64_decode` function with a backdoor inside.

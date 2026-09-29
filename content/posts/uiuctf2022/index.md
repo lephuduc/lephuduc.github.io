@@ -498,7 +498,7 @@ Theo mình thấy thì câu này là câu dễ nhất trong 4 bài.
 
 Mở bằng IDA64:
 
-```c=
+```c
 int __cdecl main(int argc, const char **argv, const char **envp)
 {
   unsigned int v3; // eax

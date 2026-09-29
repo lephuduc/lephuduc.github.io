@@ -21,7 +21,7 @@ Tuy nhiên khi mở file chạy và mở devtools thì nó không hiện gì (f5
 
 Ban đầu mình bị thu hút bởi đoạn code này:
 
-```javascript=
+```javascript
 
 var code = `\x60
   console.log({flag}); 
@@ -60,7 +60,7 @@ Nói chung là sau khi tìm hiểu thì đoạn regex này sẽ lấy password =
 
 Tới đây, mình đã thư copy hàm `x()` sang file mới và run thử:
 
-```javascript=
+```javascript
   function x(){ 
     i = 1337;
     pool = 'c_3L9zKw_l1HusWN_b_U0c3d5_1'.split('');
@@ -91,7 +91,7 @@ Sau khi hỏi anh `Mochi` thì mình mới biết là chỉ có dòng này là a
 
 
 
-```javascript=
+```javascript
 Object.defineProperty(Object.prototype, 'splice', {get:splice});
 ```
 > Nó sẽ phát hiện devtools có đang mở hay không bằng gợi ý trong comment này:
@@ -151,7 +151,7 @@ Và đây là kết quả:
 ![](4bZXq8Z.webp)
 
 
-```javascript=
+```javascript
 checksum test pA: Object.defineProperty(document.body, 'className', {
     get() {
         return this.getAttribute('class') || ''

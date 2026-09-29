@@ -3,9 +3,10 @@ title: "About"
 subtitle: "Who I am and what I do."
 ---
 
-Write your introduction here, in Markdown.
+Since you’re reading my blog, I hope we can be friends.
+Hope you enjoy it and have a great day!
 
 ## Contact
 
-- GitHub: [your-handle](https://github.com/)
-- Email: you@example.com
+- GitHub: [lephuduc](https://github.com/lephuduc)
+- Email: lephuduc111@gmail.com

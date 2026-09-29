@@ -4,11 +4,11 @@ title = 'Le Phu Duc'
 disableKinds = ['taxonomy', 'term']
 
 [params]
-  tagline = 'Reverse · 리버스 · リバース'
-  description = 'Personal site of Le Phu Duc — writeups and notes on reverse engineering, CTFs and security.'
+  tagline = 'Classic & Respect'
+  description = 'Personal site of Le Phu Duc'
   author = 'Le Phu Duc'
-  recentPosts = 5
-  portrait = 'images/avt_sketch.png'   # file in assets/
+  recentPosts = 4
+  portrait = 'images/avt.png'   # file in assets/
 
 [menus]
   [[menus.main]]
@@ -34,6 +34,11 @@ disableKinds = ['taxonomy', 'term']
     endLevel = 3
   [markup.goldmark.renderer]
     unsafe = true
+  [markup.goldmark.extensions.passthrough]
+    enable = true                 # hands math to layouts/_markup/render-passthrough.html
+    [markup.goldmark.extensions.passthrough.delimiters]
+      block = [['\[', '\]'], ['$$', '$$']]
+      inline = [['\(', '\)']]
   [markup.highlight]
     noClasses = false       # colors are in assets/css/syntax.css
     style = 'github-dark'

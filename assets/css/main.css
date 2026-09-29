@@ -243,6 +243,11 @@ main { position: relative; }
 .note-ref { margin-left: 0.1em; }
 .side img { margin: 0.2rem 0 0.5rem; }
 
+/* Math (MathML from the passthrough render hook) */
+
+math { font-size: 1.05em; }
+math[display="block"] { display: block; margin: 1.6rem 0; overflow-x: auto; }
+
 /* Drop cap: big decorated first letter */
 
 .dropcap {

@@ -10,6 +10,15 @@
   <link rel="preload" href="{{ "fonts/alegreya-normal-latin.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="{{ "fonts/alegreya-normal-vietnamese.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="{{ "fonts/alegreya-sc-normal-700-latin.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
+  {{/* Drop cap letter, so it does not load late */}}
+  {{ if and (or .IsHome .IsPage) (ne .Params.dropcap false) }}
+    {{ with index (findRESubmatch `(?s)^.*?<p>(\pL)` .Content 1) 0 }}
+      {{ $file := printf "fonts/floral-capitals/%s.woff2" (upper (index . 1)) }}
+      {{ if fileExists (printf "static/%s" $file) }}
+        <link rel="preload" href="{{ $file | relURL }}" as="font" type="font/woff2" crossorigin>
+      {{ end }}
+    {{ end }}
+  {{ end }}
   {{/* Join the CSS files into one */}}
   {{ $css := slice }}
   {{ range slice "css/fonts.css" "css/main.css" "css/syntax.css" }}

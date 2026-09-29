@@ -290,7 +290,7 @@ code { font-family: var(--font-mono); font-feature-settings: normal; letter-spac
 
 pre {
   margin: 0 0 1.2rem;
-  padding: 0.4rem 0.6rem;
+  padding: 0.6rem 0.6rem;
   overflow-x: auto;
   background: var(--code-bg) !important;
   border: 1px solid var(--border);

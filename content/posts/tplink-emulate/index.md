@@ -4,6 +4,7 @@ subtitle: "Working around a TP-Links BE230 from decrypt firmware to setup emulat
 date: 2026-09-03 13:30:40
 category: blogs
 tags: ["research"]
+draft: true
 ---
 
 ## Hi guys, I'm back

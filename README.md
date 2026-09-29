@@ -151,8 +151,14 @@ Vercel or Cloudflare Pages:
 
 ## Credits
 
-Website built with the help of @plebaotrn.
+Website built with the help of @plebaotrn. Inspired from [David Álvarez Rosa](https://david.alvarezrosa.com).
 
 ## License
 
-Copyright (c) 2026 Le Phu Duc. All rights reserved. See [LICENSE](./LICENSE).
+Unless otherwise stated:
+
+Source code is licensed under the GNU General Public License v3.0. See [LICENSE](/LICENSE)
+Written content, including articles, write-ups, and documentation, is licensed under CC BY-NC-SA 4.0. See [LICENSE-CONTENT](/LICENSE-CONTENT)
+Images, artwork, logos, and other media are not covered by either license unless explicitly stated.
+
+Website design inspired by and originally based on the work of David Álvarez Rosa. Thank you so much, David!

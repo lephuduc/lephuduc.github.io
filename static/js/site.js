@@ -23,6 +23,30 @@ document.querySelectorAll('.prose .highlight pre, .prose > pre').forEach((pre) =
   wrap.append(pre, btn);
 });
 
+// Visit counts from busuanzi (the counter the old blog used): site total in the footer,
+// and per post under the byline. The site total carries on from the old blog.
+// The script tag must send the full page URL as Referer, since busuanzi counts pages by it.
+// With the browser default it only sends the origin, and every view lands on "/".
+if (!['localhost', '127.0.0.1'].includes(location.hostname)) {
+  const show = (el, n) => {
+    if (!el || !n) return;
+    el.querySelector('span').textContent = n.toLocaleString('en-US');
+    el.hidden = false;
+  };
+  const cb = 'BusuanziCallback_' + Date.now();
+  const s = document.createElement('script');
+  window[cb] = (data) => {
+    show(document.querySelector('.byline .views'), data?.page_pv);
+    show(document.querySelector('.site-visits'), data?.site_pv);
+    delete window[cb];
+    s.remove();
+  };
+  s.referrerPolicy = 'no-referrer-when-downgrade';
+  s.src = 'https://busuanzi.ibruce.info/busuanzi?jsonpCallback=' + cb;
+  s.async = true;
+  document.head.append(s);
+}
+
 // Contents list: always open on wide screens, and mark the section being read.
 const toc = document.querySelector('.toc details');
 if (toc) {

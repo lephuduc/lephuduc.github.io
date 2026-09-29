@@ -1,5 +1,6 @@
 <aside class="aside byline">
   <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
   <span><i>by</i> {{ site.Params.author }}</span>
+  {{ if eq .Section "posts" }}<span class="views" hidden>{{ partial "eye.html" }} <span class="views-n"></span> <i>views</i></span>{{ end }}
   {{ partial "tags.html" . }}
 </aside>

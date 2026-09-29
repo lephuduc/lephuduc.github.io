@@ -383,6 +383,7 @@ pre {
 .site-footer .fleuron { width: 6rem; margin-bottom: 0.6rem; color: #6f6f75; }
 .site-footer p { margin: 0.4rem 0; font-size: 1.3rem; font-style: italic; color: var(--muted); }
 .site-footer a { color: var(--text); text-decoration: none; }
+.eye { vertical-align: -0.12em; }
 
 /* Phone and tablet: one column */
 

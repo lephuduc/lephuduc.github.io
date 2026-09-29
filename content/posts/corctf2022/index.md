@@ -6,7 +6,7 @@ category: writeup
 tags: ["reverse"]
 ---
 
-Welcome back! corCTF 2022 mình làm được bốn bài reverse, ở đây mình xếp theo thứ tự từ nhiều solve tới ít solve: Microsoft ❤️ Linux, turbocrab, msfrob và hackermans dungeon. Bài đầu tiên là bài mình nhớ lâu nhất, không phải vì khó mà vì nó dạy mình một chuyện: những gì IDA hiện ra chưa chắc đã là toàn bộ chương trình.
+Welcome back! corCTF 2022 mình làm được bốn bài reverse, ở đây mình xếp theo thứ tự từ nhiều solve tới ít solve: Microsoft ❤️ Linux, turbocrab, msfrob và hackermans dungeon.
 
 ## Microsoft ❤️ Linux - 127 solves/122 points
 

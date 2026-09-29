@@ -1,14 +1,14 @@
 ---
-title: "Emulate TP-Link devices"
-subtitle: "How I emulate the TP-Link BE230, and how the same approach works for other ARM IoT devices."
-date: 2026-09-03
-category: research
-draft: true
-# tags:
+title: "A Simple way to Emulate TP-Links Devices"
+subtitle: "Working around a TP-Links BE230 from decrypt firmware to setup emulate easily for debugging"
+date: 2026-09-03 13:30:40
+category: blogs
+tags: ["research"]
 ---
-## Guys, I'm back
 
-Hi guys, base on my research recently, I am currently working on some IoT devices, especially in router category but with my success attempt to do something, so this blog may help you if your work related.
+## Hi guys, I'm back
+
+Hi guys, base on my research recently, I am currently working on some IoT devices, especially in router category but with my minimal experience. Actually, I don't know where to start.
 
 So, I buy for my own a new router, which will start of my research and to see how much we learn from them, especially the some of hardest step of exploiting an IoT Devices: hacking and emulating.
 
@@ -47,44 +47,19 @@ For IoT devices, we have two ways to play around with this:
 
 Luckily this device has a downloadable firmware, you can find it [here](https://www.tp-link.com/us/support/download/archer-be230/).
 
-### Make sure it is really encrypted
-
-Before we look for a key, we should make sure the file is encrypted and not only compressed. This is easy to mix up, because both look like noise.
-
-```python
-# entropy per 64KB block, plus a scan for common filesystem magic
-import collections, math
-
-data = open("be230_1.2.6.bin", "rb").read()
-BS = 64 * 1024
-low = 0
-for off in range(0, len(data), BS):
-    count = collections.Counter(data[off:off + BS])
-    total = sum(count.values())
-    e = -sum((v / total) * math.log2(v / total) for v in count.values())
-    if e < 7.5:
-        low += 1
-print("blocks:", len(data) // BS, "low entropy blocks:", low)
-
-for magic in (b"hsqs", b"UBI#", b"\xfd7zXZ", b"\x27\x05\x19\x56"):
-    print(magic, data.find(magic))
-```
-
-For our image every block is 8.0 and no magic is found:
-
-```
-blocks: 741 low entropy blocks: 0
-b'hsqs' -1
-b'UBI#' -1
-b'\xfd7zXZ' -1
-b"'\x05\x19V" -1
-```
-
-A compressed image still shows its superblock magic, and still has low entropy at the partition borders. Here we have neither, so the body is ciphertext.{{< note >}}Entropy tells how random the bytes are. 8.0 is the highest value for one byte. Compressed data is close to 8.0 too, but it still keeps some structure. Encrypted data is 8.0 everywhere and keeps nothing.{{< /note >}}
-
 ### The header
 
-The header is still plaintext. This is the part we need to read:
+Only the body is encrypted. The first 0x230 bytes are still readable, so we can just look at them:
+
+```bash
+$ xxd -l 48 be230_1.2.6.bin
+00000000: 02e5 4747 e98f b5d7 0c37 53c5 8742 d3ab  ..GG.....7S..B..
+00000010: 376e 74b6 6677 2d74 7970 653a 436c 6f75  7nt.fw-type:Clou
+00000020: 640a 0000 0000 0000 0000 0000 0000 0000  d...............
+```
+{{< note >}}`xxd` prints a file as hex. `-s` is where to start and `-l` is how many bytes to show.{{< /note >}}
+
+The `fw-type:Cloud` string is already a good sign. Here is the whole header:
 
 | Offset | Size | What it is |
 |---|---|---|
@@ -95,7 +70,24 @@ The header is still plaintext. This is the part we need to read:
 | 0x130 | 256 | RSA-2048 PSS signature |
 | 0x230 | rest | AES-128-CBC ciphertext |
 
-The `fw-type:` string at 0x14 is what tells us this is the router image format. A value of 0x100 at 0x110 would mean RSA-1024, and that older format is not encrypted.
+We can read the two fields that matter in three lines:
+
+```python
+data = open("be230_1.2.6.bin", "rb").read()
+data[0x14:0x22]                              # b'fw-type:Cloud\n'
+int.from_bytes(data[0x110:0x114], "big")     # 512, so RSA-2048
+```
+
+A value of 0x100 at 0x110 would mean RSA-1024, and that older format is not encrypted. The size also tells us how long the signature is, 256 bytes for RSA-2048, so the ciphertext can only start at 0x230:
+
+```bash
+$ xxd -s 0x110 -l 48 be230_1.2.6.bin
+00000110: 0000 0200 aa55 4c5e 831f 534b a1f8 f7c9  .....UL^..SK....
+00000120: 18df 8fbf 7da1 55aa 0000 0000 0000 0000  ....}.U.........
+00000130: 94dd f733 2ccc 67ca d6e5 0ad3 e2b7 cb9c  ...3,.g.........
+```
+
+The `AA55 ... 55AA` pair at 0x114 wraps 16 bytes. It is a marker TP-Link uses in their own images, and the signature starts right after the zeros, at 0x130.
 
 ### Where is the AES key
 
@@ -110,12 +102,32 @@ Two good things come from this:
 {{< note >}}RSA-PSS is a signature scheme. It mixes the message hash with a random salt before signing, so the same file signed twice gives two different signatures. When we verify, we get the salt back.{{< /note >}}
 {{< side >}}Reference: [Probabilistic signature scheme on Wikipedia](https://en.wikipedia.org/wiki/Probabilistic_signature_scheme){{< /side >}}
 
-The public key sits in a binary called `nvrammanager`, inside an older TP-Link router firmware that is still plaintext. It is a base64 blob that starts with `BgIAAAwk`, in the Microsoft PUBLICKEYBLOB format.
+The public key sits in a binary called `nvrammanager`, inside an older TP-Link router firmware that is still plaintext. It is a base64 blob that starts with `BgIAAAwk`, in the Microsoft PUBLICKEYBLOB format. So unpack any older image with binwalk and search the files for that string:
 {{< side >}}The idea of taking the keys from files the vendor publishes comes from this prior work: [tp-link-decrypt by Watchful_IP](https://github.com/watchfulip/tp-link-decrypt), his [C210 v2 writeup](https://watchfulip.github.io/28-12-24/tp-link_c210_v2.html), the [maintained fork by robbins](https://github.com/robbins/tp-link-decrypt), and [tangrs on finding the keys in the GPL dumps](https://blog.tangrs.id.au/2025/09/22/decrypting-tplink-smart-switch-firmware/).{{< /side >}}
+
+```bash
+$ python3 extract_key.py ./old_rootfs -o rsa_pub.txt
+
+[1] searching 207 file(s) under ./old_rootfs
+
+[2] key in ./old_rootfs/usr/bin/nvrammanager at offset 0x19240
+    RSA-2048, e=65537
+    modulus starts b6c7a388c3ce2ae87f390f7f30a88945...
+    BgIAAAwkAABSU0ExAAgAAAEAAQCdocMdSvAkLmNelNXLolhx4/OqVrxm6g1XCIlMdTgW...
+
+[3] 1 blob(s), 1 different
+    written to rsa_pub.txt
+```
+
+After base64, the blob is simple: the magic `RSA1`, then the key size, then the exponent, then the modulus.
+{{< note >}}A public key is only two numbers: the modulus n and the exponent e. Here e is 65537, the usual one, and n is 256 bytes long.{{< /note >}}
+{{< side >}}Reference: [Base provider key BLOBs on Microsoft Learn](https://learn.microsoft.com/en-us/windows/win32/seccrypto/base-provider-key-blobs){{< /side >}}
+
+The same key works for their whole router line, so this is a one time job.
 
 ### The decryption logic
 
-After a while of researching, and thanks to some prior research, I rewrote my own version for this router. I put it in my github, which you can see at [this](<insert github link>) link.
+After a while of researching, and thanks to some prior research, I rewrote my own version for this router. I put it in my github, which you can see at [this](https://github.com/lephuduc/tplink-be230) link.
 
 Here is a short explanation about the decryption logic. I think you can also apply it to other TP-Link devices as well, at least the ones with `fw-type:` in the header.
 
@@ -139,61 +151,105 @@ Here is a short explanation about the decryption logic. I think you can also app
 ```
 {{< note >}}MGF1 is a mask generation function. It takes a short seed and gives back as many bytes as you ask for, by hashing the seed with a counter. PSS uses it to hide the salt.{{< /note >}}
 
-Some small points that cost me time:
+Three points there are worth remembering.
 
-Step 1, the signature is stored little endian, so we must reverse it before we treat it as a number.
+Step 1, the signature is stored little endian, so we must reverse it before we treat it as a number:
 
-Step 3, the salt here is 222 bytes, not the usual 32. That means there is no padding before the `0x01` separator, so `db[0]` is already `0x01`. Only the first 32 bytes of the salt are the key and IV, the rest is not used.
-
-Step 5 is the step that is easy to skip, but it is the one that tells us we did everything right. If `H' == H` then the key we took from the salt is the real key, and the image is the one the vendor signed. Without this check you only know the AES output looks fine, you do not know it is correct.
-
-Step 6, the AES stream starts at 0x130, not at 0x230. The signature field sits inside the stream, and it is zeroed first, the same buffer we built in step 5. If you start at 0x230 instead, everything still comes out right except the first 16 bytes, because CBC only needs the block before it. That is why this one is easy to miss.
-
-For our image the result is:
-
+```python
+sig = data[0x130:0x230][::-1]                        # reverse the 256 bytes
+em = pow(int.from_bytes(sig, "big"), e, n).to_bytes(256, "big")
 ```
-KEY = e9b527c7ee114d795608552aa951f269
-IV  = 06634586c19612d14c70f2b895b56512
+{{< note >}}Little endian means the lowest byte is written first. RSA works on one big number, so the bytes have to be put back in normal order before the math.{{< /note >}}
+
+Step 3, the salt here is 222 bytes, not the usual 32. Only the first 32 bytes are used:
+
+```python
+salt = db[db.find(b"\x01") + 1:]     # everything after the 0x01 separator
+key, iv = salt[0:16], salt[16:32]    # the rest of the salt is not used
 ```
 
-These two values only work for this exact build. Another firmware version gives another key.
+Step 6, the AES stream starts at 0x130, not at 0x230. The signature field sits inside the stream and is zeroed first, the same buffer we hashed in step 5:
+
+```python
+buf = bytearray(data)
+buf[0x130:0x230] = bytes(256)        # zero the signature field
+plain = AES.new(key, AES.MODE_CBC, iv).decrypt(bytes(buf[0x130:]))
+```
+
+If you start at 0x230 instead, everything still comes out right except the first 16 bytes, because CBC only needs the block before it. That is why this one is easy to miss.
+{{< note >}}In CBC every block is XORed with the block before it, and the IV plays that role for the first block. So a wrong start point only damages the first 16 bytes, the rest still decrypts fine.{{< /note >}}
+{{< side >}}Reference: [Block cipher mode of operation on Wikipedia](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Cipher_block_chaining_(CBC)){{< /side >}}
+
+Running it on our image, the output follows the same six steps:
+
+```bash
+$ python3 decrypt.py be230_1.2.6.bin -k rsa_pub.txt
+
+[1] public key rsa_pub.txt
+    RSA-2048, e=65537
+[2] header of 48580423 bytes
+    0x014  fw-type:Cloud
+    0x110  0x200, RSA-2048
+    0x130  signature, 256 bytes
+[3] signature reversed and raised to e mod n
+    last byte 0xbc, PSS
+    H    = 1953e99cb049f0350fec339ace53a74b9913f26747299f653a535859d0c7ab95
+    salt = 222 bytes
+[4] the first 32 bytes of the salt are the key and the IV
+    KEY = e9b527c7ee114d795608552aa951f269
+    IV  = 06634586c19612d14c70f2b895b56512
+[5] H' = SHA256(8 zeros || SHA256(message) || salt)
+    H' = 1953e99cb049f0350fec339ace53a74b9913f26747299f653a535859d0c7ab95
+    H' is H, the key is correct and the image is the vendor one
+[6] AES-128-CBC from 0x130, 48580112 bytes
+    written to be230_1.2.6.bin.dec
+
+squashfs at 0xa1f747, carve it out with dd or binwalk
+```
+
+The key and IV only work for this exact build. Another firmware version gives another key.
 
 ### Read the plaintext
 
 Two things in the plaintext look wrong at first, but they are normal:
 
-The range 0x130 to 0x230 is garbage, not data. We set the signature to zero before we verify it, and then the decrypt pass runs over those zeros too.
-
-At 0x230 the plaintext starts with the IV again, the same 16 bytes we just used. After some zeros, at 0x250, there is a second TP-Link header with the same `AA55 ... 55AA` shape. That inner image is not encrypted again.
-
-Now we can find the filesystem and carve it out:
-
-```python
-data = open("be230_1.2.6.bin.dec", "rb").read()
-print(hex(data.find(b"hsqs")))   # 0xa1f747
+```bash
+$ xxd -s 0x230 -l 64 be230_1.2.6.bin.dec
+00000230: 0663 4586 c196 12d1 4c70 f2b8 95b5 6512  .cE.....Lp....e.
+00000240: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+00000250: 0000 0100 aa55 9dd1 a8c8 8331 c969 fbbf  .....U.....1.i..
+00000260: bcf0 d432 70c7 55aa 0000 0000 0000 0000  ...2p.U.........
 ```
 
+The range 0x130 to 0x230 is garbage, not data. We set the signature to zero before we verify it, and the decrypt pass runs over those zeros too.
+
+At 0x230 the plaintext starts with `0663 4586 ...`, which is the IV again, the same 16 bytes we just used. Then at 0x250 there is a second TP-Link header with the same shape as the outer one, this time saying RSA-1024. That inner image is not encrypted again.
+
+The filesystem is the first `hsqs` magic in the plaintext:
+
 ```bash
-dd if=be230_1.2.6.bin.dec of=rootfs.squashfs bs=1M iflag=skip_bytes skip=10614599
-unsquashfs -d squashfs-root rootfs.squashfs
+$ xxd -s 0xa1f747 -l 16 be230_1.2.6.bin.dec
+00a1f747: 6873 7173 2813 0000 9511 336a 0000 0200  hsqs(.....3j....
+```
+{{< note >}}squashfs is a small read only filesystem, used by almost every router. `hsqs` is its magic, the 4 bytes that mark where it begins.{{< /note >}}
+{{< side >}}Reference: [SquashFS on Wikipedia](https://en.wikipedia.org/wiki/SquashFS){{< /side >}}
+
+Cut from there to the end of the file, then unpack it:
+
+```bash
+$ dd if=be230_1.2.6.bin.dec of=rootfs.squashfs bs=1M iflag=skip_bytes skip=10614599
+$ unsquashfs -d squashfs-root rootfs.squashfs
 ```
 {{< note >}}Use `iflag=skip_bytes` with a big block size. `dd bs=1 skip=...` gives the same result but takes minutes on a 38MB file.{{< /note >}}
 
 This gives a normal squashfs 4.0 with xz compression, 4904 inodes and 3978 files. Stock `unsquashfs` is enough here, we do not need `sasquatch`.
 
-### What we have now
-
-- the image is encrypted, not compressed, and we proved it
-- the header is read, and we know where the signature is
-- the AES key and IV come out of the RSA-PSS salt
-- the `H' == H` check proves the key is correct
-- the image is decrypted and the root filesystem is extracted
-
 ### The same way for other firmware
 
 The steps above are for this router, but the order of work is the same for most vendors:
 
-1. Check entropy first. If some blocks are low, the file is only compressed and you can go straight to binwalk.
+1. Try binwalk first. If it finds a filesystem, the image is only compressed and there is nothing to decrypt.
+{{< side >}}Reference: [binwalk](https://github.com/ReFirmLabs/binwalk){{< /side >}}
 2. Read the plaintext header. Vendors almost always leave a tag, a length, or a version number in the clear. Here it was `fw-type:`.
 3. Look for a block that has the size of a signature, 256 bytes for RSA-2048 or 128 bytes for RSA-1024. If the vendor uses PSS, the key can be inside it like here.
 4. If the key is not in the image, it is in a binary. Look for an older firmware of the same vendor that is still plaintext, or for their GPL source drop. Vendors add encryption late, so old builds are often open.
@@ -334,8 +390,9 @@ I also love being practice and research, if you also want to research an interes
 
 - This research is support for education purpose only
 - This is userland emu only, fit for single binary debug (some binary can run directly without hard interact with kernel) and examinate manually by your self.
-- Actually, if you need only able to run your binary, qemu-user is enough, this is my idea of setting up these thing also for IDA debugging, if you have any better ideas, please share, I very appriciated.
 - I put document and source of this project into: [github repo containing these].
 
 
 Thanks for your time, see you again!
+
+

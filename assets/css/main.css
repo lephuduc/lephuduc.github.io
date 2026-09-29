@@ -295,7 +295,7 @@ pre {
   background: var(--code-bg) !important;
   border: 1px solid var(--border);
   border-left: 3px solid var(--border);
-  font-size: 1.15rem;
+  font-size: 1rem;
   line-height: normal;
   tab-size: 4;
 }

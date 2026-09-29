@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(python -)",
-      "Bash(sed -n '/markup/,$p' hugo.toml)",
-      "Bash(curl -s https://lephuduc.github.io/post/googlectf2022/)"
-    ]
-  }
-}

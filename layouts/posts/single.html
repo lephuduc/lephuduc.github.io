@@ -3,7 +3,7 @@
   {{ partial "masthead.html" (dict "heading" .Title "subtitle" .Params.subtitle "aside" (partial "byline.html" .)) }}
 {{ end }}
 {{ define "main" }}
-  {{/* Contents list: left column on wide screens, a fold-out box on the top otherwise. Turn off with `toc: false`. */}}
+  {{/* Contents list: top of the right column, a fold-out box on phones. Turn off with `toc: false`. */}}
   {{ if and (ne .Params.toc false) (gt (len (findRE "<li" .TableOfContents)) 1) }}
     <nav class="toc" aria-label="Contents"><details><summary>Contents</summary>{{ .TableOfContents }}</details></nav>
   {{ end }}

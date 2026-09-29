@@ -47,10 +47,10 @@ if (!['localhost', '127.0.0.1'].includes(location.hostname)) {
   document.head.append(s);
 }
 
-// Contents list: always open on wide screens, and mark the section being read.
+// Contents list: always open when it sits in the right column, and mark the section being read.
 const toc = document.querySelector('.toc details');
 if (toc) {
-  const wide = matchMedia('(min-width: 1740px)');
+  const wide = matchMedia('(min-width: 861px)');
   const sync = () => { if (wide.matches) toc.open = true; };
   sync();
   wide.addEventListener('change', sync);

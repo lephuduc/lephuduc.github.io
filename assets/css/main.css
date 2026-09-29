@@ -193,7 +193,7 @@ hr {
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 24'%3E%3Cg fill='%238a9bb3'%3E%3Cpath d='M60 4 64 12 60 20 56 12Z'/%3E%3Ccircle cx='36' cy='12' r='2.4'/%3E%3Ccircle cx='84' cy='12' r='2.4'/%3E%3C/g%3E%3C/svg%3E");
 }
 
-/* Contents list. Left column on wide screens, fold-out box otherwise. */
+/* Contents list. Right column when there is one, fold-out box on phones. */
 
 main { position: relative; }
 
@@ -213,16 +213,15 @@ main { position: relative; }
 .toc a:hover, .toc a.active { color: var(--text); }
 .toc a.active { box-shadow: -0.6rem 0 0 -0.45rem var(--accent); }
 
-@media (min-width: 1740px) {
+/* Top of the right column, floated like the notes so later notes stack below it */
+@media (min-width: 861px) {
   .toc {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: -16rem;
-    width: 13rem;
-    margin: 0;
+    float: right;
+    clear: right;
+    width: var(--aside-w);
+    margin: 0 calc(-1 * (var(--aside-w) + var(--aside-gap))) 1.6rem 0;
   }
-  .toc details { position: sticky; top: 2rem; max-height: calc(100vh - 4rem); overflow-y: auto; }
+  .toc details { max-height: 70vh; overflow-y: auto; }
   .toc summary { pointer-events: none; list-style: none; }
   .toc summary::-webkit-details-marker { display: none; }
 }

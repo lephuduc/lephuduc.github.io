@@ -175,7 +175,7 @@ $$
 22 \times 0.37 \approx 8.14
 $$
 
-**Kết luận: "26 là độ tuổi hoàn hảo để ra quyết định cưới vợ"**{{< side >}}Tham khảo: [bài trên khoahoc.tv](https://khoahoc.tv/cac-nha-toan-hoc-khang-dinh-26-la-do-tuoi-hoan-hao-de-ra-quyet-dinh-cuoi-vo-93088), cùng hai bài tiếng Anh về quy tắc 37% trên [Big Think](https://bigthink.com/neuropsych/the-37-percent-rule/) và [IFLScience](https://www.iflscience.com/math-says-you-should-use-the-37-percent-rule-for-big-life-decisions-78618).{{< /side >}}
+**Kết luận: "26 là độ tuổi hoàn hảo để ra quyết định cưới vợ"** {{< side >}}Tham khảo: [bài trên khoahoc.tv](https://khoahoc.tv/cac-nha-toan-hoc-khang-dinh-26-la-do-tuoi-hoan-hao-de-ra-quyet-dinh-cuoi-vo-93088), cùng hai bài tiếng Anh về quy tắc 37% trên [Big Think](https://bigthink.com/neuropsych/the-37-percent-rule/) và [IFLScience](https://www.iflscience.com/math-says-you-should-use-the-37-percent-rule-for-big-life-decisions-78618).{{< /side >}}
 
 Tuy nhiên, Nhà xã hội học Nicholas H. Wolfinger từ Đại học Utah lại phát hiện rằng độ tuổi kết hôn lý tưởng để giảm nguy cơ ly hôn là từ 28 đến 32 tuổi.
 

@@ -67,7 +67,7 @@ assets/
 static/
 ├─ fonts/                       #   font files (Alegreya, Alegreya SC, Inconsolata)
 │  └─ floral-capitals/          #     drop cap font, one file per letter A-Z
-├─ js/site.js                   #   Copy button on code blocks
+├─ js/site.js                   #   Copy button on code blocks, contents list
 └─ images/                      #   other images, served at /images/...
 ```
 
@@ -102,6 +102,7 @@ Fields at the top of the post:
 | `tags` | For example `["reverse", "crypto"]` |
 | `draft` | `true` hides the post |
 | `dropcap` | `false` turns off the big first letter |
+| `toc` | `false` hides the contents list (shown when a post has 2 or more headings) |
 
 ## Images in a post
 

@@ -29,6 +29,9 @@ disableKinds = ['taxonomy', 'term']
     weight = 40
 
 [markup]
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
   [markup.goldmark.renderer]
     unsafe = true
   [markup.highlight]

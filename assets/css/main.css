@@ -2,7 +2,7 @@
 
 :root {
   color-scheme: dark;
-  font-size: 105.25%;            /* all sizes are in rem, so this scales the whole site */
+  font-size: 84.2%;             /* all sizes are in rem, so this scales the whole site */
 
   --bg: #18171b;
   --text: #ecebe7;
@@ -18,6 +18,7 @@
   --font-body: 'Alegreya', 'Alegreya Fallback', 'Alegreya Fallback Noto', 'Alegreya Fallback DejaVu', serif;
   --font-sc: 'Alegreya SC', 'Alegreya SC Fallback', 'Alegreya SC Fallback Noto', 'Alegreya SC Fallback DejaVu', serif;
   --font-mono: 'Inconsolata', 'Inconsolata Fallback', monospace;
+  --font-code: 'Cascadia Code', 'Inconsolata', 'Inconsolata Fallback', monospace;   /* code blocks */
 
   --fs-body: 1.4rem;
   --lh-body: 2rem;
@@ -44,7 +45,7 @@ body {
 /* Layout: a text column and a right column */
 
 .page {
-  max-width: 1270px;
+  max-width: 1016px;
   margin: 0 auto;
   padding: 4rem 2rem;
 }
@@ -111,7 +112,7 @@ h1, h2, h3, h4, .tags { font-family: var(--font-sc); }
 
 h1 {
   margin: 0;
-  font-size: 2.8rem;
+  font-size: 2.6rem;
   font-weight: 700;
   line-height: 1.15;
   letter-spacing: 0.12em;
@@ -295,10 +296,11 @@ pre {
   background: var(--code-bg) !important;
   border: 1px solid var(--border);
   border-left: 3px solid var(--border);
-  font-size: 1rem;
-  line-height: normal;
+  font-size: 1.05rem;   /* x-height about 85% of body text */
+  line-height: 1.4;
   tab-size: 4;
 }
+pre code { font-family: var(--font-code); letter-spacing: 0; font-variant-ligatures: none; font-feature-settings: 'calt' 0; }   /* no ligatures: != stays != */
 /* The outer box keeps the space below, so the pre inside does not */
 .highlight, .code-wrap { position: relative; margin: 0 0 1.2rem; }
 :is(.highlight, .code-wrap) :is(pre, .code-wrap) { margin: 0; }
